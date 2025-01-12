@@ -80,51 +80,46 @@ document.addEventListener('DOMContentLoaded', function() {
     // Info button functionality
     document.querySelectorAll('.info-button').forEach(button => {
         button.addEventListener('click', (e) => {
+            e.preventDefault();
             e.stopPropagation();
-            const tooltip = button.nextElementSibling;
             
-            // Close all other tooltips
-            document.querySelectorAll('.info-tooltip').forEach(t => {
-                if (t !== tooltip) {
-                    t.classList.remove('show');
+            // Close all other tooltips first
+            document.querySelectorAll('.info-tooltip').forEach(tooltip => {
+                if (tooltip !== button.nextElementSibling) {
+                    tooltip.classList.remove('show');
                 }
             });
             
             // Toggle current tooltip
+            const tooltip = button.nextElementSibling;
             tooltip.classList.toggle('show');
-            button.classList.toggle('active');
         });
     });
 
     // Close tooltips when clicking outside
-    document.addEventListener('click', () => {
-        document.querySelectorAll('.info-tooltip').forEach(tooltip => {
-            tooltip.classList.remove('show');
-        });
-        document.querySelectorAll('.info-button').forEach(button => {
-            button.classList.remove('active');
-        });
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.info-button') && !e.target.closest('.info-tooltip')) {
+            document.querySelectorAll('.info-tooltip').forEach(tooltip => {
+                tooltip.classList.remove('show');
+            });
+        }
     });
 
-    // FAQ Accordion functionality
-    const faqQuestions = document.querySelectorAll('.faq-question');
-    
-    faqQuestions.forEach(question => {
+    // FAQ functionality
+    document.querySelectorAll('.faq-question').forEach(question => {
         question.addEventListener('click', () => {
             const answer = question.nextElementSibling;
-            const isOpen = answer.style.maxHeight;
-
+            const isOpen = answer.classList.contains('show');
+            
             // Close all other answers
-            document.querySelectorAll('.faq-answer').forEach(item => {
-                item.style.maxHeight = null;
+            document.querySelectorAll('.faq-answer').forEach(a => {
+                a.classList.remove('show');
+                a.previousElementSibling.classList.remove('active');
             });
-            document.querySelectorAll('.faq-question').forEach(item => {
-                item.classList.remove('active');
-            });
-
+            
             // Toggle current answer
             if (!isOpen) {
-                answer.style.maxHeight = answer.scrollHeight + 'px';
+                answer.classList.add('show');
                 question.classList.add('active');
             }
         });
