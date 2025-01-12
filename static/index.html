@@ -47,7 +47,6 @@
             </button>
             <div class="nav-items">
                 <a href="#counter-section">Real-Time Counter</a>
-                <a href="#chart-section">Emissions Charts</a>
                 <a href="#faq-section">FAQ</a>
                 <a href="#footer">About</a>
             </div>
@@ -60,130 +59,48 @@
                 </div>
                 
                 <div class="counters-grid">
-                    <div class="counter-box" data-aos="fade-up" data-aos-duration="600" data-aos-delay="100">
-                        <div class="counter-header">
-                            <h2>Global CO₂ Emissions
-                                <button class="info-button global-info" aria-label="Global emissions counter information">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                                        <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2"/>
-                                        <path d="M12 16V12M12 8H12.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                                    </svg>
-                                </button>
-                                <div class="info-tooltip global-tooltip">
-                                    This counter tracks the total metric tons of CO₂ emitted since you opened this page. It serves as a real-time reminder of the ongoing impact of carbon emissions on our planet. Every second, greenhouse gases are released into the atmosphere from various sources, highlighting the urgency for action to reduce our carbon footprint and combat climate change.
-                                </div>
-                            </h2>
-                        </div>
-                        <div class="counter">
-                            <span id="totalEmissions">0</span>
-                        </div>
-                        <p class="subtitle">Metric Tons of CO<sub>2</sub> since you<br>opened this page</p>
-                        <p class="time-ago" id="timeAgo">0 seconds ago</p>
+                    <div class="counter-section" data-aos="fade-up">
+                        <h2>Global CO₂ Emissions <span class="info-button">ⓘ</span></h2>
+                        <div class="info-tooltip">Real-time estimate of global CO₂ emissions since you opened this page.</div>
+                        <div id="globalEmissions" class="counter">0</div>
+                        <p>Metric tons of CO₂ since you loaded this page</p>
                     </div>
 
-                    <div class="counter-box country-counter" data-aos="fade-up" data-aos-duration="600" data-aos-delay="200">
-                        <div class="counter-header">
-                            <h2>Country CO₂ Emissions
-                                <button class="info-button country-info" aria-label="Country counter information">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                                        <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2"/>
-                                        <path d="M12 16V12M12 8H12.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                                    </svg>
-                                </button>
-                                <div class="info-tooltip country-tooltip">
-                                    This counter shows the selected country's contribution to global CO₂ emissions. The percentage is based on the most recent data, reflecting each nation's impact on total global emissions. Select different countries to compare their emissions and understand their relative environmental impact.
-                                </div>
-                            </h2>
-                        </div>
-                        <div class="counter">
-                            <span id="countryEmissions">0</span>
-                        </div>
-                        <p class="subtitle">Metric Tons of CO<sub>2</sub> since page load</p>
-                        <div class="country-selector">
-                            <select id="countrySelect" class="country-dropdown">
-                                <option value="china">China</option>
-                                <option value="us">United States</option>
-                                <option value="india">India</option>
-                                <option value="russia">Russia</option>
-                                <option value="japan">Japan</option>
-                                <option value="germany">Germany</option>
-                                <option value="iran">Iran</option>
-                                <option value="skorea">South Korea</option>
-                                <option value="saudi">Saudi Arabia</option>
-                                <option value="indonesia">Indonesia</option>
-                            </select>
-                        </div>
-                        <p class="country-info" id="countryInfo"></p>
+                    <div class="counter-section" data-aos="fade-up">
+                        <h2>Country CO₂ Emissions <span class="info-button">ⓘ</span></h2>
+                        <div class="info-tooltip">Select a country to see its contribution to global emissions.</div>
+                        <select id="countrySelect" class="country-select">
+                            <option value="china">China</option>
+                            <option value="us">United States</option>
+                            <option value="india">India</option>
+                            <option value="russia">Russia</option>
+                            <option value="japan">Japan</option>
+                            <option value="germany">Germany</option>
+                            <option value="iran">Iran</option>
+                            <option value="skorea">South Korea</option>
+                            <option value="saudi">Saudi Arabia</option>
+                            <option value="indonesia">Indonesia</option>
+                        </select>
+                        <div id="countryEmissions" class="counter">0</div>
+                        <p>Metric tons of CO₂ since page load</p>
                     </div>
-                </div>
 
-                <div class="yearly-counter-container">
-                    <div class="counter-box yearly-counter">
-                        <div class="counter-header">
-                            <h2>Yearly Emissions
-                                <button class="info-button yearly-info" aria-label="Yearly emissions counter information">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                                        <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2"/>
-                                        <path d="M12 16V12M12 8H12.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                                    </svg>
-                                </button>
-                                <div class="info-tooltip yearly-tooltip">
-                                    This counter shows the total CO₂ emissions for the current year. It provides a comprehensive view of global carbon emissions on an annual basis, helping to track our progress in reducing greenhouse gas emissions over time.
-                                </div>
-                            </h2>
-                        </div>
-                        <div class="counter">
-                            <span id="yearlyEmissions">0</span>
-                        </div>
-                        <p class="subtitle">Metric Tons of CO<sub>2</sub> in <span id="currentYear">2025</span></p>
-                        <p class="time-reference">Since January 1st, <span id="yearReference">2025</span></p>
+                    <div class="counter-section" data-aos="fade-up">
+                        <h2>Yearly Emissions <span class="info-button">ⓘ</span></h2>
+                        <div class="info-tooltip">Total CO₂ emissions for the current year.</div>
+                        <div id="yearlyEmissions" class="counter">0</div>
+                        <p>Metric tons of CO₂ in 2025</p>
                     </div>
-                </div>
 
-                <div class="counter-box carbon-budget-counter" data-aos="fade-up" data-aos-duration="400" data-aos-delay="300">
-                    <div class="counter-header">
-                        <h2>Remaining Carbon Budget
-                            <button class="info-button budget-info" aria-label="Carbon budget information">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                                    <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2"/>
-                                    <path d="M12 16V12M12 8H12.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                                </svg>
-                            </button>
-                            <div class="info-tooltip budget-tooltip">
-                                The remaining carbon budget represents the estimated amount of CO₂ we can still emit while limiting global warming to 1.5°C above pre-industrial levels. This budget is rapidly depleting, emphasizing the urgency of reducing emissions.
+                    <div class="counter-section" data-aos="fade-up">
+                        <h2>Remaining Carbon Budget <span class="info-button">ⓘ</span></h2>
+                        <div class="info-tooltip">The remaining carbon budget represents the estimated amount of CO₂ we can still emit while limiting global warming to 1.5°C above pre-industrial levels.</div>
+                        <div id="carbonBudget" class="counter">157</div>
+                        <p>Gigatons of CO₂ remaining</p>
+                        <div class="budget-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 21.5%"></div>
                             </div>
-                        </h2>
-                    </div>
-                    <div class="counter">
-                        <span id="carbon-budget-counter">200</span>
-                    </div>
-                    <p class="subtitle">Gigatons of CO<sub>2</sub> remaining</p>
-                    <div class="budget-progress">
-                        <div class="progress-bar">
-                            <div id="carbon-budget-progress" class="progress-fill"></div>
-                        </div>
-                        <p class="budget-info">
-                            <span id="budget-percentage">0%</span> used
-                            <span class="separator">|</span>
-                            <span id="budget-years-remaining">4.8</span> years remaining at current rate
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="chart-section" id="chart-section">
-                <h2>Emissions Charts</h2>
-                <div class="charts-container">
-                    <div class="chart-navigation">
-                        <button id="prevChart" class="nav-button">&lt;</button>
-                        <button id="nextChart" class="nav-button">&gt;</button>
-                    </div>
-                    <div class="charts-wrapper">
-                        <div class="chart-container" id="countryChart" data-aos="zoom-in" data-aos-duration="600">
-                            <canvas height="400"></canvas>
-                        </div>
-                        <div class="chart-container" id="productChart" data-aos="zoom-in" data-aos-duration="600">
-                            <canvas height="400"></canvas>
                         </div>
                     </div>
                 </div>
