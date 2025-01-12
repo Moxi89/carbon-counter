@@ -52,60 +52,68 @@
             </div>
         </nav>
         <main>
-            <div class="counter-container" id="counter-section" data-aos="fade-up">
-                <div class="title" data-aos="fade-right">
-                    <span class="leaf-icon">🌍</span>
-                    <h1>Carbon Budget Countdown</h1>
+            <div class="counter-container" id="counter-section" data-aos="fade-up" data-aos-duration="600">
+                <div class="title" data-aos="fade-right" data-aos-duration="600">
+                    <span class="leaf-icon">🌳</span>
+                    <h1>Carbon Emissions Counter Live</h1>
                 </div>
                 
                 <div class="counters-grid">
-                    <div class="main-counter" data-aos="fade-up">
-                        <div class="budget-circle">
-                            <div class="budget-number">
-                                <span id="globalEmissions">199</span>
-                                <span class="unit">Gt CO₂</span>
-                            </div>
-                            <div class="budget-label">Remaining Carbon Budget</div>
-                            <div class="probability">50% probability to stay below 1.5°C</div>
-                        </div>
-                        <div class="timeline">
-                            <div class="timeline-marker start">2024</div>
-                            <div class="timeline-progress">
-                                <div class="progress-bar"></div>
-                            </div>
-                            <div class="timeline-marker end">2029</div>
-                        </div>
+                    <div class="counter-section" data-aos="fade-up">
+                        <h2>
+                            Global CO₂ Emissions 
+                            <button class="info-button" type="button" aria-label="Show information">ⓘ</button>
+                            <div class="info-tooltip">Real-time estimate of global CO₂ emissions since you opened this page.</div>
+                        </h2>
+                        <div id="globalEmissions" class="counter">0</div>
+                        <p>Metric tons of CO₂ since you loaded this page</p>
                     </div>
 
-                    <div class="stats-grid">
-                        <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
-                            <h3>Annual Emissions</h3>
-                            <div class="stat-value">41.6</div>
-                            <div class="stat-unit">Gt CO₂/year</div>
-                            <div class="stat-label">Global CO₂ emissions (2024)</div>
-                        </div>
-
-                        <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
-                            <h3>High Certainty Scenario</h3>
-                            <div class="stat-value">100</div>
-                            <div class="stat-unit">Gt CO₂</div>
-                            <div class="stat-label">83% probability budget (depleted by 2026)</div>
-                        </div>
-
-                        <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
-                            <h3>Atmospheric CO₂</h3>
-                            <div class="stat-value">422.5</div>
-                            <div class="stat-unit">ppm</div>
-                            <div class="stat-label">52% above pre-industrial levels</div>
-                        </div>
+                    <div class="counter-section" data-aos="fade-up">
+                        <h2>
+                            Country CO₂ Emissions 
+                            <button class="info-button" type="button" aria-label="Show information">ⓘ</button>
+                            <div class="info-tooltip">Select a country to see its contribution to global emissions.</div>
+                        </h2>
+                        <select id="countrySelect" class="country-select">
+                            <option value="china">China</option>
+                            <option value="us">United States</option>
+                            <option value="india">India</option>
+                            <option value="russia">Russia</option>
+                            <option value="japan">Japan</option>
+                            <option value="germany">Germany</option>
+                            <option value="iran">Iran</option>
+                            <option value="skorea">South Korea</option>
+                            <option value="saudi">Saudi Arabia</option>
+                            <option value="canada">Canada</option>
+                        </select>
+                        <div id="countryEmissions" class="counter">0</div>
+                        <p>Metric tons of CO₂ since page load</p>
                     </div>
 
-                    <div class="urgency-meter" data-aos="fade-up">
-                        <div class="meter-label">Time Window for Action</div>
-                        <div class="meter-bar">
-                            <div class="meter-fill"></div>
+                    <div class="counter-section" data-aos="fade-up">
+                        <h2>
+                            Yearly Emissions 
+                            <button class="info-button" type="button" aria-label="Show information">ⓘ</button>
+                            <div class="info-tooltip">Total CO₂ emissions for the current year.</div>
+                        </h2>
+                        <div id="yearlyEmissions" class="counter">0</div>
+                        <p>Metric tons of CO₂ in 2025</p>
+                    </div>
+
+                    <div class="counter-section" data-aos="fade-up">
+                        <h2>
+                            Remaining Carbon Budget 
+                            <button class="info-button" type="button" aria-label="Show information">ⓘ</button>
+                            <div class="info-tooltip">Remaining carbon budget to limit global warming to 1.5°C above pre-industrial levels.</div>
+                        </h2>
+                        <div id="carbonBudget" class="counter">0</div>
+                        <p>Gigatons of CO₂ remaining</p>
+                        <div class="budget-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%"></div>
+                            </div>
                         </div>
-                        <div class="meter-text">Budget exhaustion estimated by 2029</div>
                     </div>
                 </div>
             </div>
