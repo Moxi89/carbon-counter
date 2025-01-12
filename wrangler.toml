@@ -2,5 +2,6 @@
 name = "carbon-counter"
 compatibility_date = "2024-01-12"
 
-[site]
-bucket = "static"
+[build]
+command = ""
+output_directory = "static"
