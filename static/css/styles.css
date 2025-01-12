@@ -108,6 +108,178 @@ h1 {
     color: var(--secondary-text);
 }
 
+.info-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    color: var(--accent-color);
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.info-button:hover, .info-button.active {
+    background: rgba(74, 226, 144, 0.1);
+    transform: scale(1.1);
+}
+
+.info-tooltip {
+    display: none;
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(74, 226, 144, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.info-tooltip.show {
+    opacity: 1;
+    visibility: visible;
+    display: block;
+}
+
+.info-tooltip::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 12px;
+    height: 12px;
+    background-color: var(--card-bg);
+    border-left: 1px solid rgba(74, 226, 144, 0.2);
+    border-top: 1px solid rgba(74, 226, 144, 0.2);
+}
+
+.chart-section {
+    margin: 4rem 0;
+    padding: 2rem;
+    background: var(--card-bg);
+    border-radius: 1.5rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.charts-container {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.chart-navigation {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    transform: translateY(-50%);
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+}
+
+.nav-button {
+    background: var(--card-bg);
+    border: 1px solid rgba(74, 226, 144, 0.3);
+    color: var(--accent-color);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    pointer-events: auto;
+    font-size: 1.5rem;
+    padding: 0;
+    margin: 0 1rem;
+}
+
+.nav-button:hover {
+    background: rgba(74, 226, 144, 0.1);
+    transform: scale(1.1);
+}
+
+.nav-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.charts-wrapper {
+    position: relative;
+    height: 500px;
+    margin: 2rem 0;
+}
+
+.chart-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.chart-container.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.counter {
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin: 1.5rem 0;
+    color: var(--accent-color);
+    text-shadow: 0 0 20px rgba(74, 226, 144, 0.3);
+    font-family: 'Roboto Mono', monospace;
+    letter-spacing: -0.5px;
+}
+
+.budget-progress {
+    margin-top: 1.5rem;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(74, 226, 144, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--accent-color);
+    transition: width 0.3s ease;
+    border-radius: 4px;
+}
+
+.budget-info {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    color: var(--secondary-text);
+    font-size: 0.9rem;
+}
+
+.separator {
+    color: var(--accent-color);
+}
+
 @media (max-width: 768px) {
     body {
         padding: 10px;

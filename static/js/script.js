@@ -334,6 +334,107 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Info button functionality
+    document.querySelectorAll('.info-button').forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const tooltip = button.nextElementSibling;
+            
+            // Close all other tooltips
+            document.querySelectorAll('.info-tooltip').forEach(t => {
+                if (t !== tooltip) {
+                    t.classList.remove('show');
+                }
+            });
+            
+            // Toggle current tooltip
+            tooltip.classList.toggle('show');
+            button.classList.toggle('active');
+        });
+    });
+
+    // Close tooltips when clicking outside
+    document.addEventListener('click', () => {
+        document.querySelectorAll('.info-tooltip').forEach(tooltip => {
+            tooltip.classList.remove('show');
+        });
+        document.querySelectorAll('.info-button').forEach(button => {
+            button.classList.remove('active');
+        });
+    });
+
+    // Chart configuration
+    function createChart(ctx, data, isHorizontal = true) {
+        return new Chart(ctx, {
+            type: isHorizontal ? 'horizontalBar' : 'bar',
+            data: data,
+            options: {
+                indexAxis: isHorizontal ? 'y' : 'x',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        },
+                        ticks: {
+                            color: '#fff'
+                        }
+                    },
+                    y: {
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        },
+                        ticks: {
+                            color: '#fff'
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    // Chart navigation
+    let currentChartIndex = 0;
+    const charts = document.querySelectorAll('.chart-container');
+    const prevButton = document.querySelector('.prev-chart');
+    const nextButton = document.querySelector('.next-chart');
+
+    function updateChartVisibility() {
+        charts.forEach((chart, index) => {
+            if (index === currentChartIndex) {
+                chart.classList.add('active');
+            } else {
+                chart.classList.remove('active');
+            }
+        });
+        
+        prevButton.disabled = currentChartIndex === 0;
+        nextButton.disabled = currentChartIndex === charts.length - 1;
+    }
+
+    prevButton?.addEventListener('click', () => {
+        if (currentChartIndex > 0) {
+            currentChartIndex--;
+            updateChartVisibility();
+        }
+    });
+
+    nextButton?.addEventListener('click', () => {
+        if (currentChartIndex < charts.length - 1) {
+            currentChartIndex++;
+            updateChartVisibility();
+        }
+    });
+
+    // Initialize chart visibility
+    updateChartVisibility();
+
     // FAQ Accordion functionality
     const faqQuestions = document.querySelectorAll('.faq-question');
     
