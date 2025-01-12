@@ -70,7 +70,6 @@ document.addEventListener('DOMContentLoaded', function() {
     let lastFrameTime = 0;
     let startTime;
     let accumulatedTime = 0;
-    let currentChartIndex = 0;
 
     function formatNumber(num) {
         // Round to the nearest integer
@@ -202,130 +201,69 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize country info
     countryInfoElement.textContent = countryEmissionsData[countrySelect.value].info;
 
-    // Chart Data and Configuration
-    const countryData = {
-        labels: ['China', 'United States', 'India', 'Russia', 'Japan', 'Germany', 'Iran', 'South Korea', 'Saudi Arabia', 'Indonesia'],
-        datasets: [{
-            label: 'Percentage of Global Emissions',
-            data: [32.88, 12.60, 7.02, 4.71, 2.99, 1.85, 1.83, 1.80, 1.70, 1.65],
-            backgroundColor: [
-                'rgba(74, 226, 144, 0.8)',
-                'rgba(74, 226, 144, 0.7)',
-                'rgba(74, 226, 144, 0.6)',
-                'rgba(74, 226, 144, 0.5)',
-                'rgba(74, 226, 144, 0.4)',
-                'rgba(74, 226, 144, 0.35)',
-                'rgba(74, 226, 144, 0.3)',
-                'rgba(74, 226, 144, 0.25)',
-                'rgba(74, 226, 144, 0.2)',
-                'rgba(74, 226, 144, 0.15)'
-            ],
-            borderColor: 'rgba(74, 226, 144, 1)',
-            borderWidth: 1
-        }]
-    };
+    // Global variables
+    let currentChartIndex = 0;
+    const charts = document.querySelectorAll('.chart-container');
+    const prevButton = document.querySelector('.prev-chart');
+    const nextButton = document.querySelector('.next-chart');
 
-    const productData = {
-        labels: ['Energy', 'Industry', 'Transport', 'Buildings', 'Agriculture', 'Other'],
-        datasets: [{
-            label: 'CO₂ Emissions by Sector',
-            data: [31.5, 24.2, 14.9, 8.4, 11.8, 9.2],
-            backgroundColor: [
-                'rgba(74, 226, 144, 0.8)',
-                'rgba(74, 226, 144, 0.7)',
-                'rgba(74, 226, 144, 0.6)',
-                'rgba(74, 226, 144, 0.5)',
-                'rgba(74, 226, 144, 0.4)',
-                'rgba(74, 226, 144, 0.3)'
-            ],
-            borderColor: 'rgba(74, 226, 144, 1)',
-            borderWidth: 1
-        }]
-    };
-
-    const chartConfig = {
-        type: 'bar',
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: true,
-                    position: 'top',
-                    labels: {
-                        color: '#ffffff'
-                    }
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            return `${context.dataset.label}: ${context.raw}%`;
-                        }
-                    }
-                }
-            },
-            scales: {
-                x: {
-                    ticks: {
-                        color: '#ffffff'
-                    },
-                    grid: {
-                        color: 'rgba(255, 255, 255, 0.1)'
-                    }
-                },
-                y: {
-                    ticks: {
-                        color: '#ffffff'
-                    },
-                    grid: {
-                        color: 'rgba(255, 255, 255, 0.1)'
-                    }
-                }
-            }
-        }
-    };
-
-    // Create charts
-    const countryChart = new Chart(countryChartCanvas, {
-        ...chartConfig,
-        data: countryData
-    });
-
-    const productChart = new Chart(productChartCanvas, {
-        ...chartConfig,
-        data: productData
-    });
-
-    // Chart navigation
-    let charts = [countryChartCanvas.parentElement, productChartCanvas.parentElement];
-    
-    function updateChartVisibility() {
-        charts.forEach((chart, index) => {
-            if (index === currentChartIndex) {
-                chart.style.display = 'block';
-            } else {
-                chart.style.display = 'none';
+    // Chart configuration and initialization
+    function initializeCharts() {
+        updateChartVisibility();
+        
+        // Initialize charts here with the horizontal configuration
+        const chartContexts = document.querySelectorAll('.chart-canvas');
+        chartContexts.forEach((ctx, index) => {
+            if (ctx) {
+                createChart(ctx, getChartData(index));
             }
         });
     }
 
-    function showChart(index) {
-        currentChartIndex = index;
-        updateChartVisibility();
+    function getChartData(index) {
+        // Return appropriate data based on chart index
+        const datasets = [
+            {
+                label: 'Emissions by Country',
+                data: [32.88, 12.60, 7.02, 4.71, 2.99, 1.85, 1.83, 1.80, 1.70, 1.65],
+                backgroundColor: 'rgba(74, 226, 144, 0.6)',
+                borderColor: 'rgba(74, 226, 144, 1)',
+                borderWidth: 1
+            }
+        ];
+        return {
+            labels: ['China', 'United States', 'India', 'Russia', 'Japan', 'Germany', 'Iran', 'South Korea', 'Saudi Arabia', 'Indonesia'],
+            datasets: datasets
+        };
     }
 
-    // Initialize first chart
-    showChart(0);
+    // Chart visibility functions
+    function updateChartVisibility() {
+        charts.forEach((chart, index) => {
+            if (index === currentChartIndex) {
+                chart.classList.add('active');
+            } else {
+                chart.classList.remove('active');
+            }
+        });
+        
+        if (prevButton && nextButton) {
+            prevButton.disabled = currentChartIndex === 0;
+            nextButton.disabled = currentChartIndex === charts.length - 1;
+        }
+    }
 
-    // Add event listeners for chart navigation
-    if (prevButton && nextButton) {
+    // Event Listeners
+    if (prevButton) {
         prevButton.addEventListener('click', () => {
             if (currentChartIndex > 0) {
                 currentChartIndex--;
                 updateChartVisibility();
             }
         });
+    }
 
+    if (nextButton) {
         nextButton.addEventListener('click', () => {
             if (currentChartIndex < charts.length - 1) {
                 currentChartIndex++;
@@ -333,35 +271,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-
-    // Info button functionality
-    document.querySelectorAll('.info-button').forEach(button => {
-        button.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const tooltip = button.nextElementSibling;
-            
-            // Close all other tooltips
-            document.querySelectorAll('.info-tooltip').forEach(t => {
-                if (t !== tooltip) {
-                    t.classList.remove('show');
-                }
-            });
-            
-            // Toggle current tooltip
-            tooltip.classList.toggle('show');
-            button.classList.toggle('active');
-        });
-    });
-
-    // Close tooltips when clicking outside
-    document.addEventListener('click', () => {
-        document.querySelectorAll('.info-tooltip').forEach(tooltip => {
-            tooltip.classList.remove('show');
-        });
-        document.querySelectorAll('.info-button').forEach(button => {
-            button.classList.remove('active');
-        });
-    });
 
     // Chart configuration
     function createChart(ctx, data, isHorizontal = true) {
@@ -399,41 +308,36 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Chart navigation
-    let currentChartIndex = 0;
-    const charts = document.querySelectorAll('.chart-container');
-    const prevButton = document.querySelector('.prev-chart');
-    const nextButton = document.querySelector('.next-chart');
+    initializeCharts();
 
-    function updateChartVisibility() {
-        charts.forEach((chart, index) => {
-            if (index === currentChartIndex) {
-                chart.classList.add('active');
-            } else {
-                chart.classList.remove('active');
-            }
+    // Info button functionality
+    document.querySelectorAll('.info-button').forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const tooltip = button.nextElementSibling;
+            
+            // Close all other tooltips
+            document.querySelectorAll('.info-tooltip').forEach(t => {
+                if (t !== tooltip) {
+                    t.classList.remove('show');
+                }
+            });
+            
+            // Toggle current tooltip
+            tooltip.classList.toggle('show');
+            button.classList.toggle('active');
         });
-        
-        prevButton.disabled = currentChartIndex === 0;
-        nextButton.disabled = currentChartIndex === charts.length - 1;
-    }
-
-    prevButton?.addEventListener('click', () => {
-        if (currentChartIndex > 0) {
-            currentChartIndex--;
-            updateChartVisibility();
-        }
     });
 
-    nextButton?.addEventListener('click', () => {
-        if (currentChartIndex < charts.length - 1) {
-            currentChartIndex++;
-            updateChartVisibility();
-        }
+    // Close tooltips when clicking outside
+    document.addEventListener('click', () => {
+        document.querySelectorAll('.info-tooltip').forEach(tooltip => {
+            tooltip.classList.remove('show');
+        });
+        document.querySelectorAll('.info-button').forEach(button => {
+            button.classList.remove('active');
+        });
     });
-
-    // Initialize chart visibility
-    updateChartVisibility();
 
     // FAQ Accordion functionality
     const faqQuestions = document.querySelectorAll('.faq-question');
