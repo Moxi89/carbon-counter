@@ -154,8 +154,10 @@ h1 {
     justify-content: center;
     border-radius: 50%;
     font-size: 1rem;
-    transition: all 0.3s ease;
+    padding: 0;
+    margin-left: 0.5rem;
     position: relative;
+    transition: all 0.3s ease;
 }
 
 .info-button:hover {
@@ -164,30 +166,27 @@ h1 {
 }
 
 .info-tooltip {
+    display: none;
     position: absolute;
-    top: 100%;
+    top: calc(100% + 10px);
     left: 50%;
     transform: translateX(-50%);
     background: var(--card-bg);
     border: 1px solid rgba(74, 226, 144, 0.2);
     border-radius: 0.5rem;
     padding: 1rem;
-    width: 90%;
-    max-width: 300px;
+    width: 250px;
     color: var(--text-color);
     font-size: 0.9rem;
     line-height: 1.5;
-    z-index: 100;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
+    z-index: 1000;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    margin-top: 1rem;
+    text-align: left;
+    font-weight: normal;
 }
 
 .info-tooltip.show {
-    opacity: 1;
-    visibility: visible;
+    display: block;
 }
 
 .info-tooltip::before {
@@ -201,6 +200,12 @@ h1 {
     background: var(--card-bg);
     border-left: 1px solid rgba(74, 226, 144, 0.2);
     border-top: 1px solid rgba(74, 226, 144, 0.2);
+}
+
+h2 {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
 }
 
 .faq-section {

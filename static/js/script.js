@@ -78,27 +78,31 @@ document.addEventListener('DOMContentLoaded', function() {
     countrySelect?.addEventListener('change', updateCountryEmissions);
 
     // Info button functionality
-    document.querySelectorAll('.info-button').forEach(button => {
+    const infoButtons = document.querySelectorAll('.info-button');
+    
+    infoButtons.forEach(button => {
         button.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
             
-            // Close all other tooltips first
-            document.querySelectorAll('.info-tooltip').forEach(tooltip => {
-                if (tooltip !== button.nextElementSibling) {
-                    tooltip.classList.remove('show');
+            // Find the tooltip associated with this button
+            const tooltip = button.nextElementSibling;
+            
+            // First close all other tooltips
+            document.querySelectorAll('.info-tooltip').forEach(t => {
+                if (t !== tooltip) {
+                    t.classList.remove('show');
                 }
             });
             
-            // Toggle current tooltip
-            const tooltip = button.nextElementSibling;
+            // Toggle this tooltip
             tooltip.classList.toggle('show');
         });
     });
 
     // Close tooltips when clicking outside
     document.addEventListener('click', (e) => {
-        if (!e.target.closest('.info-button') && !e.target.closest('.info-tooltip')) {
+        if (!e.target.closest('.info-button')) {
             document.querySelectorAll('.info-tooltip').forEach(tooltip => {
                 tooltip.classList.remove('show');
             });
@@ -106,7 +110,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // FAQ functionality
-    document.querySelectorAll('.faq-question').forEach(question => {
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    
+    faqQuestions.forEach(question => {
         question.addEventListener('click', () => {
             const answer = question.nextElementSibling;
             const isOpen = answer.classList.contains('show');

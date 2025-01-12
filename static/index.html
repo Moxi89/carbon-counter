@@ -60,15 +60,21 @@
                 
                 <div class="counters-grid">
                     <div class="counter-section" data-aos="fade-up">
-                        <h2>Global CO₂ Emissions <span class="info-button">ⓘ</span></h2>
-                        <div class="info-tooltip">Real-time estimate of global CO₂ emissions since you opened this page.</div>
+                        <h2>
+                            Global CO₂ Emissions 
+                            <button class="info-button" type="button" aria-label="Show information">ⓘ</button>
+                            <div class="info-tooltip">Real-time estimate of global CO₂ emissions since you opened this page.</div>
+                        </h2>
                         <div id="globalEmissions" class="counter">0</div>
                         <p>Metric tons of CO₂ since you loaded this page</p>
                     </div>
 
                     <div class="counter-section" data-aos="fade-up">
-                        <h2>Country CO₂ Emissions <span class="info-button">ⓘ</span></h2>
-                        <div class="info-tooltip">Select a country to see its contribution to global emissions.</div>
+                        <h2>
+                            Country CO₂ Emissions 
+                            <button class="info-button" type="button" aria-label="Show information">ⓘ</button>
+                            <div class="info-tooltip">Select a country to see its contribution to global emissions.</div>
+                        </h2>
                         <select id="countrySelect" class="country-select">
                             <option value="china">China</option>
                             <option value="us">United States</option>
@@ -79,27 +85,33 @@
                             <option value="iran">Iran</option>
                             <option value="skorea">South Korea</option>
                             <option value="saudi">Saudi Arabia</option>
-                            <option value="indonesia">Indonesia</option>
+                            <option value="canada">Canada</option>
                         </select>
                         <div id="countryEmissions" class="counter">0</div>
                         <p>Metric tons of CO₂ since page load</p>
                     </div>
 
                     <div class="counter-section" data-aos="fade-up">
-                        <h2>Yearly Emissions <span class="info-button">ⓘ</span></h2>
-                        <div class="info-tooltip">Total CO₂ emissions for the current year.</div>
+                        <h2>
+                            Yearly Emissions 
+                            <button class="info-button" type="button" aria-label="Show information">ⓘ</button>
+                            <div class="info-tooltip">Total CO₂ emissions for the current year.</div>
+                        </h2>
                         <div id="yearlyEmissions" class="counter">0</div>
                         <p>Metric tons of CO₂ in 2025</p>
                     </div>
 
                     <div class="counter-section" data-aos="fade-up">
-                        <h2>Remaining Carbon Budget <span class="info-button">ⓘ</span></h2>
-                        <div class="info-tooltip">The remaining carbon budget represents the estimated amount of CO₂ we can still emit while limiting global warming to 1.5°C above pre-industrial levels.</div>
-                        <div id="carbonBudget" class="counter">157</div>
+                        <h2>
+                            Remaining Carbon Budget 
+                            <button class="info-button" type="button" aria-label="Show information">ⓘ</button>
+                            <div class="info-tooltip">Remaining carbon budget to limit global warming to 1.5°C above pre-industrial levels.</div>
+                        </h2>
+                        <div id="carbonBudget" class="counter">0</div>
                         <p>Gigatons of CO₂ remaining</p>
                         <div class="budget-progress">
                             <div class="progress-bar">
-                                <div class="progress-fill" style="width: 21.5%"></div>
+                                <div class="progress-fill" style="width: 0%"></div>
                             </div>
                         </div>
                     </div>
