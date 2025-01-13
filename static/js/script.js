@@ -85,6 +85,51 @@ document.addEventListener('DOMContentLoaded', function() {
     // Start the animation loop
     requestAnimationFrame(updateCounters);
 
+    // FAQ Dropdown functionality with smooth animations
+    const faqItems = document.querySelectorAll('.faq-item');
+    
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        const answer = item.querySelector('.faq-answer');
+        
+        // Add ARIA attributes for accessibility
+        question.setAttribute('aria-expanded', 'false');
+        answer.setAttribute('aria-hidden', 'true');
+        
+        question.addEventListener('click', () => {
+            const isOpen = item.classList.contains('active');
+            
+            // Close all other FAQs
+            faqItems.forEach(otherItem => {
+                if (otherItem !== item && otherItem.classList.contains('active')) {
+                    otherItem.classList.remove('active');
+                    const otherQuestion = otherItem.querySelector('.faq-question');
+                    const otherAnswer = otherItem.querySelector('.faq-answer');
+                    otherQuestion.setAttribute('aria-expanded', 'false');
+                    otherAnswer.setAttribute('aria-hidden', 'true');
+                }
+            });
+            
+            // Toggle current FAQ
+            item.classList.toggle('active');
+            question.setAttribute('aria-expanded', !isOpen);
+            answer.setAttribute('aria-hidden', isOpen);
+            
+            // Smooth scroll into view if needed
+            if (!isOpen) {
+                const rect = item.getBoundingClientRect();
+                const isOffscreen = rect.bottom > window.innerHeight;
+                if (isOffscreen) {
+                    const targetY = window.scrollY + rect.top - 20;
+                    window.scrollTo({
+                        top: targetY,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+    });
+
     // Event Delegation for better performance
     document.addEventListener('click', (e) => {
         // Info button clicks
@@ -104,23 +149,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // Close tooltips when clicking outside
         else if (!e.target.closest('.info-tooltip')) {
             elements.tooltips.forEach(tooltip => tooltip.classList.remove('show'));
-        }
-        
-        // FAQ clicks
-        const faqQuestion = e.target.closest('.faq-question');
-        if (faqQuestion) {
-            const answer = faqQuestion.nextElementSibling;
-            const isOpen = answer.classList.contains('show');
-            
-            document.querySelectorAll('.faq-answer').forEach(a => {
-                a.classList.remove('show');
-                a.previousElementSibling.classList.remove('active');
-            });
-            
-            if (!isOpen) {
-                answer.classList.add('show');
-                faqQuestion.classList.add('active');
-            }
         }
     });
 
