@@ -96,7 +96,8 @@ document.addEventListener('DOMContentLoaded', function() {
         question.setAttribute('aria-expanded', 'false');
         answer.setAttribute('aria-hidden', 'true');
         
-        question.addEventListener('click', () => {
+        question.addEventListener('click', (e) => {
+            e.preventDefault();
             const isOpen = item.classList.contains('active');
             
             // Close all other FAQs
@@ -114,6 +115,13 @@ document.addEventListener('DOMContentLoaded', function() {
             item.classList.toggle('active');
             question.setAttribute('aria-expanded', !isOpen);
             answer.setAttribute('aria-hidden', isOpen);
+
+            // Set max-height for animation
+            if (!isOpen) {
+                answer.style.maxHeight = answer.scrollHeight + "px";
+            } else {
+                answer.style.maxHeight = "0px";
+            }
             
             // Smooth scroll into view if needed
             if (!isOpen) {
