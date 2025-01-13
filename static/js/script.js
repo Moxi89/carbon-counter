@@ -85,54 +85,28 @@ document.addEventListener('DOMContentLoaded', function() {
     // Start the animation loop
     requestAnimationFrame(updateCounters);
 
-    // FAQ Dropdown functionality with smooth animations
-    const faqItems = document.querySelectorAll('.faq-item');
-    
-    faqItems.forEach(item => {
-        const question = item.querySelector('.faq-question');
-        const answer = item.querySelector('.faq-answer');
-        
-        // Add ARIA attributes for accessibility
-        question.setAttribute('aria-expanded', 'false');
-        answer.setAttribute('aria-hidden', 'true');
-        
-        question.addEventListener('click', (e) => {
-            e.preventDefault();
+    // FAQ Dropdown functionality
+    document.querySelectorAll('.faq-question').forEach(question => {
+        question.addEventListener('click', () => {
+            const item = question.closest('.faq-item');
             const isOpen = item.classList.contains('active');
             
             // Close all other FAQs
-            faqItems.forEach(otherItem => {
-                if (otherItem !== item && otherItem.classList.contains('active')) {
-                    otherItem.classList.remove('active');
-                    const otherQuestion = otherItem.querySelector('.faq-question');
-                    const otherAnswer = otherItem.querySelector('.faq-answer');
-                    otherQuestion.setAttribute('aria-expanded', 'false');
-                    otherAnswer.setAttribute('aria-hidden', 'true');
+            document.querySelectorAll('.faq-item.active').forEach(activeItem => {
+                if (activeItem !== item) {
+                    activeItem.classList.remove('active');
                 }
             });
             
             // Toggle current FAQ
             item.classList.toggle('active');
-            question.setAttribute('aria-expanded', !isOpen);
-            answer.setAttribute('aria-hidden', isOpen);
-
-            // Set max-height for animation
-            if (!isOpen) {
-                answer.style.maxHeight = answer.scrollHeight + "px";
-            } else {
-                answer.style.maxHeight = "0px";
-            }
             
-            // Smooth scroll into view if needed
+            // Scroll into view if needed
             if (!isOpen) {
                 const rect = item.getBoundingClientRect();
                 const isOffscreen = rect.bottom > window.innerHeight;
                 if (isOffscreen) {
-                    const targetY = window.scrollY + rect.top - 20;
-                    window.scrollTo({
-                        top: targetY,
-                        behavior: 'smooth'
-                    });
+                    item.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }
             }
         });
