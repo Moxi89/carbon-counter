@@ -4,20 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Carbon Emissions Counter Live | Real-Time Global CO₂ Tracking</title>
-    <meta name="description" content="Track real-time global carbon emissions with our live CO₂ counter. Monitor yearly emissions, country-specific data, and remaining carbon budget to limit global warming to 1.5°C.">
-    <meta name="keywords" content="carbon emissions, CO2 counter, global warming, climate change, real-time emissions, carbon budget">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Carbon Emissions Counter">
+    <meta name="google-site-verification" content="tnrk__rltpg2FY9E88LPKa8Rcm7CW7hV-OcsQtvA9-k">
+    
+    <!-- Enhanced meta description -->
+    <meta name="description" content="Track real-time global carbon emissions with our live CO₂ counter. Get accurate data on worldwide carbon footprint, country-specific emissions, and remaining carbon budget to limit global warming to 1.5°C. Updated every second with scientific data.">
+    <meta name="keywords" content="carbon emissions tracker, CO2 counter, global warming calculator, climate change monitor, real-time emissions data, carbon budget tracker, environmental monitoring, greenhouse gas emissions, global CO2 levels, climate action tool">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.carbonemissionscounter.com/">
     <meta property="og:title" content="Carbon Emissions Counter Live | Real-Time Global CO₂ Tracking">
-    <meta property="og:description" content="Track real-time global carbon emissions with our live CO₂ counter. Monitor yearly emissions, country-specific data, and remaining carbon budget.">
+    <meta property="og:description" content="Track real-time global carbon emissions with our live CO₂ counter. Get accurate data on worldwide carbon footprint and country-specific emissions.">
+    <meta property="og:image" content="https://www.carbonemissionscounter.com/images/social-preview.jpg">
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://www.carbonemissionscounter.com/">
     <meta name="twitter:title" content="Carbon Emissions Counter Live | Real-Time Global CO₂ Tracking">
-    <meta name="twitter:description" content="Track real-time global carbon emissions with our live CO₂ counter. Monitor yearly emissions, country-specific data, and remaining carbon budget.">
+    <meta name="twitter:description" content="Track real-time global carbon emissions with our live CO₂ counter. Get accurate data on worldwide carbon footprint and country-specific emissions.">
+    <meta name="twitter:image" content="https://www.carbonemissionscounter.com/images/social-preview.jpg">
+    
+    <!-- Schema.org markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Carbon Emissions Counter Live",
+      "description": "Real-time global carbon emissions tracker providing live CO₂ data and country-specific emissions information. A free public service tool for environmental awareness.",
+      "url": "https://www.carbonemissionscounter.com",
+      "applicationCategory": "EnvironmentalApplication",
+      "operatingSystem": "All",
+      "isAccessibleForFree": true,
+      "creator": {
+        "@type": "Organization",
+        "name": "Carbon Emissions Counter",
+        "url": "https://www.carbonemissionscounter.com"
+      }
+    }
+    </script>
     
     <!-- Canonical URL -->
     <link rel="canonical" href="https://www.carbonemissionscounter.com/">
@@ -29,7 +55,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <div class="background-particles">
+    <div class="background-particles" aria-hidden="true">
         <div class="particle" style="left: 10%; width: 2px; height: 2px;"></div>
         <div class="particle" style="left: 20%; width: 3px; height: 3px; animation-delay: 2s;"></div>
         <div class="particle" style="left: 35%; width: 2px; height: 2px; animation-delay: 4s;"></div>
@@ -62,8 +88,8 @@
                     <div class="counter-section" data-aos="fade-up">
                         <h2>
                             Global CO₂ Emissions 
-                            <button class="info-button" type="button" aria-label="Show information">ⓘ</button>
-                            <div class="info-tooltip">Real-time estimate of global CO₂ emissions since you opened this page.</div>
+                            <button class="info-button" type="button" aria-label="Information about global CO₂ emissions">ⓘ</button>
+                            <div class="info-tooltip" role="tooltip">Real-time estimate of global CO₂ emissions since you opened this page.</div>
                         </h2>
                         <div id="globalEmissions" class="counter">0</div>
                         <p>Metric tons of CO₂ since you loaded this page</p>
@@ -75,7 +101,7 @@
                             <button class="info-button" type="button" aria-label="Show information">ⓘ</button>
                             <div class="info-tooltip">Select a country to see its contribution to global emissions.</div>
                         </h2>
-                        <select id="countrySelect" class="country-select">
+                        <select id="countrySelect" class="country-select" aria-label="Select a country to view its CO₂ emissions">
                             <option value="china">China</option>
                             <option value="us">United States</option>
                             <option value="india">India</option>

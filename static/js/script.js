@@ -3,16 +3,24 @@ document.addEventListener('DOMContentLoaded', function() {
     const EMISSIONS_PER_YEAR = 41.6; // Gt CO₂ per year
     const CARBON_BUDGET_START = 200; // Gt CO₂ in 2024
     const EMISSIONS_PER_SECOND = 1100; // tons of CO₂
-    const UPDATE_INTERVAL = 50; // milliseconds
+    const UPDATE_INTERVAL = 1000/60; // ~16.7ms for 60fps
     const pageLoadTime = new Date(); // When the page was loaded
     const startOfYear = new Date(2025, 0, 1); // January 1st, 2025
 
-    // Get counter elements
-    const globalEmissionsElement = document.getElementById('globalEmissions');
-    const yearlyEmissionsElement = document.getElementById('yearlyEmissions');
-    const countryEmissionsElement = document.getElementById('countryEmissions');
-    const carbonBudgetElement = document.getElementById('carbonBudget');
-    const countrySelect = document.getElementById('countrySelect');
+    // Cache DOM elements
+    const elements = {
+        globalEmissions: document.getElementById('globalEmissions'),
+        yearlyEmissions: document.getElementById('yearlyEmissions'),
+        countryEmissions: document.getElementById('countryEmissions'),
+        carbonBudget: document.getElementById('carbonBudget'),
+        countrySelect: document.getElementById('countrySelect'),
+        infoButtons: document.querySelectorAll('.info-button'),
+        tooltips: document.querySelectorAll('.info-tooltip'),
+        faqQuestions: document.querySelectorAll('.faq-question'),
+        navToggle: document.querySelector('.nav-toggle'),
+        navItems: document.querySelector('.nav-items'),
+        navLinks: document.querySelectorAll('.nav-items a')
+    };
 
     // Country emissions data (percentage of global emissions)
     const countryEmissionsData = {
@@ -28,126 +36,110 @@ document.addEventListener('DOMContentLoaded', function() {
         indonesia: { percentage: 1.65 }
     };
 
-    function formatNumber(num) {
-        return Math.round(num).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    // Performance optimized number formatter
+    const formatter = new Intl.NumberFormat('en-US');
+    const formatNumber = num => formatter.format(Math.round(num));
+
+    // Cached calculations
+    let lastGlobalEmissions = 0;
+    let lastUpdate = performance.now();
+
+    // Use RequestAnimationFrame for smooth updates
+    function updateCounters(timestamp) {
+        const elapsed = timestamp - lastUpdate;
+        
+        if (elapsed >= UPDATE_INTERVAL) {
+            const now = new Date();
+            
+            // Global Emissions
+            const secondsSincePageLoad = (now - pageLoadTime) / 1000;
+            lastGlobalEmissions = Math.round(EMISSIONS_PER_SECOND * secondsSincePageLoad);
+            elements.globalEmissions.textContent = formatNumber(lastGlobalEmissions);
+
+            // Yearly Emissions
+            const secondsIntoYear = (now - startOfYear) / 1000;
+            const yearlyEmissions = (EMISSIONS_PER_YEAR * secondsIntoYear) / (365 * 24 * 60 * 60);
+            elements.yearlyEmissions.textContent = formatNumber(yearlyEmissions * 1000000000);
+
+            // Country Emissions
+            if (elements.countrySelect && elements.countryEmissions) {
+                const selectedCountry = elements.countrySelect.value;
+                const countryPercentage = countryEmissionsData[selectedCountry].percentage / 100;
+                const countryEmissions = Math.round(lastGlobalEmissions * countryPercentage);
+                elements.countryEmissions.textContent = formatNumber(countryEmissions);
+            }
+
+            // Carbon Budget
+            if (elements.carbonBudget) {
+                const yearFraction = (now - startOfYear) / (1000 * 60 * 60 * 24 * 365);
+                const budgetRemaining = CARBON_BUDGET_START - (EMISSIONS_PER_YEAR * yearFraction);
+                elements.carbonBudget.textContent = formatNumber(Math.max(0, Math.round(budgetRemaining)));
+            }
+
+            lastUpdate = timestamp;
+        }
+
+        requestAnimationFrame(updateCounters);
     }
 
-    function updateGlobalEmissions() {
-        const now = new Date();
-        const secondsSincePageLoad = (now - pageLoadTime) / 1000;
-        const totalEmissions = Math.round(EMISSIONS_PER_SECOND * secondsSincePageLoad);
-        globalEmissionsElement.textContent = formatNumber(totalEmissions);
-    }
+    // Start the animation loop
+    requestAnimationFrame(updateCounters);
 
-    function updateYearlyEmissions() {
-        const now = new Date();
-        const secondsIntoYear = (now - startOfYear) / 1000;
-        const yearlyEmissions = (EMISSIONS_PER_YEAR * secondsIntoYear) / (365 * 24 * 60 * 60);
-        yearlyEmissionsElement.textContent = formatNumber(yearlyEmissions * 1000000000);
-    }
-
-    function updateCountryEmissions() {
-        const selectedCountry = countrySelect.value;
-        const countryPercentage = countryEmissionsData[selectedCountry].percentage / 100;
-        const globalEmissions = parseInt(globalEmissionsElement.textContent.replace(/,/g, ''));
-        const countryEmissions = Math.round(globalEmissions * countryPercentage);
-        countryEmissionsElement.textContent = formatNumber(countryEmissions);
-    }
-
-    function updateCarbonBudget() {
-        const now = new Date();
-        const yearFraction = (now - startOfYear) / (1000 * 60 * 60 * 24 * 365);
-        const budgetRemaining = CARBON_BUDGET_START - (EMISSIONS_PER_YEAR * yearFraction);
-        carbonBudgetElement.textContent = Math.max(0, Math.round(budgetRemaining));
-    }
-
-    function updateAllCounters() {
-        updateGlobalEmissions();
-        updateYearlyEmissions();
-        updateCountryEmissions();
-        updateCarbonBudget();
-    }
-
-    // Initialize counters
-    updateAllCounters();
-
-    // Update counters every interval
-    setInterval(updateAllCounters, UPDATE_INTERVAL);
-
-    // Country selector event listener
-    countrySelect?.addEventListener('change', updateCountryEmissions);
-
-    // Info button functionality
-    const infoButtons = document.querySelectorAll('.info-button');
-    
-    infoButtons.forEach(button => {
-        button.addEventListener('click', (e) => {
+    // Event Delegation for better performance
+    document.addEventListener('click', (e) => {
+        // Info button clicks
+        if (e.target.closest('.info-button')) {
             e.preventDefault();
             e.stopPropagation();
             
-            // Find the tooltip associated with this button
+            const button = e.target.closest('.info-button');
             const tooltip = button.nextElementSibling;
             
-            // First close all other tooltips
-            document.querySelectorAll('.info-tooltip').forEach(t => {
-                if (t !== tooltip) {
-                    t.classList.remove('show');
-                }
+            elements.tooltips.forEach(t => {
+                if (t !== tooltip) t.classList.remove('show');
             });
             
-            // Toggle this tooltip
             tooltip.classList.toggle('show');
-        });
-    });
-
-    // Close tooltips when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!e.target.closest('.info-button')) {
-            document.querySelectorAll('.info-tooltip').forEach(tooltip => {
-                tooltip.classList.remove('show');
-            });
         }
-    });
-
-    // FAQ functionality
-    const faqQuestions = document.querySelectorAll('.faq-question');
-    
-    faqQuestions.forEach(question => {
-        question.addEventListener('click', () => {
-            const answer = question.nextElementSibling;
+        // Close tooltips when clicking outside
+        else if (!e.target.closest('.info-tooltip')) {
+            elements.tooltips.forEach(tooltip => tooltip.classList.remove('show'));
+        }
+        
+        // FAQ clicks
+        const faqQuestion = e.target.closest('.faq-question');
+        if (faqQuestion) {
+            const answer = faqQuestion.nextElementSibling;
             const isOpen = answer.classList.contains('show');
             
-            // Close all other answers
             document.querySelectorAll('.faq-answer').forEach(a => {
                 a.classList.remove('show');
                 a.previousElementSibling.classList.remove('active');
             });
             
-            // Toggle current answer
             if (!isOpen) {
                 answer.classList.add('show');
-                question.classList.add('active');
+                faqQuestion.classList.add('active');
             }
-        });
+        }
     });
 
-    // Mobile menu functionality
-    const navToggle = document.querySelector('.nav-toggle');
-    const navItems = document.querySelector('.nav-items');
-    
-    if (navToggle) {
-        navToggle.addEventListener('click', () => {
-            navItems.classList.toggle('show');
-            navToggle.classList.toggle('active');
+    // Mobile menu optimization
+    if (elements.navToggle) {
+        elements.navToggle.addEventListener('click', () => {
+            requestAnimationFrame(() => {
+                elements.navItems.classList.toggle('show');
+                elements.navToggle.classList.toggle('active');
+            });
+        });
+
+        elements.navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                requestAnimationFrame(() => {
+                    elements.navItems.classList.remove('show');
+                    elements.navToggle.classList.remove('active');
+                });
+            });
         });
     }
-
-    // Close mobile menu when clicking a link
-    const navLinks = document.querySelectorAll('.nav-items a');
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            navItems.classList.remove('show');
-            navToggle.classList.remove('active');
-        });
-    });
 });

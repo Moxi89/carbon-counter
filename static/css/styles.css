@@ -8,14 +8,16 @@
     --mono-font: 'Roboto Mono', 'Consolas', 'Courier New', monospace;
 }
 
-/* Background Animation */
+/* Performance Optimizations */
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Background Animation - Optimized */
 @keyframes gradientBG {
-    0%, 100% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
 }
 
 body {
@@ -27,8 +29,8 @@ body {
         #1c2b3e,
         var(--primary-bg)
     );
-    background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
+    background-size: 200% 200%;
+    animation: gradientBG 20s linear infinite;
     color: var(--text-color);
     line-height: 1.6;
     min-height: 100vh;
@@ -40,38 +42,41 @@ body {
     -moz-osx-font-smoothing: grayscale;
     margin: 0;
     padding: 20px;
+    overscroll-behavior: none;
 }
 
 .container {
+    width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: clamp(1rem, 5vw, 2rem);
     text-align: center;
     position: relative;
     z-index: 1;
 }
 
 h1 {
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    margin-bottom: clamp(1rem, 3vw, 2rem);
     color: var(--accent-color);
+    line-height: 1.2;
 }
 
 .counters-grid {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(1rem, 3vw, 2rem);
+    width: 100%;
     max-width: 800px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: clamp(1rem, 3vw, 2rem);
 }
 
 .counter-section {
     width: 100%;
     background: rgba(26, 35, 50, 0.7);
     border-radius: 1.5rem;
-    padding: 2rem;
+    padding: clamp(1rem, 3vw, 2rem);
     text-align: center;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
     border: 1px solid rgba(74, 226, 144, 0.1);
@@ -80,18 +85,20 @@ h1 {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     margin-bottom: 2rem;
+    transform: translateZ(0);
+    will-change: transform;
+    transition: transform 0.2s ease;
 }
 
 .counter-section:hover {
     border-color: rgba(74, 226, 144, 0.3);
-    transform: translateY(-2px);
-    transition: all 0.3s ease;
+    transform: translateY(-2px) translateZ(0);
 }
 
 .counter-section h2 {
     color: var(--accent-color);
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
+    font-size: clamp(1.2rem, 4vw, 1.8rem);
+    margin-bottom: clamp(0.5rem, 2vw, 1rem);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -100,15 +107,17 @@ h1 {
 
 .counter {
     font-family: var(--mono-font);
-    font-size: 3.5rem;
+    font-size: clamp(2rem, 6vw, 3.5rem);
     font-weight: 500;
     color: var(--accent-color);
     text-shadow: 0 0 20px rgba(74, 226, 144, 0.3);
     margin: 1rem 0;
-    padding: 1rem;
+    padding: clamp(0.5rem, 2vw, 1rem);
     background: rgba(74, 226, 144, 0.05);
     border-radius: 1rem;
     border: 1px solid rgba(74, 226, 144, 0.1);
+    transform: translateZ(0);
+    will-change: contents;
 }
 
 .counter-section p {
@@ -183,6 +192,9 @@ h1 {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     text-align: left;
     font-weight: normal;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
 }
 
 .info-tooltip.show {
@@ -307,9 +319,13 @@ h2 {
     transition: width 0.3s ease;
 }
 
-/* Responsive Design */
+/* Mobile Optimizations */
 @media (max-width: 768px) {
-    .counters-grid {
+    body {
+        padding: 10px;
+    }
+
+    .container {
         padding: 1rem;
     }
 
@@ -317,13 +333,42 @@ h2 {
         padding: 1.5rem;
     }
 
-    .counter {
-        font-size: 2.5rem;
+    .country-select {
+        width: 100%;
+        padding: 0.8rem;
     }
 
     .info-tooltip {
-        width: calc(100% - 2rem);
-        left: 1rem;
+        width: 90%;
+        max-width: 300px;
+        font-size: 0.85rem;
+    }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) {
+    .counter-section:hover {
+        transform: none;
+        border-color: rgba(74, 226, 144, 0.1);
+    }
+
+    .info-button:hover {
+        transform: none;
+        background: none;
+    }
+}
+
+/* Reduce Motion */
+@media (prefers-reduced-motion: reduce) {
+    body {
+        animation: none;
+    }
+
+    .counter-section {
+        transition: none;
+    }
+
+    .counter-section:hover {
         transform: none;
     }
 }
