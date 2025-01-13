@@ -87,6 +87,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Event Delegation for better performance
     document.addEventListener('click', (e) => {
+        // FAQ clicks
+        if (e.target.closest('.faq-question')) {
+            const button = e.target.closest('.faq-question');
+            const faqItem = button.parentElement;
+            
+            // Close all other FAQs
+            document.querySelectorAll('.faq-item.active').forEach(item => {
+                if (item !== faqItem) {
+                    item.classList.remove('active');
+                }
+            });
+            
+            // Toggle current FAQ
+            faqItem.classList.toggle('active');
+        }
+        
         // Info button clicks
         if (e.target.closest('.info-button')) {
             e.preventDefault();
@@ -125,32 +141,4 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
-
-    // FAQ Dropdown functionality
-    const faqButtons = document.querySelectorAll('.faq-question');
-    faqButtons.forEach(button => {
-        button.addEventListener('click', (e) => {
-            e.preventDefault();
-            const faqItem = button.parentElement;
-            const isActive = faqItem.classList.contains('active');
-            
-            // Close all other FAQs
-            document.querySelectorAll('.faq-item.active').forEach(item => {
-                if (item !== faqItem) {
-                    item.classList.remove('active');
-                }
-            });
-            
-            // Toggle current FAQ item
-            faqItem.classList.toggle('active');
-            
-            // Scroll into view if needed
-            if (!isActive) {
-                const rect = faqItem.getBoundingClientRect();
-                if (rect.bottom > window.innerHeight) {
-                    faqItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
-            }
-        });
-    });
 });
