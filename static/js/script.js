@@ -86,29 +86,32 @@ document.addEventListener('DOMContentLoaded', function() {
     requestAnimationFrame(updateCounters);
 
     // FAQ Dropdown functionality
-    document.querySelectorAll('.faq-question').forEach(question => {
-        question.addEventListener('click', () => {
-            const item = question.closest('.faq-item');
-            const isOpen = item.classList.contains('active');
-            
-            // Close all other FAQs
-            document.querySelectorAll('.faq-item.active').forEach(activeItem => {
-                if (activeItem !== item) {
-                    activeItem.classList.remove('active');
+    document.addEventListener('DOMContentLoaded', () => {
+        const faqButtons = document.querySelectorAll('.faq-question');
+        
+        faqButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const faqItem = button.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Close all FAQ items
+                document.querySelectorAll('.faq-item.active').forEach(item => {
+                    if (item !== faqItem) {
+                        item.classList.remove('active');
+                    }
+                });
+                
+                // Toggle current FAQ item
+                faqItem.classList.toggle('active');
+                
+                // Scroll into view if needed
+                if (!isActive) {
+                    const rect = faqItem.getBoundingClientRect();
+                    if (rect.bottom > window.innerHeight) {
+                        faqItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
                 }
             });
-            
-            // Toggle current FAQ
-            item.classList.toggle('active');
-            
-            // Scroll into view if needed
-            if (!isOpen) {
-                const rect = item.getBoundingClientRect();
-                const isOffscreen = rect.bottom > window.innerHeight;
-                if (isOffscreen) {
-                    item.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
-            }
         });
     });
 
