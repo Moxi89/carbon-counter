@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const EMISSIONS_PER_YEAR = 41.6; // Gt CO₂ per year
     const CARBON_BUDGET_START = 200; // Gt CO₂ in 2024
     const EMISSIONS_PER_SECOND = 1100; // tons of CO₂
-    const UPDATE_INTERVAL = 1000/60; // ~16.7ms for 60fps
+    const UPDATE_INTERVAL = 1000/120; // ~8.33ms for 120fps
     const pageLoadTime = new Date(); // When the page was loaded
     const startOfYear = new Date(2025, 0, 1); // January 1st, 2025
 
@@ -122,6 +122,48 @@ document.addEventListener('DOMContentLoaded', function() {
             elements.tooltips.forEach(tooltip => tooltip.classList.remove('show'));
         }
     });
+
+    // Handle tooltips for mobile
+    function initTooltips() {
+        const isMobile = window.innerWidth <= 768;
+        const tooltips = document.querySelectorAll('.info-tooltip');
+        const buttons = document.querySelectorAll('.info-button');
+
+        buttons.forEach((button, index) => {
+            const tooltip = tooltips[index];
+
+            if (isMobile) {
+                // For mobile: handle touch events
+                button.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    tooltips.forEach(t => {
+                        if (t !== tooltip) {
+                            t.style.opacity = '0';
+                            t.style.visibility = 'hidden';
+                        }
+                    });
+                    tooltip.style.opacity = '1';
+                    tooltip.style.visibility = 'visible';
+                });
+
+                // Close tooltip when touching outside
+                document.addEventListener('touchstart', (e) => {
+                    if (!e.target.closest('.info-button') && !e.target.closest('.info-tooltip')) {
+                        tooltips.forEach(t => {
+                            t.style.opacity = '0';
+                            t.style.visibility = 'hidden';
+                        });
+                    }
+                });
+            }
+        });
+    }
+
+    // Initialize tooltips
+    initTooltips();
+
+    // Update tooltips on resize
+    window.addEventListener('resize', initTooltips);
 
     // Mobile menu optimization
     if (elements.navToggle) {

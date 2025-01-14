@@ -150,7 +150,7 @@
             <section class="faq-section" id="faq-section">
                 <h2 data-aos="fade-down">Global CO₂ Emissions: Frequently Asked Questions</h2>
                 <div class="faq-container">
-                    <div class="faq-item">
+                    <div class="faq-item" data-aos="fade-up" data-aos-delay="50">
                         <button class="faq-question" type="button">
                             What are carbon emissions?
                         </button>
@@ -159,7 +159,7 @@
                         </div>
                     </div>
 
-                    <div class="faq-item">
+                    <div class="faq-item" data-aos="fade-up" data-aos-delay="75">
                         <button class="faq-question" type="button">
                             Why are carbon emissions a problem?
                         </button>
@@ -168,7 +168,7 @@
                         </div>
                     </div>
 
-                    <div class="faq-item">
+                    <div class="faq-item" data-aos="fade-up" data-aos-delay="100">
                         <button class="faq-question" type="button">
                             What are the main sources of carbon emissions?
                         </button>
@@ -184,7 +184,7 @@
                         </div>
                     </div>
 
-                    <div class="faq-item">
+                    <div class="faq-item" data-aos="fade-up" data-aos-delay="125">
                         <button class="faq-question" type="button">
                             How much do human activities contribute to carbon emissions?
                         </button>
@@ -193,7 +193,7 @@
                         </div>
                     </div>
 
-                    <div class="faq-item">
+                    <div class="faq-item" data-aos="fade-up" data-aos-delay="150">
                         <button class="faq-question" type="button">
                             What is the current level of CO₂ in the atmosphere?
                         </button>
@@ -202,7 +202,7 @@
                         </div>
                     </div>
 
-                    <div class="faq-item">
+                    <div class="faq-item" data-aos="fade-up" data-aos-delay="175">
                         <button class="faq-question" type="button">
                             How do greenhouse gases cause global warming?
                         </button>
@@ -211,7 +211,7 @@
                         </div>
                     </div>
 
-                    <div class="faq-item">
+                    <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
                         <button class="faq-question" type="button">
                             What are the main greenhouse gases?
                         </button>
@@ -220,7 +220,7 @@
                         </div>
                     </div>
 
-                    <div class="faq-item">
+                    <div class="faq-item" data-aos="fade-up" data-aos-delay="225">
                         <button class="faq-question" type="button">
                             What is the Global Warming Potential (GWP)?
                         </button>
@@ -229,7 +229,7 @@
                         </div>
                     </div>
 
-                    <div class="faq-item">
+                    <div class="faq-item" data-aos="fade-up" data-aos-delay="250">
                         <button class="faq-question" type="button">
                             What are CO₂ equivalents (CO₂e)?
                         </button>
@@ -238,7 +238,7 @@
                         </div>
                     </div>
 
-                    <div class="faq-item">
+                    <div class="faq-item" data-aos="fade-up" data-aos-delay="275">
                         <button class="faq-question" type="button">
                             How long do greenhouse gases stay in the atmosphere?
                         </button>
@@ -252,7 +252,7 @@
                         </div>
                     </div>
 
-                    <div class="faq-item">
+                    <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
                         <button class="faq-question" type="button">
                             What was the level of global CO₂ emissions in 2022?
                         </button>
@@ -261,7 +261,7 @@
                         </div>
                     </div>
 
-                    <div class="faq-item">
+                    <div class="faq-item" data-aos="fade-up" data-aos-delay="325">
                         <button class="faq-question" type="button">
                             How has the COVID-19 pandemic affected CO₂ emissions?
                         </button>
@@ -275,7 +275,7 @@
                         </div>
                     </div>
 
-                    <div class="faq-item">
+                    <div class="faq-item" data-aos="fade-up" data-aos-delay="350">
                         <button class="faq-question" type="button">
                             What role do clean energy technologies play in reducing emissions?
                         </button>
@@ -284,7 +284,7 @@
                         </div>
                     </div>
 
-                    <div class="faq-item">
+                    <div class="faq-item" data-aos="fade-up" data-aos-delay="375">
                         <button class="faq-question" type="button">
                             How has the energy crisis affected emissions from different fuel sources?
                         </button>
@@ -298,7 +298,7 @@
                         </div>
                     </div>
 
-                    <div class="faq-item">
+                    <div class="faq-item" data-aos="fade-up" data-aos-delay="400">
                         <button class="faq-question" type="button">
                             What is the impact of electric vehicles on emissions?
                         </button>
@@ -341,8 +341,10 @@
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
         AOS.init({
-            duration: 800,
-            once: true
+            duration: 400, // Faster animation duration
+            offset: 100,   // Start animation sooner
+            once: true,    // Only animate once
+            easing: 'ease-out-cubic' // Smoother easing
         });
     </script>
     <script src="./js/script.js"></script>
