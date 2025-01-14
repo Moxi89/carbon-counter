@@ -44,8 +44,9 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     margin: 0;
-    padding: 20px;
-    overscroll-behavior: none;
+    padding: 0;
+    overflow-x: hidden;
+    width: 100%;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -57,18 +58,48 @@ h1, h2, h3, h4, h5, h6 {
 
 .container {
     width: 100%;
-    max-width: 1200px;
+    max-width: 800px;
     margin: 0 auto;
-    padding: clamp(1rem, 5vw, 2rem);
+    padding: 1rem;
+    box-sizing: border-box;
     text-align: center;
-    position: relative;
-    z-index: 1;
+    overflow-x: hidden;
 }
 
 h1 {
-    font-size: clamp(1.8rem, 5vw, 2.5rem);
-    margin-bottom: clamp(1rem, 3vw, 2rem);
+    font-size: 2.5rem;
     color: var(--accent-color);
+    margin: 2rem auto;
+    text-align: center;
+    width: 100%;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+        margin: 1.5rem auto;
+        width: 90%;
+    }
+}
+
+@media (max-width: 576px) {
+    h1 {
+        font-size: 1.85rem;
+        margin: 1.25rem auto;
+        width: 100%;
+        padding: 0 1rem;
+    }
+}
+
+@media (max-width: 375px) {
+    h1 {
+        font-size: 1.75rem;
+        margin: 1rem auto;
+        width: 100%;
+        padding: 0;
+    }
 }
 
 .counters-grid {
@@ -408,7 +439,7 @@ h1 {
     left: 0;
     right: 0;
     z-index: 1000;
-    padding: 1rem 2rem;
+    padding: 1rem;
     background: rgba(11, 19, 33, 0.8);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -473,11 +504,11 @@ main {
 /* Responsive navigation */
 @media (max-width: 768px) {
     .nav-container {
-        padding: 1rem;
+        padding: 0.75rem;
     }
 
     .nav-items {
-        gap: 1rem;
+        gap: 1.5rem;
     }
 
     .nav-link {
@@ -499,133 +530,38 @@ main {
     }
 
     .container {
-        padding: 0.5rem;
-    }
-
-    /* Navigation */
-    .nav-container {
         padding: 0.75rem;
+        max-width: 100%;
     }
 
-    .nav-items {
-        gap: 0.5rem;
-    }
-
-    .nav-link {
-        font-size: 0.85rem;
-        padding: 0.4rem 0.6rem;
-    }
-
-    /* Counter sections */
-    .counter-section {
-        padding: 1.25rem;
-        margin: 1rem 0;
-    }
-
-    .counter {
-        font-size: 2.5rem;
-    }
-
-    .country-select {
-        width: 100%;
-        padding: 0.8rem;
-        font-size: 0.9rem;
-    }
-
-    /* FAQ section */
-    .faq-section {
+    h1 {
+        font-size: 2rem;
         margin: 1.5rem auto;
         padding: 0 0.75rem;
     }
 
-    .faq-question {
-        padding: 1rem;
-        font-size: 0.95rem;
-        line-height: 1.4;
-    }
-
-    .faq-answer {
-        padding: 1rem;
-        font-size: 0.9rem;
-        line-height: 1.5;
-    }
-
-    /* Scroll improvements */
-    .scroll-up {
-        bottom: 1rem;
-        right: 1rem;
-        width: 40px;
-        height: 40px;
-    }
-
-    .scroll-progress {
-        height: 2px;
-    }
-
-    /* Footer */
-    .footer-content {
-        gap: 2rem;
-        padding: 0 1rem;
-    }
-
-    .footer-section {
-        text-align: center;
-    }
-
-    .footer-section h3 {
-        font-size: 1.1rem;
-    }
-
-    .footer-links a {
-        font-size: 0.9rem;
+    .counter-card {
+        margin: 0.75rem auto;
+        width: calc(100% - 1.5rem);
+        max-width: 100%;
     }
 }
 
-/* Small mobile devices */
 @media (max-width: 480px) {
-    /* Reduce animations for better performance */
-    * {
-        animation-duration: 0.3s !important;
-    }
-
-    /* Layout adjustments */
     .container {
-        padding: 0.25rem;
+        padding: 0.5rem;
     }
 
-    /* Counter adjustments */
-    .counter {
-        font-size: 2rem;
-    }
-
-    .counter-label {
-        font-size: 0.85rem;
-    }
-
-    /* Navigation */
-    .nav-link {
-        font-size: 0.8rem;
-        padding: 0.3rem 0.5rem;
-    }
-
-    /* FAQ adjustments */
-    .faq-section {
+    h1 {
+        font-size: 1.75rem;
+        margin: 1rem auto;
         padding: 0 0.5rem;
     }
 
-    .faq-question {
-        padding: 0.75rem;
-        font-size: 0.9rem;
-    }
-
-    .faq-answer {
-        padding: 0.75rem;
-        font-size: 0.85rem;
-    }
-
-    /* Footer */
-    .footer-section {
-        padding: 0 0.5rem;
+    .counter-card {
+        margin: 0.5rem auto;
+        width: calc(100% - 1rem);
+        padding: 1rem;
     }
 }
 
@@ -843,11 +779,156 @@ section {
 
 .counter-card {
     background: var(--card-bg);
+    border-radius: 15px;
     padding: 2rem;
-    border-radius: 1rem;
+    margin: 1.5rem auto;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
     text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.counter {
+    font-size: 3rem;
+    font-family: var(--mono-font);
+    color: var(--text-color);
     margin: 1rem 0;
+    word-break: break-word;
+    text-align: center;
+    width: 100%;
+    padding: 0 0.5rem;
+    box-sizing: border-box;
+    line-height: 1.2;
+}
+
+@media (max-width: 768px) {
+    .counter {
+        font-size: 2rem;
+    }
+
+    .nav-container {
+        padding: 0.75rem;
+    }
+
+    .nav-items {
+        gap: 1.5rem;
+    }
+
+    .counter-card {
+        padding: 1.5rem;
+        margin: 1.25rem auto;
+    }
+}
+
+@media (max-width: 576px) {
+    .counter {
+        font-size: 1.5rem;
+        line-height: 1.1;
+        padding: 0;
+        margin: 0.75rem 0;
+    }
+
+    .counter-card {
+        padding: 1.25rem 1rem;
+        margin: 1rem auto;
+    }
+
+    .nav-container {
+        padding: 0.5rem;
+    }
+
+    .nav-items {
+        gap: 1rem;
+    }
+
+    .facts-carousel-container {
+        padding: 0 1.75rem;
+        margin: 0.75rem auto;
+    }
+
+    .carousel-button {
+        width: 1.75rem;
+        height: 1.75rem;
+    }
+
+    .carousel-dots {
+        gap: 0.5rem;
+        margin-top: 0.75rem;
+    }
+}
+
+@media (max-width: 375px) {
+    .counter {
+        font-size: 1.25rem;
+        margin: 0.5rem 0;
+    }
+
+    .counter-card {
+        padding: 1rem 0.75rem;
+        margin: 0.75rem auto;
+    }
+
+    .facts-carousel-container {
+        padding: 0 1.5rem;
+    }
+
+    .carousel-button {
+        width: 1.5rem;
+        height: 1.5rem;
+        font-size: 0.9rem;
+    }
+
+    .carousel-dots {
+        gap: 0.4rem;
+        margin-top: 0.5rem;
+    }
+
+    .nav-items {
+        gap: 0.75rem;
+    }
+}
+
+/* Yearly emissions specific adjustment */
+#yearlyEmissions {
+    font-size: 90%;
+}
+
+@media (max-width: 576px) {
+    #yearlyEmissions {
+        font-size: 85%;
+    }
+}
+
+@media (max-width: 375px) {
+    #yearlyEmissions {
+        font-size: 80%;
+    }
+}
+
+.facts-carousel-container {
+    position: relative;
+    margin: 1rem auto;
+    padding: 0 2.5rem;
+    box-sizing: border-box;
+    width: 100%;
+    overflow: hidden;
+    text-align: center;
+}
+
+.facts-carousel {
+    margin: 0 auto;
+    width: calc(100% - 4rem);
+}
+
+@media (max-width: 576px) {
+    .facts-carousel-container {
+        padding: 0 1.75rem;
+        margin: 0.75rem auto;
+    }
+
+    .facts-carousel {
+        width: calc(100% - 3.5rem);
+    }
 }
 
 .percentage-text {
@@ -861,7 +942,10 @@ section {
 .facts-carousel-container {
     position: relative;
     margin-top: 1rem;
-    padding: 0 2rem;
+    padding: 0 2.5rem;
+    box-sizing: border-box;
+    width: 100%;
+    overflow: hidden;
 }
 
 .facts-carousel {
@@ -874,6 +958,8 @@ section {
     -ms-overflow-style: none;
     gap: 1rem;
     padding: 0.5rem 0;
+    box-sizing: border-box;
+    width: 100%;
 }
 
 .facts-carousel::-webkit-scrollbar {
@@ -889,6 +975,8 @@ section {
     font-family: var(--mono-font);
     padding: 0.5rem;
     text-align: center;
+    box-sizing: border-box;
+    width: 100%;
 }
 
 .carousel-button {
@@ -925,8 +1013,8 @@ section {
 .carousel-dots {
     display: flex;
     justify-content: center;
-    gap: 0.5rem;
-    margin-top: 0.5rem;
+    gap: 0.75rem;
+    margin-top: 1rem;
 }
 
 .carousel-dot {
@@ -947,12 +1035,12 @@ section {
     .facts-carousel-container {
         padding: 0 1.5rem;
         margin-top: 0.75rem;
-        width: 100%;
+        max-width: 100vw;
     }
 
     .facts-carousel {
-        width: 100%;
-        padding: 0.5rem 0;
+        width: calc(100% - 3rem);
+        margin: 0 auto;
     }
 
     .fact-item {
@@ -960,24 +1048,16 @@ section {
         padding: 0.5rem 0.25rem;
         line-height: 1.5;
         width: 100%;
-        min-width: calc(100% - 2rem);
-        margin: 0 auto;
-    }
-
-    .counter-card {
-        padding: 1.5rem 1rem;
-        margin: 0.75rem 0;
-    }
-
-    .counter {
-        font-size: 2.5rem;
-        margin: 0.5rem 0;
     }
 }
 
 @media (max-width: 480px) {
     .facts-carousel-container {
         padding: 0 1rem;
+    }
+
+    .facts-carousel {
+        width: calc(100% - 2rem);
     }
 
     .fact-item {
@@ -1007,7 +1087,6 @@ section {
     }
 }
 
-/* Ensure text doesn't get cut off on very small screens */
 @media (max-width: 360px) {
     .fact-item {
         font-size: 0.75rem;
@@ -1031,5 +1110,146 @@ section {
 
     .facts-carousel {
         touch-action: pan-x pinch-zoom;
+    }
+}
+
+/* Large tablets */
+@media (max-width: 1024px) {
+    .container {
+        padding: 1rem;
+        max-width: 90%;
+    }
+
+    h1 {
+        font-size: 2.25rem;
+        margin: 1.75rem auto;
+    }
+
+    .counter-card {
+        padding: 1.75rem;
+        margin: 1rem auto;
+    }
+
+    .counter {
+        font-size: 2.75rem;
+    }
+}
+
+/* Tablets and small tablets */
+@media (max-width: 768px) {
+    .container {
+        padding: 0.75rem;
+        max-width: 100%;
+    }
+
+    h1 {
+        font-size: 2rem;
+        margin: 1.5rem auto;
+        padding: 0 0.75rem;
+    }
+
+    .counter-card {
+        padding: 1.5rem 1rem;
+        margin: 0.75rem auto;
+        width: calc(100% - 1.5rem);
+    }
+
+    .counter {
+        font-size: 2.5rem;
+    }
+
+    p {
+        font-size: 0.9rem;
+        padding: 0 0.5rem;
+    }
+
+    .facts-carousel-container {
+        padding: 0 1.5rem;
+        margin-top: 0.75rem;
+    }
+
+    .fact-item {
+        font-size: 0.85rem;
+        padding: 0.5rem 0.25rem;
+    }
+}
+
+/* Large phones */
+@media (max-width: 576px) {
+    .container {
+        padding: 0.5rem;
+    }
+
+    h1 {
+        font-size: 1.85rem;
+        margin: 1.25rem auto;
+        padding: 0 0.5rem;
+    }
+
+    .counter-card {
+        padding: 1.25rem 0.75rem;
+        margin: 0.5rem auto;
+        width: calc(100% - 1rem);
+    }
+
+    .counter {
+        font-size: 2.25rem;
+        line-height: 1.2;
+    }
+
+    p {
+        font-size: 0.85rem;
+        padding: 0 0.25rem;
+    }
+
+    .facts-carousel-container {
+        padding: 0 1rem;
+    }
+
+    .fact-item {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.2rem;
+    }
+
+    .carousel-button {
+        width: 1.5rem;
+        height: 1.5rem;
+        font-size: 1rem;
+        opacity: 0.8;
+    }
+}
+
+/* Mobile phones */
+@media (max-width: 375px) {
+    h1 {
+        font-size: 1.75rem;
+        margin: 1rem auto;
+    }
+
+    .counter-card {
+        padding: 1rem 0.5rem;
+    }
+
+    .counter {
+        font-size: 2rem;
+    }
+
+    p {
+        font-size: 0.8rem;
+    }
+
+    .facts-carousel-container {
+        padding: 0 0.75rem;
+    }
+
+    .fact-item {
+        font-size: 0.75rem;
+        line-height: 1.4;
+    }
+
+    .carousel-button {
+        width: 1.25rem;
+        height: 1.25rem;
+        font-size: 0.9rem;
     }
 }
