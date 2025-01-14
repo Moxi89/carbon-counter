@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=0.86, maximum-scale=0.86, user-scalable=no">
     <title>Carbon Emissions Counter Live | Real-Time Global CO₂ Tracking</title>
     <meta name="robots" content="index, follow">
     <meta name="author" content="Carbon Emissions Counter">
@@ -83,13 +83,16 @@
         <main>
             <div class="counter-container" id="counter-section" data-aos="fade-up" data-aos-duration="600">
                 <div class="title" data-aos="fade-right" data-aos-duration="600">
-                    <span class="leaf-icon">🌳</span>
                     <h1>Carbon Emissions Counter Live</h1>
                 </div>
                 
                 <div class="counters-grid">
                     <div class="counter-card">
-                        <h3>Global Emissions</h3>
+                        <h3>
+                            GLOBAL EMISSIONS COUNTER
+                            <button class="info-button" type="button" aria-label="Show information">ⓘ</button>
+                            <div class="info-tooltip">Real-time tracking of global CO₂ emissions from all sources since you loaded this page.</div>
+                        </h3>
                         <div id="globalEmissions" class="counter">0</div>
                         <p>Metric tons of CO₂ since you loaded this page</p>
                         <div class="facts-carousel-container">
@@ -107,7 +110,11 @@
                     </div>
 
                     <div class="counter-card">
-                        <h3>Country Emissions</h3>
+                        <h3>
+                            COUNTRY EMISSIONS COUNTER
+                            <button class="info-button" type="button" aria-label="Show information">ⓘ</button>
+                            <div class="info-tooltip">CO₂ emissions for the selected country, updated in real-time based on their annual emission rate.</div>
+                        </h3>
                         <select id="countrySelect" class="country-select">
                             <option value="china">China</option>
                             <option value="us">United States</option>
@@ -126,7 +133,11 @@
                     </div>
 
                     <div class="counter-card">
-                        <h3>Yearly Emissions</h3>
+                        <h3>
+                            YEARLY EMISSIONS COUNTER
+                            <button class="info-button" type="button" aria-label="Show information">ⓘ</button>
+                            <div class="info-tooltip">Total global CO₂ emissions since the start of the current year, combining all sources worldwide.</div>
+                        </h3>
                         <div id="yearlyEmissions" class="counter">0</div>
                         <p>Metric tons of CO₂ since January 1st, 2025</p>
                         <div class="facts-carousel-container">
@@ -143,11 +154,11 @@
                     </div>
 
                     <div class="counter-section" data-aos="fade-up">
-                        <h2>
-                            Remaining Carbon Budget 
+                        <h3>
+                            REMAINING CARBON BUDGET COUNTER
                             <button class="info-button" type="button" aria-label="Show information">ⓘ</button>
                             <div class="info-tooltip">Remaining carbon budget to limit global warming to 1.5°C above pre-industrial levels.</div>
-                        </h2>
+                        </h3>
                         <div id="carbonBudget" class="counter">0</div>
                         <p>Gigatons of CO₂ remaining</p>
                         <div class="budget-progress">
