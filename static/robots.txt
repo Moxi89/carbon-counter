@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://carbon-counter.vercel.app/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 10
+
+# Additional rules
+Disallow: /static/js/
+Disallow: /static/css/
+Allow: /static/index.html
