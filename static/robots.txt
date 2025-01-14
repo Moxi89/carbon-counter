@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://carbon-counter.vercel.app/sitemap.xml
+Sitemap: https://www.carbonemissionscounter.com/sitemap.xml
 
 # Crawl-delay
 Crawl-delay: 10
