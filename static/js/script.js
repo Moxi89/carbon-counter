@@ -141,4 +141,89 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
+
+    // Scroll improvements
+    const scrollProgress = document.querySelector('.scroll-progress');
+    const scrollUpButton = document.querySelector('.scroll-up');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('section');
+
+    // Update scroll progress bar
+    function updateScrollProgress() {
+        const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrolled = (window.scrollY / windowHeight) * 100;
+        scrollProgress.style.width = `${scrolled}%`;
+        
+        // Show/hide scroll up button
+        if (window.scrollY > window.innerHeight / 2) {
+            scrollUpButton.classList.add('visible');
+        } else {
+            scrollUpButton.classList.remove('visible');
+        }
+    }
+
+    // Handle scroll to top
+    scrollUpButton.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+    // Update active navigation link
+    function updateActiveNavLink() {
+        const fromTop = window.scrollY + 100;
+
+        sections.forEach(section => {
+            const id = section.getAttribute('id');
+            const link = document.querySelector(`.nav-link[href="#${id}"]`);
+            
+            if (!link) return;
+
+            const offsetTop = section.offsetTop;
+            const height = section.offsetHeight;
+
+            if (fromTop >= offsetTop && fromTop < offsetTop + height) {
+                navLinks.forEach(link => link.classList.remove('active'));
+                link.classList.add('active');
+                section.classList.add('section-highlight');
+            } else {
+                link.classList.remove('active');
+                section.classList.remove('section-highlight');
+            }
+        });
+    }
+
+    // Parallax effect
+    function updateParallax() {
+        const parallaxElements = document.querySelectorAll('.parallax');
+        parallaxElements.forEach(element => {
+            const speed = element.dataset.parallaxSpeed || 0.2;
+            const offset = window.scrollY * speed;
+            element.style.setProperty('--parallax-offset', `${offset}px`);
+        });
+    }
+
+    // Add parallax class to elements
+    document.querySelectorAll('.counter-section, .faq-section h2').forEach(el => {
+        el.classList.add('parallax');
+    });
+
+    // Scroll event listener with throttling
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                updateScrollProgress();
+                updateActiveNavLink();
+                updateParallax();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }, { passive: true });
+
+    // Initial call
+    updateScrollProgress();
+    updateActiveNavLink();
 });
