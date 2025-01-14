@@ -138,6 +138,18 @@ h1 {
     opacity: 0.8;
 }
 
+.emission-context {
+    display: block;
+    color: var(--accent-color);
+    font-size: 0.9rem;
+    margin-top: 0.75rem;
+    line-height: 1.4;
+    font-family: var(--mono-font);
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .country-select {
     background: rgba(74, 226, 144, 0.05);
     border: 1px solid rgba(74, 226, 144, 0.2);
@@ -826,5 +838,198 @@ section {
     .footer-section h3::after {
         left: 50%;
         transform: translateX(-50%);
+    }
+}
+
+.counter-card {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 1rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 1rem 0;
+}
+
+.percentage-text {
+    display: block;
+    color: var(--accent-color);
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    font-family: var(--mono-font);
+}
+
+.facts-carousel-container {
+    position: relative;
+    margin-top: 1rem;
+    padding: 0 2rem;
+}
+
+.facts-carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    gap: 1rem;
+    padding: 0.5rem 0;
+}
+
+.facts-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.fact-item {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    color: var(--accent-color);
+    font-size: 0.9rem;
+    line-height: 1.4;
+    font-family: var(--mono-font);
+    padding: 0.5rem;
+    text-align: center;
+}
+
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(74, 226, 144, 0.1);
+    border: none;
+    color: var(--accent-color);
+    font-size: 1.5rem;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+    z-index: 1;
+}
+
+.carousel-button:hover {
+    background: rgba(74, 226, 144, 0.2);
+}
+
+.carousel-button.prev {
+    left: 0;
+}
+
+.carousel-button.next {
+    right: 0;
+}
+
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.carousel-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: rgba(74, 226, 144, 0.2);
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.carousel-dot.active {
+    background: var(--accent-color);
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+    .facts-carousel-container {
+        padding: 0 1.5rem;
+        margin-top: 0.75rem;
+        width: 100%;
+    }
+
+    .facts-carousel {
+        width: 100%;
+        padding: 0.5rem 0;
+    }
+
+    .fact-item {
+        font-size: 0.85rem;
+        padding: 0.5rem 0.25rem;
+        line-height: 1.5;
+        width: 100%;
+        min-width: calc(100% - 2rem);
+        margin: 0 auto;
+    }
+
+    .counter-card {
+        padding: 1.5rem 1rem;
+        margin: 0.75rem 0;
+    }
+
+    .counter {
+        font-size: 2.5rem;
+        margin: 0.5rem 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .facts-carousel-container {
+        padding: 0 1rem;
+    }
+
+    .fact-item {
+        font-size: 0.8rem;
+        padding: 0.5rem 0.2rem;
+        line-height: 1.4;
+    }
+
+    .carousel-button {
+        width: 1.5rem;
+        height: 1.5rem;
+        font-size: 1rem;
+        opacity: 0.8;
+    }
+
+    .counter-card {
+        padding: 1.25rem 0.75rem;
+    }
+
+    .counter {
+        font-size: 2rem;
+    }
+
+    h3 {
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* Ensure text doesn't get cut off on very small screens */
+@media (max-width: 360px) {
+    .fact-item {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.2rem;
+    }
+
+    .counter {
+        font-size: 1.75rem;
+    }
+
+    .counter-card {
+        padding: 1rem 0.5rem;
+    }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) {
+    .carousel-button {
+        background: rgba(74, 226, 144, 0.15);
+    }
+
+    .facts-carousel {
+        touch-action: pan-x pinch-zoom;
     }
 }

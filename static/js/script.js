@@ -33,7 +33,8 @@ document.addEventListener('DOMContentLoaded', function() {
         iran: { percentage: 1.83 },
         skorea: { percentage: 1.80 },
         saudi: { percentage: 1.70 },
-        indonesia: { percentage: 1.65 }
+        indonesia: { percentage: 1.65 },
+        canada: { percentage: 1.53 }
     };
 
     // Performance optimized number formatter
@@ -64,9 +65,14 @@ document.addEventListener('DOMContentLoaded', function() {
             // Country Emissions
             if (elements.countrySelect && elements.countryEmissions) {
                 const selectedCountry = elements.countrySelect.value;
-                const countryPercentage = countryEmissionsData[selectedCountry].percentage / 100;
+                const countryData = countryEmissionsData[selectedCountry];
+                const countryPercentage = countryData ? countryData.percentage / 100 : 0;
                 const countryEmissions = Math.round(lastGlobalEmissions * countryPercentage);
                 elements.countryEmissions.textContent = formatNumber(countryEmissions);
+                
+                // Update percentage text
+                const percentageText = `${countryData.percentage}% of the global emission`;
+                document.getElementById('countryPercentage').textContent = percentageText;
             }
 
             // Carbon Budget
@@ -268,4 +274,71 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initial call
     updateScrollProgress();
     updateActiveNavLink();
+
+    // Initialize carousels
+    document.querySelectorAll('.facts-carousel-container').forEach(container => {
+        const carousel = container.querySelector('.facts-carousel');
+        const facts = container.querySelectorAll('.fact-item');
+        const prevButton = container.querySelector('.carousel-button.prev');
+        const nextButton = container.querySelector('.carousel-button.next');
+        const dotsContainer = container.querySelector('.carousel-dots');
+        
+        let currentSlide = 0;
+        
+        // Clear existing dots first
+        dotsContainer.innerHTML = '';
+
+        // Create dots
+        facts.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.classList.add('carousel-dot');
+            if (index === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(index));
+            dotsContainer.appendChild(dot);
+        });
+
+        // Update dots
+        function updateDots() {
+            container.querySelectorAll('.carousel-dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        // Slide navigation
+        function goToSlide(index) {
+            currentSlide = index;
+            carousel.scrollTo({
+                left: facts[index].offsetLeft,
+                behavior: 'smooth'
+            });
+            updateDots();
+        }
+
+        prevButton.addEventListener('click', () => {
+            currentSlide = (currentSlide - 1 + facts.length) % facts.length;
+            goToSlide(currentSlide);
+        });
+
+        nextButton.addEventListener('click', () => {
+            currentSlide = (currentSlide + 1) % facts.length;
+            goToSlide(currentSlide);
+        });
+
+        // Handle scroll events
+        carousel.addEventListener('scroll', () => {
+            const index = Math.round(carousel.scrollLeft / carousel.offsetWidth);
+            if (index !== currentSlide) {
+                currentSlide = index;
+                updateDots();
+            }
+        });
+
+        // Auto-advance carousel every 10 seconds
+        setInterval(() => {
+            if (!document.hidden && !carousel.matches(':hover')) {
+                currentSlide = (currentSlide + 1) % facts.length;
+                goToSlide(currentSlide);
+            }
+        }, 10000);
+    });
 });
