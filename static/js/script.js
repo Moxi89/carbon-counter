@@ -91,6 +91,33 @@ document.addEventListener('DOMContentLoaded', function() {
     // Start the animation loop
     requestAnimationFrame(updateCounters);
 
+    // Carbon Budget Counter
+    const carbonBudgetCounter = document.getElementById('carbonBudget');
+    const progressFill = document.querySelector('.progress-fill');
+    const startingBudget = 200; // Gt CO2
+    const annualUsage = 41.6; // Gt CO2 per year
+    const usagePerSecond = annualUsage / (365 * 24 * 60 * 60); // Gt CO2 per second
+    const startDate = new Date('2024-01-01T00:00:00Z');
+
+    function updateCarbonBudget() {
+        const secondsSince2024 = (Date.now() - startDate.getTime()) / 1000;
+        const budgetUsed = usagePerSecond * secondsSince2024;
+        const remainingBudget = startingBudget - budgetUsed;
+        
+        // Update counter
+        carbonBudgetCounter.textContent = Math.max(0, remainingBudget.toFixed(6));
+        
+        // Update progress bar
+        const percentageUsed = Math.min(100, (budgetUsed / startingBudget) * 100);
+        progressFill.style.width = `${percentageUsed}%`;
+        
+        // Request next update
+        requestAnimationFrame(updateCarbonBudget);
+    }
+
+    // Start the carbon budget counter
+    updateCarbonBudget();
+
     // Event Delegation for better performance
     document.addEventListener('click', (e) => {
         // FAQ clicks
@@ -341,4 +368,89 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }, 10000);
     });
+
+    // Carbon Budget Carousel
+    function initializeBudgetCarousel() {
+        const carousel = document.querySelector('.facts-carousel');
+        const facts = Array.from(document.querySelectorAll('.fact-item'));
+        const prevButton = document.querySelector('.carousel-button.prev');
+        const nextButton = document.querySelector('.carousel-button.next');
+        const dotsContainer = document.querySelector('.carousel-dots');
+        
+        let currentIndex = 0;
+        
+        // Create dots
+        facts.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.classList.add('carousel-dot');
+            if (index === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(index));
+            dotsContainer.appendChild(dot);
+        });
+        
+        const dots = Array.from(document.querySelectorAll('.carousel-dot'));
+        
+        function updateDots() {
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
+        }
+        
+        function goToSlide(index) {
+            currentIndex = index;
+            const offset = facts[index].offsetLeft;
+            carousel.scrollTo({
+                left: offset,
+                behavior: 'smooth'
+            });
+            updateDots();
+        }
+        
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % facts.length;
+            goToSlide(currentIndex);
+        }
+        
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + facts.length) % facts.length;
+            goToSlide(currentIndex);
+        }
+        
+        prevButton.addEventListener('click', prevSlide);
+        nextButton.addEventListener('click', nextSlide);
+        
+        // Auto-advance every 5 seconds
+        let autoAdvance = setInterval(nextSlide, 5000);
+        
+        // Pause auto-advance on hover
+        carousel.addEventListener('mouseenter', () => clearInterval(autoAdvance));
+        carousel.addEventListener('mouseleave', () => {
+            clearInterval(autoAdvance);
+            autoAdvance = setInterval(nextSlide, 5000);
+        });
+        
+        // Handle manual scrolling
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        carousel.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+        
+        carousel.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            const diff = touchStartX - touchEndX;
+            
+            if (Math.abs(diff) > 50) { // Minimum swipe distance
+                if (diff > 0) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+            }
+        }, { passive: true });
+    }
+
+    // Initialize carousels when DOM is loaded
+    initializeBudgetCarousel();
 });
