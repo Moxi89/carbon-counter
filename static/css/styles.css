@@ -781,13 +781,13 @@ section {
     padding: 2rem;
     margin: 1.5rem auto;
     box-sizing: border-box;
-    width: 100%;
+    width: 95%;
     max-width: 100%;
     text-align: center;
 }
 
 .counter {
-    font-size: 2.75rem;
+    font-size: min(3rem, 5vw);
     font-family: var(--mono-font);
     color: var(--text-color);
     margin: 1rem 0;
@@ -799,42 +799,63 @@ section {
     line-height: 1.2;
 }
 
-@media (max-width: 768px) {
+@media screen and (max-device-width: 1024px) {
     .counter {
-        font-size: 1.75rem;
+        font-size: min(2.5rem, 6vw);
+    }
+    
+    .counter-card {
+        padding: 1.5rem;
+        margin: 1.25rem auto;
+    }
+}
+
+@media screen and (max-device-width: 768px) {
+    .counter {
+        font-size: min(2rem, 5.5vw);
         line-height: 1.1;
     }
     
     .counter-card {
-        padding: 1.5rem 1rem;
+        padding: 1.25rem 1rem;
+        width: 92%;
     }
 }
 
-@media (max-width: 576px) {
+@media screen and (max-device-width: 480px) {
     .counter {
-        font-size: 1.35rem;
+        font-size: min(1.75rem, 5vw);
         line-height: 1.1;
-        margin: 0.75rem 0;
     }
     
     .counter-card {
         padding: 1rem 0.75rem;
-        margin: 0.75rem auto;
-        width: 95%;
+        margin: 1rem auto;
+        width: 90%;
     }
 }
 
-@media (max-width: 375px) {
+@media screen and (max-device-width: 360px) {
     .counter {
-        font-size: 1.1rem;
+        font-size: min(1.5rem, 4.5vw);
         line-height: 1;
-        margin: 0.5rem 0;
     }
     
     .counter-card {
         padding: 0.75rem 0.5rem;
-        margin: 0.5rem auto;
-        width: 92%;
+        margin: 0.75rem auto;
+        width: 88%;
+    }
+}
+
+/* Specific adjustment for yearly emissions counter */
+#yearlyEmissions.counter {
+    font-size: 90%;
+}
+
+@media screen and (max-device-width: 480px) {
+    #yearlyEmissions.counter {
+        font-size: 85%;
     }
 }
 
@@ -1133,6 +1154,8 @@ section {
     .fact-item {
         font-size: 0.85rem;
         padding: 0.5rem 0.25rem;
+        line-height: 1.5;
+        width: 100%;
     }
 }
 
@@ -1171,6 +1194,7 @@ section {
     .fact-item {
         font-size: 0.8rem;
         padding: 0.4rem 0.2rem;
+        line-height: 1.4;
     }
 
     .carousel-button {
