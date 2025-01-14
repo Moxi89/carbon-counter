@@ -888,23 +888,6 @@ section {
     }
 }
 
-/* Yearly emissions specific adjustment */
-#yearlyEmissions {
-    font-size: 90%;
-}
-
-@media (max-width: 576px) {
-    #yearlyEmissions {
-        font-size: 85%;
-    }
-}
-
-@media (max-width: 375px) {
-    #yearlyEmissions {
-        font-size: 80%;
-    }
-}
-
 .facts-carousel-container {
     position: relative;
     margin: 1rem auto;
