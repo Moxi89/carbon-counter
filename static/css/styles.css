@@ -60,8 +60,55 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 1rem;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.counter-card {
+    background: var(--card-bg);
+    border-radius: 15px;
+    padding: 2rem;
+    margin: 1.5rem 0;
+    width: 90%;
+    max-width: 800px;
+    text-align: center;
+}
+
+@media screen and (max-device-width: 768px) {
+    .container {
+        padding: 0.75rem;
+    }
+    
+    .counter-card {
+        width: 85%;
+        padding: 1.5rem;
+        margin: 1rem 0;
+    }
+}
+
+@media screen and (max-device-width: 480px) {
+    .container {
+        padding: 0.5rem;
+    }
+    
+    .counter-card {
+        width: 85%;
+        padding: 1.25rem 1rem;
+    }
+}
+
+@media screen and (max-device-width: 360px) {
+    .container {
+        padding: 0.25rem;
+    }
+    
+    .counter-card {
+        width: 85%;
+        padding: 1rem 0.75rem;
+    }
 }
 
 h1 {
@@ -72,6 +119,37 @@ h1 {
     width: 100%;
     padding: 0;
     box-sizing: border-box;
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 2rem auto;
+    width: 100%;
+    text-align: center;
+}
+
+.title .leaf-icon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+@media screen and (max-device-width: 768px) {
+    .title .leaf-icon {
+        font-size: 2rem;
+        margin-bottom: 0.4rem;
+    }
+}
+
+@media screen and (max-device-width: 480px) {
+    .title .leaf-icon {
+        font-size: 1.85rem;
+        margin-bottom: 0.3rem;
+    }
 }
 
 @media (max-width: 768px) {
@@ -775,143 +853,12 @@ section {
     }
 }
 
-.counter-card {
-    background: var(--card-bg);
-    border-radius: 15px;
-    padding: 2rem;
-    margin: 1.5rem auto;
-    box-sizing: border-box;
-    width: 95%;
-    max-width: 100%;
-    text-align: center;
-}
-
-.counter {
-    font-size: min(3rem, 5vw);
-    font-family: var(--mono-font);
-    color: var(--text-color);
-    margin: 1rem 0;
-    word-break: break-word;
-    text-align: center;
+.counter-container {
     width: 100%;
-    padding: 0;
-    box-sizing: border-box;
-    line-height: 1.2;
-}
-
-@media screen and (max-device-width: 1024px) {
-    .counter {
-        font-size: min(2.5rem, 6vw);
-    }
-    
-    .counter-card {
-        padding: 1.5rem;
-        margin: 1.25rem auto;
-    }
-}
-
-@media screen and (max-device-width: 768px) {
-    .counter {
-        font-size: min(2rem, 5.5vw);
-        line-height: 1.1;
-    }
-    
-    .counter-card {
-        padding: 1.25rem 1rem;
-        width: 92%;
-    }
-}
-
-@media screen and (max-device-width: 480px) {
-    .counter {
-        font-size: min(1.75rem, 5vw);
-        line-height: 1.1;
-    }
-    
-    .counter-card {
-        padding: 1rem 0.75rem;
-        margin: 1rem auto;
-        width: 90%;
-    }
-}
-
-@media screen and (max-device-width: 360px) {
-    .counter {
-        font-size: min(1.5rem, 4.5vw);
-        line-height: 1;
-    }
-    
-    .counter-card {
-        padding: 0.75rem 0.5rem;
-        margin: 0.75rem auto;
-        width: 88%;
-    }
-}
-
-/* Specific adjustment for yearly emissions counter */
-#yearlyEmissions.counter {
-    font-size: 90%;
-}
-
-@media screen and (max-device-width: 480px) {
-    #yearlyEmissions.counter {
-        font-size: 85%;
-    }
-}
-
-.container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem;
-    box-sizing: border-box;
-}
-
-@media (max-width: 768px) {
-    .container {
-        padding: 1rem;
-        max-width: 100%;
-    }
-}
-
-@media (max-width: 576px) {
-    .container {
-        padding: 0.75rem;
-        width: 100%;
-        overflow-x: hidden;
-    }
-}
-
-@media (max-width: 375px) {
-    .container {
-        padding: 0.5rem;
-    }
-}
-
-.facts-carousel-container {
-    position: relative;
-    margin: 1rem auto;
-    padding: 0 2.5rem;
-    box-sizing: border-box;
-    width: 100%;
-    overflow: hidden;
-    text-align: center;
-}
-
-.facts-carousel {
-    margin: 0 auto;
-    width: calc(100% - 4rem);
-}
-
-@media (max-width: 576px) {
-    .facts-carousel-container {
-        padding: 0 1.75rem;
-        margin: 0.75rem auto;
-    }
-
-    .facts-carousel {
-        width: calc(100% - 3.5rem);
-    }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .percentage-text {
@@ -1193,7 +1140,7 @@ section {
 
     .fact-item {
         font-size: 0.8rem;
-        padding: 0.4rem 0.2rem;
+        padding: 0.5rem 0.2rem;
         line-height: 1.4;
     }
 
