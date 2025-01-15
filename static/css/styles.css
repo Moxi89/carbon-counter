@@ -67,47 +67,202 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
 }
 
+.counters-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
 .counter-card {
     background: var(--card-bg);
     border-radius: 15px;
     padding: 2rem;
-    margin: 1.5rem 0;
-    width: 90%;
-    max-width: 800px;
+    width: 100%;
     text-align: center;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
 }
 
-@media screen and (max-device-width: 768px) {
-    .container {
-        padding: 0.75rem;
-    }
-    
-    .counter-card {
-        width: 85%;
-        padding: 1.5rem;
-        margin: 1rem 0;
-    }
+.counter-content {
+    display: grid;
+    gap: 0.5rem;
 }
 
-@media screen and (max-device-width: 480px) {
+@media screen and (max-width: 768px) {
     .container {
         padding: 0.5rem;
     }
     
-    .counter-card {
-        width: 85%;
-        padding: 1.25rem 1rem;
-    }
-}
-
-@media screen and (max-device-width: 360px) {
-    .container {
-        padding: 0.25rem;
+    .counters-grid {
+        padding: 0.75rem;
+        gap: 1rem;
     }
     
     .counter-card {
-        width: 85%;
+        padding: 1.5rem;
+        gap: 0.5rem;
+    }
+}
+
+@media screen and (max-width: 480px) {    
+    .counter-card {
+        padding: 1.25rem 1rem;
+    }
+
+    h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .fact-item {
+        font-size: 0.85rem;
+        padding: 0.5rem 0.25rem;
+        line-height: 1.4;
+    }
+
+    .facts-carousel-container {
+        padding: 0 1rem;
+    }
+
+    .counter {
+        font-size: 1.8rem;
+        padding: 0.75rem;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .container {
+        padding: 0.25rem;
+    }
+
+    .counters-grid {
+        padding: 0.25rem;
+        gap: 0.5rem;
+    }
+
+    .counter-card {
         padding: 1rem 0.75rem;
+    }
+
+    .facts-carousel-container {
+        padding: 0 0.5rem;
+        margin: 0.5rem 0;
+    }
+
+    .fact-item {
+        font-size: 0.75rem;
+        padding: 0.25rem;
+        line-height: 1.3;
+    }
+
+    .page-timer {
+        font-size: 0.75rem;
+        margin: 0.25rem 0;
+    }
+
+    .counter {
+        font-size: 1.5rem;
+        padding: 0.5rem;
+        margin: 0.5rem 0;
+    }
+
+    h3 {
+        font-size: 0.95rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .carousel-button {
+        width: 24px;
+        height: 24px;
+    }
+
+    .carousel-dots {
+        margin: 0.5rem 0;
+    }
+
+    .country-select {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+        margin: 0.5rem auto;
+    }
+}
+
+@media screen and (max-device-width: 768px) {
+    .container {
+        padding: 0.5rem;
+    }
+    
+    .counters-grid {
+        padding: 0.5rem;
+        gap: 1rem;
+    }
+    
+    .counter-card {
+        padding: 2rem 1.5rem;
+        margin: 0.5rem 0;
+    }
+
+    .counter {
+        font-size: 2rem;
+    }
+}
+
+@media screen and (max-device-width: 480px) {    
+    .counter-card {
+        padding: 1.5rem 1rem;
+    }
+
+    h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .fact-item {
+        font-size: 0.85rem;
+        padding: 0.5rem;
+        line-height: 1.4;
+    }
+
+    .facts-carousel-container {
+        padding: 0 1rem;
+    }
+
+    .counter {
+        font-size: 1.8rem;
+    }
+}
+
+@media screen and (max-device-width: 400px) {
+    .counter-card {
+        padding: 1.25rem 0.75rem;
+    }
+
+    .facts-carousel-container {
+        padding: 0 0.75rem;
+    }
+
+    .fact-item {
+        font-size: 0.8rem;
+        padding: 0.5rem 0.25rem;
+    }
+
+    .page-timer {
+        font-size: 0.8rem;
+        margin: 0.4rem 0;
+    }
+
+    .counter {
+        font-size: 1.6rem;
+        margin: 0.75rem 0;
+    }
+
+    h3 {
+        font-size: 1rem;
     }
 }
 
@@ -168,32 +323,33 @@ h1 {
     }
 }
 
-.counters-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: clamp(1rem, 3vw, 2rem);
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: clamp(1rem, 3vw, 2rem);
-}
-
 .counter-section {
     width: 100%;
-    background: rgba(26, 35, 50, 0.7);
-    border-radius: 1.5rem;
-    padding: clamp(1rem, 3vw, 2rem);
+    background: var(--card-bg);
+    border-radius: 15px;
+    padding: 2rem;
     text-align: center;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(74, 226, 144, 0.1);
-    position: relative;
-    overflow: visible;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    margin-bottom: 2rem;
-    transform: translateZ(0);
-    will-change: transform;
-    transition: transform 0.2s ease;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+@media (max-width: 768px) {
+    .counter-section {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {    
+    .counter-section {
+        padding: 1.25rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .counter-section {
+        padding: 1rem;
+    }
 }
 
 .counter-section:hover {
@@ -211,21 +367,37 @@ h1 {
     gap: 0.5rem;
 }
 
-.counter, #globalEmissions, #countryEmissions, #carbonBudget {
+.counter, #globalEmissions, #countryEmissions, #carbonBudget, #yearlyEmissions {
     font-family: var(--mono-font);
     font-feature-settings: "tnum" 1;
     letter-spacing: -0.02em;
-    font-size: clamp(2rem, 6vw, 3.5rem);
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
     font-weight: 500;
-    color: #ffffff;
+    color: var(--text-color);
     text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-    margin: 1rem 0;
-    padding: clamp(0.5rem, 2vw, 1rem);
+    margin: 0.75rem 0;
+    padding: 0.75rem;
     background: rgba(74, 226, 144, 0.05);
     border-radius: 1rem;
     border: 1px solid rgba(74, 226, 144, 0.1);
     transform: translateZ(0);
     will-change: contents;
+}
+
+@media (max-width: 480px) {
+    .counter, #globalEmissions, #countryEmissions, #carbonBudget, #yearlyEmissions {
+        font-size: 1.6rem;
+        padding: 0.5rem;
+        margin: 0.5rem 0;
+    }
+}
+
+@media (max-width: 400px) {
+    .counter, #globalEmissions, #countryEmissions, #carbonBudget, #yearlyEmissions {
+        font-size: 1.4rem;
+        padding: 0.4rem;
+        margin: 0.4rem 0;
+    }
 }
 
 .counter-section p {
@@ -646,7 +818,6 @@ h1 {
     .facts-carousel-container {
         padding: 0 1.5rem;
         margin-top: 0.75rem;
-        max-width: 100vw;
     }
 
     .facts-carousel {
@@ -760,9 +931,9 @@ h1 {
     }
 
     .counter-card {
-        padding: 1.5rem 1rem;
         margin: 0.75rem auto;
         width: calc(100% - 1.5rem);
+        max-width: 100%;
     }
 
     .counter {
@@ -927,7 +1098,7 @@ h3 {
     padding: 1rem;
     background: rgba(11, 19, 33, 0.8);
     backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    -webkit-backpack-filter: blur(10px);
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
@@ -1260,4 +1431,33 @@ section {
         left: 50%;
         transform: translateX(-50%);
     }
+}
+
+.page-timer {
+    color: var(--accent-color);
+    font-size: 0.9rem;
+    font-family: var(--mono-font);
+    text-align: center;
+    margin: 0.5rem 0;
+    opacity: 0.9;
+}
+
+@media screen and (max-device-width: 768px) {
+    .page-timer {
+        font-size: 0.85rem;
+    }
+}
+
+@media screen and (max-device-width: 480px) {
+    .page-timer {
+        font-size: 0.8rem;
+    }
+}
+
+.counter {
+    font-size: 3.5rem;
+    font-family: var(--mono-font);
+    color: var(--text-color);
+    margin: 1rem 0;
+    text-align: center;
 }

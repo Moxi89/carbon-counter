@@ -19,7 +19,9 @@ document.addEventListener('DOMContentLoaded', function() {
         faqQuestions: document.querySelectorAll('.faq-question'),
         navToggle: document.querySelector('.nav-toggle'),
         navItems: document.querySelector('.nav-items'),
-        navLinks: document.querySelectorAll('.nav-items a')
+        navLinks: document.querySelectorAll('.nav-items a'),
+        pageTimer: document.getElementById('pageTimer'),
+        countryTimer: document.getElementById('countryTimer')
     };
 
     // Country emissions data (percentage of global emissions)
@@ -302,155 +304,90 @@ document.addEventListener('DOMContentLoaded', function() {
     updateScrollProgress();
     updateActiveNavLink();
 
-    // Initialize carousels
-    document.querySelectorAll('.facts-carousel-container').forEach(container => {
-        const carousel = container.querySelector('.facts-carousel');
-        const facts = container.querySelectorAll('.fact-item');
-        const prevButton = container.querySelector('.carousel-button.prev');
-        const nextButton = container.querySelector('.carousel-button.next');
-        const dotsContainer = container.querySelector('.carousel-dots');
-        
-        let currentSlide = 0;
-        
-        // Clear existing dots first
-        dotsContainer.innerHTML = '';
-
-        // Create dots
-        facts.forEach((_, index) => {
-            const dot = document.createElement('div');
-            dot.classList.add('carousel-dot');
-            if (index === 0) dot.classList.add('active');
-            dot.addEventListener('click', () => goToSlide(index));
-            dotsContainer.appendChild(dot);
-        });
-
-        // Update dots
-        function updateDots() {
-            container.querySelectorAll('.carousel-dot').forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentSlide);
-            });
-        }
-
-        // Slide navigation
-        function goToSlide(index) {
-            currentSlide = index;
-            carousel.scrollTo({
-                left: facts[index].offsetLeft,
-                behavior: 'smooth'
-            });
-            updateDots();
-        }
-
-        prevButton.addEventListener('click', () => {
-            currentSlide = (currentSlide - 1 + facts.length) % facts.length;
-            goToSlide(currentSlide);
-        });
-
-        nextButton.addEventListener('click', () => {
-            currentSlide = (currentSlide + 1) % facts.length;
-            goToSlide(currentSlide);
-        });
-
-        // Handle scroll events
-        carousel.addEventListener('scroll', () => {
-            const index = Math.round(carousel.scrollLeft / carousel.offsetWidth);
-            if (index !== currentSlide) {
-                currentSlide = index;
-                updateDots();
-            }
-        });
-
-        // Auto-advance carousel every 10 seconds
-        setInterval(() => {
-            if (!document.hidden && !carousel.matches(':hover')) {
-                currentSlide = (currentSlide + 1) % facts.length;
-                goToSlide(currentSlide);
-            }
-        }, 10000);
-    });
-
-    // Carbon Budget Carousel
-    function initializeBudgetCarousel() {
-        const carousel = document.querySelector('.facts-carousel');
-        const facts = Array.from(document.querySelectorAll('.fact-item'));
-        const prevButton = document.querySelector('.carousel-button.prev');
-        const nextButton = document.querySelector('.carousel-button.next');
-        const dotsContainer = document.querySelector('.carousel-dots');
-        
-        let currentIndex = 0;
-        
-        // Create dots
-        facts.forEach((_, index) => {
-            const dot = document.createElement('div');
-            dot.classList.add('carousel-dot');
-            if (index === 0) dot.classList.add('active');
-            dot.addEventListener('click', () => goToSlide(index));
-            dotsContainer.appendChild(dot);
-        });
-        
-        const dots = Array.from(document.querySelectorAll('.carousel-dot'));
-        
-        function updateDots() {
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentIndex);
-            });
-        }
-        
-        function goToSlide(index) {
-            currentIndex = index;
-            const offset = facts[index].offsetLeft;
-            carousel.scrollTo({
-                left: offset,
-                behavior: 'smooth'
-            });
-            updateDots();
-        }
-        
-        function nextSlide() {
-            currentIndex = (currentIndex + 1) % facts.length;
-            goToSlide(currentIndex);
-        }
-        
-        function prevSlide() {
-            currentIndex = (currentIndex - 1 + facts.length) % facts.length;
-            goToSlide(currentIndex);
-        }
-        
-        prevButton.addEventListener('click', prevSlide);
-        nextButton.addEventListener('click', nextSlide);
-        
-        // Auto-advance every 5 seconds
-        let autoAdvance = setInterval(nextSlide, 5000);
-        
-        // Pause auto-advance on hover
-        carousel.addEventListener('mouseenter', () => clearInterval(autoAdvance));
-        carousel.addEventListener('mouseleave', () => {
-            clearInterval(autoAdvance);
-            autoAdvance = setInterval(nextSlide, 5000);
-        });
-        
-        // Handle manual scrolling
-        let touchStartX = 0;
-        let touchEndX = 0;
-        
-        carousel.addEventListener('touchstart', e => {
-            touchStartX = e.changedTouches[0].screenX;
-        }, { passive: true });
-        
-        carousel.addEventListener('touchend', e => {
-            touchEndX = e.changedTouches[0].screenX;
-            const diff = touchStartX - touchEndX;
-            
-            if (Math.abs(diff) > 50) { // Minimum swipe distance
-                if (diff > 0) {
-                    nextSlide();
-                } else {
-                    prevSlide();
-                }
-            }
-        }, { passive: true });
+    // Update timers
+    function updateTimers() {
+        const now = new Date();
+        const secondsElapsed = Math.floor((now - pageLoadTime) / 1000);
+        const timerText = `${secondsElapsed} seconds since you opened the page`;
+        elements.pageTimer.textContent = timerText;
+        elements.countryTimer.textContent = timerText;
     }
 
-    // Initialize carousels when DOM is loaded
-    initializeBudgetCarousel();
+    // Update timers every second
+    setInterval(updateTimers, 1000);
+    updateTimers(); // Initial update
+
+    // Initialize carousels
+    function initializeCarousels() {
+        const carousels = document.querySelectorAll('.facts-carousel-container');
+        carousels.forEach(container => {
+            const carousel = container.querySelector('.facts-carousel');
+            const facts = Array.from(container.querySelectorAll('.fact-item'));
+            const prevButton = container.querySelector('.carousel-button.prev');
+            const nextButton = container.querySelector('.carousel-button.next');
+            const dotsContainer = container.querySelector('.carousel-dots');
+            
+            let currentSlide = 0;
+            
+            // Clear existing dots
+            dotsContainer.innerHTML = '';
+            
+            // Create only the needed number of dots
+            facts.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.classList.add('carousel-dot');
+                if (index === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToSlide(index));
+                dotsContainer.appendChild(dot);
+            });
+
+            const dots = Array.from(dotsContainer.children);
+
+            function updateDots() {
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentSlide);
+                });
+            }
+
+            function goToSlide(index) {
+                currentSlide = index;
+                const offset = facts[index].offsetLeft;
+                carousel.scrollTo({
+                    left: offset,
+                    behavior: 'smooth'
+                });
+                updateDots();
+            }
+
+            prevButton.addEventListener('click', () => {
+                currentSlide = (currentSlide - 1 + facts.length) % facts.length;
+                goToSlide(currentSlide);
+            });
+
+            nextButton.addEventListener('click', () => {
+                currentSlide = (currentSlide + 1) % facts.length;
+                goToSlide(currentSlide);
+            });
+
+            // Handle scroll events
+            carousel.addEventListener('scroll', () => {
+                const index = Math.round(carousel.scrollLeft / carousel.offsetWidth);
+                if (index !== currentSlide) {
+                    currentSlide = index;
+                    updateDots();
+                }
+            });
+
+            // Auto-advance carousel every 10 seconds
+            setInterval(() => {
+                if (!document.hidden && !carousel.matches(':hover')) {
+                    currentSlide = (currentSlide + 1) % facts.length;
+                    goToSlide(currentSlide);
+                }
+            }, 10000);
+        });
+    }
+
+    // Call initialization
+    initializeCarousels();
 });
