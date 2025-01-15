@@ -1,13 +1,11 @@
 User-agent: *
 Allow: /
-
-# Sitemap location
 Sitemap: https://www.carbonemissionscounter.com/sitemap.xml
 
-# Crawl-delay
-Crawl-delay: 10
+# Allow all bots to access CSS, JS, and images
+Allow: /static/css/
+Allow: /static/js/
+Allow: /static/images/
 
-# Additional rules
-Disallow: /static/js/
-Disallow: /static/css/
-Allow: /static/index.html
+# Prevent caching of real-time data
+Disallow: /api/
