@@ -94,8 +94,28 @@
                     <div class="counter-card">
                         <h3>
                             GLOBAL EMISSIONS COUNTER
-                            <button class="info-button" type="button" aria-label="Show information">ⓘ</button>
-                            <div class="info-tooltip">Real-time tracking of global CO₂ emissions from all sources since you loaded this page.</div>
+                            <button class="info-button" 
+                                    type="button" 
+                                    aria-label="Show information about global emissions counter"
+                                    data-tooltip-id="global-emissions">ⓘ</button>
+                            <div class="info-tooltip" 
+                                 role="tooltip" 
+                                 id="global-emissions-tooltip" 
+                                 data-category="global-metrics">
+                                <p class="tooltip-main">Real-time tracking of global CO₂ emissions from all sources since page load. Based on total annual emissions of 41.6 billion metric tons (Global Carbon Budget 2024).</p>
+                                <div class="tooltip-breakdown">
+                                    <span class="breakdown-label">2024 Breakdown:</span>
+                                    <ul class="breakdown-list">
+                                        <li>Fossil CO₂: 37.4 billion tons</li>
+                                        <li>Land-use change: 4.2 billion tons</li>
+                                    </ul>
+                                </div>
+                                <div class="tooltip-facts">
+                                    <span class="fact-label">Key Finding:</span> 
+                                    Total emissions increased by 2% (1 billion tons) from 2023, with researchers noting "no sign" of peak fossil CO₂ emissions yet.
+                                </div>
+                                <a href="#faq-section" class="tooltip-link">Learn more about emission sources →</a>
+                            </div>
                         </h3>
                         <div id="globalEmissions" class="counter">0</div>
                         <p>Metric tons of CO₂ since page load</p>
@@ -117,8 +137,29 @@
                     <div class="counter-card">
                         <h3>
                             COUNTRY EMISSIONS COUNTER
-                            <button class="info-button" type="button" aria-label="Show information">ⓘ</button>
-                            <div class="info-tooltip">CO₂ emissions for the selected country, updated in real-time based on their annual emission rate.</div>
+                            <button class="info-button" 
+                                    type="button" 
+                                    aria-label="Show information about country emissions"
+                                    data-tooltip-id="country-emissions">ⓘ</button>
+                            <div class="info-tooltip" 
+                                 role="tooltip" 
+                                 id="country-emissions-tooltip" 
+                                 data-category="country-metrics">
+                                <p class="tooltip-main">CO₂ emissions for selected country, updated in real-time based on their share of global emissions (Global Carbon Budget 2024).</p>
+                                <div class="tooltip-breakdown">
+                                    <span class="breakdown-label">Top Emitters 2024:</span>
+                                    <ul class="breakdown-list">
+                                        <li>China: 32.88% (13.7 Gt CO₂)</li>
+                                        <li>USA: 12.60% (5.2 Gt CO₂)</li>
+                                        <li>India: 7.02% (2.9 Gt CO₂)</li>
+                                        <li>Russia: 4.71% (2.0 Gt CO₂)</li>
+                                    </ul>
+                                </div>
+                                <div class="tooltip-facts">
+                                    <span class="fact-label">Regional Impact:</span>
+                                    These top 4 countries account for 57.21% of global emissions.
+                                </div>
+                            </div>
                         </h3>
                         <select id="countrySelect" class="country-select">
                             <option value="china">China</option>
@@ -141,11 +182,31 @@
                     <div class="counter-card">
                         <h3>
                             YEARLY EMISSIONS COUNTER
-                            <button class="info-button" type="button" aria-label="Show information">ⓘ</button>
-                            <div class="info-tooltip">Total global CO₂ emissions since the start of the current year, combining all sources worldwide.</div>
+                            <button class="info-button" 
+                                    type="button" 
+                                    aria-label="Show information about yearly emissions"
+                                    data-tooltip-id="yearly-emissions">ⓘ</button>
+                            <div class="info-tooltip" 
+                                 role="tooltip" 
+                                 id="yearly-emissions-tooltip" 
+                                 data-category="yearly-metrics">
+                                <p class="tooltip-main">Total global CO₂ emissions since January 1st, 2024. Includes both fossil fuel and land-use change emissions.</p>
+                                <div class="tooltip-breakdown">
+                                    <span class="breakdown-label">Annual Growth:</span>
+                                    <ul class="breakdown-list">
+                                        <li>2024: 41.6 Gt CO₂ (2% increase)</li>
+                                        <li>2023: 40.6 Gt CO₂</li>
+                                        <li>2022: 40.0 Gt CO₂</li>
+                                    </ul>
+                                </div>
+                                <div class="tooltip-facts">
+                                    <span class="fact-label">Trend:</span>
+                                    Global emissions continue to rise by approximately 1 billion tons per year.
+                                </div>
+                            </div>
                         </h3>
                         <div id="yearlyEmissions" class="counter">0</div>
-                        <p>Metric tons of CO₂ since January 1st, 2025</p>
+                        <p>Metric tons of CO₂ since January 1st, 2024</p>
                         <div class="facts-carousel-container">
                             <button class="carousel-button prev" aria-label="Previous fact">‹</button>
                             <div class="facts-carousel">
@@ -162,9 +223,29 @@
 
                     <div class="counter-card">
                         <h3>
-                            Remaining Carbon Budget
-                            <button class="info-button" type="button" aria-label="Show information">ⓘ</button>
-                            <div class="info-tooltip">Remaining carbon budget to limit global warming to 1.5°C above pre-industrial levels.</div>
+                            REMAINING CARBON BUDGET
+                            <button class="info-button" 
+                                    type="button" 
+                                    aria-label="Show information about carbon budget"
+                                    data-tooltip-id="carbon-budget">ⓘ</button>
+                            <div class="info-tooltip" 
+                                 role="tooltip" 
+                                 id="carbon-budget-tooltip" 
+                                 data-category="budget-metrics">
+                                <p class="tooltip-main">Estimated remaining CO₂ emissions allowance to limit global warming to 1.5°C above pre-industrial levels (IPCC AR6).</p>
+                                <div class="tooltip-breakdown">
+                                    <span class="breakdown-label">Probability Scenarios:</span>
+                                    <ul class="breakdown-list">
+                                        <li>67% chance: 400 Gt CO₂ remaining</li>
+                                        <li>50% chance: 500 Gt CO₂ remaining</li>
+                                        <li>33% chance: 600 Gt CO₂ remaining</li>
+                                    </ul>
+                                </div>
+                                <div class="tooltip-facts">
+                                    <span class="fact-label">Critical Timeline:</span>
+                                    At current emission rates (41.6 Gt/year), the 50% probability budget will be depleted in approximately 12 years.
+                                </div>
+                            </div>
                         </h3>
                         <div id="carbonBudget" class="counter">200</div>
                         <p>Gigatons of CO₂ remaining</p>
@@ -391,5 +472,32 @@
         });
     </script>
     <script src="./js/script.js"></script>
+    
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Carbon Emissions Counter Live",
+      "description": "Track real-time global carbon emissions with our live CO₂ counter. Get accurate data on worldwide carbon footprint, country-specific emissions, and remaining carbon budget.",
+      "applicationCategory": "EnvironmentalApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "about": {
+        "@type": "Thing",
+        "name": "Carbon Emissions",
+        "description": "Real-time tracking and visualization of global CO₂ emissions to raise awareness about climate change"
+      },
+      "mainEntity": {
+        "@type": "Dataset",
+        "name": "Global Carbon Emissions Data",
+        "description": "Real-time calculations and estimates of global carbon dioxide emissions",
+        "measurementTechnique": "Statistical estimation and real-time calculation"
+      }
+    }
+    </script>     
 </body>
 </html>
