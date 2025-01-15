@@ -1234,6 +1234,16 @@ h3 {
     background: rgba(0, 0, 0, 0.2);
 }
 
+.hero-description .highlight {
+    color: var(--accent-color);
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.hero-description .highlight:hover {
+    color: #22C55E;
+}
+
 @media (max-width: 768px) {
     .hero-section {
         padding: 3rem 1rem;
