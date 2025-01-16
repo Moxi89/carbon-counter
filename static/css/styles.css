@@ -1408,14 +1408,33 @@ main {
 
 /* Reduce Motion */
 @media (prefers-reduced-motion: reduce) {
-    * {
+    /* Smooth animations for counters but remove other animations */
+    .counter-value {
+        transition: color 0.2s ease-in-out;
+    }
+    
+    /* Remove AOS animations */
+    [data-aos] {
+        transition-property: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+    }
+    
+    /* Reduce particle animations */
+    .particle {
         animation: none !important;
-        transition: none !important;
+    }
+    
+    /* Smooth scroll behavior */
+    html {
         scroll-behavior: auto !important;
     }
-
-    .parallax {
-        transform: none !important;
+    
+    /* Reduce hover animations */
+    .nav-link:hover,
+    .footer-links a:hover,
+    .info-button:hover {
+        transition: none;
     }
 }
 
@@ -1720,5 +1739,38 @@ section {
     .about-content > p {
         font-size: 1rem;
         margin-bottom: 2rem;
+    }
+}
+
+/* Keyboard focus styles */
+.nav-link:focus-visible,
+.faq-question:focus-visible,
+.info-button:focus-visible,
+.scroll-up:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Only show focus for keyboard users */
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* Zoom-friendly styles */
+@media screen and (max-width: 768px) {
+    .counter-card {
+        min-width: 280px; /* Ensure minimum readable width */
+        max-width: 100%;  /* Prevent overflow */
+        margin: 0 auto;   /* Center cards */
+    }
+    
+    .counter-value {
+        word-break: break-word; /* Prevent number overflow */
+        overflow-wrap: break-word;
+    }
+    
+    .counter-description {
+        max-height: none; /* Allow content to expand when zoomed */
     }
 }
