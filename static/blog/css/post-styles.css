@@ -1,0 +1,258 @@
+/* Post Styles */
+:root {
+    --post-max-width: 800px;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 3rem;
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-sm);
+}
+
+/* Breadcrumb */
+.breadcrumb {
+    margin: var(--spacing-sm) 0;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.breadcrumb a {
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    color: var(--accent-color);
+}
+
+/* Post Content */
+.post-content {
+    max-width: var(--post-max-width);
+    margin: 0 auto;
+    padding: var(--spacing-lg) 0;
+}
+
+/* Post Header */
+.post-header {
+    margin-bottom: var(--spacing-lg);
+    text-align: center;
+}
+
+.featured-image {
+    margin-bottom: var(--spacing-md);
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.featured-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.post-meta {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    align-items: center;
+    margin-bottom: var(--spacing-sm);
+    flex-wrap: wrap;
+}
+
+.read-time {
+    color: var(--text-color);
+    opacity: 0.8;
+}
+
+.post-header h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    margin: var(--spacing-sm) 0;
+    line-height: 1.2;
+}
+
+.post-intro {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Table of Contents */
+.table-of-contents {
+    background: var(--card-bg);
+    padding: var(--spacing-md);
+    border-radius: 12px;
+    margin: var(--spacing-lg) 0;
+}
+
+.table-of-contents h2 {
+    font-size: 1.2rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+.table-of-contents ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.table-of-contents li {
+    margin-bottom: 0.5rem;
+}
+
+.table-of-contents a {
+    color: var(--text-color);
+    text-decoration: none;
+    opacity: 0.9;
+}
+
+.table-of-contents a:hover {
+    color: var(--accent-color);
+}
+
+/* Post Body */
+.post-body {
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+.post-body section {
+    margin-bottom: var(--spacing-lg);
+}
+
+.post-body h2 {
+    font-size: 1.8rem;
+    margin: var(--spacing-lg) 0 var(--spacing-sm);
+}
+
+.post-body p {
+    margin-bottom: var(--spacing-md);
+}
+
+/* Tip Box */
+.tip-box {
+    background: var(--card-bg);
+    padding: var(--spacing-md);
+    border-radius: 12px;
+    margin: var(--spacing-md) 0;
+    border-left: 4px solid var(--accent-color);
+}
+
+.tip-box strong {
+    color: var(--accent-color);
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+/* Share Buttons */
+.share-buttons {
+    margin: var(--spacing-lg) 0;
+    text-align: center;
+}
+
+.share-icons {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    margin-top: var(--spacing-sm);
+}
+
+.share-btn {
+    background: var(--card-bg);
+    border: none;
+    color: var(--text-color);
+    padding: 0.5rem 1rem;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.share-btn:hover {
+    background: var(--accent-color);
+    color: var(--primary-bg);
+}
+
+/* Related Posts */
+.related-posts {
+    margin: var(--spacing-lg) 0;
+}
+
+.related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-sm);
+}
+
+.related-post {
+    background: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--text-color);
+    transition: transform 0.3s ease;
+}
+
+.related-post:hover {
+    transform: translateY(-5px);
+}
+
+.related-post img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.related-post h4 {
+    padding: var(--spacing-sm);
+    margin: 0;
+}
+
+/* Post Navigation */
+.post-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin: var(--spacing-lg) 0;
+    gap: var(--spacing-sm);
+}
+
+.prev-post,
+.next-post {
+    background: var(--card-bg);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.prev-post:hover,
+.next-post:hover {
+    background: var(--accent-color);
+    color: var(--primary-bg);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .post-content {
+        padding: var(--spacing-md) 0;
+    }
+
+    .post-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .share-icons {
+        flex-wrap: wrap;
+    }
+
+    .post-navigation {
+        flex-direction: column;
+        text-align: center;
+    }
+}

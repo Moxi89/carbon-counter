@@ -48,14 +48,55 @@
     }
     </script>
     
+    <!-- WebApplication Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Carbon Emissions Counter Live",
+      "description": "Track real-time global carbon emissions with our live CO₂ counter. Get accurate data on worldwide carbon footprint, country-specific emissions, and remaining carbon budget.",
+      "applicationCategory": "EnvironmentalApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "availability": "http://schema.org/InStock"
+      },
+      "about": {
+        "@type": "Thing",
+        "name": "Carbon Emissions",
+        "description": "Real-time tracking and visualization of global CO₂ emissions to raise awareness about climate change"
+      },
+      "mainEntity": {
+        "@type": "Dataset",
+        "name": "Global Carbon Emissions Data",
+        "description": "Real-time calculations and estimates of global carbon dioxide emissions",
+        "measurementTechnique": "Statistical estimation and real-time calculation",
+        "license": "All Rights Reserved",
+        "temporalCoverage": "2024/2025",
+        "creator": {
+          "@type": "Organization",
+          "name": "Carbon Emissions Counter"
+        }
+      },
+      "browserRequirements": "Requires JavaScript. Works on all modern browsers.",
+      "softwareVersion": "1.0",
+      "url": "https://www.carbonemissionscounter.com/"
+    }
+    </script>
+    
     <!-- Canonical URL -->
     <link rel="canonical" href="https://www.carbonemissionscounter.com/">
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="images/favicon.png">
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="shared/nav-styles.css">
+    <link rel="stylesheet" href="shared/footer-styles.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="shared/nav.js" defer></script>
 </head>
 <body>
     <div class="scroll-progress"></div>
@@ -76,9 +117,11 @@
             </div>
             <div class="nav-items">
                 <a href="#global-emissions-card" class="nav-link">Carbon Emissions Counters</a>
+                <a href="blog/" class="nav-link">Blog</a>
                 <a href="#faq-section" class="nav-link">FAQ</a>
                 <a href="#about-section" class="nav-link">About</a>
             </div>
+            <div></div><!-- Empty div for grid layout -->
         </nav>
         <main role="main">
             <div class="counter-container" id="counter-section" data-aos="fade-up" data-aos-duration="600">
@@ -456,31 +499,25 @@
             </section>
         </main>
 
-        <footer class="site-footer" id="footer" role="contentinfo">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Resources</h3>
-                    <ul class="footer-links">
-                        <li><a href="https://www.ipcc.ch/reports/" target="_blank" rel="noopener">IPCC Reports</a></li>
-                        <li><a href="https://www.iea.org/data-and-statistics" target="_blank" rel="noopener">IEA Data</a></li>
-                        <li><a href="https://www.globalcarbonproject.org/" target="_blank" rel="noopener">Global Carbon Project</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#global-emissions-card">Carbon Emissions Counters</a></li>
-                        <li><a href="#faq-section">FAQ</a></li>
-                        <li><a href="#about-section">About</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>Built with 💚 for our planet • 2025 Carbon Emissions Counter • All rights reserved.</p>
-            </div>
-        </footer>
+        <!-- Footer -->
+        <div id="footer-placeholder"></div>
     </div>
+
+    <script>
+        // Load navbar
+        fetch('shared/navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-placeholder').innerHTML = data;
+            });
+
+        // Load footer
+        fetch('shared/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            });
+    </script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
         AOS.init({

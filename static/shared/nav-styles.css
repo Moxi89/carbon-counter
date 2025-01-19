@@ -1,0 +1,113 @@
+/* Navigation */
+.nav-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(11, 19, 33, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 9999;
+    padding: 1rem 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.nav-logo, .nav-items, .nav-items a {
+    pointer-events: auto;
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.5rem;
+}
+
+.nav-items {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Override any conflicting styles */
+.nav-container .nav-items a.nav-link {
+    all: unset;
+    color: var(--text-color) !important;
+    text-decoration: none !important;
+    font-size: 0.9rem !important;
+    font-weight: 500 !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: 20px !important;
+    transition: all 0.2s ease !important;
+    background: transparent !important;
+    display: inline-block !important;
+    border: none !important;
+    cursor: pointer !important;
+    line-height: normal !important;
+    margin: 0 !important;
+    white-space: nowrap !important;
+    font-family: var(--font-family) !important;
+}
+
+.nav-container .nav-items a.nav-link:hover {
+    background: rgba(74, 226, 144, 0.1) !important;
+    color: var(--accent-color) !important;
+}
+
+.nav-container .nav-items a.nav-link.active {
+    background: var(--accent-color) !important;
+    color: var(--primary-bg) !important;
+}
+
+/* Nav scroll states */
+.nav-container.nav-hidden {
+    transform: translateY(-100%);
+}
+
+.nav-container.nav-visible {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Add padding to body to prevent content from going under fixed navbar */
+body {
+    padding-top: 64px; /* Adjust this value to match your navbar height */
+}
+
+@media (max-width: 768px) {
+    .nav-container {
+        padding: 0.75rem 1.5rem;
+        grid-template-columns: auto 1fr;
+    }
+
+    .nav-items {
+        justify-content: flex-end;
+        gap: 1rem;
+    }
+
+    .nav-container .nav-items a.nav-link {
+        font-size: 0.85rem !important;
+        padding: 0.4rem 0.8rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-container {
+        padding: 0.5rem 1rem;
+    }
+
+    .nav-items {
+        gap: 0.5rem;
+    }
+
+    .nav-container .nav-items a.nav-link {
+        font-size: 0.8rem !important;
+        padding: 0.3rem 0.6rem !important;
+    }
+}

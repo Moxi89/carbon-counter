@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[POST TITLE] | Carbon Counter</title>
+    
+    <meta name="description" content="[150-160 character description]">
+    <meta name="keywords" content="[keyword1, keyword2, keyword3, keyword4, keyword5]">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../../shared/nav-styles.css">
+    <link rel="stylesheet" href="../../shared/footer-styles.css">
+    <link rel="stylesheet" href="../css/blog-styles.css">
+    <link rel="stylesheet" href="../../css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <div id="navbar-placeholder"></div>
+
+        <article class="blog-post">
+            <header class="post-header">
+                <span class="category-tag">[CATEGORY]</span>
+                <h1>[POST TITLE]</h1>
+                <div class="post-meta">
+                    <span>[X] min read</span>
+                    <span>[CURRENT DATE]</span>
+                </div>
+            </header>
+
+            <div class="post-content">
+                <!-- Hook -->
+                <p class="lead">[1-2 sentence hook that draws the reader in with a personal story or surprising fact]</p>
+
+                <!-- Personal connection/story -->
+                <p>[2-3 sentences establishing personal connection to the topic]</p>
+
+                <!-- Main problem statement -->
+                <h2>[Problem Title]</h2>
+                <p>[Clear statement of the problem this post will solve]</p>
+
+                <!-- Quick Tips Box -->
+                <div class="quick-tips-box">
+                    <h3>Quick Wins</h3>
+                    <ul>
+                        <li>✓ [Quick win 1]</li>
+                        <li>✓ [Quick win 2]</li>
+                        <li>✓ [Quick win 3]</li>
+                    </ul>
+                </div>
+
+                <!-- Solutions/Tips -->
+                <h2>[Main Solutions Section Title]</h2>
+
+                <h3>1. [First Solution]</h3>
+                <p>[Solution explanation with specific numbers and impact]</p>
+
+                <div class="try-this-box">
+                    <h4>Try This</h4>
+                    <p>[Specific, actionable step the reader can take right now]</p>
+                </div>
+
+                <h3>2. [Second Solution]</h3>
+                <p>[Solution explanation with specific numbers and impact]</p>
+
+                <h3>3. [Third Solution]</h3>
+                <p>[Solution explanation with specific numbers and impact]</p>
+
+                <h3>4. [Fourth Solution]</h3>
+                <p>[Solution explanation with specific numbers and impact]</p>
+
+                <!-- Quick wins section -->
+                <h2>[Action Plan Title]</h2>
+                <p>[Introduction to the action steps]</p>
+                <ul>
+                    <li><strong>[Timeframe 1]:</strong> [Action step]</li>
+                    <li><strong>[Timeframe 2]:</strong> [Action step]</li>
+                    <li><strong>[Timeframe 3]:</strong> [Action step]</li>
+                </ul>
+
+                <!-- Conclusion with next steps -->
+                <h2>Start Now</h2>
+                <p>[One simple action step to take right now]</p>
+
+                <div class="impact-box">
+                    <h3>Your Impact</h3>
+                    <p>[Specific impact numbers and comparisons]</p>
+                </div>
+            </div>
+        </article>
+
+        <!-- Footer -->
+        <div id="footer-placeholder"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load navbar
+            fetch('../../shared/navbar.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('navbar-placeholder').innerHTML = data;
+                    // Fix navbar links
+                    const navbar = document.getElementById('navbar-placeholder');
+                    navbar.querySelectorAll('a').forEach(link => {
+                        const href = link.getAttribute('href');
+                        if (href.startsWith('#')) {
+                            link.href = '../../' + href;
+                        } else if (!href.startsWith('http') && !href.startsWith('../../')) {
+                            link.href = '../../' + href;
+                        }
+                    });
+                });
+
+            // Load footer
+            fetch('../../shared/footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer-placeholder').innerHTML = data;
+                    // Fix footer links
+                    const footer = document.getElementById('footer-placeholder');
+                    footer.querySelectorAll('a').forEach(link => {
+                        const href = link.getAttribute('href');
+                        if (href.startsWith('#')) {
+                            link.href = '../../' + href;
+                        } else if (!href.startsWith('http') && !href.startsWith('../../')) {
+                            link.href = '../../' + href;
+                        }
+                    });
+                });
+        });
+    </script>
+</body>
+</html>

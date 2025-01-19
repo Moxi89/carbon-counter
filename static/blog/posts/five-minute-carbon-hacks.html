@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5-Minute Carbon Hacks: Quick Wins That Actually Work | Carbon Counter</title>
+    
+    <meta name="description" content="Discover easy 5-minute carbon reduction hacks that fit into your busy schedule. Simple switches that make a real difference, backed by actual CO₂ savings data.">
+    <meta name="keywords" content="carbon reduction hacks, quick eco tips, daily sustainability, easy green living, time-saving eco hacks">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../../shared/nav-styles.css">
+    <link rel="stylesheet" href="../../shared/footer-styles.css">
+    <link rel="stylesheet" href="../css/blog-styles.css">
+    <link rel="stylesheet" href="../../css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <div id="navbar-placeholder"></div>
+
+        <article class="blog-post">
+            <header class="post-header">
+                <span class="category-tag">Life Hacks</span>
+                <h1>5-Minute Carbon Hacks: Quick Wins That Actually Work</h1>
+                <div class="post-meta">
+                    <span>5 min read</span>
+                    <span>January 19, 2025</span>
+                </div>
+            </header>
+
+            <div class="post-content">
+                <!-- Hook -->
+                <p class="lead">"I don't have time for sustainability." I used to say this every morning as I rushed to work. Then I discovered these 5-minute hacks that cut my carbon footprint – and actually saved me time.</p>
+
+                <!-- Personal connection/story -->
+                <p>Between meetings, deadlines, and family commitments, finding time for eco-friendly habits seemed impossible. But after tracking my daily routines, I realized something surprising: some of my most time-consuming habits were also the most carbon-intensive.</p>
+
+                <!-- Main problem statement -->
+                <h2>The Busy Person's Climate Dilemma</h2>
+                <p>Here's the reality: most of us want to reduce our carbon footprint, but we're already stretched thin. The secret isn't adding new tasks to your day – it's making your existing routines more efficient and eco-friendly at the same time.</p>
+
+                <!-- Quick Tips Box -->
+                <div class="quick-tips-box">
+                    <h3>30-Second Wins</h3>
+                    <ul>
+                        <li>✓ Put a "one-in-one-out" rule for plugs by your desk</li>
+                        <li>✓ Keep a reusable cup by your keys</li>
+                        <li>✓ Set your phone's brightness to auto-adjust</li>
+                    </ul>
+                </div>
+
+                <!-- Solutions/Tips -->
+                <h2>5 Time-Saving Carbon Hacks</h2>
+
+                <h3>1. The Morning Rush Revolution</h3>
+                <p>My coffee routine was wasting both time and energy. Switching to a French press not only cut 3 minutes from my morning – it also saves 0.5 kWh per day compared to my old coffee maker. That's 45 kg of CO₂ per year!</p>
+
+                <div class="try-this-box">
+                    <h4>Try This</h4>
+                    <p>Place your French press and kettle next to each other the night before. While the water boils, you can get dressed – no more waiting around.</p>
+                </div>
+
+                <h3>2. The 2-Minute Shower Hack</h3>
+                <p>I discovered that pre-heating the bathroom while I brush my teeth means I need less hot water in the shower. This simple timing switch saves both water heating energy and precious morning minutes.</p>
+
+                <h3>3. The Lunch Break Power-Down</h3>
+                <p>Created a one-switch solution for my desk: all non-essential devices plug into one power strip. Flipping it when I leave for lunch saves more energy than individual standby modes – and there's no forgetting to turn things off.</p>
+
+                <h3>4. The Commute Combo</h3>
+                <p>Combining my workout with my commute by biking to work twice a week saves 30 minutes of gym time and cuts 8 kg of CO₂ emissions per week. Plus, I arrive more energized than after my old car commute.</p>
+
+                <h3>5. The Evening Auto-Pilot</h3>
+                <p>Setting up "sunset routines" on my smart devices means lights and heating automatically adjust in the evening. No more walking around the house checking everything – saving time and preventing energy waste from forgotten lights.</p>
+
+                <!-- Quick wins section -->
+                <h2>Your 24-Hour Challenge</h2>
+                <p>Pick three of these quick wins to try tomorrow:</p>
+                <ul>
+                    <li><strong>Morning (2 min):</strong> Prep coffee station and lay out a reusable water bottle</li>
+                    <li><strong>Work (1 min):</strong> Set up a one-switch solution for your desk</li>
+                    <li><strong>Lunch (30 sec):</strong> Power down non-essentials</li>
+                    <li><strong>Evening (1 min):</strong> Prep tomorrow's eco-shortcuts</li>
+                    <li><strong>Bedtime (30 sec):</strong> Enable auto-brightness on all devices</li>
+                </ul>
+
+                <!-- Conclusion with next steps -->
+                <h2>Start Now</h2>
+                <p>Begin with just one hack today. Place a reusable cup by your keys before you go to bed. Tomorrow morning, you'll automatically grab it on your way out – saving both time and disposable cups.</p>
+
+                <div class="impact-box">
+                    <h3>Your 5-Minute Impact</h3>
+                    <p>These quick hacks can reduce your daily carbon emissions by 2-3 kg. That adds up to over 1 tonne per year – equivalent to planting 16 trees! Plus, you'll save about 30 minutes each day.</p>
+                </div>
+            </div>
+        </article>
+
+        <!-- Footer -->
+        <div id="footer-placeholder"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load navbar
+            fetch('../../shared/navbar.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('navbar-placeholder').innerHTML = data;
+                    // Fix navbar links
+                    const navbar = document.getElementById('navbar-placeholder');
+                    navbar.querySelectorAll('a').forEach(link => {
+                        const href = link.getAttribute('href');
+                        if (href.startsWith('#')) {
+                            link.href = '../../' + href;
+                        } else if (!href.startsWith('http') && !href.startsWith('../../')) {
+                            link.href = '../../' + href;
+                        }
+                    });
+                });
+
+            // Load footer
+            fetch('../../shared/footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer-placeholder').innerHTML = data;
+                    // Fix footer links
+                    const footer = document.getElementById('footer-placeholder');
+                    footer.querySelectorAll('a').forEach(link => {
+                        const href = link.getAttribute('href');
+                        if (href.startsWith('#')) {
+                            link.href = '../../' + href;
+                        } else if (!href.startsWith('http') && !href.startsWith('../../')) {
+                            link.href = '../../' + href;
+                        }
+                    });
+                });
+        });
+    </script>
+</body>
+</html>
