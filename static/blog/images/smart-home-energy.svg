@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="400" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#0B1321;stop-opacity:0.9"/>
+            <stop offset="100%" style="stop-color:#1A2332;stop-opacity:0.9"/>
+        </linearGradient>
+        <filter id="glow">
+            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+            <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+
+    <!-- Background -->
+    <rect width="100%" height="100%" fill="url(#bgGradient)"/>
+
+    <!-- House outline -->
+    <path d="M200 300 L400 150 L600 300 L600 400 L200 400 Z" 
+          fill="none" stroke="#4AE290" stroke-width="3" opacity="0.8"/>
+
+    <!-- Smart home elements -->
+    <circle cx="300" cy="250" r="30" fill="#4AE290" opacity="0.6"/>
+    <circle cx="500" cy="250" r="30" fill="#4AE290" opacity="0.6"/>
+    <circle cx="400" cy="350" r="40" fill="#4AE290" opacity="0.6"/>
+
+    <!-- Connection lines -->
+    <line x1="300" y1="250" x2="400" y2="350" stroke="#ffffff" stroke-width="2" opacity="0.5"/>
+    <line x1="500" y1="250" x2="400" y2="350" stroke="#ffffff" stroke-width="2" opacity="0.5"/>
+
+    <!-- WiFi symbol -->
+    <g transform="translate(400,100) scale(0.8)" fill="none" stroke="#ffffff" stroke-width="3">
+        <path d="M-40,40 C-40,40 0,0 0,0 C0,0 40,40 40,40" opacity="0.2"/>
+        <path d="M-30,30 C-30,30 0,-5 0,-5 C0,-5 30,30 30,30" opacity="0.4"/>
+        <path d="M-20,20 C-20,20 0,-10 0,-10 C0,-10 20,20 20,20" opacity="0.6"/>
+        <path d="M-10,10 C-10,10 0,-15 0,-15 C0,-15 10,10 10,10" opacity="0.8"/>
+    </g>
+</svg>

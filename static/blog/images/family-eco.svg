@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="400" viewBox="0 0 800 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background with subtle gradient -->
+    <rect width="800" height="400" fill="url(#paint0_linear)"/>
+    
+    <!-- Tree -->
+    <path d="M380 120L420 120L450 200L350 200L380 120Z" fill="#4AE290"/>
+    <rect x="390" y="200" width="20" height="40" fill="#4AE290"/>
+    
+    <!-- Recycling Symbol -->
+    <path d="M600 200L620 230L580 230L600 200Z" fill="#4AE290"/>
+    <path d="M580 190L620 190L600 160L580 190Z" fill="#4AE290"/>
+    
+    <!-- Garden Elements -->
+    <path d="M200 250C230 220 230 280 200 250Z" fill="#4AE290"/>
+    <path d="M250 230C280 200 280 260 250 230Z" fill="#4AE290"/>
+    
+    <!-- Solar Panel -->
+    <rect x="500" y="150" width="60" height="40" fill="#1A2332" stroke="#4AE290" stroke-width="2"/>
+    <line x1="520" y1="150" x2="520" y2="190" stroke="#4AE290" stroke-width="1"/>
+    <line x1="540" y1="150" x2="540" y2="190" stroke="#4AE290" stroke-width="1"/>
+    
+    <!-- Decorative Elements -->
+    <circle cx="150" cy="150" r="20" fill="#1A2332" opacity="0.5"/>
+    <circle cx="650" cy="300" r="15" fill="#1A2332" opacity="0.5"/>
+    
+    <!-- Stars -->
+    <path d="M700 150L710 170L720 150L710 130L700 150Z" fill="#4AE290"/>
+    <path d="M100 250L110 270L120 250L110 230L100 250Z" fill="#4AE290"/>
+    
+    <!-- Gradient Definition -->
+    <defs>
+        <linearGradient id="paint0_linear" x1="0" y1="0" x2="800" y2="400" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#0B1321"/>
+            <stop offset="1" stop-color="#1A2332"/>
+        </linearGradient>
+    </defs>
+</svg>

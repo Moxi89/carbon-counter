@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="400" viewBox="0 0 800 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background with subtle gradient -->
+    <rect width="800" height="400" fill="url(#paint0_linear)"/>
+    
+    <!-- Graph Container -->
+    <rect x="200" y="100" width="400" height="200" fill="#1A2332" stroke="#4AE290" stroke-width="4"/>
+    
+    <!-- Graph Lines -->
+    <path d="M220 250L380 180L580 120" stroke="#4AE290" stroke-width="4" stroke-linecap="round"/>
+    <path d="M220 200L380 220L580 150" stroke="#4AE290" stroke-width="2" opacity="0.5"/>
+    
+    <!-- Data Points -->
+    <circle cx="380" cy="180" r="8" fill="#4AE290"/>
+    <circle cx="580" cy="120" r="8" fill="#4AE290"/>
+    <circle cx="220" cy="250" r="8" fill="#4AE290"/>
+    
+    <!-- Axis Labels -->
+    <line x1="200" y1="300" x2="600" y2="300" stroke="#4AE290" stroke-width="2"/>
+    <line x1="200" y1="100" x2="200" y2="300" stroke="#4AE290" stroke-width="2"/>
+    
+    <!-- Decorative Elements -->
+    <circle cx="650" cy="150" r="20" fill="#1A2332" opacity="0.5"/>
+    <circle cx="150" cy="250" r="15" fill="#1A2332" opacity="0.5"/>
+    <path d="M700 200L720 220L740 200L720 180L700 200Z" fill="#4AE290"/>
+    <path d="M100 150L120 170L140 150L120 130L100 150Z" fill="#4AE290"/>
+    
+    <!-- Gradient Definition -->
+    <defs>
+        <linearGradient id="paint0_linear" x1="0" y1="0" x2="800" y2="400" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#0B1321"/>
+            <stop offset="1" stop-color="#1A2332"/>
+        </linearGradient>
+    </defs>
+</svg>

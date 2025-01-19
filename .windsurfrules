@@ -1,0 +1,153 @@
+# Carbon Counter Workspace Rules
+
+## Design Philosophy
+- Proactively suggest modern design trends
+- Focus on immersive user experience
+- Implement latest web design practices
+- Balance aesthetics with functionality
+- Prioritize performance and accessibility
+
+## 2024/2025 Design Standards
+### Visual Design
+- Glassmorphism for cards
+- Micro-interactions
+- Dark mode optimized
+- Subtle gradients
+- Variable fonts
+- 3D elements where appropriate
+
+### Interactive Elements
+- Smooth scroll behaviors
+- Gesture-based interactions
+- Progressive loading
+- Skeleton screens
+- Dynamic tooltips
+- Scroll-triggered animations
+
+### Layout Principles
+- Grid-based layouts
+- Whitespace utilization
+- Responsive breakpoints
+- Container queries
+- Fluid typography
+- Vertical rhythm
+
+## Project-Specific Guidelines
+
+### Color System
+```css
+Primary: #0B1321 (Dark blue)
+Secondary: #1A2332 (Light blue)
+Accent: #4AE290 (Green)
+Text: #ffffff
+```
+
+### Typography
+- System fonts for performance
+- Fluid type scaling
+- Minimum 16px base
+- Clear hierarchy
+- Optimal line length
+
+### Components
+- Reusable card structure
+- Consistent spacing
+- Interactive states
+- Loading states
+- Error states
+
+### Data Visualization
+- Real-time updates
+- Smooth transitions
+- Clear data labels
+- Mobile-optimized views
+- Accessible colors
+
+## Development Approach
+
+### Performance
+- Lazy loading
+- Code splitting
+- Asset optimization
+- Cache strategies
+- Performance budgets
+
+### Accessibility
+- WCAG 2.1 compliance
+- Keyboard navigation
+- Screen reader support
+- Color contrast
+- Focus management
+
+### SEO
+- Semantic structure
+- Meta optimization
+- Schema markup
+- Performance metrics
+- Mobile optimization
+
+## AI Assistant Role
+- Suggest modern alternatives
+- Point out dated practices
+- Recommend performance improvements
+- Share industry best practices
+- Provide trend-aware solutions
+
+## Implementation Rules
+### Before Changes
+- Suggest modern alternatives
+- Consider mobile impact
+- Check performance implications
+- Verify accessibility
+
+### During Development
+- Progressive enhancement
+- Browser compatibility
+- Performance monitoring
+- Responsive testing
+
+### After Implementation
+- Verify best practices
+- Check against trends
+- Test cross-browser
+- Validate accessibility
+
+## Project Structure
+```
+/static
+  /css
+    - styles.css (main styles)
+    - variables.css (design tokens)
+    - components.css (reusable components)
+  /js
+    - main.js (core functionality)
+    - counters.js (counter logic)
+    - animations.js (animation controls)
+  /images
+    - optimized and properly sized
+  /data
+    - emissions-data.json
+    - country-data.json
+```
+
+## Git Commit Standards
+- feat: New feature addition
+- fix: Bug fixes
+- style: Visual updates
+- perf: Performance improvements
+- docs: Documentation updates
+- refactor: Code restructuring
+
+## Quality Checklist
+- Mobile-first approach verified
+- Cross-browser compatibility tested
+- Performance metrics checked
+- Accessibility guidelines followed
+- SEO best practices implemented
+- Modern design patterns used
+- Documentation updated
+- Code optimization completed
+
+
+verify that you understand me before making any changes.
+*These rules serve as a living document and can be updated as new trends and best practices emerge in web development.*

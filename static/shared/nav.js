@@ -2,21 +2,37 @@ document.addEventListener('DOMContentLoaded', () => {
     // Get current path
     const currentPath = window.location.pathname;
 
+    // Fix relative paths based on current page location
+    const navbar = document.querySelector('nav');
+    const links = navbar.getElementsByTagName('a');
+    
+    // Determine if we're in a subdirectory
+    const isInBlogPosts = currentPath.includes('/blog/posts/');
+    const prefix = isInBlogPosts ? '../..' : '..';
+    
+    // Update links
+    for (let link of links) {
+        const href = link.getAttribute('href');
+        if (href && href.startsWith('/static/')) {
+            // Remove /static/ prefix and adjust path
+            link.href = prefix + href.substring(7);
+        } else if (href && href.startsWith('../')) {
+            // Already relative, leave as is
+            link.href = href;
+        }
+    }
+
+    // Add active class to current page link
+    if (currentPath.includes('/blog/')) {
+        const blogLink = navbar.querySelector('a[href$="blog/index.html"]');
+        if (blogLink) {
+            blogLink.classList.add('active');
+        }
+    }
+
     // Find all nav links
     const navLinks = document.querySelectorAll('.nav-link');
     
-    // Handle initial active states
-    navLinks.forEach(link => {
-        // Remove active class initially
-        link.classList.remove('active');
-    });
-
-    // Handle blog section
-    if (currentPath.includes('/blog/')) {
-        const blogLink = document.querySelector('a[href="blog/"]');
-        if (blogLink) blogLink.classList.add('active');
-    }
-
     // Only set up scroll observers if we're on the main page
     if (currentPath === '/' || currentPath.endsWith('index.html')) {
         // Get all sections that have corresponding nav links

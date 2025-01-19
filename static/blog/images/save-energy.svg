@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="400" viewBox="0 0 800 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background with subtle gradient -->
+    <rect width="800" height="400" fill="url(#paint0_linear)"/>
+    
+    <!-- Light Bulb -->
+    <circle cx="400" cy="180" r="80" fill="#1A2332" stroke="#4AE290" stroke-width="4"/>
+    <path d="M360 260L440 260C440 280 420 290 400 290C380 290 360 280 360 260Z" fill="#1A2332" stroke="#4AE290" stroke-width="4"/>
+    <path d="M385 290L415 290L415 310L385 310L385 290Z" fill="#1A2332" stroke="#4AE290" stroke-width="4"/>
+    
+    <!-- Energy Rays -->
+    <path d="M400 80L400 40" stroke="#4AE290" stroke-width="4" stroke-linecap="round"/>
+    <path d="M300 180L260 180" stroke="#4AE290" stroke-width="4" stroke-linecap="round"/>
+    <path d="M500 180L540 180" stroke="#4AE290" stroke-width="4" stroke-linecap="round"/>
+    <path d="M330 110L300 80" stroke="#4AE290" stroke-width="4" stroke-linecap="round"/>
+    <path d="M470 110L500 80" stroke="#4AE290" stroke-width="4" stroke-linecap="round"/>
+    
+    <!-- Leaf Elements -->
+    <path d="M600 250C630 220 630 280 600 250Z" fill="#4AE290"/>
+    <path d="M200 150C230 120 230 180 200 150Z" fill="#4AE290"/>
+    
+    <!-- Energy Sparkles -->
+    <circle cx="650" cy="150" r="5" fill="#4AE290"/>
+    <circle cx="150" cy="250" r="5" fill="#4AE290"/>
+    <circle cx="300" cy="350" r="5" fill="#4AE290"/>
+    <circle cx="500" cy="350" r="5" fill="#4AE290"/>
+    
+    <!-- Gradient Definition -->
+    <defs>
+        <linearGradient id="paint0_linear" x1="0" y1="0" x2="800" y2="400" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#0B1321"/>
+            <stop offset="1" stop-color="#1A2332"/>
+        </linearGradient>
+    </defs>
+</svg>

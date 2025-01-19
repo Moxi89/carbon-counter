@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="400" viewBox="0 0 800 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background with subtle gradient -->
+    <rect width="800" height="400" fill="url(#paint0_linear)"/>
+    
+    <!-- House Shape -->
+    <path d="M300 100L500 100L500 300L300 300L300 100Z" fill="#1A2332" stroke="#4AE290" stroke-width="4"/>
+    <path d="M250 150L400 50L550 150" stroke="#4AE290" stroke-width="4" stroke-linecap="round"/>
+    
+    <!-- Windows -->
+    <rect x="330" y="140" width="50" height="50" fill="#0B1321" stroke="#4AE290" stroke-width="2"/>
+    <rect x="420" y="140" width="50" height="50" fill="#0B1321" stroke="#4AE290" stroke-width="2"/>
+    
+    <!-- Door -->
+    <rect x="375" y="220" width="50" height="80" fill="#0B1321" stroke="#4AE290" stroke-width="2"/>
+    
+    <!-- Smart Home Elements -->
+    <circle cx="600" cy="150" r="30" fill="#1A2332" stroke="#4AE290" stroke-width="2"/>
+    <path d="M590 150L600 140L610 150" stroke="#4AE290" stroke-width="2"/>
+    <path d="M590 155L600 145L610 155" stroke="#4AE290" stroke-width="2"/>
+    
+    <!-- WiFi Signals -->
+    <path d="M200 200Q400 50 600 200" stroke="#4AE290" stroke-width="2" stroke-dasharray="4 4"/>
+    <path d="M250 220Q400 100 550 220" stroke="#4AE290" stroke-width="2" stroke-dasharray="4 4"/>
+    
+    <!-- Decorative Elements -->
+    <circle cx="150" cy="150" r="20" fill="#1A2332" opacity="0.5"/>
+    <circle cx="650" cy="250" r="15" fill="#1A2332" opacity="0.5"/>
+    
+    <!-- Gradient Definition -->
+    <defs>
+        <linearGradient id="paint0_linear" x1="0" y1="0" x2="800" y2="400" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#0B1321"/>
+            <stop offset="1" stop-color="#1A2332"/>
+        </linearGradient>
+    </defs>
+</svg>
