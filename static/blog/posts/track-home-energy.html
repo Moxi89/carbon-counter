@@ -12,6 +12,71 @@
     <meta property="og:title" content="Track Your CO₂ & Energy Costs | Carbon Counter">
     <meta property="og:description" content="Find which devices cost you money AND create CO₂. Simple tracking methods to reduce both your bills and carbon footprint!">
     <meta property="og:type" content="article">
+    <meta property="og:image" content="../images/track-energy.svg">
+    <meta property="og:url" content="https://carboncounter.com/blog/posts/track-home-energy.html">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Track Your CO₂ & Energy Costs">
+    <meta name="twitter:description" content="Find which devices cost you money AND create CO₂. Simple tracking methods to reduce both your bills and carbon footprint!">
+    <meta name="twitter:image" content="../images/track-energy.svg">
+    
+    <!-- Article Metadata -->
+    <meta property="article:published_time" content="2025-01-19">
+    <meta property="article:modified_time" content="2025-01-19">
+    <meta property="article:author" content="Carbon Counter Team">
+    <meta property="article:section" content="Energy Tracking">
+    <meta property="article:tag" content="Energy Monitoring">
+    <meta property="article:tag" content="Cost Savings">
+    <meta property="article:tag" content="Carbon Tracking">
+    
+    <!-- Schema.org Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://carboncounter.com/blog/posts/track-home-energy.html"
+        },
+        "headline": "Track Your CO₂ & Energy Costs",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://carboncounter.com/blog/images/track-energy.svg",
+            "width": "800",
+            "height": "400"
+        },
+        "datePublished": "2025-01-19",
+        "dateModified": "2025-01-19",
+        "author": {
+            "@type": "Organization",
+            "name": "Carbon Counter Team",
+            "url": "https://carboncounter.com/about"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Carbon Counter",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://carboncounter.com/images/logo.svg",
+                "width": "600",
+                "height": "60"
+            }
+        },
+        "description": "Find which devices cost you money AND create CO₂. Simple tracking methods to reduce both your bills and carbon footprint - using things you already have!",
+        "keywords": "CO2 tracking at home, carbon emissions calculator, energy cost monitor, reduce carbon footprint, climate action tips, carbon counter guide",
+        "articleSection": "Energy Tracking",
+        "articleBody": "Ever got a high energy bill AND wondered about your carbon footprint? You're not alone! Here's how to track both using things you already have at home. No fancy equipment needed - just smart ways to spot what's costing you money and creating CO₂."
+    }
+    </script>
+    
+    <!-- Additional SEO -->
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Carbon Counter Team">
+    <meta name="rating" content="General">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://carboncounter.com/blog/posts/track-home-energy.html">
     
     <!-- Styles -->
     <link rel="stylesheet" href="../../shared/nav-styles.css">
@@ -20,23 +85,22 @@
     <link rel="stylesheet" href="../css/post-styles.css">
     
     <!-- Scripts -->
+    <script src="../../shared/nav.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             fetch('../../shared/navbar.html')
                 .then(response => response.text())
                 .then(data => {
                     document.getElementById('navbar-placeholder').innerHTML = data;
-                    const navbar = document.getElementById('navbar-placeholder');
-                    const links = navbar.getElementsByTagName('a');
-                    for (let link of links) {
-                        if (link.getAttribute('href').startsWith('/')) {
-                            link.href = '../..' + link.getAttribute('href');
-                        }
-                    }
+                });
+
+            fetch('../../shared/footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer-placeholder').innerHTML = data;
                 });
         });
     </script>
-    <script src="../../shared/nav.js" defer></script>
 </head>
 <body>
     <div class="container">
@@ -54,7 +118,7 @@
                 <!-- Post Header -->
                 <header class="post-header">
                     <div class="featured-image">
-                        <img src="../images/article2.svg" alt="Track your CO2 and energy costs">
+                        <img src="../images/track-energy.svg" alt="Track your home's energy usage visualization">
                     </div>
                     <div class="post-meta">
                         <span class="category-tag">Smart Tech</span>
@@ -170,16 +234,7 @@
         </main>
 
         <!-- Footer -->
-        <footer>
-            <div class="footer-content">
-                <div class="copyright"> 2025 Carbon Counter</div>
-                <nav class="footer-links">
-                    <a href="../../index.html">Home</a>
-                    <a href="../../index.html#about-section">About</a>
-                    <a href="../../index.html#faq-section">FAQ</a>
-                </nav>
-            </div>
-        </footer>
+        <div id="footer-placeholder"></div>
     </div>
 </body>
 </html>
