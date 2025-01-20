@@ -13,131 +13,204 @@
     <link rel="stylesheet" href="/shared/footer-styles.css">
     <link rel="stylesheet" href="/css/blog-styles.css">
     <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        .blog-main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .blog-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .blog-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .blog-meta {
+            color: var(--accent);
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        .category-filter {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--accent);
+            background: transparent;
+            color: var(--text-primary);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--accent);
+            color: var(--surface-dark);
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .blog-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: var(--accent);
+            color: var(--surface-dark);
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-content h2 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .card-content p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .read-more {
+            display: inline-block;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .read-more:hover {
+            color: var(--accent-hover);
+        }
+
+        @media (max-width: 768px) {
+            .blog-main {
+                padding: 1rem;
+            }
+
+            .blog-header h1 {
+                font-size: 2rem;
+            }
+
+            .filter-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .filter-btn {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <!-- Navigation -->
         <div id="navbar-placeholder"></div>
 
-        <!-- Blog Header -->
-        <header class="blog-hero animate-on-scroll">
-            <h1>Carbon Counter: Your Guide to Sustainable Living</h1>
-            <p class="hero-subtitle">Discover practical tips, expert insights, and innovative solutions for reducing your carbon footprint. Join our community of climate-conscious individuals making a real impact on environmental sustainability.</p>
-            <div class="hero-stats">
-                <span>✓ Weekly Updates</span>
-                <span>✓ Expert Tips</span>
-                <span>✓ Real Results</span>
+        <main class="blog-main">
+            <div class="blog-header">
+                <h1>Latest Insights</h1>
+                <p>Discover practical tips, expert insights, and innovative solutions for reducing your carbon footprint. Join our community of climate-conscious individuals making a real impact on environmental sustainability.</p>
+                <p class="blog-meta">✓ Weekly Updates / Expert Tips / Real Results</p>
             </div>
-        </header>
 
-        <!-- Category Filter -->
-        <section class="category-filter animate-on-scroll">
-            <h3>Browse by Category</h3>
-            <div class="filter-buttons">
-                <button class="filter-btn active" data-category="All">All</button>
-                <button class="filter-btn" data-category="Smart Living">Smart Living</button>
-                <button class="filter-btn" data-category="Easy Changes">Easy Changes</button>
-                <button class="filter-btn" data-category="Life Hacks">Life Hacks</button>
-                <button class="filter-btn" data-category="Family & Home">Family & Home</button>
-                <button class="filter-btn" data-category="Smart Tech">Smart Tech</button>
-            </div>
-        </section>
-
-        <!-- Featured Article -->
-        <section class="featured-article glassmorphism animate-on-scroll" data-category="Smart Living">
-            <div class="featured-content">
-                <img src="/images/kitchen-energy.svg" alt="Kitchen energy efficiency visualization" class="featured-image">
-                <div class="article-text">
-                    <span class="category-tag">Smart Living</span>
-                    <h2>Your Kitchen's Hidden CO₂: Real Fixes That Work</h2>
-                    <p>Discover simple ways to spot and fix hidden energy waste in your kitchen. Real solutions that actually work, no fancy gadgets needed.</p>
-                    <div class="article-meta">
-                        <span>5 min read</span>
-                        <span>January 19, 2025</span>
-                    </div>
-                    <a href="posts/kitchen-hidden-co2.html" class="read-more">Read Article →</a>
+            <div class="category-filter">
+                <h2>Browse by Category</h2>
+                <div class="filter-buttons">
+                    <button class="filter-btn active">All</button>
+                    <button class="filter-btn">Smart Living</button>
+                    <button class="filter-btn">Easy Changes</button>
+                    <button class="filter-btn">Life Hacks</button>
+                    <button class="filter-btn">Family & Home</button>
+                    <button class="filter-btn">Smart Tech</button>
                 </div>
             </div>
-        </section>
 
-        <!-- Article Grid -->
-        <section class="article-grid">
-            <!-- Smart Living Article -->
-            <article class="article-card glassmorphism animate-on-scroll" data-category="Smart Living">
-                <div class="card-content">
-                    <img src="/images/smart-home-energy.svg" alt="Smart home energy tracking visualization" class="article-image">
-                    <span class="category-tag">Smart Living</span>
-                    <h3>Track Your Home's Energy: Simple Steps That Work</h3>
-                    <p>Learn how to monitor and understand your home's energy usage with these easy-to-follow techniques.</p>
-                    <div class="article-meta">
-                        <span>5 min read</span>
-                        <span>January 19, 2025</span>
+            <div class="blog-grid">
+                <article class="blog-card">
+                    <img src="/images/kitchen-energy.svg" alt="Kitchen energy efficiency visualization" class="card-image">
+                    <div class="card-content">
+                        <div class="card-tag">Smart Living</div>
+                        <h2>Your Kitchen's Hidden CO₂: Real Fixes That Work</h2>
+                        <p>Discover simple ways to spot and fix hidden energy waste in your kitchen. Real solutions that actually work, no fancy gadgets needed.</p>
+                        <div class="card-meta">
+                            <span>5 min read</span>
+                            <span>January 19, 2025</span>
+                        </div>
+                        <a href="/blog/posts/kitchen-hidden-co2" class="read-more">Read Article →</a>
                     </div>
-                    <a href="posts/track-home-energy.html" class="read-more">Read Article →</a>
-                </div>
-            </article>
+                </article>
 
-            <!-- Smart Tech Article -->
-            <article class="article-card glassmorphism animate-on-scroll" data-category="Smart Tech">
-                <div class="card-content">
-                    <img src="/images/smart-home.svg" alt="Smart home energy savings visualization" class="article-image">
-                    <span class="category-tag">Smart Tech</span>
-                    <h3>Your Smart Home's Hidden Potential: Energy Savings That Actually Work</h3>
-                    <p>Transform your smart devices from energy wasters to carbon savers with these proven optimization techniques.</p>
-                    <div class="article-meta">
-                        <span>6 min read</span>
-                        <span>January 19, 2025</span>
+                <article class="blog-card">
+                    <img src="/images/track-energy.svg" alt="Smart home energy tracking visualization" class="card-image">
+                    <div class="card-content">
+                        <div class="card-tag">Smart Living</div>
+                        <h2>Track Your Home's Energy: Simple Steps That Work</h2>
+                        <p>Learn how to monitor and understand your home's energy usage with these easy-to-follow techniques.</p>
+                        <div class="card-meta">
+                            <span>5 min read</span>
+                            <span>January 19, 2025</span>
+                        </div>
+                        <a href="/blog/posts/track-home-energy" class="read-more">Read Article →</a>
                     </div>
-                    <a href="posts/smart-home-energy-savings.html" class="read-more">Read Article →</a>
-                </div>
-            </article>
+                </article>
 
-            <!-- Life Hacks Article -->
-            <article class="article-card glassmorphism animate-on-scroll" data-category="Life Hacks">
-                <div class="card-content">
-                    <img src="/images/quick-wins.svg" alt="Quick carbon reduction wins" class="article-image">
-                    <span class="category-tag">Life Hacks</span>
-                    <h3>5-Minute Carbon Hacks: Quick Wins That Actually Work</h3>
-                    <p>No time for sustainability? These quick carbon-cutting hacks fit perfectly into your busy schedule.</p>
-                    <div class="article-meta">
-                        <span>5 min read</span>
-                        <span>January 19, 2025</span>
-                    </div>
-                    <a href="posts/five-minute-carbon-hacks.html" class="read-more">Read Article →</a>
-                </div>
-            </article>
-
-            <!-- Easy Changes Article -->
-            <article class="article-card glassmorphism animate-on-scroll" data-category="Easy Changes">
-                <div class="card-content">
-                    <img src="/images/save-energy-home.svg" alt="Home energy saving tips" class="article-image">
-                    <span class="category-tag">Easy Changes</span>
-                    <h3>Save Energy at Home: Simple Changes That Make a Difference</h3>
-                    <p>Discover practical ways to reduce your home's energy consumption without compromising comfort.</p>
-                    <div class="article-meta">
-                        <span>5 min read</span>
-                        <span>January 19, 2025</span>
-                    </div>
-                    <a href="posts/save-energy-at-home.html" class="read-more">Read Article →</a>
-                </div>
-            </article>
-
-            <!-- Family & Home Article -->
-            <article class="article-card glassmorphism animate-on-scroll" data-category="Family & Home">
-                <div class="card-content">
-                    <img src="/images/family-eco-activities.svg" alt="Family engaging in eco-friendly activities" class="article-image">
-                    <span class="category-tag">Family & Home</span>
-                    <h3>Your Family's Green Journey: Fun Activities That Make a Difference</h3>
-                    <p>Engage your whole family in sustainable living with these fun, educational activities that make a real impact.</p>
-                    <div class="article-meta">
-                        <span>6 min read</span>
-                        <span>January 19, 2025</span>
-                    </div>
-                    <a href="posts/family-eco-activities.html" class="read-more">Read Article →</a>
-                </div>
-            </article>
-
-        </section>
+                <!-- Repeat similar structure for other articles -->
+            </div>
+        </main>
 
         <!-- Footer -->
         <div id="footer-placeholder"></div>

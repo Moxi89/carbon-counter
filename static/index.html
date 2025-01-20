@@ -319,22 +319,101 @@
                 <div class="blog-grid">
                     <a href="/blog/posts/smart-home-energy-savings" class="blog-card">
                         <img src="/images/smart-home.svg" alt="Smart home energy savings">
-                        <h3>Smart Home Energy Savings</h3>
-                        <p>Use technology to automate your energy savings</p>
+                        <div class="card-content">
+                            <h3>Smart Home Energy Savings</h3>
+                            <p>Use technology to automate your energy savings</p>
+                        </div>
                     </a>
                     <a href="/blog/posts/save-energy-at-home" class="blog-card">
                         <img src="/images/save-energy-home.svg" alt="Save energy at home">
-                        <h3>Save Energy at Home</h3>
-                        <p>Simple changes for real energy savings</p>
+                        <div class="card-content">
+                            <h3>Save Energy at Home</h3>
+                            <p>Simple changes for real energy savings</p>
+                        </div>
                     </a>
                     <a href="/blog/posts/track-home-energy" class="blog-card">
                         <img src="/images/track-energy.svg" alt="Track your energy use">
-                        <h3>Track Your Home's Energy Use</h3>
-                        <p>Monitor and optimize your consumption</p>
+                        <div class="card-content">
+                            <h3>Track Your Home's Energy Use</h3>
+                            <p>Monitor and optimize your consumption</p>
+                        </div>
                     </a>
                 </div>
-                <a href="/blog" class="view-all-button">View All Articles</a>
+                <div class="view-all-wrapper">
+                    <a href="/blog" class="view-all-button">View All Articles</a>
+                </div>
             </section>
+
+            <style>
+                .blog-preview {
+                    padding: 4rem 2rem;
+                    background: var(--surface-dark);
+                }
+                
+                .blog-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                    gap: 2rem;
+                    margin: 2rem 0;
+                }
+                
+                .blog-card {
+                    display: flex;
+                    flex-direction: column;
+                    background: rgba(255, 255, 255, 0.05);
+                    border-radius: 12px;
+                    overflow: hidden;
+                    transition: transform 0.3s ease, box-shadow 0.3s ease;
+                    text-decoration: none;
+                    color: var(--text-primary);
+                }
+                
+                .blog-card:hover {
+                    transform: translateY(-4px);
+                    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+                }
+                
+                .blog-card img {
+                    width: 100%;
+                    height: 200px;
+                    object-fit: cover;
+                }
+                
+                .card-content {
+                    padding: 1.5rem;
+                }
+                
+                .blog-card h3 {
+                    margin: 0 0 0.5rem 0;
+                    font-size: 1.25rem;
+                    color: var(--text-primary);
+                }
+                
+                .blog-card p {
+                    margin: 0;
+                    color: var(--text-secondary);
+                    font-size: 0.95rem;
+                }
+                
+                .view-all-wrapper {
+                    text-align: center;
+                    margin-top: 2rem;
+                }
+                
+                .view-all-button {
+                    display: inline-block;
+                    padding: 0.75rem 2rem;
+                    background: var(--accent);
+                    color: var(--text-primary);
+                    text-decoration: none;
+                    border-radius: 6px;
+                    transition: background 0.3s ease;
+                }
+                
+                .view-all-button:hover {
+                    background: var(--accent-hover);
+                }
+            </style>
 
             <section class="faq-section" id="faq-section">
                 <h2 data-aos="fade-down">Global CO₂ Emissions: Frequently Asked Questions</h2>
