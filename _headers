@@ -1,0 +1,24 @@
+# All pages
+/*
+  X-Frame-Options: SAMEORIGIN
+  X-XSS-Protection: 1; mode=block
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+
+# Static assets
+/static/blog/images/*
+  Cache-Control: public, max-age=31536000
+  Access-Control-Allow-Origin: *
+
+/static/css/*
+  Cache-Control: public, max-age=31536000
+  Access-Control-Allow-Origin: *
+
+/static/js/*
+  Cache-Control: public, max-age=31536000
+  Access-Control-Allow-Origin: *
+
+# HTML files
+*.html
+  Cache-Control: public, max-age=0, must-revalidate
