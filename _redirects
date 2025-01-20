@@ -1,22 +1,48 @@
-# Remove .html extension
-/*  /static/:splat.html  200
-
-# Handle /blog route
+# Priority redirects
+/  /static/index.html  200
 /blog  /static/blog/index.html  200
 /blog/  /static/blog/index.html  200
 
-# Handle blog posts
-/blog/posts/*  /static/blog/posts/:splat.html  200
+# Blog post redirects with clean URLs
+/blog/posts/smart-home-energy-savings  /static/blog/posts/smart-home-energy-savings.html  200
+/blog/posts/save-energy-at-home  /static/blog/posts/save-energy-at-home.html  200
+/blog/posts/track-home-energy  /static/blog/posts/track-home-energy.html  200
+/blog/posts/kitchen-hidden-co2  /static/blog/posts/kitchen-hidden-co2.html  200
+/blog/posts/five-minute-carbon-hacks  /static/blog/posts/five-minute-carbon-hacks.html  200
+/blog/posts/family-eco-activities  /static/blog/posts/family-eco-activities.html  200
 
-# Handle static assets
-/images/*  /static/blog/images/:splat  200
+# Static assets with proper caching
+/images/*  /static/images/:splat  200
 /css/*  /static/css/:splat  200
 /js/*  /static/js/:splat  200
 /shared/*  /static/shared/:splat  200
 
+# Handle section anchors
+/#counter-section  /static/index.html#counter-section  200
+/#faq-section  /static/index.html#faq-section  200
+/#about-section  /static/index.html#about-section  200
+
 # Handle other pages
 /privacy  /static/privacy/index.html  200
 /terms  /static/terms/index.html  200
+
+# Legacy URL handling (redirect old URLs to new clean URLs)
+/static/blog/*  /blog/:splat  301
+/blog/posts/*.html  /blog/posts/:splat  301
+/static/images/*  /images/:splat  301
+/static/css/*  /css/:splat  301
+/static/js/*  /js/:splat  301
+/static/shared/*  /shared/:splat  301
+
+# Handle blog category pages
+/blog/category/smart-living  /static/blog/index.html  200
+/blog/category/easy-changes  /static/blog/index.html  200
+/blog/category/life-hacks  /static/blog/index.html  200
+/blog/category/family-home  /static/blog/index.html  200
+/blog/category/smart-tech  /static/blog/index.html  200
+
+# Catch any remaining .html extensions and redirect to clean URLs
+/*/*.html  /:splat  301
 
 # Custom 404 page
 /*  /404.html  404

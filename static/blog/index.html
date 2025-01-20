@@ -9,10 +9,10 @@
     <meta name="keywords" content="carbon footprint reduction, CO2 tracking, climate action tips, reduce emissions, carbon counter blog">
     
     <!-- Styles -->
-    <link rel="stylesheet" href="../shared/nav-styles.css">
-    <link rel="stylesheet" href="../shared/footer-styles.css">
-    <link rel="stylesheet" href="css/blog-styles.css">
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="/shared/nav-styles.css">
+    <link rel="stylesheet" href="/shared/footer-styles.css">
+    <link rel="stylesheet" href="/css/blog-styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
     <div class="container">
@@ -46,7 +46,7 @@
         <!-- Featured Article -->
         <section class="featured-article glassmorphism animate-on-scroll" data-category="Smart Living">
             <div class="featured-content">
-                <img src="images/kitchen-energy.svg" alt="Kitchen energy efficiency visualization" class="featured-image">
+                <img src="/images/kitchen-energy.svg" alt="Kitchen energy efficiency visualization" class="featured-image">
                 <div class="article-text">
                     <span class="category-tag">Smart Living</span>
                     <h2>Your Kitchen's Hidden CO₂: Real Fixes That Work</h2>
@@ -65,7 +65,7 @@
             <!-- Smart Living Article -->
             <article class="article-card glassmorphism animate-on-scroll" data-category="Smart Living">
                 <div class="card-content">
-                    <img src="images/smart-home-energy.svg" alt="Smart home energy tracking visualization" class="article-image">
+                    <img src="/images/smart-home-energy.svg" alt="Smart home energy tracking visualization" class="article-image">
                     <span class="category-tag">Smart Living</span>
                     <h3>Track Your Home's Energy: Simple Steps That Work</h3>
                     <p>Learn how to monitor and understand your home's energy usage with these easy-to-follow techniques.</p>
@@ -80,7 +80,7 @@
             <!-- Smart Tech Article -->
             <article class="article-card glassmorphism animate-on-scroll" data-category="Smart Tech">
                 <div class="card-content">
-                    <img src="images/smart-home.svg" alt="Smart home energy savings visualization" class="article-image">
+                    <img src="/images/smart-home.svg" alt="Smart home energy savings visualization" class="article-image">
                     <span class="category-tag">Smart Tech</span>
                     <h3>Your Smart Home's Hidden Potential: Energy Savings That Actually Work</h3>
                     <p>Transform your smart devices from energy wasters to carbon savers with these proven optimization techniques.</p>
@@ -95,7 +95,7 @@
             <!-- Life Hacks Article -->
             <article class="article-card glassmorphism animate-on-scroll" data-category="Life Hacks">
                 <div class="card-content">
-                    <img src="images/quick-wins.svg" alt="Quick carbon reduction wins" class="article-image">
+                    <img src="/images/quick-wins.svg" alt="Quick carbon reduction wins" class="article-image">
                     <span class="category-tag">Life Hacks</span>
                     <h3>5-Minute Carbon Hacks: Quick Wins That Actually Work</h3>
                     <p>No time for sustainability? These quick carbon-cutting hacks fit perfectly into your busy schedule.</p>
@@ -110,7 +110,7 @@
             <!-- Easy Changes Article -->
             <article class="article-card glassmorphism animate-on-scroll" data-category="Easy Changes">
                 <div class="card-content">
-                    <img src="images/save-energy-home.svg" alt="Home energy saving tips" class="article-image">
+                    <img src="/images/save-energy-home.svg" alt="Home energy saving tips" class="article-image">
                     <span class="category-tag">Easy Changes</span>
                     <h3>Save Energy at Home: Simple Changes That Make a Difference</h3>
                     <p>Discover practical ways to reduce your home's energy consumption without compromising comfort.</p>
@@ -125,7 +125,7 @@
             <!-- Family & Home Article -->
             <article class="article-card glassmorphism animate-on-scroll" data-category="Family & Home">
                 <div class="card-content">
-                    <img src="images/family-eco-activities.svg" alt="Family engaging in eco-friendly activities" class="article-image">
+                    <img src="/images/family-eco-activities.svg" alt="Family engaging in eco-friendly activities" class="article-image">
                     <span class="category-tag">Family & Home</span>
                     <h3>Your Family's Green Journey: Fun Activities That Make a Difference</h3>
                     <p>Engage your whole family in sustainable living with these fun, educational activities that make a real impact.</p>
@@ -144,12 +144,12 @@
     </div>
 
     <!-- Scripts -->
-    <script src="../shared/nav.js" defer></script>
-    <script src="js/blog.js" defer></script>
+    <script src="/shared/nav.js" defer></script>
+    <script src="/js/blog.js" defer></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Load navbar and footer
-            fetch('../shared/navbar.html')
+            fetch('/shared/navbar.html')
                 .then(response => response.text())
                 .then(data => {
                     document.getElementById('navbar-placeholder').innerHTML = data;
@@ -158,12 +158,12 @@
                     navbar.querySelectorAll('a').forEach(link => {
                         const href = link.getAttribute('href');
                         if (href.startsWith('#')) {
-                            link.href = '../' + href;
+                            link.href = '/' + href;
                         }
                     });
                 });
 
-            fetch('../shared/footer.html')
+            fetch('/shared/footer.html')
                 .then(response => response.text())
                 .then(data => {
                     document.getElementById('footer-placeholder').innerHTML = data;
@@ -172,9 +172,9 @@
                     footer.querySelectorAll('a').forEach(link => {
                         const href = link.getAttribute('href');
                         if (href.startsWith('#')) {
-                            link.href = '../' + href;
-                        } else if (!href.startsWith('http') && !href.startsWith('../')) {
-                            link.href = '../' + href;
+                            link.href = '/' + href;
+                        } else if (!href.startsWith('http') && !href.startsWith('/')) {
+                            link.href = '/' + href;
                         }
                     });
                 });

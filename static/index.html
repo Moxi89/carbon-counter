@@ -17,17 +17,17 @@
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.carbonemissionscounter.com/">
+    <meta property="og:url" content="https://carboncounter.com/">
     <meta property="og:title" content="Carbon Emissions Counter Live | Real-Time Global CO₂ Tracking">
     <meta property="og:description" content="Track real-time global carbon emissions with our live CO₂ counter. Get accurate data on worldwide carbon footprint and country-specific emissions.">
-    <meta property="og:image" content="https://www.carbonemissionscounter.com/images/social-preview.jpg">
+    <meta property="og:image" content="https://carboncounter.com/images/social-preview.jpg">
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://www.carbonemissionscounter.com/">
+    <meta name="twitter:url" content="https://carboncounter.com/">
     <meta name="twitter:title" content="Carbon Emissions Counter Live | Real-Time Global CO₂ Tracking">
     <meta name="twitter:description" content="Track real-time global carbon emissions with our live CO₂ counter. Get accurate data on worldwide carbon footprint and country-specific emissions.">
-    <meta name="twitter:image" content="https://www.carbonemissionscounter.com/images/social-preview.jpg">
+    <meta name="twitter:image" content="https://carboncounter.com/images/social-preview.jpg">
     
     <!-- Schema.org markup -->
     <script type="application/ld+json">
@@ -36,14 +36,14 @@
       "@type": "WebApplication",
       "name": "Carbon Emissions Counter Live",
       "description": "Real-time global carbon emissions tracker providing live CO₂ data and country-specific emissions information. A free public service tool for environmental awareness.",
-      "url": "https://www.carbonemissionscounter.com",
+      "url": "https://carboncounter.com",
       "applicationCategory": "EnvironmentalApplication",
       "operatingSystem": "All",
       "isAccessibleForFree": true,
       "creator": {
         "@type": "Organization",
         "name": "Carbon Emissions Counter",
-        "url": "https://www.carbonemissionscounter.com"
+        "url": "https://carboncounter.com"
       }
     }
     </script>
@@ -82,21 +82,21 @@
       },
       "browserRequirements": "Requires JavaScript. Works on all modern browsers.",
       "softwareVersion": "1.0",
-      "url": "https://www.carbonemissionscounter.com/"
+      "url": "https://carboncounter.com/"
     }
     </script>
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://www.carbonemissionscounter.com/">
+    <link rel="canonical" href="https://carboncounter.com/">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="images/favicon.png">
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="shared/nav-styles.css">
-    <link rel="stylesheet" href="shared/footer-styles.css">
+    <link rel="icon" type="image/png" href="/images/favicon.png">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/shared/nav-styles.css">
+    <link rel="stylesheet" href="/shared/footer-styles.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="shared/nav.js" defer></script>
+    <script src="/shared/nav.js" defer></script>
 </head>
 <body>
     <div class="scroll-progress"></div>
@@ -117,7 +117,7 @@
             </div>
             <div class="nav-items">
                 <a href="#global-emissions-card" class="nav-link">Carbon Emissions Counters</a>
-                <a href="blog/" class="nav-link">Blog</a>
+                <a href="/blog" class="nav-link">Blog</a>
                 <a href="#faq-section" class="nav-link">FAQ</a>
                 <a href="#about-section" class="nav-link">About</a>
             </div>
@@ -314,6 +314,28 @@
                 </div>
             </div>
 
+            <section class="blog-preview">
+                <h2>Latest Insights</h2>
+                <div class="blog-grid">
+                    <a href="/blog/posts/smart-home-energy-savings" class="blog-card">
+                        <img src="/images/smart-home.svg" alt="Smart home energy savings">
+                        <h3>Smart Home Energy Savings</h3>
+                        <p>Use technology to automate your energy savings</p>
+                    </a>
+                    <a href="/blog/posts/save-energy-at-home" class="blog-card">
+                        <img src="/images/save-energy-home.svg" alt="Save energy at home">
+                        <h3>Save Energy at Home</h3>
+                        <p>Simple changes for real energy savings</p>
+                    </a>
+                    <a href="/blog/posts/track-home-energy" class="blog-card">
+                        <img src="/images/track-energy.svg" alt="Track your energy use">
+                        <h3>Track Your Home's Energy Use</h3>
+                        <p>Monitor and optimize your consumption</p>
+                    </a>
+                </div>
+                <a href="/blog" class="view-all-button">View All Articles</a>
+            </section>
+
             <section class="faq-section" id="faq-section">
                 <h2 data-aos="fade-down">Global CO₂ Emissions: Frequently Asked Questions</h2>
                 <div class="faq-container">
@@ -505,14 +527,14 @@
 
     <script>
         // Load navbar
-        fetch('shared/navbar.html')
+        fetch('/shared/navbar.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('navbar-placeholder').innerHTML = data;
             });
 
         // Load footer
-        fetch('shared/footer.html')
+        fetch('/shared/footer.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('footer-placeholder').innerHTML = data;
