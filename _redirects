@@ -1,7 +1,10 @@
 # Priority redirects
-/  /static/index.html  200
-/blog  /static/blog/index.html  200
-/blog/  /static/blog/index.html  200
+/  /index.html  200
+/blog  /blog/index.html  200
+/blog/  /blog/index.html  200
+/privacy  /privacy.html  200
+/terms  /terms.html  200
+/*  /index.html  200
 
 # Clean URL redirects (remove .html)
 /blog/posts/*.html  /blog/posts/:splat  301
@@ -22,13 +25,9 @@
 /shared/*  /static/shared/:splat  200
 
 # Handle section anchors
-/#counter-section  /static/index.html#counter-section  200
-/#faq-section  /static/index.html#faq-section  200
-/#about-section  /static/index.html#about-section  200
-
-# Handle other pages
-/privacy  /privacy.html  200
-/terms  /terms.html  200
+/#counter-section  /index.html#counter-section  200
+/#faq-section  /index.html#faq-section  200
+/#about-section  /index.html#about-section  200
 
 # Legacy URL handling (redirect old URLs to new clean URLs)
 /static/blog/*  /blog/:splat  301
@@ -38,14 +37,11 @@
 /static/shared/*  /shared/:splat  301
 
 # Handle blog category pages
-/blog/category/smart-living  /static/blog/index.html  200
-/blog/category/easy-changes  /static/blog/index.html  200
-/blog/category/life-hacks  /static/blog/index.html  200
-/blog/category/family-home  /static/blog/index.html  200
-/blog/category/smart-tech  /static/blog/index.html  200
-
-# Catch-all for clean URLs
-/*  /static/:splat  200
+/blog/category/smart-living  /blog/index.html  200
+/blog/category/easy-changes  /blog/index.html  200
+/blog/category/life-hacks  /blog/index.html  200
+/blog/category/family-home  /blog/index.html  200
+/blog/category/smart-tech  /blog/index.html  200
 
 # Custom 404 page
 /*  /404.html  404
