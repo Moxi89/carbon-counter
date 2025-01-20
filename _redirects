@@ -27,8 +27,8 @@
 /#about-section  /static/index.html#about-section  200
 
 # Handle other pages
-/privacy  /static/privacy/index.html  200
-/terms  /static/terms/index.html  200
+/privacy  /privacy.html  200
+/terms  /terms.html  200
 
 # Legacy URL handling (redirect old URLs to new clean URLs)
 /static/blog/*  /blog/:splat  301

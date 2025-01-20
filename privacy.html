@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Carbon Counter</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/shared/nav-styles.css">
+    <link rel="stylesheet" href="/shared/footer-styles.css">
+    <style>
+        .privacy-content {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            position: relative;
+        }
+        
+        .privacy-content h1 {
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+        }
+        
+        .privacy-content h2 {
+            color: var(--text-primary);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .privacy-content p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .privacy-content ul {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+        }
+        
+        .privacy-content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .last-updated {
+            font-style: italic;
+            color: var(--text-secondary);
+            margin-top: 3rem;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background: var(--accent);
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(74, 226, 144, 0.2);
+        }
+
+        .back-button:before {
+            content: "←";
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Include Navigation -->
+    <div id="nav-placeholder"></div>
+
+    <main class="privacy-content glassmorphism">
+        <a href="/" class="back-button">Go Back</a>
+        <h1>Privacy Policy</h1>
+        
+        <p>At Carbon Counter, we take your privacy seriously. This policy describes how we collect, use, and protect your personal information.</p>
+        
+        <h2>Information We Collect</h2>
+        <ul>
+            <li>Usage data for carbon emission calculations</li>
+            <li>Device information for optimization</li>
+            <li>Cookies for better user experience</li>
+        </ul>
+        
+        <h2>How We Use Your Information</h2>
+        <p>We use your information to:</p>
+        <ul>
+            <li>Calculate and track your carbon footprint</li>
+            <li>Improve our services and user experience</li>
+            <li>Provide personalized recommendations</li>
+            <li>Send important updates about our service</li>
+        </ul>
+        
+        <h2>Data Protection</h2>
+        <p>We implement various security measures to protect your personal information, including:</p>
+        <ul>
+            <li>Encryption of sensitive data</li>
+            <li>Regular security assessments</li>
+            <li>Limited access to personal information</li>
+            <li>Secure data storage practices</li>
+        </ul>
+        
+        <h2>Your Rights</h2>
+        <p>You have the right to:</p>
+        <ul>
+            <li>Access your personal data</li>
+            <li>Request data correction</li>
+            <li>Request data deletion</li>
+            <li>Opt-out of data collection</li>
+        </ul>
+        
+        <h2>Contact Us</h2>
+        <p>If you have any questions about our privacy policy, please contact us at privacy@carbonemissionscounter.com</p>
+        
+        <p class="last-updated">Last updated: January 20, 2025</p>
+    </main>
+
+    <!-- Include Footer -->
+    <div id="footer-placeholder"></div>
+
+    <script src="/shared/nav.js"></script>
+    <script>
+        // Load navigation and footer
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('/shared/navbar.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('nav-placeholder').innerHTML = data;
+                });
+            
+            fetch('/shared/footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer-placeholder').innerHTML = data;
+                });
+        });
+    </script>
+</body>
+</html>
