@@ -136,16 +136,24 @@
 /* Tip Box */
 .tip-box {
     background: var(--card-bg);
-    padding: var(--spacing-md);
     border-radius: 12px;
+    padding: var(--spacing-md);
     margin: var(--spacing-md) 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tip-box.highlight {
     border-left: 4px solid var(--accent-color);
 }
 
-.tip-box strong {
+.tip-box h3 {
     color: var(--accent-color);
-    display: block;
-    margin-bottom: 0.5rem;
+    margin-top: 0;
+    margin-bottom: var(--spacing-sm);
+}
+
+.tip-box p:last-child {
+    margin-bottom: 0;
 }
 
 /* Share Buttons */
@@ -216,27 +224,33 @@
 .post-navigation {
     display: flex;
     justify-content: space-between;
-    margin: var(--spacing-lg) 0;
-    gap: var(--spacing-sm);
+    margin-top: var(--spacing-lg);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.prev-post,
-.next-post {
-    background: var(--card-bg);
-    padding: var(--spacing-sm) var(--spacing-md);
-    border-radius: 8px;
-    text-decoration: none;
+.post-navigation a {
     color: var(--text-color);
-    transition: all 0.3s ease;
+    text-decoration: none;
+    padding: var(--spacing-sm);
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+    flex: 1;
 }
 
-.prev-post:hover,
-.next-post:hover {
-    background: var(--accent-color);
-    color: var(--primary-bg);
+.post-navigation a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* Responsive Adjustments */
+.prev-post {
+    text-align: left;
+}
+
+.next-post {
+    text-align: right;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
     .post-content {
         padding: var(--spacing-md) 0;
@@ -253,6 +267,10 @@
 
     .post-navigation {
         flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+
+    .post-navigation a {
         text-align: center;
     }
 }

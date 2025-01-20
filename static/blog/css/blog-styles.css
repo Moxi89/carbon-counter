@@ -117,6 +117,8 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     font-size: 0.9rem;
+    position: relative;
+    overflow: hidden;
 }
 
 .filter-btn:hover,
@@ -128,9 +130,9 @@ body {
 /* Blog Grid */
 .blog-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2.5rem;
-    padding: 0 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem 0;
 }
 
 /* Blog Cards */
@@ -140,10 +142,26 @@ body {
     overflow: hidden;
     transition: transform 0.3s ease;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    will-change: transform;
 }
 
-.blog-card:hover {
-    transform: translateY(-5px);
+.blog-card .card-image {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+}
+
+.blog-card:not(.visible) {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.blog-card.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .card-image {
@@ -202,6 +220,69 @@ body {
 
 .read-more:hover {
     transform: translateX(5px);
+}
+
+/* Ripple Effect */
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.3);
+    width: 100px;
+    height: 100px;
+    margin-top: -50px;
+    margin-left: -50px;
+    animation: ripple 1s;
+    pointer-events: none;
+}
+
+@keyframes ripple {
+    from {
+        transform: scale(0);
+        opacity: 1;
+    }
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* Filter Button Animations */
+.click-circle {
+    position: absolute;
+    background: radial-gradient(circle, var(--accent-color) 0%, transparent 100%);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    pointer-events: none;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    animation: buttonClick 0.4s ease-out;
+}
+
+@keyframes buttonClick {
+    from {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0);
+    }
+    to {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(2);
+    }
+}
+
+/* Smooth transitions for filter changes */
+@media (prefers-reduced-motion: reduce) {
+    .blog-card,
+    .blog-card .card-image,
+    .filter-btn {
+        transition: none;
+    }
+    
+    .ripple,
+    .click-circle {
+        display: none;
+    }
 }
 
 /* Responsive Design */

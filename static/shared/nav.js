@@ -7,10 +7,13 @@ document.addEventListener('DOMContentLoaded', () => {
     async function loadHTML(url) {
         try {
             const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
             return await response.text();
         } catch (error) {
-            console.error('Error loading HTML:', error);
-            return '';
+            console.error(`Error loading ${url}:`, error);
+            return null;
         }
     }
 
@@ -19,9 +22,13 @@ document.addEventListener('DOMContentLoaded', () => {
         loadHTML('/shared/navbar.html'),
         loadHTML('/shared/footer.html')
     ]).then(([navbarHTML, footerHTML]) => {
-        if (navbarPlaceholder) navbarPlaceholder.innerHTML = navbarHTML;
-        if (footerPlaceholder) footerPlaceholder.innerHTML = footerHTML;
-        
+        if (navbarHTML && navbarPlaceholder) {
+            navbarPlaceholder.innerHTML = navbarHTML;
+        }
+        if (footerHTML && footerPlaceholder) {
+            footerPlaceholder.innerHTML = footerHTML;
+        }
+
         // Get current path
         const currentPath = window.location.pathname;
 
@@ -62,52 +69,50 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // Scroll-based navigation
-        let lastScrollY = window.scrollY;
-        let ticking = false;
+        // Initialize scroll behavior
+        let lastY = window.scrollY;
+        const navbar = document.querySelector('.nav-container');
+        const threshold = 50;
+        let isNavVisible = true;
 
-        // Debounce scroll events for better performance
         function onScroll() {
-            if (!ticking) {
-                requestAnimationFrame(() => {
-                    handleNavVisibility(lastScrollY, window.scrollY);
-                    lastScrollY = window.scrollY;
-                    ticking = false;
-                });
-                ticking = true;
-            }
+            const currentY = window.scrollY;
+            handleNavVisibility(lastY, currentY);
+            lastY = currentY;
         }
 
-        // Handle navbar visibility
         function handleNavVisibility(lastY, currentY) {
-            const navbar = document.querySelector('.nav-container');
-            const scrollingDown = currentY > lastY;
-            const scrollAmount = Math.abs(currentY - lastY);
-            const minScrollBeforeHide = 50; // Minimum scroll before hiding nav
+            if (!navbar) return;
 
-            // Don't hide nav when near the top
-            if (currentY < 100) {
-                navbar.classList.remove('nav-hidden');
-                navbar.classList.add('nav-visible');
-                return;
+            // Show navbar when scrolling up or near top
+            if (currentY < threshold || currentY < lastY) {
+                if (!isNavVisible) {
+                    navbar.style.transform = 'translateY(0)';
+                    isNavVisible = true;
+                }
+            } 
+            // Hide navbar when scrolling down
+            else if (currentY > lastY && currentY > threshold) {
+                if (isNavVisible) {
+                    navbar.style.transform = 'translateY(-100%)';
+                    isNavVisible = false;
+                }
             }
 
-            // Only react to significant scroll amounts
-            if (scrollAmount < minScrollBeforeHide) return;
-
-            if (scrollingDown) {
-                navbar.classList.add('nav-hidden');
-                navbar.classList.remove('nav-visible');
+            // Add/remove shadow based on scroll position
+            if (currentY > 0) {
+                navbar.classList.add('nav-shadow');
             } else {
-                navbar.classList.remove('nav-hidden');
-                navbar.classList.add('nav-visible');
+                navbar.classList.remove('nav-shadow');
             }
         }
 
-        // Add scroll listener
+        // Add scroll listener with passive flag for better performance
         window.addEventListener('scroll', onScroll, { passive: true });
 
         // Initialize nav state
-        document.querySelector('.nav-container').classList.add('nav-visible');
+        onScroll();
+    }).catch(error => {
+        console.error('Error loading navigation components:', error);
     });
 });
