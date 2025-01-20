@@ -3,157 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carbon Counter Blog - Climate Action Tips & Guides</title>
-    
-    <meta name="description" content="Practical guides and tips for tracking and reducing your carbon footprint. Real solutions that work for everyone.">
-    <meta name="keywords" content="carbon footprint reduction, CO2 tracking, climate action tips, reduce emissions, carbon counter blog">
-    
-    <!-- Styles -->
+    <title>Blog - Carbon Counter</title>
     <link rel="stylesheet" href="/shared/nav-styles.css">
     <link rel="stylesheet" href="/shared/footer-styles.css">
-    <link rel="stylesheet" href="/css/blog-styles.css">
-    <link rel="stylesheet" href="/css/styles.css">
-    <style>
-        .blog-main {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        .blog-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .blog-header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-        }
-
-        .blog-meta {
-            color: var(--accent);
-            font-size: 0.9rem;
-            margin-top: 1rem;
-        }
-
-        .category-filter {
-            margin-bottom: 3rem;
-            text-align: center;
-        }
-
-        .filter-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            justify-content: center;
-            margin-top: 1rem;
-        }
-
-        .filter-btn {
-            padding: 0.5rem 1rem;
-            border: 1px solid var(--accent);
-            background: transparent;
-            color: var(--text-primary);
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .filter-btn:hover, .filter-btn.active {
-            background: var(--accent);
-            color: var(--surface-dark);
-        }
-
-        .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .blog-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            overflow: hidden;
-            transition: transform 0.3s ease;
-        }
-
-        .blog-card:hover {
-            transform: translateY(-4px);
-        }
-
-        .card-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .card-content {
-            padding: 1.5rem;
-        }
-
-        .card-tag {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            background: var(--accent);
-            color: var(--surface-dark);
-            border-radius: 15px;
-            font-size: 0.8rem;
-            margin-bottom: 1rem;
-        }
-
-        .card-content h2 {
-            font-size: 1.25rem;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-        }
-
-        .card-content p {
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-
-        .card-meta {
-            display: flex;
-            justify-content: space-between;
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            margin-bottom: 1rem;
-        }
-
-        .read-more {
-            display: inline-block;
-            color: var(--accent);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .read-more:hover {
-            color: var(--accent-hover);
-        }
-
-        @media (max-width: 768px) {
-            .blog-main {
-                padding: 1rem;
-            }
-
-            .blog-header h1 {
-                font-size: 2rem;
-            }
-
-            .filter-buttons {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .filter-btn {
-                width: 100%;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="/blog/css/blog-styles.css">
 </head>
 <body>
     <div class="container">
@@ -161,55 +14,114 @@
         <div id="navbar-placeholder"></div>
 
         <main class="blog-main">
-            <div class="blog-header">
-                <h1>Latest Insights</h1>
+            <section class="blog-hero glassmorphism">
+                <h1>LATEST INSIGHTS</h1>
                 <p>Discover practical tips, expert insights, and innovative solutions for reducing your carbon footprint. Join our community of climate-conscious individuals making a real impact on environmental sustainability.</p>
-                <p class="blog-meta">✓ Weekly Updates / Expert Tips / Real Results</p>
-            </div>
+                <div class="post-meta">✓ Weekly Updates / Expert Tips / Real Results</div>
+            </section>
 
-            <div class="category-filter">
+            <section class="category-section">
                 <h2>Browse by Category</h2>
                 <div class="filter-buttons">
-                    <button class="filter-btn active">All</button>
-                    <button class="filter-btn">Smart Living</button>
-                    <button class="filter-btn">Easy Changes</button>
-                    <button class="filter-btn">Life Hacks</button>
-                    <button class="filter-btn">Family & Home</button>
-                    <button class="filter-btn">Smart Tech</button>
+                    <button class="filter-btn active" data-category="all">All Posts</button>
+                    <button class="filter-btn" data-category="smart-living">Smart Living</button>
+                    <button class="filter-btn" data-category="smart-tech">Smart Tech</button>
+                    <button class="filter-btn" data-category="sustainability">Sustainability</button>
+                    <button class="filter-btn" data-category="guides">Guides</button>
                 </div>
-            </div>
+            </section>
 
-            <div class="blog-grid">
-                <article class="blog-card">
-                    <img src="/images/kitchen-energy.svg" alt="Kitchen energy efficiency visualization" class="card-image">
+            <section class="blog-grid">
+                <!-- Kitchen Hidden CO2 -->
+                <article class="blog-card glassmorphism" data-category="smart-living">
+                    <img src="/blog/images/kitchen-energy.svg" alt="Kitchen energy efficiency" class="card-image">
                     <div class="card-content">
-                        <div class="card-tag">Smart Living</div>
+                        <span class="card-tag">Smart Living</span>
                         <h2>Your Kitchen's Hidden CO₂: Real Fixes That Work</h2>
                         <p>Discover simple ways to spot and fix hidden energy waste in your kitchen. Real solutions that actually work, no fancy gadgets needed.</p>
                         <div class="card-meta">
                             <span>5 min read</span>
                             <span>January 19, 2025</span>
                         </div>
-                        <a href="/blog/posts/kitchen-hidden-co2" class="read-more">Read Article →</a>
+                        <a href="/blog/posts/kitchen-hidden-co2.html" class="read-more">Read Article →</a>
                     </div>
                 </article>
 
-                <article class="blog-card">
-                    <img src="/images/track-energy.svg" alt="Smart home energy tracking visualization" class="card-image">
+                <!-- Track Home Energy -->
+                <article class="blog-card glassmorphism" data-category="smart-tech">
+                    <img src="/blog/images/track-energy.svg" alt="Track home energy usage" class="card-image">
                     <div class="card-content">
-                        <div class="card-tag">Smart Living</div>
+                        <span class="card-tag">Smart Tech</span>
                         <h2>Track Your Home's Energy: Simple Steps That Work</h2>
                         <p>Learn how to monitor and understand your home's energy usage with these easy-to-follow techniques.</p>
                         <div class="card-meta">
                             <span>5 min read</span>
                             <span>January 19, 2025</span>
                         </div>
-                        <a href="/blog/posts/track-home-energy" class="read-more">Read Article →</a>
+                        <a href="/blog/posts/track-home-energy.html" class="read-more">Read Article →</a>
                     </div>
                 </article>
 
-                <!-- Repeat similar structure for other articles -->
-            </div>
+                <!-- Save Energy at Home -->
+                <article class="blog-card glassmorphism" data-category="guides">
+                    <img src="/blog/images/save-energy-home.svg" alt="Home energy saving solutions" class="card-image">
+                    <div class="card-content">
+                        <span class="card-tag">Guides</span>
+                        <h2>5 Ways to Save Energy at Home</h2>
+                        <p>Simple, effective ways to reduce your home's energy consumption and lower your carbon footprint, with real savings you can see.</p>
+                        <div class="card-meta">
+                            <span>4 min read</span>
+                            <span>January 18, 2025</span>
+                        </div>
+                        <a href="/blog/posts/save-energy-at-home.html" class="read-more">Read Article →</a>
+                    </div>
+                </article>
+
+                <!-- Family Eco Activities -->
+                <article class="blog-card glassmorphism" data-category="sustainability">
+                    <img src="/blog/images/family-eco-activities.svg" alt="Family eco-friendly activities" class="card-image">
+                    <div class="card-content">
+                        <span class="card-tag">Sustainability</span>
+                        <h2>Fun Family Activities for a Greener Home</h2>
+                        <p>Engage the whole family in eco-friendly activities that make a real difference while creating lasting memories.</p>
+                        <div class="card-meta">
+                            <span>6 min read</span>
+                            <span>January 18, 2025</span>
+                        </div>
+                        <a href="/blog/posts/family-eco-activities.html" class="read-more">Read Article →</a>
+                    </div>
+                </article>
+
+                <!-- Five Minute Carbon Hacks -->
+                <article class="blog-card glassmorphism" data-category="guides">
+                    <img src="/blog/images/quick-wins.svg" alt="Quick carbon reduction hacks" class="card-image">
+                    <div class="card-content">
+                        <span class="card-tag">Guides</span>
+                        <h2>5-Minute Carbon Reduction Hacks</h2>
+                        <p>Quick and effective ways to reduce your carbon footprint in just minutes a day. Perfect for busy lifestyles.</p>
+                        <div class="card-meta">
+                            <span>3 min read</span>
+                            <span>January 17, 2025</span>
+                        </div>
+                        <a href="/blog/posts/five-minute-carbon-hacks.html" class="read-more">Read Article →</a>
+                    </div>
+                </article>
+
+                <!-- Smart Home Energy Savings -->
+                <article class="blog-card glassmorphism" data-category="smart-tech">
+                    <img src="/blog/images/smart-home-energy.svg" alt="Smart home energy savings" class="card-image">
+                    <div class="card-content">
+                        <span class="card-tag">Smart Tech</span>
+                        <h2>Smart Home Solutions for Energy Savings</h2>
+                        <p>Leverage smart home technology to automatically reduce your energy consumption and track savings in real-time.</p>
+                        <div class="card-meta">
+                            <span>7 min read</span>
+                            <span>January 17, 2025</span>
+                        </div>
+                        <a href="/blog/posts/smart-home-solutions.html" class="read-more">Read Article →</a>
+                    </div>
+                </article>
+            </section>
         </main>
 
         <!-- Footer -->
@@ -218,7 +130,7 @@
 
     <!-- Scripts -->
     <script src="/shared/nav.js" defer></script>
-    <script src="/js/blog.js" defer></script>
+    <script src="/blog/js/blog.js" defer></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Load navbar and footer
@@ -264,7 +176,7 @@
             document.querySelectorAll('.animate-on-scroll').forEach((el) => observer.observe(el));
 
             // Accessibility
-            const filterSection = document.querySelector('.category-filter');
+            const filterSection = document.querySelector('.category-section');
             filterSection.setAttribute('role', 'navigation');
             filterSection.setAttribute('aria-label', 'Blog categories');
 

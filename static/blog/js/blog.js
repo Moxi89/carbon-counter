@@ -1,13 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
     const filterButtons = document.querySelectorAll('.filter-btn');
-    const articles = document.querySelectorAll('.article-card');
-    const featuredArticle = document.querySelector('.featured-article');
+    const articles = document.querySelectorAll('.blog-card');
 
     // Debug: Log all articles and their categories
     console.log('All articles:', Array.from(articles).map(article => ({
         title: article.querySelector('h3')?.textContent,
-        category: article.getAttribute('data-category'),
-        rawCategory: article.getAttribute('data-category').trim(),
+        category: article.dataset.category,
+        rawCategory: article.dataset.category.trim(),
         rawElement: article
     })));
 
@@ -15,11 +14,8 @@ document.addEventListener('DOMContentLoaded', function() {
         articles.forEach(article => {
             article.style.display = 'block';
             article.style.opacity = '1';
+            article.style.transform = 'translateY(0)';
         });
-        if (featuredArticle) {
-            featuredArticle.style.display = 'block';
-            featuredArticle.style.opacity = '1';
-        }
     }
 
     function filterArticles(category) {
@@ -29,14 +25,11 @@ document.addEventListener('DOMContentLoaded', function() {
             length: category.length
         });
         
-        const allArticles = [featuredArticle, ...articles];
-        allArticles.forEach(article => {
-            if (!article) return;
+        articles.forEach(article => {
+            const articleCategory = article.dataset.category;
+            const title = article.querySelector('h3')?.textContent;
             
-            const articleCategory = article.getAttribute('data-category');
-            const title = article.querySelector('h3')?.textContent || article.querySelector('h2')?.textContent;
-            
-            const shouldShow = category === 'All' || articleCategory === category;
+            const shouldShow = category === 'all' || articleCategory === category;
             
             console.log('Article:', {
                 title,
@@ -52,10 +45,16 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (shouldShow) {
                 article.style.display = 'block';
-                setTimeout(() => article.style.opacity = '1', 10);
+                setTimeout(() => {
+                    article.style.opacity = '1';
+                    article.style.transform = 'translateY(0)';
+                }, 50);
             } else {
                 article.style.opacity = '0';
-                setTimeout(() => article.style.display = 'none', 300);
+                article.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    article.style.display = 'none';
+                }, 300);
             }
         });
     }
@@ -63,23 +62,23 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add click handlers to filter buttons
     filterButtons.forEach(button => {
         button.addEventListener('click', () => {
-            const category = button.getAttribute('data-category');
+            // Remove active class from all buttons
+            filterButtons.forEach(btn => {
+                btn.classList.remove('active');
+                btn.setAttribute('aria-pressed', 'false');
+            });
+            // Add active class to clicked button
+            button.classList.add('active');
+            button.setAttribute('aria-pressed', 'true');
+            
+            const category = button.dataset.category;
             console.log('Filter button clicked:', {
                 category,
                 categoryTrimmed: category.trim(),
                 length: category.length
             });
             
-            // Update active button
-            filterButtons.forEach(btn => {
-                btn.classList.remove('active');
-                btn.setAttribute('aria-pressed', 'false');
-            });
-            button.classList.add('active');
-            button.setAttribute('aria-pressed', 'true');
-
-            // Filter articles
-            if (category === 'All') {
+            if (category === 'all') {
                 showAllArticles();
             } else {
                 filterArticles(category);
@@ -87,6 +86,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Show all articles initially
-    showAllArticles();
+    // Initialize with 'all' category
+    filterArticles('all');
 });
