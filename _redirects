@@ -3,6 +3,10 @@
 /blog  /static/blog/index.html  200
 /blog/  /static/blog/index.html  200
 
+# Clean URL redirects (remove .html)
+/blog/posts/*.html  /blog/posts/:splat  301
+/*.html  /:splat  301
+
 # Blog post redirects with clean URLs
 /blog/posts/smart-home-energy-savings  /static/blog/posts/smart-home-energy-savings.html  200
 /blog/posts/save-energy-at-home  /static/blog/posts/save-energy-at-home.html  200
@@ -28,7 +32,6 @@
 
 # Legacy URL handling (redirect old URLs to new clean URLs)
 /static/blog/*  /blog/:splat  301
-/blog/posts/*.html  /blog/posts/:splat  301
 /static/images/*  /images/:splat  301
 /static/css/*  /css/:splat  301
 /static/js/*  /js/:splat  301
@@ -41,8 +44,8 @@
 /blog/category/family-home  /static/blog/index.html  200
 /blog/category/smart-tech  /static/blog/index.html  200
 
-# Catch any remaining .html extensions and redirect to clean URLs
-/*/*.html  /:splat  301
+# Catch-all for clean URLs
+/*  /static/:splat  200
 
 # Custom 404 page
 /*  /404.html  404
