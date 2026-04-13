@@ -278,12 +278,12 @@ a:hover {
 }
 
 /* Button-Style Links for Guide Page */
-.usage-step,
+.usage-step[href],
 .next-step-card {
     position: relative;
 }
 
-.usage-step::after,
+.usage-step[href]::after,
 .next-step-card::after {
     content: '';
     position: absolute;
@@ -300,14 +300,14 @@ a:hover {
     opacity: 0.8;
 }
 
-.usage-step:hover::after,
+.usage-step[href]:hover::after,
 .next-step-card:hover::after {
     opacity: 1;
     transform: scale(1.1);
     box-shadow: 0 4px 15px rgba(74, 226, 144, 0.4);
 }
 
-.usage-step::after {
+.usage-step[href]::after {
     content: '>';
     color: var(--primary-bg);
     font-size: 18px;
@@ -324,7 +324,7 @@ a:hover {
 }
 
 /* Button indicator text */
-.usage-step::before,
+.usage-step[href]::before,
 .next-step-card::before {
     content: 'Click to explore';
     position: absolute;
@@ -337,10 +337,21 @@ a:hover {
     font-weight: 500;
 }
 
-.usage-step:hover::before,
+.usage-step[href]:hover::before,
 .next-step-card:hover::before {
     opacity: 1;
     color: #52b788;
+}
+
+/* Remove hover effects from non-linked usage steps */
+.usage-step:not([href]) {
+    cursor: default;
+}
+
+.usage-step:not([href]):hover {
+    transform: none;
+    box-shadow: none;
+    border-color: rgba(74, 226, 144, 0.3);
 }
 
 /* Links and Buttons */
