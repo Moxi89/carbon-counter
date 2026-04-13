@@ -23,6 +23,9 @@
 /blog/posts/beyond-2025-next-decade-climate  /static/blog/posts/beyond-2025-next-decade-climate.html  200
 /blog/posts/climate-tech-innovations-2026  /static/blog/posts/climate-tech-innovations-2026.html  200
 
+# CO2 live tracking page
+/co2-live  /static/co2-live.html  200
+
 # Static assets with proper caching
 /images/*  /static/images/:splat  200
 /css/*  /static/css/:splat  200
