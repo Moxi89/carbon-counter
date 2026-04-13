@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.86, maximum-scale=3">
+    <title>Carbon Emissions Counter Live | Real-Time Global CO₂ Tracking</title>
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Carbon Emissions Counter">
+    <meta name="google-site-verification" content="tnrk__rltpg2FY9E88LPKa8Rcm7CW7hV-OcsQtvA9-k">
+    
+    <!-- Enhanced meta description -->
+    <meta name="description" content="Track real-time global carbon emissions with our live CO₂ counter. Get accurate data on worldwide carbon footprint, country-specific emissions, and remaining carbon budget to limit global warming to 1.5°C. Updated every second with scientific data.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <meta name="keywords" content="carbon emissions tracker, CO2 counter, global warming calculator, climate change monitor, real-time emissions data, carbon budget tracker, environmental monitoring, greenhouse gas emissions, global CO2 levels, climate action tool">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://carboncounter.com/">
+    <meta property="og:title" content="Carbon Emissions Counter Live | Real-Time Global CO₂ Tracking">
+    <meta property="og:description" content="Track real-time global carbon emissions with our live CO₂ counter. Get accurate data on worldwide carbon footprint and country-specific emissions.">
+    <meta property="og:image" content="https://carboncounter.com/images/social-preview.jpg">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://carboncounter.com/">
+    <meta name="twitter:title" content="Carbon Emissions Counter Live | Real-Time Global CO₂ Tracking">
+    <meta name="twitter:description" content="Track real-time global carbon emissions with our live CO₂ counter. Get accurate data on worldwide carbon footprint and country-specific emissions.">
+    <meta name="twitter:image" content="https://carboncounter.com/images/social-preview.jpg">
+    
+    <!-- Schema.org markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Carbon Emissions Counter Live",
+      "description": "Real-time global carbon emissions tracker providing live CO₂ data and country-specific emissions information. A free public service tool for environmental awareness.",
+      "url": "https://carboncounter.com",
+      "applicationCategory": "EnvironmentalApplication",
+      "operatingSystem": "All",
+      "isAccessibleForFree": true,
+      "creator": {
+        "@type": "Organization",
+        "name": "Carbon Emissions Counter",
+        "url": "https://carboncounter.com"
+      }
+    }
+    </script>
+    
+    <!-- WebApplication Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Carbon Emissions Counter Live",
+      "description": "Track real-time global carbon emissions with our live CO₂ counter. Get accurate data on worldwide carbon footprint, country-specific emissions, and remaining carbon budget.",
+      "applicationCategory": "EnvironmentalApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "availability": "http://schema.org/InStock"
+      },
+      "about": {
+        "@type": "Thing",
+        "name": "Carbon Emissions",
+        "description": "Real-time tracking and visualization of global CO₂ emissions to raise awareness about climate change"
+      },
+      "mainEntity": {
+        "@type": "Dataset",
+        "name": "Global Carbon Emissions Data",
+        "description": "Real-time calculations and estimates of global carbon dioxide emissions",
+        "measurementTechnique": "Statistical estimation and real-time calculation",
+        "license": "All Rights Reserved",
+        "temporalCoverage": "2024/2025",
+        "creator": {
+          "@type": "Organization",
+          "name": "Carbon Emissions Counter"
+        }
+      },
+      "browserRequirements": "Requires JavaScript. Works on all modern browsers.",
+      "softwareVersion": "1.0",
+      "url": "https://carboncounter.com/"
+    }
+    </script>
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://carboncounter.com/">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/images/favicon.png">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="shared/nav-styles.css">
+    <link rel="stylesheet" href="shared/footer-styles.css">
+    <link rel="stylesheet" href="shared/cookie-banner.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="scroll-progress"></div>
+    <button class="scroll-up" aria-label="Scroll to top">↑</button>
+    <div class="background-particles" aria-hidden="true">
+        <div class="particle" style="left: 10%; width: 2px; height: 2px;"></div>
+        <div class="particle" style="left: 20%; width: 3px; height: 3px; animation-delay: 2s;"></div>
+        <div class="particle" style="left: 35%; width: 2px; height: 2px; animation-delay: 4s;"></div>
+        <div class="particle" style="left: 50%; width: 4px; height: 4px; animation-delay: 6s;"></div>
+        <div class="particle" style="left: 65%; width: 2px; height: 2px; animation-delay: 3s;"></div>
+        <div class="particle" style="left: 80%; width: 3px; height: 3px; animation-delay: 5s;"></div>
+        <div class="particle" style="left: 90%; width: 2px; height: 2px; animation-delay: 1s;"></div>
+    </div>
+    <div class="container">
+        <div id="navbar-placeholder"></div>
+
+        <main role="main">
+            <div class="counter-container" id="counter-section" data-aos="fade-up" data-aos-duration="600">
+                <div class="hero-section" data-aos="fade-right" data-aos-duration="600">
+                    <h1>CARBON EMISSIONS COUNTER LIVE</h1>
+                    <div class="hero-description">
+                        <p>Track real-time <span class="highlight">carbon emissions</span> and their impact on our planet. Our interactive dashboard provides vital insights into <span class="highlight">global</span>, <span class="highlight">national</span>, and <span class="highlight">yearly CO₂ levels</span> — empowering you to understand and act on climate change.</p>
+                        <p class="disclaimer">Note: Data is based on verified calculations from trusted environmental sources</p>
+                    </div>
+                </div>
+                
+                <div class="counters-grid">
+                    <div class="counter-card" id="global-emissions-card">
+                        <h3>
+                            GLOBAL EMISSIONS COUNTER
+                            <button class="info-button" 
+                                    type="button" 
+                                    aria-label="Show information about global emissions counter"
+                                    data-tooltip-id="global-emissions">ⓘ</button>
+                            <div class="info-tooltip" 
+                                 role="tooltip" 
+                                 id="global-emissions-tooltip" 
+                                 data-category="global-metrics">
+                                <p class="tooltip-main">Real-time tracking of global CO₂ emissions from all sources since page load. Based on total annual emissions of 42.2 billion metric tons (Global Carbon Budget 2025).</p>
+                                <div class="tooltip-breakdown">
+                                    <span class="breakdown-label">2025 Breakdown:</span>
+                                    <ul class="breakdown-list">
+                                        <li>Fossil CO₂: 38.1 billion tons (+1.1% growth)</li>
+                                        <li>Land-use change: 4.1 billion tons (declining)</li>
+                                    </ul>
+                                </div>
+                                <div class="tooltip-facts">
+                                    <span class="fact-label">Key Finding:</span> 
+                                    Fossil emissions hit record high in 2025. The 1.5°C carbon budget is "virtually exhausted" with only 170 Gt CO₂ remaining.
+                                </div>
+                                <a href="#faq-section" class="tooltip-link">Learn more about emission sources →</a>
+                            </div>
+                        </h3>
+                        <div id="globalEmissions" class="counter">0</div>
+                        <p>Metric tons of CO₂ since page load</p>
+                        <div id="pageTimer" class="page-timer">0 seconds since you opened the page</div>
+                        <div class="facts-carousel-container">
+                            <button class="carousel-button prev" aria-label="Previous fact">‹</button>
+                            <div class="facts-carousel">
+                                <div class="fact-item">One metric ton of CO₂ equals driving a car for 2,500 miles (4,000 km) - about the distance from Los Angeles to New York</div>
+                                <div class="fact-item">One metric ton of CO₂ is produced by charging 120,000 smartphones, or one person's smartphone use for over 300 years</div>
+                                <div class="fact-item">One metric ton of CO₂ equals the annual carbon absorption of 50 mature trees in a forest</div>
+                                <div class="fact-item">One metric ton of CO₂ is produced by a single passenger on a round-trip flight from London to New York</div>
+                                <div class="fact-item">One metric ton of CO₂ is generated by the average household's electricity use for about 2.5 months</div>
+                            </div>
+                            <button class="carousel-button next" aria-label="Next fact">›</button>
+                            <div class="carousel-dots"></div>
+                        </div>
+                    </div>
+
+                    <div class="counter-card">
+                        <h3>
+                            COUNTRY EMISSIONS COUNTER
+                            <button class="info-button" 
+                                    type="button" 
+                                    aria-label="Show information about country emissions"
+                                    data-tooltip-id="country-emissions">ⓘ</button>
+                            <div class="info-tooltip" 
+                                 role="tooltip" 
+                                 id="country-emissions-tooltip" 
+                                 data-category="country-metrics">
+                                <p class="tooltip-main">CO₂ emissions for selected country, updated in real-time based on their share of global emissions (Global Carbon Budget 2025).</p>
+                                <div class="tooltip-breakdown">
+                                    <span class="breakdown-label">Top Emitters 2025:</span>
+                                    <ul class="breakdown-list">
+                                        <li>China: 33.0% (13.9 Gt CO₂)</li>
+                                        <li>USA: 13.0% (5.5 Gt CO₂)</li>
+                                        <li>India: 7.2% (3.0 Gt CO₂)</li>
+                                        <li>Russia: 4.7% (2.0 Gt CO₂)</li>
+                                    </ul>
+                                </div>
+                                <div class="tooltip-facts">
+                                    <span class="fact-label">Regional Impact:</span>
+                                    These top 4 countries account for 57.9% of global emissions. China shows slight growth slowdown.
+                                </div>
+                            </div>
+                        </h3>
+                        <select id="countrySelect" class="country-select">
+                            <option value="china">China</option>
+                            <option value="us">United States</option>
+                            <option value="india">India</option>
+                            <option value="russia">Russia</option>
+                            <option value="japan">Japan</option>
+                            <option value="germany">Germany</option>
+                            <option value="iran">Iran</option>
+                            <option value="skorea">South Korea</option>
+                            <option value="saudi">Saudi Arabia</option>
+                            <option value="canada">Canada</option>
+                        </select>
+                        <div id="countryEmissions" class="counter">0</div>
+                        <p>Metric tons of CO₂ since page load</p>
+                        <div id="countryTimer" class="page-timer">0 seconds since you opened the page</div>
+                        <span id="countryPercentage" class="percentage-text"></span>
+                    </div>
+
+                    <div class="counter-card">
+                        <h3>
+                            YEARLY EMISSIONS COUNTER
+                            <button class="info-button" 
+                                    type="button" 
+                                    aria-label="Show information about yearly emissions"
+                                    data-tooltip-id="yearly-emissions">ⓘ</button>
+                            <div class="info-tooltip" 
+                                 role="tooltip" 
+                                 id="yearly-emissions-tooltip" 
+                                 data-category="yearly-metrics">
+                                <p class="tooltip-main">Total global CO₂ emissions since January 1st, 2025. Includes both fossil fuel and land-use change emissions.</p>
+                                <div class="tooltip-breakdown">
+                                    <span class="breakdown-label">Annual Growth:</span>
+                                    <ul class="breakdown-list">
+                                        <li>2025: 42.2 Gt CO₂ (+1.1% fossil growth)</li>
+                                        <li>2024: 41.6 Gt CO₂ (2% increase)</li>
+                                        <li>2023: 40.6 Gt CO₂</li>
+                                    </ul>
+                                </div>
+                                <div class="tooltip-facts">
+                                    <span class="fact-label">Trend:</span>
+                                    Fossil emissions hit record 38.1 Gt in 2025. Land-use emissions declining slightly.
+                                </div>
+                            </div>
+                        </h3>
+                        <div id="yearlyEmissions" class="counter">0</div>
+                        <p>Metric tons of CO₂ since January 1st, 2025</p>
+                        <div class="facts-carousel-container">
+                            <button class="carousel-button prev" aria-label="Previous fact">‹</button>
+                            <div class="facts-carousel">
+                                <div class="fact-item">Every 1 billion tons of CO₂ equals the annual carbon absorption of 50 billion mature trees - more than all trees in the Amazon rainforest.</div>
+                                <div class="fact-item">At the current rate of emissions, we release as much CO₂ in 1 hour as the Earth naturally absorbed in 100 years before industrialization.</div>
+                                <div class="fact-item">To absorb these emissions naturally, we would need to plant new forests covering an area the size of the United States every year.</div>
+                                <div class="fact-item">Each second of emissions would fill 12 Olympic-sized swimming pools with CO₂ at normal atmospheric pressure.</div>
+                                <div class="fact-item">The amount of CO₂ we emit annually would form a layer 4 meters thick covering the entire Earth's surface.</div>
+                            </div>
+                            <button class="carousel-button next" aria-label="Next fact">›</button>
+                            <div class="carousel-dots"></div>
+                        </div>
+                    </div>
+
+                    <div class="counter-card">
+                        <h3>
+                            REMAINING CARBON BUDGET
+                            <button class="info-button" 
+                                    type="button" 
+                                    aria-label="Show information about carbon budget"
+                                    data-tooltip-id="carbon-budget">ⓘ</button>
+                            <div class="info-tooltip" 
+                                 role="tooltip" 
+                                 id="carbon-budget-tooltip" 
+                                 data-category="budget-metrics">
+                                <p class="tooltip-main">Estimated remaining CO₂ emissions allowance to limit global warming to 1.5°C above pre-industrial levels (Global Carbon Budget 2025).</p>
+                                <div class="tooltip-breakdown">
+                                    <span class="breakdown-label">Critical Status:</span>
+                                    <ul class="breakdown-list">
+                                        <li>170 Gt CO₂ remaining (virtually exhausted)</li>
+                                        <li>Budget depleted before 2030</li>
+                                        <li>1.5°C target no longer plausible</li>
+                                    </ul>
+                                </div>
+                                <div class="tooltip-facts">
+                                    <span class="fact-label">Critical Timeline:</span>
+                                    At current emission rates (42.2 Gt/year), the remaining budget will be exhausted in ~4 years (2029).
+                                </div>
+                            </div>
+                        </h3>
+                        <div id="carbonBudget" class="counter">170</div>
+                        <p>Gigatons of CO₂ remaining</p>
+                        <div class="budget-context">42.2 Gt CO₂ used per year</div>
+                        <div class="budget-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 20%"></div>
+                            </div>
+                        </div>
+                        <div class="facts-carousel-container">
+                            <button class="carousel-button prev" aria-label="Previous fact">‹</button>
+                            <div class="facts-carousel">
+                                <div class="fact-item">At current rate of 42.2 Gt per year, our carbon budget will be exhausted by 2029</div>
+                                <div class="fact-item">For 83% certainty of staying below 1.5°C, we only have 100 Gt CO₂ left</div>
+                                <div class="fact-item">CO₂ levels are now at 427.1 ppm, 55% above pre-industrial levels</div>
+                                <div class="fact-item">We're using about 3.5 Gt of our carbon budget every month</div>
+                                <div class="fact-item">Once the budget is exhausted, every additional Gt of CO₂ increases the risk of exceeding 1.5°C</div>
+                            </div>
+                            <button class="carousel-button next" aria-label="Next fact">›</button>
+                            <div class="carousel-dots"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <section class="blog-preview">
+                <h2>Latest Insights</h2>
+                <div class="blog-grid">
+                    <a href="/blog/posts/family-eco-activities.html" class="blog-card">
+                        <img src="/blog/images/family-eco-activities.svg" alt="Family eco activities">
+                        <div class="card-content">
+                            <h3>Family Eco Activities</h3>
+                            <p>Fun activities for sustainable family living</p>
+                        </div>
+                    </a>
+                    <a href="/blog/posts/five-minute-carbon-hacks.html" class="blog-card">
+                        <img src="/blog/images/quick-wins.svg" alt="Quick carbon reduction hacks">
+                        <div class="card-content">
+                            <h3>5-Minute Carbon Reduction Hacks</h3>
+                            <p>Quick and easy ways to reduce your carbon footprint</p>
+                        </div>
+                    </a>
+                    <a href="/blog/posts/track-home-energy.html" class="blog-card">
+                        <img src="/blog/images/track-energy.svg" alt="Track your home energy">
+                        <div class="card-content">
+                            <h3>Track Your Home Energy</h3>
+                            <p>Monitor and optimize your consumption</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="view-all-wrapper">
+                    <a href="/blog" class="view-all-button">View All Articles</a>
+                </div>
+            </section>
+
+            <style>
+                .blog-preview {
+                    padding: 4rem 2rem;
+                    background: var(--surface-dark);
+                }
+                
+                .blog-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                    gap: 2rem;
+                    margin: 2rem 0;
+                }
+                
+                .blog-card {
+                    display: flex;
+                    flex-direction: column;
+                    background: rgba(255, 255, 255, 0.05);
+                    border-radius: 12px;
+                    overflow: hidden;
+                    transition: transform 0.3s ease, box-shadow 0.3s ease;
+                    text-decoration: none;
+                    color: var(--text-primary);
+                }
+                
+                .blog-card:hover {
+                    transform: translateY(-4px);
+                    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+                }
+                
+                .blog-card img {
+                    width: 100%;
+                    height: 200px;
+                    object-fit: cover;
+                }
+                
+                .card-content {
+                    padding: 1.5rem;
+                }
+                
+                .blog-card h3 {
+                    margin: 0 0 0.5rem 0;
+                    font-size: 1.25rem;
+                    color: var(--text-primary);
+                }
+                
+                .blog-card p {
+                    margin: 0;
+                    color: var(--text-secondary);
+                    font-size: 0.95rem;
+                }
+                
+                .view-all-wrapper {
+                    text-align: center;
+                    margin-top: 2rem;
+                }
+                
+                .view-all-button {
+                    display: inline-block;
+                    padding: 0.75rem 2rem;
+                    background: var(--accent);
+                    color: var(--text-primary);
+                    text-decoration: none;
+                    border-radius: 6px;
+                    transition: background 0.3s ease;
+                }
+                
+                .view-all-button:hover {
+                    background: var(--accent-hover);
+                }
+            </style>
+
+            <section class="faq-section" id="faq-section">
+                <h2 data-aos="fade-down">Global CO₂ Emissions: Frequently Asked Questions</h2>
+                <div class="faq-container">
+                    <div class="faq-item" data-aos="fade-up" data-aos-delay="50">
+                        <button class="faq-question" type="button">
+                            What are carbon emissions?
+                        </button>
+                        <div class="faq-answer">
+                            Carbon emissions refer to the release of carbon dioxide (CO₂) into the atmosphere, primarily through human activities such as burning fossil fuels, deforestation, and industrial processes.
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-aos="fade-up" data-aos-delay="75">
+                        <button class="faq-question" type="button">
+                            Why are carbon emissions a problem?
+                        </button>
+                        <div class="faq-answer">
+                            Carbon emissions are a major contributor to global warming and climate change. They enhance the greenhouse effect, trapping heat in the Earth's atmosphere and leading to rising global temperatures.
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-aos="fade-up" data-aos-delay="100">
+                        <button class="faq-question" type="button">
+                            What are the main sources of carbon emissions?
+                        </button>
+                        <div class="faq-answer">
+                            The primary sources of greenhouse gas emissions globally are:
+                            <ul>
+                                <li>Electricity and heat production (31%)</li>
+                                <li>Agriculture (11%)</li>
+                                <li>Transportation (15%)</li>
+                                <li>Forestry (6%)</li>
+                                <li>Manufacturing (12%)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-aos="fade-up" data-aos-delay="125">
+                        <button class="faq-question" type="button">
+                            How much do human activities contribute to carbon emissions?
+                        </button>
+                        <div class="faq-answer">
+                            Human activities are responsible for a significant portion of carbon emissions. Currently, humans release an estimated 9.5 billion metric tons of carbon into the atmosphere each year through burning fossil fuels, and another 1.5 billion through deforestation and other land cover changes.
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-aos="fade-up" data-aos-delay="150">
+                        <button class="faq-question" type="button">
+                            What is the current level of CO₂ in the atmosphere?
+                        </button>
+                        <div class="faq-answer">
+                            As of 2019, the amount of carbon dioxide in the atmosphere has increased from about 280 parts per million (ppm) in 1800 to 410 ppm.
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-aos="fade-up" data-aos-delay="175">
+                        <button class="faq-question" type="button">
+                            How do greenhouse gases cause global warming?
+                        </button>
+                        <div class="faq-answer">
+                            Greenhouse gases, including CO₂, absorb heat energy radiated from Earth's surface and re-radiate some of it back, trapping heat in the atmosphere and causing the planet's surface temperature to rise.
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
+                        <button class="faq-question" type="button">
+                            What are the main greenhouse gases?
+                        </button>
+                        <div class="faq-answer">
+                            The main greenhouse gases are carbon dioxide (CO₂), methane (CH₄), nitrous oxide (N₂O), and fluorinated gases.
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-aos="fade-up" data-aos-delay="225">
+                        <button class="faq-question" type="button">
+                            What is the Global Warming Potential (GWP)?
+                        </button>
+                        <div class="faq-answer">
+                            GWP is a measure used to compare the warming effect of different greenhouse gases relative to CO₂ over a specific time period, typically 100 years.
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-aos="fade-up" data-aos-delay="250">
+                        <button class="faq-question" type="button">
+                            What are CO₂ equivalents (CO₂e)?
+                        </button>
+                        <div class="faq-answer">
+                            CO₂ equivalents (CO₂e) are a standardized unit that expresses the global warming potential of different greenhouse gases in terms of the amount of CO₂ that would have the same impact.
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-aos="fade-up" data-aos-delay="275">
+                        <button class="faq-question" type="button">
+                            How long do greenhouse gases stay in the atmosphere?
+                        </button>
+                        <div class="faq-answer">
+                            The atmospheric lifetime of greenhouse gases varies:
+                            <ul>
+                                <li>Methane (CH₄): approximately 12 years</li>
+                                <li>Nitrous oxide (N₂O): over 120 years</li>
+                                <li>Carbon dioxide (CO₂): variable, but can persist for centuries</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
+                        <button class="faq-question" type="button">
+                            What was the level of global CO₂ emissions in 2022?
+                        </button>
+                        <div class="faq-answer">
+                            In 2022, global energy-related CO₂ emissions grew by 0.9% to reach a new high of over 36.8 Gt (gigatonnes).
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-aos="fade-up" data-aos-delay="325">
+                        <button class="faq-question" type="button">
+                            How has the COVID-19 pandemic affected CO₂ emissions?
+                        </button>
+                        <div class="faq-answer">
+                            The pandemic caused significant fluctuations in emissions:
+                            <ul>
+                                <li>2020: Emissions shrank by more than 5% due to reduced energy demand</li>
+                                <li>2021: Emissions rebounded past pre-pandemic levels, growing more than 6%</li>
+                                <li>2022: Growth slowed to 0.9%</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-aos="fade-up" data-aos-delay="350">
+                        <button class="faq-question" type="button">
+                            What role do clean energy technologies play in reducing emissions?
+                        </button>
+                        <div class="faq-answer">
+                            In 2022, increased deployment of clean energy technologies such as renewables, electric vehicles, and heat pumps helped prevent an additional 550 Mt in CO₂ emissions.
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-aos="fade-up" data-aos-delay="375">
+                        <button class="faq-question" type="button">
+                            How has the energy crisis affected emissions from different fuel sources?
+                        </button>
+                        <div class="faq-answer">
+                            In 2022:
+                            <ul>
+                                <li>Emissions from natural gas fell by 1.6% (118 Mt)</li>
+                                <li>Emissions from coal grew by 1.6% (243 Mt)</li>
+                                <li>Emissions from oil increased by 2.5% (268 Mt)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-aos="fade-up" data-aos-delay="400">
+                        <button class="faq-question" type="button">
+                            What is the impact of electric vehicles on emissions?
+                        </button>
+                        <div class="faq-answer">
+                            Electric vehicles are gaining momentum. In 2022, over 10 million electric cars were sold, exceeding 14% of global car sales, which helps reduce emissions from the transportation sector.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="about-section" id="about-section" data-aos="fade-up">
+                <h2>About Carbon Emissions Counter</h2>
+                <div class="about-content">
+                    <p>Welcome to the Carbon Emissions Counter, an interactive platform dedicated to tracking and visualizing global CO₂ emissions in real-time. Our mission is to provide transparent insights into worldwide carbon emissions through data-driven visualization, helping individuals and organizations understand their environmental impact.</p>
+                    
+                    <div class="about-features">
+                        <div class="feature">
+                            <h3>Data-Driven Insights</h3>
+                            <p>Using calculations based on reliable international sources including the Global Carbon Project, IPCC, and IEA, we provide accurate and up-to-date emissions data.</p>
+                        </div>
+                        <div class="feature">
+                            <h3>Real-Time Tracking</h3>
+                            <p>Monitor global, country-specific, and yearly carbon emissions as they accumulate, with our interactive counters providing immediate visibility into emission trends.</p>
+                        </div>
+                        <div class="feature">
+                            <h3>Environmental Impact</h3>
+                            <p>Understand the scale of global emissions and their impact on our remaining carbon budget, helping to drive awareness and action for climate change mitigation.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <div id="footer-placeholder"></div>
+        <script>
+            // Load footer
+            fetch('/shared/footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer-placeholder').innerHTML = data;
+                });
+        </script>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="/shared/nav.js" defer></script>
+    <script src="/shared/footer.js" defer></script>
+    <script src="/shared/cookie-banner.js" defer></script>
+    <script>
+        AOS.init({
+            duration: 400, // Faster animation duration
+            offset: 100,   // Start animation sooner
+            once: true,    // Only animate once
+            easing: 'ease-out-cubic' // Smoother easing
+        });
+    </script>
+    <script src="./js/script.js"></script>
+    
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Carbon Emissions Counter Live",
+      "description": "Track real-time global carbon emissions with our live CO₂ counter. Get accurate data on worldwide carbon footprint, country-specific emissions, and remaining carbon budget.",
+      "applicationCategory": "EnvironmentalApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "about": {
+        "@type": "Thing",
+        "name": "Carbon Emissions",
+        "description": "Real-time tracking and visualization of global CO₂ emissions to raise awareness about climate change"
+      },
+      "mainEntity": {
+        "@type": "Dataset",
+        "name": "Global Carbon Emissions Data",
+        "description": "Real-time calculations and estimates of global carbon dioxide emissions",
+        "measurementTechnique": "Statistical estimation and real-time calculation"
+      }
+    }
+    </script>     
+</body>
+</html>

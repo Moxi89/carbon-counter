@@ -1,0 +1,51 @@
+/* Global CSS Variables */
+:root {
+    /* Colors */
+    --primary-bg: #0B1321;
+    --secondary-bg: #1A2332;
+    --accent-color: #4AE290;
+    --text-color: #ffffff;
+    --card-bg: rgba(26, 35, 50, 0.7);
+    
+    /* Typography */
+    --font-family-base: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --font-size-base: 16px;
+    --line-height-base: 1.6;
+    
+    /* Spacing */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    
+    /* Border Radius */
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+    --border-radius-lg: 12px;
+    
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-base: 0.3s ease;
+    --transition-slow: 0.5s ease;
+    
+    /* Shadows */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.2);
+    --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.3);
+    
+    /* Z-index layers */
+    --z-index-base: 1;
+    --z-index-dropdown: 10;
+    --z-index-sticky: 100;
+    --z-index-fixed: 200;
+    --z-index-modal: 300;
+    --z-index-popover: 400;
+    --z-index-tooltip: 500;
+    
+    /* Glassmorphism */
+    --glass-bg: rgba(26, 35, 50, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-blur: 12px;
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+}

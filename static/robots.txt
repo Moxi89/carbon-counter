@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.carbonemissionscounter.com/sitemap.xml
+
+# Allow all bots to access CSS, JS, and images
+Allow: /static/css/
+Allow: /static/js/
+Allow: /static/images/
+
+# Prevent caching of real-time data
+Disallow: /api/

@@ -1,0 +1,159 @@
+/* Navbar-specific variables */
+:root {
+    --nav-text: #ffffff;
+    --nav-accent: #4AE290;
+    --nav-bg: rgba(26, 35, 50, 0.8);
+    --nav-border: rgba(74, 226, 144, 0.1);
+}
+
+/* Navbar Container */
+.nav-container {
+    background: var(--nav-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--nav-border);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.nav-container > div {
+    width: 100%;
+    max-width: 1440px;
+    padding: 1rem 2rem;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+}
+
+/* Logo Styles */
+.nav-logo {
+    grid-column: 1;
+}
+
+.home-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--nav-text);
+}
+
+.leaf-icon {
+    font-size: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.home-link:hover .leaf-icon {
+    transform: scale(1.1) rotate(-5deg);
+}
+
+/* Navigation Items */
+.nav-items {
+    grid-column: 2;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-link {
+    position: relative;
+    color: var(--nav-text);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.5rem 0;
+    transition: color 0.3s ease;
+    white-space: nowrap;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--nav-accent);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.nav-link:hover {
+    color: var(--nav-accent);
+}
+
+.nav-link.active {
+    color: var(--nav-accent);
+}
+
+/* Accessibility */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Focus Styles */
+.nav-link:focus-visible {
+    outline: 2px solid var(--nav-accent);
+    outline-offset: 4px;
+}
+
+/* Mobile Menu Toggle - Hidden */
+.mobile-menu-toggle {
+    display: none;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .nav-container > div {
+        padding: 0.75rem 1rem;
+    }
+
+    .nav-items {
+        gap: 1rem;
+    }
+
+    .nav-link {
+        font-size: 0.8rem;
+    }
+
+    .leaf-icon {
+        font-size: 1.2rem;
+    }
+}
+
+/* Scroll Behavior */
+.nav-container.hidden {
+    transform: translateY(-100%);
+}
+
+.nav-container.scrolled {
+    background: rgba(11, 19, 33, 0.95);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Add padding to body to prevent content from going under fixed navbar */
+body {
+    padding-top: 64px; /* Adjust this value to match your navbar height */
+}

@@ -1,0 +1,48 @@
+RewriteEngine On
+
+# Remove .html extension
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^(.*)$ $1.html [NC,L]
+
+# Handle /blog route
+RewriteRule ^blog$ /static/blog/index.html [NC,L]
+RewriteRule ^blog/$ /static/blog/index.html [NC,L]
+
+# Handle blog posts
+RewriteRule ^blog/posts/([^/]+)$ /static/blog/posts/$1.html [NC,L]
+
+# Handle static assets
+RewriteRule ^images/(.*)$ /static/blog/images/$1 [NC,L]
+RewriteRule ^css/(.*)$ /static/css/$1 [NC,L]
+RewriteRule ^js/(.*)$ /static/js/$1 [NC,L]
+RewriteRule ^shared/(.*)$ /static/shared/$1 [NC,L]
+
+# Handle other pages
+RewriteRule ^privacy$ /static/privacy/index.html [NC,L]
+RewriteRule ^terms$ /static/terms/index.html [NC,L]
+
+# Prevent directory listings
+Options -Indexes
+
+# Enable CORS for static assets
+<FilesMatch "\.(svg|jpg|jpeg|png|gif|css|js)$">
+    Header set Access-Control-Allow-Origin "*"
+</FilesMatch>
+
+# Browser caching for static assets
+<FilesMatch "\.(svg|jpg|jpeg|png|gif|js|css)$">
+    Header set Cache-Control "max-age=31536000, public"
+</FilesMatch>
+
+# Compression for text files
+<FilesMatch "\.(html|css|js|svg)$">
+    SetOutputFilter DEFLATE
+</FilesMatch>
+
+# Security headers
+Header always set X-Frame-Options "SAMEORIGIN"
+Header always set X-XSS-Protection "1; mode=block"
+Header always set X-Content-Type-Options "nosniff"
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"

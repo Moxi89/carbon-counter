@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="400" viewBox="0 0 800 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background with subtle gradient -->
+    <rect width="800" height="400" fill="url(#paint0_linear)"/>
+    
+    <!-- House Outline -->
+    <path d="M300 150L400 80L500 150L500 300L300 300L300 150Z" fill="#1A2332" stroke="#4AE290" stroke-width="4"/>
+    
+    <!-- Solar Panel -->
+    <rect x="320" y="120" width="60" height="40" fill="#1A2332" stroke="#4AE290" stroke-width="2"/>
+    <line x1="340" y1="120" x2="340" y2="160" stroke="#4AE290" stroke-width="1"/>
+    <line x1="360" y1="120" x2="360" y2="160" stroke="#4AE290" stroke-width="1"/>
+    
+    <!-- Window with Energy Rating -->
+    <rect x="420" y="180" width="40" height="60" fill="#0B1321" stroke="#4AE290" stroke-width="2"/>
+    <path d="M430 200L450 200M430 210L450 210" stroke="#4AE290" stroke-width="2"/>
+    
+    <!-- Door -->
+    <rect x="340" y="230" width="40" height="70" fill="#0B1321" stroke="#4AE290" stroke-width="2"/>
+    
+    <!-- Energy Efficiency Arrows -->
+    <path d="M580 150L600 130L620 150" stroke="#4AE290" stroke-width="3"/>
+    <path d="M580 170L600 150L620 170" stroke="#4AE290" stroke-width="3"/>
+    
+    <!-- Leaf Elements -->
+    <path d="M200 200C230 170 230 230 200 200Z" fill="#4AE290"/>
+    <path d="M650 250C680 220 680 280 650 250Z" fill="#4AE290"/>
+    
+    <!-- Energy Stars -->
+    <path d="M180 150L190 170L200 150L190 130L180 150Z" fill="#4AE290"/>
+    <path d="M600 300L610 320L620 300L610 280L600 300Z" fill="#4AE290"/>
+    
+    <!-- Gradient Definition -->
+    <defs>
+        <linearGradient id="paint0_linear" x1="0" y1="0" x2="800" y2="400" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#0B1321"/>
+            <stop offset="1" stop-color="#1A2332"/>
+        </linearGradient>
+    </defs>
+</svg>

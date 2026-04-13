@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="400" viewBox="0 0 800 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Definitions -->
+    <defs>
+        <linearGradient id="bg-gradient" x1="0" y1="0" x2="800" y2="400">
+            <stop offset="0%" style="stop-color:#1A2332"/>
+            <stop offset="100%" style="stop-color:#0B1321"/>
+        </linearGradient>
+        <!-- Glow effect -->
+        <filter id="glow">
+            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+            <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+
+    <!-- Background -->
+    <rect width="800" height="400" fill="url(#bg-gradient)"/>
+
+    <!-- Clock with recycling arrows -->
+    <g transform="translate(400, 200)" filter="url(#glow)">
+        <!-- Clock face -->
+        <circle cx="0" cy="0" r="80" stroke="#4AE290" stroke-width="3" fill="none"/>
+        
+        <!-- Clock hands -->
+        <line x1="0" y1="0" x2="0" y2="-60" stroke="#4AE290" stroke-width="4" transform="rotate(300)"/>
+        <line x1="0" y1="0" x2="40" y2="0" stroke="#4AE290" stroke-width="4" transform="rotate(60)"/>
+        
+        <!-- Center dot -->
+        <circle cx="0" cy="0" r="4" fill="#4AE290"/>
+        
+        <!-- Time markers -->
+        <line x1="0" y1="-75" x2="0" y2="-65" stroke="#4AE290" stroke-width="2" />
+        <line x1="0" y1="-75" x2="0" y2="-65" stroke="#4AE290" stroke-width="2" transform="rotate(90)" />
+        <line x1="0" y1="-75" x2="0" y2="-65" stroke="#4AE290" stroke-width="2" transform="rotate(180)" />
+        <line x1="0" y1="-75" x2="0" y2="-65" stroke="#4AE290" stroke-width="2" transform="rotate(270)" />
+        
+        <!-- Quick win text -->
+        <text x="0" y="-95" fill="#4AE290" text-anchor="middle" font-size="14">5 MIN</text>
+    </g>
+
+    <!-- Quick win icons -->
+    <g filter="url(#glow)">
+        <!-- Power strip icon -->
+        <g transform="translate(200, 200)">
+            <rect x="-30" y="-15" width="60" height="30" rx="5" stroke="#4AE290" stroke-width="2" fill="none"/>
+            <circle cx="-15" cy="0" r="5" fill="#4AE290" opacity="0.7"/>
+            <circle cx="15" cy="0" r="5" fill="#4AE290" opacity="0.7"/>
+        </g>
+
+        <!-- Water drop icon -->
+        <g transform="translate(600, 200)">
+            <path d="M0,-30 C20,-30 30,-10 30,10 C30,30 15,40 0,40 C-15,40 -30,30 -30,10 C-30,-10 -20,-30 0,-30" 
+                  stroke="#4AE290" stroke-width="2" fill="none"/>
+            <path d="M0,-20 C10,-20 15,0 15,10 C15,20 7.5,25 0,25 C-7.5,25 -15,20 -15,10 C-15,0 -10,-20 0,-20" 
+                  fill="#4AE290" opacity="0.3"/>
+        </g>
+    </g>
+
+    <!-- Decorative elements -->
+    <g filter="url(#glow)">
+        <!-- Lightning bolts -->
+        <path d="M100,150 L120,130 L110,170 L130,150" stroke="#4AE290" stroke-width="2" fill="none"/>
+        <path d="M700,250 L720,230 L710,270 L730,250" stroke="#4AE290" stroke-width="2" fill="none"/>
+        
+        <!-- Sparkles -->
+        <path d="M150,300 L170,320 L150,340 L130,320 Z" fill="#4AE290" opacity="0.5"/>
+        <path d="M650,100 L670,120 L650,140 L630,120 Z" fill="#4AE290" opacity="0.5"/>
+        
+        <!-- Small dots -->
+        <circle cx="200" cy="100" r="3" fill="#4AE290" opacity="0.7"/>
+        <circle cx="600" cy="300" r="3" fill="#4AE290" opacity="0.7"/>
+    </g>
+</svg>
