@@ -277,6 +277,72 @@ a:hover {
     transform: translateY(-1px);
 }
 
+/* Button-Style Links for Guide Page */
+.usage-step,
+.next-step-card {
+    position: relative;
+}
+
+.usage-step::after,
+.next-step-card::after {
+    content: '';
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--accent-color), #52b788);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    opacity: 0.8;
+}
+
+.usage-step:hover::after,
+.next-step-card:hover::after {
+    opacity: 1;
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(74, 226, 144, 0.4);
+}
+
+.usage-step::after {
+    content: '>';
+    color: var(--primary-bg);
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.next-step-card::after {
+    content: '>';
+    color: var(--primary-bg);
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1;
+}
+
+/* Button indicator text */
+.usage-step::before,
+.next-step-card::before {
+    content: 'Click to explore';
+    position: absolute;
+    bottom: 65px;
+    right: 20px;
+    font-size: 0.85rem;
+    color: var(--accent-color);
+    opacity: 0.7;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.usage-step:hover::before,
+.next-step-card:hover::before {
+    opacity: 1;
+    color: #52b788;
+}
+
 /* Links and Buttons */
 .step-link,
 .next-step-link {
