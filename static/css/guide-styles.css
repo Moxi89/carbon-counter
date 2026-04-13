@@ -1,0 +1,442 @@
+/* Professional Styles for Carbon Tracking Guide */
+
+/* Step Cards Container */
+.step-cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.step-card {
+    background: linear-gradient(135deg, rgba(26, 35, 50, 0.9), rgba(11, 19, 33, 0.9));
+    border: 1px solid rgba(74, 226, 144, 0.2);
+    border-radius: 16px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.step-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent-color), #52b788);
+}
+
+.step-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(74, 226, 144, 0.15);
+    border-color: rgba(74, 226, 144, 0.4);
+}
+
+.step-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.step-number-large {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+    display: block;
+    line-height: 1;
+}
+
+.step-content h3 {
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.action-items, .implementation-tips, .action-strategies {
+    background: rgba(11, 19, 33, 0.6);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.action-items h4, .implementation-tips h4, .action-strategies h4 {
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.action-items ul, .implementation-tips ul, .action-strategies ul {
+    list-style: none;
+    padding: 0;
+}
+
+.action-items li, .implementation-tips li, .action-strategies li {
+    padding: 0.5rem 0;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.action-items li::before, .implementation-tips li::before, .action-strategies li::before {
+    content: '>';
+    position: absolute;
+    left: 0;
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+.accuracy-note {
+    background: linear-gradient(135deg, rgba(74, 226, 144, 0.1), rgba(82, 183, 136, 0.05));
+    border: 1px solid rgba(74, 226, 144, 0.3);
+    border-radius: 12px;
+    padding: 1rem;
+    margin: 1.5rem 0;
+    font-size: 0.9rem;
+}
+
+.step-cta {
+    background: linear-gradient(135deg, var(--accent-color), #52b788);
+    color: var(--primary-bg);
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+    text-align: center;
+    margin-top: 1.5rem;
+    width: 100%;
+}
+
+.step-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(74, 226, 144, 0.3);
+}
+
+/* Tracking Methods */
+.tracking-methods {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.method-option {
+    background: rgba(11, 19, 33, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.method-option:hover {
+    background: rgba(74, 226, 144, 0.1);
+    border-color: rgba(74, 226, 144, 0.2);
+}
+
+.method-option h4 {
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+/* Tools Comparison */
+.tools-comparison {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.tool-card {
+    background: rgba(26, 35, 50, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 2rem;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.tool-card.featured {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 30px rgba(74, 226, 144, 0.2);
+}
+
+.tool-card.featured::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, var(--accent-color), #52b788, var(--accent-color));
+    border-radius: 16px;
+    z-index: -1;
+    opacity: 0.7;
+    animation: borderGlow 3s ease-in-out infinite;
+}
+
+@keyframes borderGlow {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 0.9; }
+}
+
+.tool-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.tool-header h3 {
+    color: var(--text-color);
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.tool-badge {
+    background: var(--accent-color);
+    color: var(--primary-bg);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.tool-description {
+    margin-bottom: 1.5rem;
+    color: var(--secondary-text);
+    line-height: 1.6;
+}
+
+.tool-features {
+    display: grid;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem;
+    background: rgba(11, 19, 33, 0.4);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.feature:hover {
+    background: rgba(74, 226, 144, 0.1);
+}
+
+.feature-icon {
+    color: var(--accent-color);
+    font-weight: 600;
+    min-width: 120px;
+}
+
+.feature-desc {
+    color: var(--secondary-text);
+    font-size: 0.9rem;
+}
+
+.tool-cta-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.5rem;
+}
+
+.tool-cta-primary {
+    background: linear-gradient(135deg, var(--accent-color), #52b788);
+    color: var(--primary-bg);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.tool-cta-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(74, 226, 144, 0.3);
+}
+
+.tool-cta-secondary {
+    color: var(--secondary-text);
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.tool-price {
+    font-weight: 700;
+    color: var(--accent-color);
+}
+
+/* Technical Content */
+.technical-content {
+    background: rgba(26, 35, 50, 0.6);
+    border-radius: 16px;
+    padding: 3rem;
+    margin: 2rem 0;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.tech-explanation, .data-sources, .accuracy-info {
+    margin-bottom: 3rem;
+}
+
+.tech-explanation h3, .data-sources h3, .accuracy-info h3 {
+    color: var(--accent-color);
+    margin-bottom: 1.5rem;
+    font-size: 1.4rem;
+}
+
+.formula-box {
+    background: linear-gradient(135deg, rgba(74, 226, 144, 0.1), rgba(82, 183, 136, 0.05));
+    border: 1px solid rgba(74, 226, 144, 0.3);
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 2rem 0;
+    text-align: center;
+    font-family: var(--mono-font);
+    font-size: 1.1rem;
+}
+
+.formula-title {
+    color: var(--accent-color);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    font-family: var(--heading-font);
+}
+
+.formula-content {
+    background: rgba(11, 19, 33, 0.6);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.source-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.source-item {
+    background: rgba(11, 19, 33, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.source-item:hover {
+    background: rgba(26, 35, 50, 0.8);
+    border-color: rgba(74, 226, 144, 0.2);
+    transform: translateY(-2px);
+}
+
+.source-item h4 {
+    color: var(--accent-color);
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+}
+
+.accuracy-levels {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.accuracy-level {
+    background: rgba(11, 19, 33, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.accuracy-level.high {
+    border-color: rgba(74, 226, 144, 0.3);
+}
+
+.accuracy-level.medium {
+    border-color: rgba(255, 193, 7, 0.3);
+}
+
+.accuracy-level.low {
+    border-color: rgba(239, 68, 68, 0.3);
+}
+
+.accuracy-level:hover {
+    transform: translateY(-2px);
+}
+
+.accuracy-level h4 {
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+}
+
+.accuracy-level.high h4 {
+    color: var(--accent-color);
+}
+
+.accuracy-level.medium h4 {
+    color: #ffc107;
+}
+
+.accuracy-level.low h4 {
+    color: #ef4444;
+}
+
+/* Section Intros */
+.section-intro {
+    font-size: 1.2rem;
+    color: var(--secondary-text);
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 3rem auto;
+    line-height: 1.8;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .step-cards-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .tools-comparison {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .source-grid, .accuracy-levels {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .step-card, .tool-card {
+        padding: 1.5rem;
+    }
+    
+    .technical-content {
+        padding: 2rem;
+    }
+    
+    .step-number-large {
+        font-size: 2.5rem;
+    }
+}
