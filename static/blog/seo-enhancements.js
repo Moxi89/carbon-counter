@@ -2,34 +2,70 @@
 // This script adds internal linking and SEO improvements dynamically
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Add internal links to key terms in articles
-    const internalLinks = {
-        'carbon budget': '/blog/posts/critical-climate-year-2025.html',
-        '1.5°C target': '/blog/posts/critical-climate-year-2025.html',
-        'emissions': '/',
-        'carbon counter': '/',
-        'electric vehicles': '/blog/posts/transportation-climate-guide.html',
-        'plant-based': '/blog/posts/food-climate-solutions.html',
-        'food waste': '/blog/posts/food-climate-solutions.html',
-        'climate adaptation': '/blog/posts/beyond-2025-next-decade-climate.html',
-        'direct air capture': '/blog/posts/climate-tech-innovations-2026.html'
-    };
-
-    // Find article content
-    const articleContent = document.querySelector('.post-body');
-    if (!articleContent) return;
-
-    // Add internal links to key terms
-    let contentHTML = articleContent.innerHTML;
+    // Wait for images to load before modifying content
+    const featuredImages = document.querySelectorAll('.featured-image img');
+    let imagesLoaded = 0;
     
-    Object.keys(internalLinks).forEach(term => {
-        const regex = new RegExp(`\\b${term}\\b`, 'gi');
-        contentHTML = contentHTML.replace(regex, (match) => {
-            return `<a href="${internalLinks[term]}" class="internal-link" title="Learn more about ${term}">${match}</a>`;
+    if (featuredImages.length === 0) {
+        // No images to wait for, proceed immediately
+        addInternalLinks();
+    } else {
+        featuredImages.forEach(img => {
+            if (img.complete) {
+                imagesLoaded++;
+                if (imagesLoaded === featuredImages.length) {
+                    addInternalLinks();
+                }
+            } else {
+                img.addEventListener('load', () => {
+                    imagesLoaded++;
+                    if (imagesLoaded === featuredImages.length) {
+                        addInternalLinks();
+                    }
+                });
+                img.addEventListener('error', () => {
+                    imagesLoaded++;
+                    if (imagesLoaded === featuredImages.length) {
+                        addInternalLinks();
+                    }
+                });
+            }
         });
-    });
+    }
+    
+    function addInternalLinks() {
+        // Add internal links to key terms in articles
+        const internalLinks = {
+            'carbon budget': '/blog/posts/critical-climate-year-2025.html',
+            '1.5°C target': '/blog/posts/critical-climate-year-2025.html',
+            'emissions': '/',
+            'carbon counter': '/',
+            'electric vehicles': '/blog/posts/transportation-climate-guide.html',
+            'plant-based': '/blog/posts/food-climate-solutions.html',
+            'food waste': '/blog/posts/food-climate-solutions.html',
+            'climate adaptation': '/blog/posts/beyond-2025-next-decade-climate.html',
+            'direct air capture': '/blog/posts/climate-tech-innovations-2026.html'
+        };
 
-    articleContent.innerHTML = contentHTML;
+        // Find article content (exclude header with images)
+        const articleContent = document.querySelector('.post-body');
+        if (!articleContent) return;
+
+        // Add internal links to key terms
+        let contentHTML = articleContent.innerHTML;
+        
+        Object.keys(internalLinks).forEach(term => {
+            const regex = new RegExp(`\\b${term}\\b`, 'gi');
+            contentHTML = contentHTML.replace(regex, (match) => {
+                return `<a href="${internalLinks[term]}" class="internal-link" title="Learn more about ${term}">${match}</a>`;
+            });
+        });
+
+        // Only update if content actually changed
+        if (contentHTML !== articleContent.innerHTML) {
+            articleContent.innerHTML = contentHTML;
+        }
+    }
 
     // Add FAQ schema for enhanced SEO
     const faqSection = document.querySelector('.faq-section');
