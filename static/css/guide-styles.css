@@ -21,11 +21,11 @@
 }
 
 .hero-content p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    margin-bottom: 2rem;
+    font-size: 1.25rem;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
     max-width: 800px;
-    color: var(--secondary-text);
+    color: #d0d0d0;
 }
 
 /* Section Headlines */
@@ -51,12 +51,12 @@ section h2::after {
 }
 
 .section-intro {
-    font-size: 1.2rem;
-    line-height: 1.7;
+    font-size: 1.3rem;
+    line-height: 1.8;
     text-align: center;
     max-width: 700px;
-    margin: 0 auto 3rem auto;
-    color: var(--secondary-text);
+    margin: 0 auto 3.5rem auto;
+    color: #d0d0d0;
 }
 
 /* Card Headlines */
@@ -76,10 +76,10 @@ section h2::after {
 .science-card p,
 .impact-card p,
 .next-step-card p {
-    font-size: 1rem;
-    line-height: 1.6;
-    color: var(--text-color);
-    margin-bottom: 1rem;
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: #f0f0f0;
+    margin-bottom: 1.5rem;
 }
 
 /* Key Points */
@@ -113,10 +113,10 @@ section h2::after {
 }
 
 .usage-step p {
-    font-size: 1rem;
-    line-height: 1.6;
-    color: var(--secondary-text);
-    margin-bottom: 1rem;
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: #d0d0d0;
+    margin-bottom: 1.5rem;
 }
 
 /* Example Boxes */
@@ -180,11 +180,12 @@ section h2::after {
 }
 
 .equivalent-item .description {
-    font-size: 0.95rem;
-    color: var(--secondary-text);
+    font-size: 1.05rem;
+    color: #d0d0d0;
     text-align: right;
     flex: 1;
     margin-left: 1rem;
+    line-height: 1.6;
 }
 
 /* Education Highlights */
@@ -269,11 +270,12 @@ ul {
 }
 
 ul li {
-    padding: 0.5rem 0;
+    padding: 0.75rem 0;
     position: relative;
     padding-left: 1.5rem;
-    color: var(--secondary-text);
-    line-height: 1.6;
+    color: #d0d0d0;
+    line-height: 1.8;
+    font-size: 1.1rem;
 }
 
 ul li::before {
@@ -316,19 +318,25 @@ ul li::before {
     }
 }
 
-/* Step Cards Container */
-.step-cards-container {
+/* Understanding Grid */
+.understanding-grid,
+.science-content,
+.impact-grid,
+.next-steps-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 2rem;
+    gap: 2.5rem;
     margin: 3rem 0;
 }
 
-.step-card {
-    background: linear-gradient(135deg, rgba(26, 35, 50, 0.9), rgba(11, 19, 33, 0.9));
-    border: 1px solid rgba(74, 226, 144, 0.2);
+.understanding-card,
+.science-card,
+.impact-card,
+.next-step-card {
+    background: linear-gradient(135deg, rgba(40, 50, 65, 0.95), rgba(25, 35, 50, 0.95));
+    border: 1px solid rgba(74, 226, 144, 0.3);
     border-radius: 16px;
-    padding: 2rem;
+    padding: 2.5rem;
     position: relative;
     overflow: hidden;
     transition: all 0.3s ease;
