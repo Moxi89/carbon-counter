@@ -1,0 +1,151 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="800" height="400" fill="#1a2332"/>
+  
+  <!-- Grid pattern -->
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#2a3441" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="400" fill="url(#grid)"/>
+  
+  <!-- Title -->
+  <text x="400" y="30" text-anchor="middle" fill="#4ae290" font-size="24" font-weight="bold" font-family="Arial, sans-serif">
+    Renewable Energy Solutions 2026
+  </text>
+  
+  <!-- Solar Panels Section -->
+  <g transform="translate(50, 80)">
+    <rect x="0" y="0" width="160" height="120" fill="#2a3441" stroke="#4ae290" stroke-width="2" rx="8"/>
+    <text x="80" y="25" text-anchor="middle" fill="#f0f0f0" font-size="14" font-weight="bold">Solar Panels</text>
+    <!-- Solar panel icon -->
+    <rect x="30" y="40" width="100" height="60" fill="#4ae290" rx="3"/>
+    <line x1="30" y1="50" x2="130" y2="50" stroke="#1a2332" stroke-width="1"/>
+    <line x1="30" y1="60" x2="130" y2="60" stroke="#1a2332" stroke-width="1"/>
+    <line x1="30" y1="70" x2="130" y2="70" stroke="#1a2332" stroke-width="1"/>
+    <line x1="30" y1="80" x2="130" y2="80" stroke="#1a2332" stroke-width="1"/>
+    <line x1="30" y1="90" x2="130" y2="90" stroke="#1a2332" stroke-width="1"/>
+    <!-- Sun icon -->
+    <circle cx="80" cy="20" r="8" fill="#ffd700"/>
+    <path d="M 80 5 L 80 12 M 80 28 L 80 35 M 65 20 L 70 20 M 90 20 L 95 20" stroke="#ffd700" stroke-width="2"/>
+    <text x="80" y="105" text-anchor="middle" fill="#f0f0f0" font-size="12">22% Efficiency</text>
+  </g>
+  
+  <!-- Wind Turbine Section -->
+  <g transform="translate(240, 80)">
+    <rect x="0" y="0" width="160" height="120" fill="#2a3441" stroke="#4ae290" stroke-width="2" rx="8"/>
+    <text x="80" y="25" text-anchor="middle" fill="#f0f0f0" font-size="14" font-weight="bold">Wind Turbine</text>
+    <!-- Wind turbine icon -->
+    <rect x="75" y="60" width="10" height="40" fill="#4ae290"/>
+    <polygon points="80,40 70,60 90,60" fill="#4ae290"/>
+    <circle cx="80" cy="40" r="3" fill="#1a2332"/>
+    <!-- Blades -->
+    <path d="M 80 40 L 80 15" stroke="#4ae290" stroke-width="4"/>
+    <path d="M 80 40 L 65 50" stroke="#4ae290" stroke-width="4"/>
+    <path d="M 80 40 L 95 50" stroke="#4ae290" stroke-width="4"/>
+    <!-- Wind lines -->
+    <path d="M 20 30 Q 40 35 60 30" fill="none" stroke="#87ceeb" stroke-width="2"/>
+    <path d="M 20 50 Q 40 55 60 50" fill="none" stroke="#87ceeb" stroke-width="2"/>
+    <text x="80" y="105" text-anchor="middle" fill="#f0f0f0" font-size="12">3-5 MW Power</text>
+  </g>
+  
+  <!-- Battery Storage Section -->
+  <g transform="translate(430, 80)">
+    <rect x="0" y="0" width="160" height="120" fill="#2a3441" stroke="#4ae290" stroke-width="2" rx="8"/>
+    <text x="80" y="25" text-anchor="middle" fill="#f0f0f0" font-size="14" font-weight="bold">Battery Storage</text>
+    <!-- Battery icon -->
+    <rect x="50" y="40" width="60" height="40" fill="#4ae290" rx="5"/>
+    <rect x="110" y="50" width="10" height="20" fill="#4ae290"/>
+    <!-- Charge indicator -->
+    <rect x="55" y="45" width="50" height="30" fill="#1a2332" rx="3"/>
+    <rect x="55" y="45" width="50" height="20" fill="#52b788" rx="3"/>
+    <text x="80" y="60" text-anchor="middle" fill="#1a2332" font-size="12" font-weight="bold">67%</text>
+    <text x="80" y="105" text-anchor="middle" fill="#f0f0f0" font-size="12">13.5 kWh</text>
+  </g>
+  
+  <!-- Smart Home Section -->
+  <g transform="translate(620, 80)">
+    <rect x="0" y="0" width="160" height="120" fill="#2a3441" stroke="#4ae290" stroke-width="2" rx="8"/>
+    <text x="80" y="25" text-anchor="middle" fill="#f0f0f0" font-size="14" font-weight="bold">Smart Home</text>
+    <!-- Smart home icon -->
+    <rect x="40" y="40" width="80" height="50" fill="#4ae290" rx="5"/>
+    <rect x="50" y="50" width="25" height="15" fill="#1a2332"/>
+    <rect x="85" y="50" width="25" height="15" fill="#1a2332"/>
+    <rect x="60" y="70" width="40" height="15" fill="#1a2332"/>
+    <!-- WiFi symbol -->
+    <circle cx="80" cy="25" r="2" fill="#4ae290"/>
+    <path d="M 70 20 Q 80 15 90 20" fill="none" stroke="#4ae290" stroke-width="2"/>
+    <path d="M 65 15 Q 80 8 95 15" fill="none" stroke="#4ae290" stroke-width="2"/>
+    <text x="80" y="105" text-anchor="middle" fill="#f0f0f0" font-size="12">AI Optimized</text>
+  </g>
+  
+  <!-- Energy Flow Diagram -->
+  <g transform="translate(200, 230)">
+    <rect x="0" y="0" width="400" height="120" fill="#2a3441" stroke="#4ae290" stroke-width="3" rx="10"/>
+    <text x="200" y="25" text-anchor="middle" fill="#f0f0f0" font-size="18" font-weight="bold">Clean Energy System</text>
+    
+    <!-- Energy flow arrows -->
+    <path d="M 50 50 L 150 50" stroke="#4ae290" stroke-width="3" marker-end="url(#arrowhead)"/>
+    <path d="M 250 50 L 350 50" stroke="#4ae290" stroke-width="3" marker-end="url(#arrowhead)"/>
+    
+    <!-- Components -->
+    <rect x="20" y="35" width="30" height="30" fill="#4ae290" rx="3"/>
+    <text x="35" y="55" text-anchor="middle" fill="#1a2332" font-size="10" font-weight="bold">Gen</text>
+    
+    <rect x="150" y="35" width="30" height="30" fill="#52b788" rx="3"/>
+    <text x="165" y="55" text-anchor="middle" fill="#1a2332" font-size="10" font-weight="bold">Store</text>
+    
+    <rect x="280" y="35" width="30" height="30" fill="#4ae290" rx="3"/>
+    <text x="295" y="55" text-anchor="middle" fill="#1a2332" font-size="10" font-weight="bold">Use</text>
+    
+    <rect x="350" y="35" width="30" height="30" fill="#52b788" rx="3"/>
+    <text x="365" y="55" text-anchor="middle" fill="#1a2332" font-size="10" font-weight="bold">Grid</text>
+    
+    <text x="200" y="85" text-anchor="middle" fill="#f0f0f0" font-size="14">100% Renewable Energy</text>
+    <text x="200" y="105" text-anchor="middle" fill="#4ae290" font-size="12">Zero Carbon Emissions</text>
+  </g>
+  
+  <!-- Arrow marker definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4ae290"/>
+    </marker>
+  </defs>
+  
+  <!-- Cost/Benefit indicators -->
+  <g transform="translate(50, 320)">
+    <rect x="0" y="0" width="120" height="60" fill="#2a3441" stroke="#4ae290" stroke-width="2" rx="5"/>
+    <text x="60" y="20" text-anchor="middle" fill="#f0f0f0" font-size="12" font-weight="bold">ROI</text>
+    <text x="60" y="35" text-anchor="middle" fill="#4ae290" font-size="16" font-weight="bold">12-15%</text>
+    <text x="60" y="50" text-anchor="middle" fill="#f0f0f0" font-size="10">Annual Return</text>
+  </g>
+  
+  <g transform="translate(200, 320)">
+    <rect x="0" y="0" width="120" height="60" fill="#2a3441" stroke="#4ae290" stroke-width="2" rx="5"/>
+    <text x="60" y="20" text-anchor="middle" fill="#f0f0f0" font-size="12" font-weight="bold">Payback</text>
+    <text x="60" y="35" text-anchor="middle" fill="#4ae290" font-size="16" font-weight="bold">6-10</text>
+    <text x="60" y="50" text-anchor="middle" fill="#f0f0f0" font-size="10">Years</text>
+  </g>
+  
+  <g transform="translate(350, 320)">
+    <rect x="0" y="0" width="120" height="60" fill="#2a3441" stroke="#4ae290" stroke-width="2" rx="5"/>
+    <text x="60" y="20" text-anchor="middle" fill="#f0f0f0" font-size="12" font-weight="bold">Savings</text>
+    <text x="60" y="35" text-anchor="middle" fill="#4ae290" font-size="16" font-weight="bold">$2,000</text>
+    <text x="60" y="50" text-anchor="middle" fill="#f0f0f0" font-size="10">Per Year</text>
+  </g>
+  
+  <g transform="translate(500, 320)">
+    <rect x="0" y="0" width="120" height="60" fill="#2a3441" stroke="#4ae290" stroke-width="2" rx="5"/>
+    <text x="60" y="20" text-anchor="middle" fill="#f0f0f0" font-size="12" font-weight="bold">CO2 Saved</text>
+    <text x="60" y="35" text-anchor="middle" fill="#4ae290" font-size="16" font-weight="bold">8-12</text>
+    <text x="60" y="50" text-anchor="middle" fill="#f0f0f0" font-size="10">Tons/Year</text>
+  </g>
+  
+  <g transform="translate(650, 320)">
+    <rect x="0" y="0" width="120" height="60" fill="#2a3441" stroke="#4ae290" stroke-width="2" rx="5"/>
+    <text x="60" y="20" text-anchor="middle" fill="#f0f0f0" font-size="12" font-weight="bold">Incentive</text>
+    <text x="60" y="35" text-anchor="middle" fill="#4ae290" font-size="16" font-weight="bold">30%</text>
+    <text x="60" y="50" text-anchor="middle" fill="#f0f0f0" font-size="10">Tax Credit</text>
+  </g>
+</svg>
