@@ -227,25 +227,47 @@ section h2::after {
     line-height: 1.3;
 }
 
+/* Modern Link Styling */
+a {
+    color: var(--accent-color) !important;
+    text-decoration: none !important;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border-bottom: 2px solid transparent;
+}
+
+a:visited {
+    color: var(--accent-color) !important;
+    text-decoration: none !important;
+}
+
+a:hover {
+    color: #52b788 !important;
+    border-bottom: 2px solid #52b788;
+    transform: translateY(-1px);
+}
+
 /* Links and Buttons */
 .step-link,
 .next-step-link {
     display: inline-block;
     background: linear-gradient(135deg, var(--accent-color), #52b788);
-    color: var(--primary-bg);
-    text-decoration: none;
+    color: var(--primary-bg) !important;
+    text-decoration: none !important;
     padding: 0.75rem 1.5rem;
     border-radius: 8px;
     font-weight: 600;
     font-size: 0.9rem;
     transition: all 0.3s ease;
     margin-top: 1rem;
+    border-bottom: none !important;
 }
 
 .step-link:hover,
 .next-step-link:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(74, 226, 144, 0.3);
+    border-bottom: none !important;
 }
 
 /* CTA Button */
