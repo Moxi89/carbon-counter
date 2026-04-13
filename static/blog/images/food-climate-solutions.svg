@@ -1,0 +1,98 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#95d5b2;stop-opacity:0.1" />
+      <stop offset="100%" style="stop-color:#52b788;stop-opacity:0.1" />
+    </linearGradient>
+    <linearGradient id="plantGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#52b788;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#40916c;stop-opacity:0.8" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="400" fill="url(#bgGrad)" />
+  
+  <!-- Plant-based plate -->
+  <g transform="translate(50, 100)">
+    <!-- Plate -->
+    <ellipse cx="75" cy="75" rx="70" ry="15" fill="#1a2332" opacity="0.3"/>
+    <ellipse cx="75" cy="70" rx="60" ry="50" fill="#f8f9fa" stroke="#52b788" stroke-width="2"/>
+    
+    <!-- Vegetables -->
+    <circle cx="60" cy="60" r="8" fill="#ff6b6b" opacity="0.8"/>
+    <circle cx="75" cy="55" r="6" fill="#ffd60a" opacity="0.8"/>
+    <circle cx="90" cy="65" r="7" fill="#4cc9f0" opacity="0.8"/>
+    <rect x="55" y="70" width="40" height="8" rx="4" fill="#52b788" opacity="0.8"/>
+    <circle cx="65" cy="80" r="5" fill="#e76f51" opacity="0.8"/>
+    <circle cx="85" cy="82" r="4" fill="#f4a261" opacity="0.8"/>
+    
+    <!-- Leaf symbol -->
+    <path d="M 95 50 Q 100 45 105 50 Q 100 55 95 50" fill="#52b788"/>
+  </g>
+  
+  <!-- Compost bin -->
+  <g transform="translate(200, 120)">
+    <!-- Bin -->
+    <rect x="0" y="20" width="60" height="50" rx="5" fill="#8b5a3c" stroke="#52b788" stroke-width="2"/>
+    <!-- Compost contents -->
+    <ellipse cx="30" cy="25" rx="25" ry="8" fill="#3a5a40" opacity="0.8"/>
+    <!-- Steam -->
+    <path d="M 20 15 Q 18 10 20 5" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.5"/>
+    <path d="M 30 15 Q 32 10 30 5" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.5"/>
+    <path d="M 40 15 Q 38 10 40 5" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.5"/>
+    <!-- Label -->
+    <text x="30" y="50" fill="#ffffff" font-family="Arial, sans-serif" font-size="10" text-anchor="middle">COMPOST</text>
+  </g>
+  
+  <!-- Local market -->
+  <g transform="translate(320, 100)">
+    <!-- Market stall -->
+    <rect x="0" y="40" width="80" height="60" fill="#8b5a3c" stroke="#52b788" stroke-width="2"/>
+    <!-- Roof -->
+    <path d="M -10 40 L 40 10 L 90 40 Z" fill="#d4a373" stroke="#52b788" stroke-width="2"/>
+    <!-- Produce -->
+    <circle cx="20" cy="60" r="8" fill="#ff6b6b" opacity="0.8"/>
+    <circle cx="40" cy="65" r="7" fill="#ffd60a" opacity="0.8"/>
+    <circle cx="60" cy="60" r="6" fill="#4cc9f0" opacity="0.8"/>
+    <rect x="15" y="75" width="50" height="10" rx="5" fill="#52b788" opacity="0.8"/>
+    <!-- Local sign -->
+    <text x="40" y="30" fill="#ffffff" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" font-weight="bold">LOCAL</text>
+  </g>
+  
+  <!-- CO2 reduction -->
+  <g transform="translate(480, 80)">
+    <!-- Big down arrow -->
+    <path d="M 0 0 L -20 40 L -10 40 L -10 80 L 10 80 L 10 40 L 20 40 Z" fill="#52b788" opacity="0.8"/>
+    <text x="0" y="100" fill="#ffffff" font-family="Arial, sans-serif" font-size="16" text-anchor="middle">-30%</text>
+    <text x="0" y="120" fill="#8b95a5" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">Food Emissions</text>
+  </g>
+  
+  <!-- Food waste comparison -->
+  <g transform="translate(550, 200)">
+    <text x="0" y="-10" fill="#ffffff" font-family="Arial, sans-serif" font-size="14" font-weight="bold">Food Waste</text>
+    <!-- Before -->
+    <rect x="0" y="0" width="30" height="60" fill="#ff6b6b" opacity="0.8"/>
+    <text x="15" y="75" fill="#8b95a5" font-family="Arial, sans-serif" font-size="10" text-anchor="middle">Before</text>
+    <!-- After -->
+    <rect x="50" y="30" width="30" height="30" fill="#52b788" opacity="0.8"/>
+    <text x="65" y="75" fill="#8b95a5" font-family="Arial, sans-serif" font-size="10" text-anchor="middle">After</text>
+  </g>
+  
+  <!-- Energy efficient cooking -->
+  <g transform="translate(650, 180)">
+    <!-- Pot -->
+    <ellipse cx="30" cy="40" rx="25" ry="8" fill="#1a2332" opacity="0.3"/>
+    <path d="M 5 20 Q 5 40 30 40 Q 55 40 55 20 Z" fill="#6c757d" stroke="#52b788" stroke-width="2"/>
+    <!-- Steam -->
+    <path d="M 20 15 Q 18 5 20 0" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.6"/>
+    <path d="M 30 15 Q 32 5 30 0" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.6"/>
+    <path d="M 40 15 Q 38 5 40 0" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.6"/>
+    <!-- Energy efficient label -->
+    <text x="30" y="60" fill="#4ae290" font-family="Arial, sans-serif" font-size="10" text-anchor="middle">EFFICIENT</text>
+  </g>
+  
+  <!-- Title -->
+  <text x="400" y="30" fill="#ffffff" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle">Kitchen Climate Solutions</text>
+</svg>
