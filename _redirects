@@ -15,6 +15,14 @@
 /blog/posts/five-minute-carbon-hacks  /static/blog/posts/five-minute-carbon-hacks.html  200
 /blog/posts/family-eco-activities  /static/blog/posts/family-eco-activities.html  200
 
+# New 2025/2026 blog article redirects
+/blog/posts/critical-climate-year-2025  /static/blog/posts/critical-climate-year-2025.html  200
+/blog/posts/transportation-climate-guide  /static/blog/posts/transportation-climate-guide.html  200
+/blog/posts/food-climate-solutions  /static/blog/posts/food-climate-solutions.html  200
+/blog/posts/2026-climate-outlook  /static/blog/posts/2026-climate-outlook.html  200
+/blog/posts/beyond-2025-next-decade-climate  /static/blog/posts/beyond-2025-next-decade-climate.html  200
+/blog/posts/climate-tech-innovations-2026  /static/blog/posts/climate-tech-innovations-2026.html  200
+
 # Static assets with proper caching
 /images/*  /static/images/:splat  200
 /css/*  /static/css/:splat  200
