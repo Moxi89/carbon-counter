@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Search Console Performance Analyzer</title>
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0B1321 0%, #1A2332 100%);
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .upload-area {
+            border: 2px dashed #4ae290;
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 30px;
+            background: rgba(74, 226, 144, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .upload-area:hover {
+            border-color: #52b788;
+            background: rgba(74, 226, 144, 0.15);
+        }
+        
+        .upload-area.dragover {
+            border-color: #ffd60a;
+            background: rgba(255, 214, 10, 0.1);
+        }
+        
+        .file-input {
+            display: none;
+        }
+        
+        .upload-btn {
+            background: #4ae290;
+            color: #0B1321;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .upload-btn:hover {
+            background: #52b788;
+            transform: translateY(-2px);
+        }
+        
+        .results-section {
+            display: none;
+        }
+        
+        .metric-card {
+            background: rgba(26, 35, 50, 0.8);
+            border: 1px solid rgba(74, 226, 144, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .metric-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #4ae290;
+        }
+        
+        .metric-label {
+            color: #8B95A5;
+            margin-top: 5px;
+        }
+        
+        .table-container {
+            background: rgba(26, 35, 50, 0.8);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid rgba(74, 226, 144, 0.2);
+        }
+        
+        th {
+            background: rgba(74, 226, 144, 0.1);
+            font-weight: 600;
+            color: #4ae290;
+        }
+        
+        tr:hover {
+            background: rgba(74, 226, 144, 0.05);
+        }
+        
+        .performance-chart {
+            background: rgba(26, 35, 50, 0.8);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .chart-canvas {
+            width: 100%;
+            height: 300px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #8B95A5;
+        }
+        
+        .recommendations {
+            background: rgba(255, 214, 10, 0.1);
+            border: 1px solid rgba(255, 214, 10, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+        }
+        
+        .recommendation-item {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .recommendation-item:before {
+            content: ">";
+            position: absolute;
+            left: 0;
+            color: #ffd60a;
+        }
+        
+        .high-performance {
+            color: #4ae290;
+        }
+        
+        .medium-performance {
+            color: #ffd60a;
+        }
+        
+        .low-performance {
+            color: #ff6b6b;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #8B95A5;
+        }
+        
+        .error {
+            background: rgba(255, 107, 107, 0.1);
+            border: 1px solid rgba(255, 107, 107, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            color: #ff6b6b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Google Search Console Performance Analyzer</h1>
+        <p>Upload your CSV performance reports to get insights and SEO recommendations.</p>
+        
+        <div class="upload-area" id="uploadArea">
+            <div class="upload-content">
+                <h3>Drop CSV files here or click to upload</h3>
+                <p>Supports Google Search Console performance export files</p>
+                <button class="upload-btn" onclick="document.getElementById('fileInput').click()">
+                    Choose Files
+                </button>
+                <input type="file" id="fileInput" class="file-input" multiple accept=".csv">
+            </div>
+        </div>
+        
+        <div class="results-section" id="resultsSection">
+            <div class="metric-grid" id="metricGrid">
+                <!-- Metrics will be populated here -->
+            </div>
+            
+            <div class="performance-chart">
+                <h3>Performance Overview</h3>
+                <div class="chart-canvas" id="chartCanvas">
+                    Chart will be displayed here
+                </div>
+            </div>
+            
+            <div class="table-container">
+                <h3>Top Performing Pages</h3>
+                <table id="pagesTable">
+                    <thead>
+                        <tr>
+                            <th>Page</th>
+                            <th>Clicks</th>
+                            <th>Impressions</th>
+                            <th>CTR</th>
+                            <th>Position</th>
+                            <th>Performance</th>
+                        </tr>
+                    </thead>
+                    <tbody id="pagesTableBody">
+                        <!-- Data will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="table-container">
+                <h3>Top Queries</h3>
+                <table id="queriesTable">
+                    <thead>
+                        <tr>
+                            <th>Query</th>
+                            <th>Clicks</th>
+                            <th>Impressions</th>
+                            <th>CTR</th>
+                            <th>Position</th>
+                        </tr>
+                    </thead>
+                    <tbody id="queriesTableBody">
+                        <!-- Data will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="recommendations">
+                <h3>SEO Recommendations</h3>
+                <div id="recommendationsList">
+                    <!-- Recommendations will be populated here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let gscData = [];
+        
+        // File upload handling
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const resultsSection = document.getElementById('resultsSection');
+        
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+        
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+        
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            handleFiles(e.dataTransfer.files);
+        });
+        
+        fileInput.addEventListener('change', (e) => {
+            handleFiles(e.target.files);
+        });
+        
+        function handleFiles(files) {
+            const csvFiles = Array.from(files).filter(file => file.name.endsWith('.csv'));
+            
+            if (csvFiles.length === 0) {
+                showError('Please upload CSV files only');
+                return;
+            }
+            
+            Promise.all(csvFiles.map(file => readCSV(file)))
+                .then(results => {
+                    gscData = results.flat();
+                    analyzeData();
+                    resultsSection.style.display = 'block';
+                })
+                .catch(error => {
+                    showError('Error reading CSV files: ' + error.message);
+                });
+        }
+        
+        function readCSV(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                
+                reader.onload = (e) => {
+                    try {
+                        const csv = parseCSV(e.target.result);
+                        resolve(csv);
+                    } catch (error) {
+                        reject(error);
+                    }
+                };
+                
+                reader.onerror = () => reject(new Error('Failed to read file'));
+                reader.readAsText(file);
+            });
+        }
+        
+        function parseCSV(csvText) {
+            const lines = csvText.split('\n').filter(line => line.trim());
+            if (lines.length < 2) {
+                throw new Error('CSV file is empty or invalid');
+            }
+            
+            const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
+            const data = [];
+            
+            for (let i = 1; i < lines.length; i++) {
+                const values = lines[i].split(',').map(v => v.trim().replace(/"/g, ''));
+                if (values.length === headers.length) {
+                    const row = {};
+                    headers.forEach((header, index) => {
+                        row[header] = values[index];
+                    });
+                    data.push(row);
+                }
+            }
+            
+            return data;
+        }
+        
+        function analyzeData() {
+            // Calculate overall metrics
+            const totalClicks = gscData.reduce((sum, row) => sum + (parseFloat(row.Clicks) || 0), 0);
+            const totalImpressions = gscData.reduce((sum, row) => sum + (parseFloat(row.Impressions) || 0), 0);
+            const avgCTR = totalImpressions > 0 ? (totalClicks / totalImpressions * 100) : 0;
+            const avgPosition = gscData.reduce((sum, row) => sum + (parseFloat(row.Position) || 0), 0) / gscData.length;
+            
+            // Update metrics display
+            updateMetrics(totalClicks, totalImpressions, avgCTR, avgPosition);
+            
+            // Update tables
+            updatePagesTable();
+            updateQueriesTable();
+            
+            // Generate recommendations
+            generateRecommendations(avgCTR, avgPosition);
+            
+            // Create simple chart
+            createChart();
+        }
+        
+        function updateMetrics(clicks, impressions, ctr, position) {
+            const metricGrid = document.getElementById('metricGrid');
+            metricGrid.innerHTML = `
+                <div class="metric-card">
+                    <div class="metric-value">${clicks.toLocaleString()}</div>
+                    <div class="metric-label">Total Clicks</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">${impressions.toLocaleString()}</div>
+                    <div class="metric-label">Total Impressions</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">${ctr.toFixed(2)}%</div>
+                    <div class="metric-label">Average CTR</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">${position.toFixed(1)}</div>
+                    <div class="metric-label">Average Position</div>
+                </div>
+            `;
+        }
+        
+        function updatePagesTable() {
+            const pagesData = {};
+            
+            gscData.forEach(row => {
+                if (!pagesData[row.Page]) {
+                    pagesData[row.Page] = {
+                        clicks: 0,
+                        impressions: 0,
+                        positions: []
+                    };
+                }
+                pagesData[row.Page].clicks += parseFloat(row.Clicks) || 0;
+                pagesData[row.Page].impressions += parseFloat(row.Impressions) || 0;
+                pagesData[row.Page].positions.push(parseFloat(row.Position) || 0);
+            });
+            
+            const pages = Object.entries(pagesData)
+                .map(([page, data]) => ({
+                    page,
+                    clicks: data.clicks,
+                    impressions: data.impressions,
+                    ctr: data.impressions > 0 ? (data.clicks / data.impressions * 100) : 0,
+                    position: data.positions.reduce((sum, pos) => sum + pos, 0) / data.positions.length
+                }))
+                .sort((a, b) => b.clicks - a.clicks)
+                .slice(0, 10);
+            
+            const tbody = document.getElementById('pagesTableBody');
+            tbody.innerHTML = pages.map(page => `
+                <tr>
+                    <td>${page.page}</td>
+                    <td>${page.clicks.toLocaleString()}</td>
+                    <td>${page.impressions.toLocaleString()}</td>
+                    <td class="${getPerformanceClass(page.ctr)}">${page.ctr.toFixed(2)}%</td>
+                    <td class="${getPerformanceClass(20 - page.position)}">${page.position.toFixed(1)}</td>
+                    <td class="${getOverallPerformanceClass(page.ctr, page.position)}">${getPerformanceLabel(page.ctr, page.position)}</td>
+                </tr>
+            `).join('');
+        }
+        
+        function updateQueriesTable() {
+            const queriesData = {};
+            
+            gscData.forEach(row => {
+                if (!queriesData[row.Query]) {
+                    queriesData[row.Query] = {
+                        clicks: 0,
+                        impressions: 0,
+                        positions: []
+                    };
+                }
+                queriesData[row.Query].clicks += parseFloat(row.Clicks) || 0;
+                queriesData[row.Query].impressions += parseFloat(row.Impressions) || 0;
+                queriesData[row.Query].positions.push(parseFloat(row.Position) || 0);
+            });
+            
+            const queries = Object.entries(queriesData)
+                .map(([query, data]) => ({
+                    query,
+                    clicks: data.clicks,
+                    impressions: data.impressions,
+                    ctr: data.impressions > 0 ? (data.clicks / data.impressions * 100) : 0,
+                    position: data.positions.reduce((sum, pos) => sum + pos, 0) / data.positions.length
+                }))
+                .sort((a, b) => b.clicks - a.clicks)
+                .slice(0, 10);
+            
+            const tbody = document.getElementById('queriesTableBody');
+            tbody.innerHTML = queries.map(query => `
+                <tr>
+                    <td>${query.query}</td>
+                    <td>${query.clicks.toLocaleString()}</td>
+                    <td>${query.impressions.toLocaleString()}</td>
+                    <td class="${getPerformanceClass(query.ctr)}">${query.ctr.toFixed(2)}%</td>
+                    <td class="${getPerformanceClass(20 - query.position)}">${query.position.toFixed(1)}</td>
+                </tr>
+            `).join('');
+        }
+        
+        function generateRecommendations(avgCTR, avgPosition) {
+            const recommendations = [];
+            
+            if (avgCTR < 2) {
+                recommendations.push('Low CTR detected. Consider improving meta titles and descriptions to increase click-through rates.');
+            }
+            
+            if (avgPosition > 10) {
+                recommendations.push('Average position is below 10. Focus on improving on-page SEO and building quality backlinks.');
+            }
+            
+            if (avgCTR > 5 && avgPosition < 8) {
+                recommendations.push('Good performance! Consider expanding content around top-performing queries.');
+            }
+            
+            recommendations.push('Regularly update content to maintain freshness and search engine rankings.');
+            recommendations.push('Monitor Core Web Vitals and ensure fast loading times for better user experience.');
+            recommendations.push('Use structured data markup to enhance search result appearance with rich snippets.');
+            
+            const recommendationsList = document.getElementById('recommendationsList');
+            recommendationsList.innerHTML = recommendations.map(rec => `
+                <div class="recommendation-item">${rec}</div>
+            `).join('');
+        }
+        
+        function createChart() {
+            const chartCanvas = document.getElementById('chartCanvas');
+            chartCanvas.innerHTML = 'Performance chart visualization would go here (requires charting library)';
+        }
+        
+        function getPerformanceClass(value) {
+            if (value >= 70) return 'high-performance';
+            if (value >= 40) return 'medium-performance';
+            return 'low-performance';
+        }
+        
+        function getOverallPerformanceClass(ctr, position) {
+            const score = (ctr / 10 * 5) + ((20 - position) / 20 * 5);
+            return getPerformanceClass(score * 10);
+        }
+        
+        function getPerformanceLabel(ctr, position) {
+            if (ctr >= 5 && position <= 5) return 'Excellent';
+            if (ctr >= 3 && position <= 10) return 'Good';
+            if (ctr >= 2 && position <= 15) return 'Average';
+            return 'Needs Improvement';
+        }
+        
+        function showError(message) {
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error';
+            errorDiv.textContent = message;
+            document.querySelector('.container').insertBefore(errorDiv, document.querySelector('.upload-area'));
+            
+            setTimeout(() => {
+                errorDiv.remove();
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
