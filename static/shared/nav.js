@@ -114,11 +114,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 const href = link.getAttribute('href');
                 
                 if (href.startsWith('/#')) {
-                    e.preventDefault();
                     const targetId = href.substring(2);
                     const targetElement = document.getElementById(targetId);
                     
-                    if (targetElement) {
+                    // Check if we're on the home page and the target exists
+                    if (targetElement && (window.location.pathname === '/' || window.location.pathname === '/index.html')) {
+                        e.preventDefault();
                         targetElement.scrollIntoView({
                             behavior: 'smooth'
                         });
@@ -126,6 +127,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         // Update URL without jumping
                         history.pushState(null, '', href);
                     }
+                    // If we're not on home page or target doesn't exist, let the default navigation work
+                    // This will navigate to home page with the anchor
                 }
             });
         });
