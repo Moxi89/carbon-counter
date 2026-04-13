@@ -26,6 +26,10 @@
 # CO2 live tracking page
 /co2-live  /static/co2-live.html  200
 
+# Legal pages
+/privacy  /static/privacy.html  200
+/terms  /static/terms.html  200
+
 # Static assets with proper caching
 /images/*  /static/images/:splat  200
 /css/*  /static/css/:splat  200
