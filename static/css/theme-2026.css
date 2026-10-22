@@ -722,3 +722,47 @@ footer.glassmorphism,
 
     .background-particles { display: none !important; }
 }
+
+/* --------------------------------------------------------------------------
+   Cookie banner: compact bar at the bottom instead of a large box
+   -------------------------------------------------------------------------- */
+
+.cookie-banner {
+    left: 16px !important;
+    right: 16px !important;
+    bottom: 16px !important;
+    top: auto !important;
+    width: auto !important;
+    max-width: 640px !important;
+    margin: 0 auto !important;
+    padding: 14px 16px !important;
+    transform: none !important;
+}
+
+.cookie-content {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px !important;
+    text-align: left !important;
+}
+
+.cookie-content p {
+    flex: 1 1 16rem;
+    margin: 0 !important;
+    font-size: 0.875rem !important;
+    line-height: 1.5 !important;
+}
+
+.cookie-buttons {
+    display: flex !important;
+    gap: 8px !important;
+    margin: 0 !important;
+}
+
+.cookie-banner .btn {
+    padding: 0 16px !important;
+    font-size: 0.875rem !important;
+}

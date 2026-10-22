@@ -103,7 +103,8 @@
     <link rel="stylesheet" href="shared/cookie-banner.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="/css/theme-2026.css?v=2026-10">
+    <link rel="stylesheet" href="/css/theme-2026.css?v=2026-10b">
+    <link rel="stylesheet" href="/css/home-2026.css?v=2026-10">
 </head>
 <body>
     <div class="scroll-progress"></div>
@@ -121,87 +122,68 @@
         <div id="navbar-placeholder"></div>
 
         <main role="main">
-            <div class="counter-container" id="counter-section" data-aos="fade-up" data-aos-duration="600">
-                <div class="hero-section" data-aos="fade-right" data-aos-duration="600">
-                    <h1>CARBON EMISSIONS COUNTER LIVE</h1>
-                    <div class="hero-description">
-                        <p>Track real-time <span class="highlight">carbon emissions</span> and their impact on our planet. Our interactive dashboard provides vital insights into <span class="highlight">global</span>, <span class="highlight">national</span>, and <span class="highlight">yearly CO₂ levels</span> — empowering you to understand and act on climate change.</p>
-                        <p class="disclaimer">Note: Data is based on verified calculations from trusted environmental sources</p>
-                    </div>
+            <!-- Hero: the one number that matters -->
+            <section class="cx-hero" id="counter-section" aria-labelledby="cx-title">
+                <p class="cx-eyebrow"><span class="cx-live-dot" aria-hidden="true"></span>Live estimate &middot; updates every second</p>
+                <h1 class="cx-title" id="cx-title">Carbon Emissions Counter Live</h1>
+                <p class="cx-lede">Global CO&#8322; emissions from fossil fuels and land use, counted in real time from the Global Carbon Budget&nbsp;2025.</p>
+
+                <div class="cx-hero-figure">
+                    <p class="cx-label">CO&#8322; emitted worldwide in <span class="current-year">2026</span></p>
+                    <p class="cx-big" id="cxYear">0</p>
+                    <p class="cx-unit">tonnes since 1 January</p>
                 </div>
-                
-                <div class="counters-grid">
-                    <div class="counter-card" id="global-emissions-card">
-                        <h3>
-                            GLOBAL EMISSIONS COUNTER
-                            <button class="info-button" 
-                                    type="button" 
-                                    aria-label="Show information about global emissions counter"
-                                    data-tooltip-id="global-emissions">ⓘ</button>
-                            <div class="info-tooltip" 
-                                 role="tooltip" 
-                                 id="global-emissions-tooltip" 
-                                 data-category="global-metrics">
-                                <p class="tooltip-main">Real-time tracking of global CO₂ emissions from all sources since page load. Based on total annual emissions of 42.2 billion metric tons (Global Carbon Budget 2025).</p>
-                                <div class="tooltip-breakdown">
-                                    <span class="breakdown-label">2025 Breakdown:</span>
-                                    <ul class="breakdown-list">
-                                        <li>Fossil CO₂: 38.1 billion tons (+1.1% growth)</li>
-                                        <li>Land-use change: 4.1 billion tons (declining)</li>
-                                    </ul>
-                                </div>
-                                <div class="tooltip-facts">
-                                    <span class="fact-label">Key Finding:</span> 
-                                    Fossil emissions hit record high in 2025. The 1.5°C carbon budget is "virtually exhausted" with only 170 Gt CO₂ remaining.
-                                </div>
-                                <a href="#faq-section" class="tooltip-link">Learn more about emission sources →</a>
-                            </div>
-                        </h3>
-                        <div id="globalEmissions" class="counter">0</div>
-                        <p>Metric tons of CO₂ since page load</p>
-                        <div id="pageTimer" class="page-timer">0 seconds since you opened the page</div>
-                        <div class="facts-carousel-container">
-                            <button class="carousel-button prev" aria-label="Previous fact">‹</button>
-                            <div class="facts-carousel">
-                                <div class="fact-item">One metric ton of CO₂ equals driving a car for 2,500 miles (4,000 km) - about the distance from Los Angeles to New York</div>
-                                <div class="fact-item">One metric ton of CO₂ is produced by charging 120,000 smartphones, or one person's smartphone use for over 300 years</div>
-                                <div class="fact-item">One metric ton of CO₂ equals the annual carbon absorption of 50 mature trees in a forest</div>
-                                <div class="fact-item">One metric ton of CO₂ is produced by a single passenger on a round-trip flight from London to New York</div>
-                                <div class="fact-item">One metric ton of CO₂ is generated by the average household's electricity use for about 2.5 months</div>
-                            </div>
-                            <button class="carousel-button next" aria-label="Next fact">›</button>
-                            <div class="carousel-dots"></div>
+
+                <div class="cx-hero-meta">
+                    <div class="cx-chip"><span class="cx-chip-value" id="cxSession">0</span><span class="cx-chip-label">tonnes since you opened this page</span></div>
+                    <div class="cx-chip"><span class="cx-chip-value">1,338</span><span class="cx-chip-label">tonnes every second</span></div>
+                    <button type="button" class="cx-pause" id="cxPause" aria-pressed="false">
+                        <svg class="cx-icon-pause" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+                        <svg class="cx-icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+                        <span class="cx-pause-text">Pause</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Carbon budget: what's left and when it runs out -->
+            <section class="cx-budget" aria-labelledby="cx-budget-title">
+                <div class="cx-budget-head">
+                    <div>
+                        <h2 id="cx-budget-title">The 1.5&nbsp;&deg;C carbon budget</h2>
+                        <p>CO&#8322; the world can still emit for a 50% chance of keeping warming to 1.5&nbsp;&deg;C.</p>
+                    </div>
+                    <span class="cx-badge">Running out</span>
+                </div>
+
+                <div class="cx-budget-body">
+                    <div class="cx-budget-left">
+                        <p class="cx-budget-number"><span id="cxBudget">170.00</span><span class="cx-budget-unit">Gt CO&#8322; left</span></p>
+                        <div class="cx-meter" role="img" aria-label="Carbon budget used" id="cxMeter">
+                            <div class="cx-meter-track"><div class="cx-meter-used" id="cxMeterUsed" style="width: 20%"></div></div>
+                            <div class="cx-meter-labels"><span>170 Gt (2026)</span><span id="cxUsed">20% used</span><span>0 Gt (2030)</span></div>
                         </div>
                     </div>
+                    <div class="cx-countdown" aria-label="Time until the budget runs out">
+                        <p class="cx-countdown-label">Runs out in</p>
+                        <div class="cx-countdown-grid">
+                            <div><span id="cxYears">3</span><small>years</small></div>
+                            <div><span id="cxDays">0</span><small>days</small></div>
+                            <div><span id="cxHours">00</span><small>hours</small></div>
+                            <div><span id="cxMins">00</span><small>min</small></div>
+                            <div><span id="cxSecs">00</span><small>sec</small></div>
+                        </div>
+                        <p class="cx-countdown-note">at today&rsquo;s rate of 42.2&nbsp;Gt a year</p>
+                    </div>
+                </div>
+            </section>
 
-                    <div class="counter-card">
-                        <h3>
-                            COUNTRY EMISSIONS COUNTER
-                            <button class="info-button" 
-                                    type="button" 
-                                    aria-label="Show information about country emissions"
-                                    data-tooltip-id="country-emissions">ⓘ</button>
-                            <div class="info-tooltip" 
-                                 role="tooltip" 
-                                 id="country-emissions-tooltip" 
-                                 data-category="country-metrics">
-                                <p class="tooltip-main">CO₂ emissions for selected country, updated in real-time based on their share of global emissions (Global Carbon Budget 2025).</p>
-                                <div class="tooltip-breakdown">
-                                    <span class="breakdown-label">Top Emitters 2025:</span>
-                                    <ul class="breakdown-list">
-                                        <li>China: 33.0% (13.9 Gt CO₂)</li>
-                                        <li>USA: 13.0% (5.5 Gt CO₂)</li>
-                                        <li>India: 7.2% (3.0 Gt CO₂)</li>
-                                        <li>Russia: 4.7% (2.0 Gt CO₂)</li>
-                                    </ul>
-                                </div>
-                                <div class="tooltip-facts">
-                                    <span class="fact-label">Regional Impact:</span>
-                                    These top 4 countries account for 57.9% of global emissions. China shows slight growth slowdown.
-                                </div>
-                            </div>
-                        </h3>
-                        <select id="countrySelect" class="country-select">
+            <!-- Key figures -->
+            <section class="cx-grid" aria-label="Key figures">
+                <article class="cx-tile cx-country">
+                    <h2 class="cx-tile-title">By country</h2>
+                    <label class="cx-select-label" for="cxCountry">Choose a country</label>
+                    <div class="cx-select-wrap">
+                        <select id="cxCountry" class="cx-select">
                             <option value="china">China</option>
                             <option value="us">United States</option>
                             <option value="india">India</option>
@@ -211,105 +193,67 @@
                             <option value="iran">Iran</option>
                             <option value="skorea">South Korea</option>
                             <option value="saudi">Saudi Arabia</option>
+                            <option value="indonesia">Indonesia</option>
                             <option value="canada">Canada</option>
                         </select>
-                        <div id="countryEmissions" class="counter">0</div>
-                        <p>Metric tons of CO₂ since page load</p>
-                        <div id="countryTimer" class="page-timer">0 seconds since you opened the page</div>
-                        <span id="countryPercentage" class="percentage-text"></span>
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
                     </div>
+                    <p class="cx-tile-number" id="cxCountryValue">0</p>
+                    <p class="cx-tile-sub">tonnes since you opened this page</p>
+                    <div class="cx-share">
+                        <div class="cx-share-bar"><span id="cxCountryBar" style="width: 33%"></span></div>
+                        <p><strong id="cxCountryShare">33.0%</strong> of global emissions &middot; <span id="cxCountryYear">13.9</span>&nbsp;Gt a year</p>
+                    </div>
+                </article>
 
-                    <div class="counter-card">
-                        <h3>
-                            YEARLY EMISSIONS COUNTER
-                            <button class="info-button" 
-                                    type="button" 
-                                    aria-label="Show information about yearly emissions"
-                                    data-tooltip-id="yearly-emissions">ⓘ</button>
-                            <div class="info-tooltip" 
-                                 role="tooltip" 
-                                 id="yearly-emissions-tooltip" 
-                                 data-category="yearly-metrics">
-                                <p class="tooltip-main">Total global CO₂ emissions since January 1st, <span class="current-year">2026</span>. Includes both fossil fuel and land-use change emissions.</p>
-                                <div class="tooltip-breakdown">
-                                    <span class="breakdown-label">Annual Growth:</span>
-                                    <ul class="breakdown-list">
-                                        <li>2025: 42.2 Gt CO₂ (+1.1% fossil growth)</li>
-                                        <li>2024: 41.6 Gt CO₂ (2% increase)</li>
-                                        <li>2023: 40.6 Gt CO₂</li>
-                                    </ul>
-                                </div>
-                                <div class="tooltip-facts">
-                                    <span class="fact-label">Trend:</span>
-                                    Fossil emissions hit record 38.1 Gt in 2025. Land-use emissions declining slightly.
-                                </div>
-                            </div>
-                        </h3>
-                        <div id="yearlyEmissions" class="counter">0</div>
-                        <p>Metric tons of CO₂ since January 1st, <span class="current-year">2026</span></p>
-                        <div class="facts-carousel-container">
-                            <button class="carousel-button prev" aria-label="Previous fact">‹</button>
-                            <div class="facts-carousel">
-                                <div class="fact-item">Every 1 billion tons of CO₂ equals the annual carbon absorption of 50 billion mature trees - more than all trees in the Amazon rainforest.</div>
-                                <div class="fact-item">At the current rate of emissions, we release as much CO₂ in 1 hour as the Earth naturally absorbed in 100 years before industrialization.</div>
-                                <div class="fact-item">To absorb these emissions naturally, we would need to plant new forests covering an area the size of the United States every year.</div>
-                                <div class="fact-item">Each second of emissions would fill 12 Olympic-sized swimming pools with CO₂ at normal atmospheric pressure.</div>
-                                <div class="fact-item">The amount of CO₂ we emit annually would form a layer 4 meters thick covering the entire Earth's surface.</div>
-                            </div>
-                            <button class="carousel-button next" aria-label="Next fact">›</button>
-                            <div class="carousel-dots"></div>
-                        </div>
-                    </div>
+                <article class="cx-tile cx-rates">
+                    <h2 class="cx-tile-title">How fast it adds up</h2>
+                    <dl class="cx-rate-list">
+                        <div><dt>Every second</dt><dd>1,338 t</dd></div>
+                        <div><dt>Every minute</dt><dd>80,300 t</dd></div>
+                        <div><dt>Every hour</dt><dd>4.8 million t</dd></div>
+                        <div><dt>Every day</dt><dd>115.6 million t</dd></div>
+                        <div><dt>Every year</dt><dd>42.2 billion t</dd></div>
+                    </dl>
+                </article>
 
-                    <div class="counter-card">
-                        <h3>
-                            REMAINING CARBON BUDGET
-                            <button class="info-button" 
-                                    type="button" 
-                                    aria-label="Show information about carbon budget"
-                                    data-tooltip-id="carbon-budget">ⓘ</button>
-                            <div class="info-tooltip" 
-                                 role="tooltip" 
-                                 id="carbon-budget-tooltip" 
-                                 data-category="budget-metrics">
-                                <p class="tooltip-main">Estimated remaining CO₂ emissions allowance to limit global warming to 1.5°C above pre-industrial levels (Global Carbon Budget 2025).</p>
-                                <div class="tooltip-breakdown">
-                                    <span class="breakdown-label">Critical Status:</span>
-                                    <ul class="breakdown-list">
-                                        <li>170 Gt CO₂ remaining (virtually exhausted)</li>
-                                        <li>Budget depleted before 2030</li>
-                                        <li>1.5°C target no longer plausible</li>
-                                    </ul>
-                                </div>
-                                <div class="tooltip-facts">
-                                    <span class="fact-label">Critical Timeline:</span>
-                                    At current emission rates (42.2 Gt/year), the remaining budget (170 Gt from January 2026) will be exhausted in about 4 years, by early 2030.
-                                </div>
-                            </div>
-                        </h3>
-                        <div id="carbonBudget" class="counter">170</div>
-                        <p>Gigatons of CO₂ remaining</p>
-                        <div class="budget-context">42.2 Gt CO₂ used per year</div>
-                        <div class="budget-progress">
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 20%"></div>
-                            </div>
-                        </div>
-                        <div class="facts-carousel-container">
-                            <button class="carousel-button prev" aria-label="Previous fact">‹</button>
-                            <div class="facts-carousel">
-                                <div class="fact-item">At current rate of 42.2 Gt per year, our carbon budget will be exhausted by early 2030</div>
-                                <div class="fact-item">For 83% certainty of staying below 1.5°C, we only have 100 Gt CO₂ left</div>
-                                <div class="fact-item">CO₂ levels are now at 427.1 ppm, 55% above pre-industrial levels</div>
-                                <div class="fact-item">We're using about 3.5 Gt of our carbon budget every month</div>
-                                <div class="fact-item">Once the budget is exhausted, every additional Gt of CO₂ increases the risk of exceeding 1.5°C</div>
-                            </div>
-                            <button class="carousel-button next" aria-label="Next fact">›</button>
-                            <div class="carousel-dots"></div>
-                        </div>
+                <article class="cx-tile cx-sources">
+                    <h2 class="cx-tile-title">Where it comes from</h2>
+                    <div class="cx-split" role="img" aria-label="Fossil fuels 90 percent, land use 10 percent">
+                        <span class="cx-split-fossil" style="width: 90.3%"></span><span class="cx-split-land" style="width: 9.7%"></span>
                     </div>
-                </div>
-            </div>
+                    <ul class="cx-legend">
+                        <li><span class="cx-dot cx-dot-fossil" aria-hidden="true"></span><span>Fossil fuels &amp; cement</span><strong>38.1&nbsp;Gt</strong></li>
+                        <li><span class="cx-dot cx-dot-land" aria-hidden="true"></span><span>Land use (mainly deforestation)</span><strong>4.1&nbsp;Gt</strong></li>
+                    </ul>
+                    <p class="cx-tile-note">Fossil emissions hit a record high in 2025, up 1.1%.</p>
+                </article>
+
+                <article class="cx-tile cx-emitters">
+                    <h2 class="cx-tile-title">Biggest emitters</h2>
+                    <ol class="cx-bars">
+                        <li><span class="cx-bar-name">China</span><span class="cx-bar"><span style="width: 100%"></span></span><span class="cx-bar-val">33.0%</span></li>
+                        <li><span class="cx-bar-name">United States</span><span class="cx-bar"><span style="width: 39.4%"></span></span><span class="cx-bar-val">13.0%</span></li>
+                        <li><span class="cx-bar-name">India</span><span class="cx-bar"><span style="width: 21.8%"></span></span><span class="cx-bar-val">7.2%</span></li>
+                        <li><span class="cx-bar-name">Russia</span><span class="cx-bar"><span style="width: 14.2%"></span></span><span class="cx-bar-val">4.7%</span></li>
+                        <li><span class="cx-bar-name">Japan</span><span class="cx-bar"><span style="width: 9.1%"></span></span><span class="cx-bar-val">3.0%</span></li>
+                        <li><span class="cx-bar-name">Germany</span><span class="cx-bar"><span style="width: 5.5%"></span></span><span class="cx-bar-val">1.8%</span></li>
+                    </ol>
+                    <p class="cx-tile-note">Share of global CO&#8322; emissions, 2025 estimates.</p>
+                </article>
+
+                <article class="cx-tile cx-perspective">
+                    <h2 class="cx-tile-title">One tonne of CO&#8322; is about&hellip;</h2>
+                    <ul class="cx-facts">
+                        <li><span class="cx-fact-num">4,000&nbsp;km</span><span>driven in an average petrol car</span></li>
+                        <li><span class="cx-fact-num">1</span><span>passenger&rsquo;s round trip London&ndash;New York</span></li>
+                        <li><span class="cx-fact-num">50</span><span>mature trees absorbing CO&#8322; for a year</span></li>
+                        <li><span class="cx-fact-num">120,000</span><span>smartphone charges</span></li>
+                    </ul>
+                </article>
+            </section>
+
+            <p class="cx-source">Estimates are calculated from annual totals in the <a href="https://globalcarbonbudget.org/" rel="noopener">Global Carbon Budget 2025</a>, not measured live. <a href="/carbon-tracking-guide">How the counter works &rarr;</a></p>
 
             <section class="blog-preview">
                 <h2>Latest Insights</h2>
@@ -413,7 +357,7 @@
             </style>
 
             <section class="faq-section" id="faq-section">
-                <h2 data-aos="fade-down">Global CO₂ Emissions: Frequently Asked Questions</h2>
+                <h2>Global CO₂ Emissions: Frequently Asked Questions</h2>
                 <div class="faq-container">
                     <div class="faq-item" data-aos="fade-up" data-aos-delay="50">
                         <button class="faq-question" type="button">
@@ -695,6 +639,7 @@
         });
     </script>
     <script src="./js/script.js?v=2026-10"></script>
+    <script src="/js/home-2026.js?v=2026-10" defer></script>
     
     <!-- Schema.org JSON-LD -->
     <script type="application/ld+json">
