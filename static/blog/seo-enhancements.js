@@ -129,8 +129,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Add reading time estimation
     const readingTime = document.querySelector('.reading-time');
-    if (!readingTime) {
-        const text = articleContent.textContent;
+    const articleBody = document.querySelector('.post-body');
+    if (!readingTime && articleBody) {
+        const text = articleBody.textContent;
         const wordsPerMinute = 200;
         const words = text.trim().split(/\s+/).length;
         const minutes = Math.ceil(words / wordsPerMinute);

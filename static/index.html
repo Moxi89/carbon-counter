@@ -680,19 +680,11 @@
 
         <!-- Footer -->
         <div id="footer-placeholder"></div>
-        <script>
-            // Load footer
-            fetch('/shared/footer.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('footer-placeholder').innerHTML = data;
-                });
-        </script>
     </div>
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="/shared/nav.js" defer></script>
-    <script src="/shared/footer.js" defer></script>
+    <script src="/shared/footer.js?v=2026-10" defer></script>
     <script src="/shared/cookie-banner.js" defer></script>
     <script>
         AOS.init({
@@ -702,7 +694,7 @@
             easing: 'ease-out-cubic' // Smoother easing
         });
     </script>
-    <script src="./js/script.js"></script>
+    <script src="./js/script.js?v=2026-10"></script>
     
     <!-- Schema.org JSON-LD -->
     <script type="application/ld+json">

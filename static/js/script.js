@@ -53,13 +53,13 @@ document.addEventListener('DOMContentLoaded', function() {
             // Global Emissions
             const secondsSincePageLoad = (now - pageLoadTime) / 1000;
             lastGlobalEmissions = Math.round(EMISSIONS_PER_SECOND * secondsSincePageLoad);
-            elements.globalEmissions.textContent = formatNumber(lastGlobalEmissions);
+            if (elements.globalEmissions) elements.globalEmissions.textContent = formatNumber(lastGlobalEmissions);
 
             // Yearly Emissions (since January 1st of the current year)
             const startOfYear = new Date(now.getFullYear(), 0, 1);
             const secondsIntoYear = (now - startOfYear) / 1000;
             const yearlyEmissions = (EMISSIONS_PER_YEAR * secondsIntoYear) / (365 * 24 * 60 * 60);
-            elements.yearlyEmissions.textContent = formatNumber(yearlyEmissions * 1000000000);
+            if (elements.yearlyEmissions) elements.yearlyEmissions.textContent = formatNumber(yearlyEmissions * 1000000000);
 
             // Country Emissions
             if (elements.countrySelect && elements.countryEmissions) {
@@ -71,7 +71,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Update percentage text
                 const percentageText = `${countryData.percentage}% of the global emission`;
-                document.getElementById('countryPercentage').textContent = percentageText;
+                const countryPercentageEl = document.getElementById('countryPercentage');
+                if (countryPercentageEl) countryPercentageEl.textContent = percentageText;
             }
 
             lastUpdate = timestamp;
@@ -102,11 +103,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const remainingBudget = startingBudget - budgetUsed;
         
         // Update counter
-        carbonBudgetCounter.textContent = Math.max(0, remainingBudget).toFixed(2);
+        if (carbonBudgetCounter) carbonBudgetCounter.textContent = Math.max(0, remainingBudget).toFixed(2);
         
         // Update progress bar
         const percentageUsed = Math.min(100, (budgetUsed / startingBudget) * 100);
-        progressFill.style.width = `${percentageUsed}%`;
+        if (progressFill) progressFill.style.width = `${percentageUsed}%`;
         
         // Request next update
         requestAnimationFrame(updateCarbonBudget);
@@ -199,7 +200,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateScrollProgress() {
         const scrollProgress = document.querySelector('.scroll-progress');
         const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-        scrollProgress.style.width = `${scrollPercent}%`;
+        if (scrollProgress) scrollProgress.style.width = `${scrollPercent}%`;
     }
 
     window.addEventListener('scroll', updateScrollProgress);
@@ -207,7 +208,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Handle scroll to top
     const scrollUpButton = document.querySelector('.scroll-up');
-    scrollUpButton.addEventListener('click', () => {
+    scrollUpButton?.addEventListener('click', () => {
         window.scrollTo({
             top: 0,
             behavior: 'smooth'
@@ -216,7 +217,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Show/hide scroll button based on scroll position
     window.addEventListener('scroll', () => {
-        scrollUpButton.classList.toggle('visible', window.scrollY > window.innerHeight / 2);
+        scrollUpButton?.classList.toggle('visible', window.scrollY > window.innerHeight / 2);
     });
 
     // Update timers
@@ -224,8 +225,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const now = new Date();
         const secondsElapsed = Math.floor((now - pageLoadTime) / 1000);
         const timerText = `${secondsElapsed} seconds since you opened the page`;
-        elements.pageTimer.textContent = timerText;
-        elements.countryTimer.textContent = timerText;
+        if (elements.pageTimer) elements.pageTimer.textContent = timerText;
+        if (elements.countryTimer) elements.countryTimer.textContent = timerText;
     }
 
     // Update timers every second
