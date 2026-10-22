@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const EMISSIONS_PER_SECOND = 1338; // tons of CO₂ (42.2 Gt ÷ 31,536,000 seconds)
     const UPDATE_INTERVAL = 1000/120; // ~8.33ms for 120fps
     const pageLoadTime = new Date(); // When the page was loaded
-    const startOfYear = new Date(2025, 0, 1); // January 1st, 2025
 
     // Cache DOM elements
     const elements = {
@@ -56,7 +55,8 @@ document.addEventListener('DOMContentLoaded', function() {
             lastGlobalEmissions = Math.round(EMISSIONS_PER_SECOND * secondsSincePageLoad);
             elements.globalEmissions.textContent = formatNumber(lastGlobalEmissions);
 
-            // Yearly Emissions
+            // Yearly Emissions (since January 1st of the current year)
+            const startOfYear = new Date(now.getFullYear(), 0, 1);
             const secondsIntoYear = (now - startOfYear) / 1000;
             const yearlyEmissions = (EMISSIONS_PER_YEAR * secondsIntoYear) / (365 * 24 * 60 * 60);
             elements.yearlyEmissions.textContent = formatNumber(yearlyEmissions * 1000000000);
@@ -74,18 +74,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('countryPercentage').textContent = percentageText;
             }
 
-            // Carbon Budget
-            if (elements.carbonBudget) {
-                const yearFraction = (now - startOfYear) / (1000 * 60 * 60 * 24 * 365);
-                const budgetRemaining = CARBON_BUDGET_START - (EMISSIONS_PER_YEAR * yearFraction);
-                elements.carbonBudget.textContent = formatNumber(Math.max(0, Math.round(budgetRemaining)));
-            }
-
             lastUpdate = timestamp;
         }
 
         requestAnimationFrame(updateCounters);
     }
+
+    // Keep "since January 1st, <year>" labels current
+    const currentYear = String(new Date().getFullYear());
+    document.querySelectorAll('.current-year').forEach(el => { el.textContent = currentYear; });
 
     // Start the animation loop
     requestAnimationFrame(updateCounters);
@@ -96,15 +93,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const startingBudget = 170; // Gt CO2 remaining for 1.5°C
     const annualUsage = 42.2; // Gt CO2 per year (2025)
     const usagePerSecond = annualUsage / (365 * 24 * 60 * 60); // Gt CO2 per second
-    const startDate = new Date('2025-01-01T00:00:00Z');
+    // Global Carbon Budget 2025 gives the 170 Gt figure as of 1 January 2026
+    const startDate = new Date('2026-01-01T00:00:00Z');
 
     function updateCarbonBudget() {
-        const secondsSince2024 = (Date.now() - startDate.getTime()) / 1000;
-        const budgetUsed = usagePerSecond * secondsSince2024;
+        const secondsSinceStart = (Date.now() - startDate.getTime()) / 1000;
+        const budgetUsed = usagePerSecond * secondsSinceStart;
         const remainingBudget = startingBudget - budgetUsed;
         
         // Update counter
-        carbonBudgetCounter.textContent = Math.max(0, remainingBudget.toFixed(6));
+        carbonBudgetCounter.textContent = Math.max(0, remainingBudget).toFixed(2);
         
         // Update progress bar
         const percentageUsed = Math.min(100, (budgetUsed / startingBudget) * 100);

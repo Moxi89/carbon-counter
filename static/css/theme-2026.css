@@ -1,0 +1,724 @@
+/* ==========================================================================
+   Carbon Counter — 2026 theme layer
+   Loaded LAST on every page. It retunes the shared design tokens and
+   restyles the main components; page-specific CSS stays untouched.
+   Deep green-black background, emerald data, solar-gold for the budget.
+   Fonts are self-hosted so they don't depend on Google Fonts.
+   ========================================================================== */
+
+@font-face { font-family: 'Fira Sans'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/fira-sans-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Fira Sans'; font-style: normal; font-weight: 500; font-display: swap; src: url('/fonts/fira-sans-latin-500-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Fira Sans'; font-style: normal; font-weight: 600; font-display: swap; src: url('/fonts/fira-sans-latin-600-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Fira Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url('/fonts/fira-sans-latin-700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Fira Code'; font-style: normal; font-weight: 300 700; font-display: swap; src: url('/fonts/fira-code-latin-wght-normal.woff2') format('woff2-variations'); }
+
+:root {
+    color-scheme: dark;
+
+    /* 2026 palette */
+    --t-bg: #050b09;
+    --t-surface: rgba(14, 30, 24, 0.72);
+    --t-surface-solid: #0d1c17;
+    --t-surface-raised: #12261f;
+    --t-border: rgba(52, 211, 153, 0.14);
+    --t-border-strong: rgba(52, 211, 153, 0.32);
+    --t-text: #ecfdf5;
+    --t-muted: #a3bfb4;
+    --t-subtle: #7f9c91;
+    --t-primary: #10b981;
+    --t-primary-bright: #34d399;
+    --t-primary-soft: rgba(16, 185, 129, 0.12);
+    --t-gold: #fbbf24;
+    --t-gold-soft: rgba(251, 191, 36, 0.12);
+    --t-danger: #f87171;
+    --t-sans: 'Fira Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --t-mono: 'Fira Code', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+    --t-radius: 20px;
+    --t-radius-sm: 12px;
+    --t-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 24px 48px -24px rgba(0, 0, 0, 0.6);
+    --t-ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+    /* Map the site's existing tokens onto the new palette */
+    --primary-bg: var(--t-bg);
+    --secondary-bg: var(--t-surface-solid);
+    --accent-color: var(--t-primary-bright);
+    --text-color: var(--t-text);
+    --secondary-text: var(--t-muted);
+    --card-bg: var(--t-surface);
+    --glass-bg: var(--t-surface);
+    --glass-border: var(--t-border);
+    --glass-shadow: var(--t-shadow);
+    --nav-bg: rgba(5, 11, 9, 0.72);
+    --nav-border: var(--t-border);
+    --nav-accent: var(--t-primary-bright);
+    --nav-text: var(--t-text);
+    --font-family: var(--t-sans);
+    --font-family-base: var(--t-sans);
+    --heading-font: var(--t-sans);
+    --mono-font: var(--t-mono);
+    --border-radius-md: var(--t-radius-sm);
+    --border-radius-lg: var(--t-radius);
+}
+
+/* --------------------------------------------------------------------------
+   Base
+   -------------------------------------------------------------------------- */
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+    font-family: var(--t-sans) !important;
+    color: var(--t-text);
+    background-color: var(--t-bg) !important;
+    background-image:
+        radial-gradient(60rem 40rem at 10% -10%, rgba(16, 185, 129, 0.16), transparent 60%),
+        radial-gradient(50rem 36rem at 100% 30%, rgba(251, 191, 36, 0.06), transparent 60%),
+        radial-gradient(60rem 40rem at 50% 110%, rgba(16, 185, 129, 0.10), transparent 60%) !important;
+    background-attachment: fixed !important;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Faint data-grid texture */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image:
+        linear-gradient(rgba(52, 211, 153, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(52, 211, 153, 0.045) 1px, transparent 1px);
+    background-size: 48px 48px;
+    -webkit-mask-image: radial-gradient(ellipse at 50% 0%, #000 0%, transparent 75%);
+    mask-image: radial-gradient(ellipse at 50% 0%, #000 0%, transparent 75%);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--t-sans);
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+}
+
+p, li { text-wrap: pretty; }
+
+a { color: var(--t-primary-bright); }
+
+:focus-visible {
+    outline: 2px solid var(--t-primary-bright) !important;
+    outline-offset: 3px;
+    border-radius: 6px;
+}
+
+::selection { background: rgba(52, 211, 153, 0.3); color: #fff; }
+
+.particle {
+    background: var(--t-primary-bright) !important;
+    box-shadow: 0 0 12px var(--t-primary-bright);
+}
+
+.scroll-progress {
+    background: linear-gradient(90deg, var(--t-primary), var(--t-primary-bright)) !important;
+}
+
+.scroll-up {
+    background: var(--t-surface-raised) !important;
+    color: var(--t-primary-bright) !important;
+    border: 1px solid var(--t-border-strong) !important;
+    min-width: 44px;
+    min-height: 44px;
+}
+
+/* --------------------------------------------------------------------------
+   Navigation (shared navbar)
+   -------------------------------------------------------------------------- */
+
+.nav-container {
+    background: rgba(5, 11, 9, 0.72) !important;
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    border-bottom: 1px solid var(--t-border) !important;
+    box-shadow: none !important;
+}
+
+.nav-container.scrolled { background: rgba(5, 11, 9, 0.9) !important; }
+
+/* Swap the 🌳 emoji for an SVG leaf + wordmark (navbar.html is long-cached, so this lives in CSS) */
+.nav-logo .leaf-icon { display: none !important; }
+
+.nav-logo .home-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    color: var(--t-text) !important;
+    text-decoration: none;
+}
+
+.nav-logo .home-link::before {
+    content: '';
+    width: 26px;
+    height: 26px;
+    flex-shrink: 0;
+    background-color: var(--t-primary-bright);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z'/%3E%3Cpath d='M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z'/%3E%3Cpath d='M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.nav-logo .home-link::after {
+    content: 'CO\2082  Counter';
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+}
+
+.nav-link {
+    color: var(--t-muted) !important;
+    font-weight: 500;
+    border-radius: 999px;
+    padding: 8px 12px !important;
+    transition: color 150ms ease, background-color 150ms ease;
+}
+
+.nav-link:hover,
+.nav-link.active,
+.nav-link[aria-current='page'] {
+    color: var(--t-text) !important;
+    background: var(--t-primary-soft);
+}
+
+.nav-link::after { display: none !important; }
+
+/* --------------------------------------------------------------------------
+   Headings & hero blocks
+   -------------------------------------------------------------------------- */
+
+.hero-section h1,
+.hero-content h1,
+.blog-hero h1,
+.post-title,
+.post-header h1,
+.legal-header h1 {
+    font-family: var(--t-sans) !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.03em !important;
+    text-transform: none;
+    background: linear-gradient(180deg, #ffffff 30%, #a7f3d0 100%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    color: transparent !important;
+    -webkit-text-fill-color: transparent !important;
+    text-shadow: none !important;
+    filter: none !important;
+}
+
+.hero-section h1::after,
+.blog-hero h1::after,
+.post-title::after,
+section h2::after,
+.hero-description .highlight::after {
+    background: linear-gradient(90deg, var(--t-primary), var(--t-primary-bright)) !important;
+    box-shadow: none !important;
+}
+
+.hero-description,
+.hero-content p,
+.section-intro {
+    color: var(--t-muted) !important;
+}
+
+.hero-description .highlight { color: var(--t-text) !important; }
+
+.disclaimer { color: var(--t-subtle) !important; }
+
+/* Section titles on the home page and elsewhere */
+.faq-section > h2,
+.about-section h2,
+.blog-preview h2,
+.category-section h2,
+section > h2 {
+    color: var(--t-text) !important;
+    font-family: var(--t-sans) !important;
+    -webkit-text-fill-color: currentColor;
+}
+
+/* --------------------------------------------------------------------------
+   Cards (home counters, blog, guide, legal)
+   -------------------------------------------------------------------------- */
+
+.counter-card,
+.glassmorphism,
+.blog-card,
+.feature,
+.faq-item,
+.understanding-card,
+.science-card,
+.impact-card,
+.next-step-card,
+.usage-step,
+.equivalent-item,
+.highlight-item,
+.source-item,
+.method-option,
+.policy-section,
+.legal-content,
+.counter-item,
+.main-counter,
+.post-navigation a,
+.about-section,
+.blog-hero {
+    background: var(--t-surface) !important;
+    border: 1px solid var(--t-border) !important;
+    border-radius: var(--t-radius) !important;
+    box-shadow: var(--t-shadow) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.counter-card:hover,
+.blog-card:hover,
+.feature:hover,
+.understanding-card:hover,
+.science-card:hover,
+.impact-card:hover,
+.next-step-card:hover,
+.usage-step:hover,
+.source-item:hover,
+.method-option:hover,
+.post-navigation a:hover {
+    border-color: var(--t-border-strong) !important;
+}
+
+/* Thin highlight along the top edge of counter cards */
+.counter-card {
+    position: relative;
+}
+
+.counter-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 24px;
+    right: 24px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(52, 211, 153, 0.5), transparent);
+    pointer-events: none;
+}
+
+.counter-card h3 {
+    font-family: var(--t-sans) !important;
+    font-size: 0.8125rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase;
+    color: var(--t-muted) !important;
+}
+
+.counter-card p { color: var(--t-muted); }
+
+/* Big numbers */
+.counter,
+#globalEmissions,
+#countryEmissions,
+#yearlyEmissions,
+#carbonBudget,
+.counter-value,
+.highlight-number,
+.number {
+    font-family: var(--t-mono) !important;
+    font-variant-numeric: tabular-nums;
+    font-variant-ligatures: none;
+    letter-spacing: -0.02em;
+}
+
+.counter,
+#globalEmissions,
+#countryEmissions,
+#yearlyEmissions,
+#carbonBudget,
+.counter-value {
+    background: rgba(0, 0, 0, 0.22) !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    border-radius: var(--t-radius-sm) !important;
+    color: var(--t-text) !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+}
+
+#yearlyEmissions {
+    color: var(--t-primary-bright) !important;
+    text-shadow: 0 0 24px rgba(52, 211, 153, 0.25) !important;
+}
+
+.highlight-number,
+.number { color: var(--t-primary-bright) !important; }
+
+.page-timer,
+.percentage-text,
+#countryPercentage,
+.budget-context {
+    font-family: var(--t-mono) !important;
+    color: var(--t-primary-bright) !important;
+}
+
+/* Carbon budget card — warning tone */
+.counter-card:has(#carbonBudget) {
+    border-color: rgba(251, 191, 36, 0.22) !important;
+    background:
+        radial-gradient(40rem 14rem at 50% 0%, rgba(251, 191, 36, 0.08), transparent 70%),
+        var(--t-surface) !important;
+}
+
+.counter-card:has(#carbonBudget)::before {
+    background: linear-gradient(90deg, transparent, rgba(251, 191, 36, 0.55), transparent);
+}
+
+#carbonBudget { color: var(--t-gold) !important; }
+
+.counter-card:has(#carbonBudget) .budget-context { color: var(--t-gold) !important; }
+
+/* Budget bar: gradient on the track, the fill's shadow dims the unused part */
+.progress-bar {
+    height: 12px !important;
+    border-radius: 999px !important;
+    overflow: hidden !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    background: linear-gradient(90deg, var(--t-primary) 0%, var(--t-gold) 65%, var(--t-danger) 100%) !important;
+}
+
+.progress-fill {
+    background: transparent !important;
+    box-shadow: 0 0 0 100vw rgba(13, 24, 20, 0.92) !important;
+    border-radius: 0 !important;
+}
+
+.progress-fill::after { display: none !important; }
+
+/* Country dropdown */
+.country-select {
+    min-height: 44px;
+    border-radius: var(--t-radius-sm) !important;
+    border: 1px solid var(--t-border-strong) !important;
+    background-color: var(--t-surface-raised) !important;
+    color: var(--t-text) !important;
+    font-family: var(--t-sans) !important;
+}
+
+.country-select:hover,
+.country-select:focus { border-color: var(--t-primary-bright) !important; }
+
+.country-select option { background: var(--t-surface-solid); color: var(--t-text); }
+
+/* Fact carousels */
+.fact-item {
+    font-family: var(--t-sans) !important;
+    color: var(--t-muted) !important;
+}
+
+.carousel-button {
+    min-width: 36px;
+    min-height: 36px;
+    border-radius: 50% !important;
+    border: 1px solid var(--t-border-strong) !important;
+    background: var(--t-surface-raised) !important;
+    color: var(--t-primary-bright) !important;
+}
+
+.carousel-button:hover { background: var(--t-primary-soft) !important; }
+
+.carousel-dot { background: rgba(255, 255, 255, 0.2) !important; }
+.carousel-dot.active { background: var(--t-primary-bright) !important; }
+
+/* Info buttons & tooltips */
+.info-button {
+    color: var(--t-primary-bright) !important;
+    border-color: var(--t-border-strong) !important;
+    background: transparent !important;
+}
+
+.info-button:hover { background: var(--t-primary-soft) !important; }
+
+.info-tooltip {
+    background: #08130f !important;
+    border: 1px solid var(--t-border-strong) !important;
+    border-radius: 16px !important;
+    color: var(--t-muted) !important;
+    box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.7) !important;
+    font-family: var(--t-sans) !important;
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+.tooltip-breakdown,
+.tooltip-facts {
+    background: rgba(0, 0, 0, 0.25) !important;
+    border-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+/* --------------------------------------------------------------------------
+   Buttons, pills, tags
+   -------------------------------------------------------------------------- */
+
+.cta-button,
+.view-all-button,
+.btn-primary,
+.step-cta,
+.read-more {
+    font-family: var(--t-sans) !important;
+    font-weight: 600 !important;
+    border-radius: 999px !important;
+    transition: transform 150ms var(--t-ease), background-color 150ms ease, border-color 150ms ease;
+}
+
+.cta-button,
+.btn-primary {
+    background: var(--t-primary-bright) !important;
+    color: #022c22 !important;
+    -webkit-text-fill-color: #022c22 !important;
+    border: 0 !important;
+    box-shadow: 0 0 32px rgba(52, 211, 153, 0.25) !important;
+}
+
+.cta-button:hover,
+.btn-primary:hover { background: #6ee7b7 !important; transform: translateY(-1px); }
+
+.view-all-button,
+.btn-secondary {
+    background: transparent !important;
+    color: var(--t-primary-bright) !important;
+    border: 1px solid var(--t-border-strong) !important;
+    border-radius: 999px !important;
+}
+
+.view-all-button:hover,
+.btn-secondary:hover { background: var(--t-primary-soft) !important; }
+
+.filter-btn {
+    font-family: var(--t-sans) !important;
+    background: transparent !important;
+    color: var(--t-muted) !important;
+    border: 1px solid var(--t-border) !important;
+    min-height: 40px;
+}
+
+.filter-btn:hover { color: var(--t-text) !important; border-color: var(--t-border-strong) !important; }
+
+.filter-btn.active {
+    background: var(--t-primary-bright) !important;
+    color: #022c22 !important;
+    border-color: var(--t-primary-bright) !important;
+}
+
+.card-tag,
+.category-tag,
+.climate-urgent-badge {
+    font-family: var(--t-mono) !important;
+    font-size: 0.75rem !important;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: var(--t-primary-soft) !important;
+    color: var(--t-primary-bright) !important;
+    border: 1px solid var(--t-border-strong) !important;
+    border-radius: 999px !important;
+}
+
+.climate-urgent-badge {
+    display: inline-block !important;
+    width: auto !important;
+    margin: 12px auto 4px !important;
+    padding: 6px 14px !important;
+    text-transform: none;
+    background: var(--t-gold-soft) !important;
+    color: var(--t-gold) !important;
+    border-color: rgba(251, 191, 36, 0.35) !important;
+}
+
+/* --------------------------------------------------------------------------
+   FAQ
+   -------------------------------------------------------------------------- */
+
+.faq-item {
+    border-radius: 16px !important;
+    box-shadow: none !important;
+}
+
+.faq-item.active,
+.faq-item:hover { border-color: var(--t-border-strong) !important; }
+
+.faq-question {
+    min-height: 56px;
+    font-family: var(--t-sans) !important;
+    font-weight: 500 !important;
+    color: var(--t-text) !important;
+    background: transparent !important;
+}
+
+.faq-answer,
+.faq-answer p {
+    background: transparent !important;
+    color: var(--t-muted) !important;
+}
+
+/* --------------------------------------------------------------------------
+   Blog
+   -------------------------------------------------------------------------- */
+
+.blog-card { overflow: hidden; }
+
+.blog-card h2,
+.blog-card h3,
+.card-content h2,
+.card-content h3 { color: var(--t-text) !important; }
+
+.card-content p,
+.card-meta { color: var(--t-muted) !important; }
+
+.post-title { font-size: clamp(2rem, 5vw, 3rem) !important; }
+
+.post-meta,
+.meta-info,
+.breadcrumb { color: var(--t-subtle) !important; }
+
+.post-content { color: #d6e5df !important; }
+
+.post-content h2,
+.post-content h3 { color: var(--t-text) !important; }
+
+.post-content strong { color: #fff; }
+
+.featured-image {
+    border-radius: var(--t-radius) !important;
+    border: 1px solid var(--t-border) !important;
+    background: var(--t-surface) !important;
+}
+
+.climate-urgent-box {
+    background: var(--t-gold-soft) !important;
+    border: 1px solid rgba(251, 191, 36, 0.3) !important;
+    border-radius: var(--t-radius) !important;
+}
+
+.climate-urgent-box h3 { color: var(--t-gold) !important; }
+
+.climate-impact-box,
+.climate-context-box,
+.tip-box,
+.cta-box,
+.example-box,
+.formula-box,
+.key-point,
+.accuracy-level {
+    background: var(--t-primary-soft) !important;
+    border: 1px solid var(--t-border) !important;
+    border-radius: var(--t-radius) !important;
+}
+
+.post-content code,
+.post-content pre {
+    font-family: var(--t-mono) !important;
+    background: rgba(0, 0, 0, 0.3) !important;
+}
+
+/* --------------------------------------------------------------------------
+   Guide & legal pages
+   -------------------------------------------------------------------------- */
+
+.next-step-link,
+.step-link { color: var(--t-primary-bright) !important; }
+
+.step-number {
+    font-family: var(--t-mono) !important;
+    background: var(--t-primary-soft) !important;
+    color: var(--t-primary-bright) !important;
+    border: 1px solid var(--t-border-strong) !important;
+}
+
+.legal-content h2,
+.policy-section h2 { color: var(--t-primary-bright) !important; }
+
+.legal-content p,
+.legal-content li,
+.policy-section p,
+.policy-section li { color: var(--t-muted) !important; }
+
+.last-updated { color: var(--t-subtle) !important; font-family: var(--t-mono) !important; }
+
+/* Keep the legal page titles clear of the fixed nav bar */
+.legal-header { padding-top: 32px !important; }
+
+/* Live tracker page */
+.live-dot { background: var(--t-primary-bright) !important; box-shadow: 0 0 12px var(--t-primary-bright) !important; }
+
+/* --------------------------------------------------------------------------
+   Footer & cookie banner
+   -------------------------------------------------------------------------- */
+
+footer.glassmorphism,
+.site-footer {
+    background: rgba(5, 11, 9, 0.6) !important;
+    border: 0 !important;
+    border-top: 1px solid var(--t-border) !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+
+.footer-brand h4 { color: var(--t-text) !important; font-family: var(--t-sans) !important; }
+.footer-brand p,
+.copyright { color: var(--t-subtle) !important; }
+
+.footer-section h5 {
+    color: var(--t-primary-bright) !important;
+    font-size: 0.8125rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.footer-section a {
+    color: var(--t-muted) !important;
+    min-height: 32px;
+}
+
+.footer-section a:hover { color: var(--t-text) !important; }
+
+.cookie-banner {
+    background: rgba(8, 19, 15, 0.97) !important;
+    border: 1px solid var(--t-border-strong) !important;
+    border-radius: var(--t-radius) !important;
+    box-shadow: 0 24px 48px -16px rgba(0, 0, 0, 0.8) !important;
+    font-family: var(--t-sans) !important;
+}
+
+.cookie-content p { color: var(--t-muted) !important; }
+
+.cookie-banner .btn { min-height: 40px; border-radius: 999px !important; }
+
+/* --------------------------------------------------------------------------
+   Phones: icon-only brand and tighter links so all 7 fit
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 768px) {
+    .nav-link { padding: 8px 6px !important; }
+    .nav-items { gap: 2px !important; }
+}
+
+@media (max-width: 600px) {
+    .nav-logo .home-link::after { display: none; }
+    .nav-link { padding: 8px 4px !important; font-size: 0.8125rem !important; }
+}
+
+/* --------------------------------------------------------------------------
+   Reduced motion
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .background-particles { display: none !important; }
+}
