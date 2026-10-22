@@ -10,11 +10,8 @@
     const BUDGET_START = Date.UTC(2026, 0, 1);        // GCB 2025 counts from 1 January 2026
     const BUDGET_END = BUDGET_START + (BUDGET_START_GT / 42.2) * SECONDS_PER_YEAR * 1000;
 
-    // Share of global CO2 emissions, 2025 estimates
-    const COUNTRIES = {
-        china: 33.0, us: 13.0, india: 7.2, russia: 4.7, japan: 3.0, germany: 1.8,
-        iran: 1.8, skorea: 1.8, saudi: 1.7, indonesia: 1.6, canada: 1.5
-    };
+    // Country figures live on the <option> elements (share %, annual Mt),
+    // written by tools/countries/build.py from the latest annual data.
 
     const $ = (id) => document.getElementById(id);
     const el = {
@@ -22,7 +19,7 @@
         meterUsed: $('cxMeterUsed'), used: $('cxUsed'), meter: $('cxMeter'),
         years: $('cxYears'), days: $('cxDays'), hours: $('cxHours'), mins: $('cxMins'), secs: $('cxSecs'),
         country: $('cxCountry'), countryValue: $('cxCountryValue'), countryShare: $('cxCountryShare'),
-        countryBar: $('cxCountryBar'), countryYear: $('cxCountryYear'), pause: $('cxPause')
+        countryBar: $('cxCountryBar'), countryYear: $('cxCountryYear'), countryLink: $('cxCountryLink'), pause: $('cxPause')
     };
     if (!el.year) return;
 
@@ -35,11 +32,19 @@
     let pausedAt = 0;      // wall-clock time when paused
     let lastPaint = 0;
 
+    const selected = () => el.country.options[el.country.selectedIndex];
+    const topShare = parseFloat(el.country.options[0].dataset.share) || 1;
+
     function setCountry() {
-        const share = COUNTRIES[el.country.value] || 0;
+        const o = selected();
+        const share = parseFloat(o.dataset.share) || 0;
         el.countryShare.textContent = share.toFixed(1) + '%';
-        el.countryYear.textContent = (share / 100 * 42.2).toFixed(1);
-        el.countryBar.style.width = (share / COUNTRIES.china * 100) + '%';
+        el.countryYear.textContent = ((parseFloat(o.dataset.mt) || 0) / 1000).toFixed(2);
+        el.countryBar.style.width = (share / topShare * 100) + '%';
+        if (el.countryLink) {
+            el.countryLink.href = '/co2-emissions/' + o.value;
+            el.countryLink.textContent = o.textContent + ' CO\u2082 profile \u2192';
+        }
     }
 
     function render(now) {
@@ -50,8 +55,8 @@
         const sessionT = Math.max(0, sessionSeconds * PER_SECOND_T);
         el.session.textContent = fmt.format(Math.floor(sessionT));
 
-        const share = COUNTRIES[el.country.value] || 0;
-        el.countryValue.textContent = fmt.format(Math.floor(sessionT * share / 100));
+        const countryRate = (parseFloat(selected().dataset.mt) || 0) * 1e6 / SECONDS_PER_YEAR;
+        el.countryValue.textContent = fmt.format(Math.floor(sessionSeconds * countryRate));
 
         const usedGt = Math.max(0, (now - BUDGET_START) / 1000 / SECONDS_PER_YEAR * 42.2);
         const leftGt = Math.max(0, BUDGET_START_GT - usedGt);

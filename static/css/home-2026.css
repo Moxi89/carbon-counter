@@ -755,3 +755,21 @@ main > section + section { margin-top: 20px; }
 @media (prefers-reduced-motion: reduce) {
     .cx-live-dot { animation: none; }
 }
+
+/* Links added for the country pages */
+.cx-tile-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: var(--t-primary-bright);
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.cx-tile-link:hover,
+.cx-tile-note a:hover,
+a.cx-bar-name:hover { text-decoration: underline; }
+
+.cx-tile-note a { color: var(--t-primary-bright); text-decoration: none; }
+
+a.cx-bar-name { color: var(--t-muted); text-decoration: none; }

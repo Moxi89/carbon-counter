@@ -27,7 +27,7 @@
                     document.getElementById('navbar-placeholder').innerHTML = data;
                     // Initialize navbar after loading
                     const navScript = document.createElement('script');
-                    navScript.src = '/shared/nav.js';
+                    navScript.src = '/shared/nav.js?v=2026-10';
                     document.body.appendChild(navScript);
                 })
                 .catch(error => console.error('Error loading navbar:', error));
