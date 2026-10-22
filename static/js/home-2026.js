@@ -56,7 +56,7 @@
         el.session.textContent = fmt.format(Math.floor(sessionT));
 
         const countryRate = (parseFloat(selected().dataset.mt) || 0) * 1e6 / SECONDS_PER_YEAR;
-        el.countryValue.textContent = fmt.format(Math.floor(sessionSeconds * countryRate));
+        el.countryValue.textContent = fmt.format(Math.floor((now - yearStart) / 1000 * countryRate));
 
         const usedGt = Math.max(0, (now - BUDGET_START) / 1000 / SECONDS_PER_YEAR * 42.2);
         const leftGt = Math.max(0, BUDGET_START_GT - usedGt);

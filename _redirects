@@ -24,7 +24,8 @@
 /blog/posts/climate-tech-innovations-2026  /static/blog/posts/climate-tech-innovations-2026.html  200
 
 # CO2 live tracking page
-/co2-live  /static/co2-live.html  200
+# The old CO2 Live page duplicated the home page
+/co2-live  /  301
 
 # Legal pages
 /privacy  /static/privacy.html  200

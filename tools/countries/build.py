@@ -190,7 +190,7 @@ def head(title, description, path, extra_css, schema):
     <link rel="stylesheet" href="/shared/nav-styles.css">
     <link rel="stylesheet" href="/shared/footer-styles.css">
     <link rel="stylesheet" href="/shared/cookie-banner.css">
-    <link rel="stylesheet" href="/css/theme-2026.css?v={ASSET_V}b">
+    <link rel="stylesheet" href="/css/theme-2026.css?v={ASSET_V}d">
     <link rel="stylesheet" href="/css/{extra_css}?v={ASSET_V}">
 {schema}
 </head>
@@ -206,7 +206,7 @@ def foot(js):
         <div id="footer-placeholder"></div>
     </div>
     <script src="/shared/nav.js?v={ASSET_V}" defer></script>
-    <script src="/shared/footer.js?v={ASSET_V}" defer></script>
+    <script src="/shared/footer.js?v={ASSET_V}c" defer></script>
     <script src="/shared/cookie-banner.js" defer></script>
     <script src="/js/{js}?v={ASSET_V}" defer></script>
 </body>
@@ -551,7 +551,7 @@ def ranking_page(data, featured_slugs):
 # ---------------------------------------------------------------------------
 
 STATIC_URLS = [
-    ('/', 'daily', '1.0'), ('/co2-emissions-by-country', 'weekly', '0.9'), ('/co2-live', 'daily', '0.8'),
+    ('/', 'daily', '1.0'), ('/co2-emissions-by-country', 'weekly', '0.9'),
     ('/carbon-tracking-guide', 'monthly', '0.7'), ('/blog', 'weekly', '0.7'),
     ('/privacy', 'yearly', '0.2'), ('/terms', 'yearly', '0.2'),
 ]
