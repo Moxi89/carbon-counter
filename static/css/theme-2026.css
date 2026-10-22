@@ -706,6 +706,75 @@ footer.glassmorphism,
     .nav-link { padding: 8px 4px !important; font-size: 0.8125rem !important; }
 }
 
+
+/* --------------------------------------------------------------------------
+   Motion (2026): replaces AOS slide-ins, the drifting background,
+   pulsing badges, shimmer sweeps and click ripples
+   -------------------------------------------------------------------------- */
+
+/* Retire the old effects */
+body { animation: none !important; will-change: auto !important; }
+.progress-fill::after,
+.click-circle,
+.ripple { display: none !important; }
+.climate-urgent-badge,
+.climate-urgent-box { animation: none !important; }
+
+/* Headings: no decorative underline bars */
+.hero-section h1::after,
+.hero-content h1::after,
+.blog-hero h1::after,
+.post-title::after,
+.post-header h1::after,
+section h2::after,
+.faq-section h2::after,
+.about-section h2::after,
+.hero-content h2::after,
+.section-intro::after { display: none !important; }
+
+/* Hero text: a quick fade-up with a soft blur, staggered line by line */
+@keyframes t-rise {
+    from { opacity: 0; transform: translateY(14px); filter: blur(6px); }
+    to { opacity: 1; transform: none; filter: none; }
+}
+
+.cx-hero > *,
+.cc-hero > *,
+.cc-crumbs,
+.hero-content > *,
+.blog-hero > *,
+.post-header > *,
+.legal-header > * {
+    animation: t-rise 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.cx-hero > :nth-child(2), .cc-hero > :nth-child(2), .hero-content > :nth-child(2), .blog-hero > :nth-child(2), .post-header > :nth-child(2), .legal-header > :nth-child(2) { animation-delay: 70ms; }
+.cx-hero > :nth-child(3), .cc-hero > :nth-child(3), .hero-content > :nth-child(3), .blog-hero > :nth-child(3), .post-header > :nth-child(3) { animation-delay: 140ms; }
+.cx-hero > :nth-child(4), .cc-hero > :nth-child(4), .hero-content > :nth-child(4), .blog-hero > :nth-child(4), .post-header > :nth-child(4) { animation-delay: 210ms; }
+.cx-hero > :nth-child(n+5), .cc-hero > :nth-child(n+5), .hero-content > :nth-child(n+5), .blog-hero > :nth-child(n+5) { animation-delay: 280ms; }
+
+/* Sections ease in as they scroll into view. shared/footer.js adds
+   .t-reveal-on to <html> and .is-in to each block as it appears, so
+   without JavaScript everything is simply visible. */
+.t-reveal-on :is(.cx-budget, .cx-tile, .cc-stat, .cc-card, .cc-podium-item, .blog-card, .faq-item, .cc-faq-item,
+    .feature, .understanding-card, .science-card, .impact-card, .next-step-card, .usage-step, .policy-section) {
+    transition: opacity 600ms cubic-bezier(0.22, 1, 0.36, 1), transform 600ms cubic-bezier(0.22, 1, 0.36, 1), border-color 150ms ease;
+}
+
+.t-reveal-on :is(.cx-budget, .cx-tile, .cc-stat, .cc-card, .cc-podium-item, .blog-card, .faq-item, .cc-faq-item,
+    .feature, .understanding-card, .science-card, .impact-card, .next-step-card, .usage-step, .policy-section):not(.is-in) {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cx-hero > *, .cc-hero > *, .cc-crumbs, .hero-content > *, .blog-hero > *, .post-header > *, .legal-header > *,
+    .cx-budget, .cx-tile, .cc-stat, .cc-card, .cc-podium-item, .blog-card, .faq-item, .cc-faq-item, .feature,
+    .understanding-card, .science-card, .impact-card, .next-step-card, .usage-step, .policy-section {
+        animation: none !important;
+    }
+}
+
 /* --------------------------------------------------------------------------
    Reduced motion
    -------------------------------------------------------------------------- */
@@ -721,4 +790,48 @@ footer.glassmorphism,
     }
 
     .background-particles { display: none !important; }
+}
+
+/* --------------------------------------------------------------------------
+   Cookie banner: compact bar at the bottom instead of a large box
+   -------------------------------------------------------------------------- */
+
+.cookie-banner {
+    left: 16px !important;
+    right: 16px !important;
+    bottom: 16px !important;
+    top: auto !important;
+    width: auto !important;
+    max-width: 640px !important;
+    margin: 0 auto !important;
+    padding: 14px 16px !important;
+    transform: none !important;
+}
+
+.cookie-content {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px !important;
+    text-align: left !important;
+}
+
+.cookie-content p {
+    flex: 1 1 16rem;
+    margin: 0 !important;
+    font-size: 0.875rem !important;
+    line-height: 1.5 !important;
+}
+
+.cookie-buttons {
+    display: flex !important;
+    gap: 8px !important;
+    margin: 0 !important;
+}
+
+.cookie-banner .btn {
+    padding: 0 16px !important;
+    font-size: 0.875rem !important;
 }

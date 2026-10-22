@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="../../shared/footer-styles.css">
     <link rel="stylesheet" href="../css/blog-styles.css">
     <link rel="stylesheet" href="../../css/styles.css">
-    <link rel="stylesheet" href="/css/theme-2026.css?v=2026-10">
+    <link rel="stylesheet" href="/css/theme-2026.css?v=2026-10d">
 </head>
 <body>
     <div class="container">
@@ -27,7 +27,7 @@
                     document.getElementById('navbar-placeholder').innerHTML = data;
                     // Initialize navbar after loading
                     const navScript = document.createElement('script');
-                    navScript.src = '/shared/nav.js';
+                    navScript.src = '/shared/nav.js?v=2026-10';
                     document.body.appendChild(navScript);
                 })
                 .catch(error => console.error('Error loading navbar:', error));
@@ -111,7 +111,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Load footer
-            fetch('../../shared/footer.html')
+            fetch('/shared/footer.html?v=2026-10')
                 .then(response => response.text())
                 .then(data => {
                     document.getElementById('footer-placeholder').innerHTML = data;
