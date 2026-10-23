@@ -46,6 +46,25 @@ function stats(t) {
     return `${t.kicker ? `<p class="kicker">${esc(t.kicker)}</p>` : ''}<ol class="stats${t.gold ? ' gold' : ''}">${items}</ol><p class="src">${esc(t.source)}</p>`;
 }
 
+function ppm() {
+    const t = JSON.parse(fs.readFileSync(path.join(ROOT, 'tools', 'ppm', 'ppm.json'), 'utf8')).text;
+    return stat({ kicker: 'CO₂ at Mauna Loa, latest month', green: true, value: t.latest_ppm_1dp, unit: 'ppm',
+        lines: [`${t.latest_month} · ${t.change} a year earlier`, `Record: ${t.record_ppm} ppm in ${t.record_month}`],
+        source: 'Source: NOAA, preliminary monthly mean' });
+}
+
+// Key findings of the current Global Carbon Budget edition (tools/yearly/gcb.json)
+function gcb() {
+    const g = JSON.parse(fs.readFileSync(path.join(ROOT, 'tools', 'yearly', 'gcb.json'), 'utf8')).current;
+    const c = g.fossil_change_pct;
+    const change = (c >= 0 ? '+' : '−') + Math.abs(c).toFixed(1) + '%';
+    return stats({ kicker: `Global Carbon Budget ${g.edition}`, gold: true, items: [
+        [`${g.fossil_gt.toFixed(1)} Gt`, `fossil CO₂ in ${g.year} (${change})`],
+        [`${g.total_gt.toFixed(1)} Gt`, 'total CO₂ including land use'],
+        [`${g.budget_15_gt} Gt`, `left for 1.5 °C from 1 January ${g.budget_start_year}`],
+    ], source: `Source: Global Carbon Budget ${g.edition}` });
+}
+
 function budget() {
     const b = budgetFigures();
     return stat({ kicker: '1.5 °C carbon budget left', value: String(b.gt), unit: 'Gt CO₂',
@@ -59,7 +78,7 @@ function page(slug, job) {
     const shade = right
         ? 'linear-gradient(270deg,rgba(5,11,9,.94) 0%,rgba(5,11,9,.84) 38%,rgba(5,11,9,.35) 60%,transparent 74%)'
         : 'linear-gradient(90deg,rgba(5,11,9,.94) 0%,rgba(5,11,9,.84) 38%,rgba(5,11,9,.35) 60%,transparent 74%)';
-    const body = job.chart ? chart(job.chart) : job.stat ? stat(job.stat) : job.stats ? stats(job.stats) : job.budget ? budget() : '';
+    const body = job.chart ? chart(job.chart) : job.stat ? stat(job.stat) : job.stats ? stats(job.stats) : job.budget ? budget() : job.ppm ? ppm() : job.gcb ? gcb() : '';
     return `<!doctype html><html><head><meta charset="utf-8"><style>
 @font-face{font-family:'Fira Sans';font-weight:500;src:url('${FONTS}/fira-sans-latin-500-normal.woff2')}
 @font-face{font-family:'Fira Sans';font-weight:600;src:url('${FONTS}/fira-sans-latin-600-normal.woff2')}
@@ -102,6 +121,8 @@ body{width:${W}px;height:${H}px;overflow:hidden;background:#050b09;font-family:'
     const tmp = path.join(os.tmpdir(), 'hero-render.html');
     for (const [slug, job] of Object.entries(jobs)) {
         if (slug.startsWith('_')) continue;
+        // A draft post (e.g. tools/blog/drafts/) gets its hero once it is published
+        if (!fs.existsSync(path.join(ROOT, 'tools', 'blog', 'content', slug + '.html'))) { console.log('skip', slug, '(no post yet)'); continue; }
         fs.writeFileSync(tmp, page(slug, job));
         await p.goto('file://' + tmp);
         await p.evaluate(() => document.fonts.ready);

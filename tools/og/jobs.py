@@ -68,6 +68,12 @@ def main():
                 job['flip'] = hero.get('side') == 'right'
                 if hero.get('og_sub'):
                     job['sub'] = hero['og_sub']
+                if hero.get('ppm'):
+                    t = json.load(open(os.path.join(ROOT, 'tools', 'ppm', 'ppm.json'), encoding='utf-8'))['text']
+                    job['sub'] = f"{t['latest_ppm']} ppm at Mauna Loa in {t['latest_month']} (NOAA)"
+                if hero.get('gcb'):
+                    job['sub'] = (f"Fossil CO₂ {gcb['fossil_gt']:.1f} Gt in {gcb['year']}; "
+                                  f"{gcb['budget_15_gt']} Gt left for 1.5 °C")
                 if hero.get('budget'):
                     job['big'] = f"{gcb['budget_15_gt']} Gt"
                     job['sub'] = f"CO₂ left for 1.5 °C from 1 January {gcb['budget_start_year']}"

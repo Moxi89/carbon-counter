@@ -49,12 +49,20 @@ def nice_date(iso):
     return f'{d.day} {d.strftime("%B %Y")}'
 
 
+def fill_ppm(raw):
+    """Fill {{ppm:key}} placeholders with the latest Mauna Loa figures (tools/ppm/ppm.json, see tools/ppm/update.py)."""
+    if '{{ppm:' not in raw:
+        return raw
+    text = json.load(open(os.path.join(ROOT, 'tools', 'ppm', 'ppm.json'), encoding='utf-8'))['text']
+    return re.sub(r'\{\{ppm:(\w+)\}\}', lambda m: text[m.group(1)], raw)
+
+
 def load():
     posts = []
     for f in sorted(os.listdir(CONTENT)):
         if not f.endswith('.html'):
             continue
-        raw = open(os.path.join(CONTENT, f), encoding='utf-8').read()
+        raw = fill_ppm(open(os.path.join(CONTENT, f), encoding='utf-8').read())
         m = re.match(r'\s*<!--meta\s*(\{.*?\})\s*-->\s*(.*)$', raw, re.S)
         if not m:
             raise SystemExit(f'{f}: missing <!--meta {{...}} --> header')

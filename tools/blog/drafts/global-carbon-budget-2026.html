@@ -8,7 +8,7 @@ On release day:
 3. python3 tools/yearly/gcb_update.py --draft
    fills the {{...}} numbers, removes this comment and writes tools/blog/content/global-carbon-budget-2026.html.
    It refuses while any {{...}} value is missing or any [[WRITE: ...]] note is left.
-4. python3 tools/blog/build.py
+4. python3 tools/blog/build.py, then node tools/blog/heroes/render.js (its photo is ready in tools/blog/heroes/photos/)
 Runbook: docs/GCB2026.md
 -->
 <!--meta
@@ -18,8 +18,8 @@ Runbook: docs/GCB2026.md
   "description": "Global Carbon Budget {{edition}} explained in plain English: {{fossil}} Gt fossil CO₂, country trends, carbon sinks, {{ppm}} ppm and the {{budget}} Gt left for 1.5 °C.",
   "dek": "The Global Carbon Project’s annual report is the reference count of the world’s CO₂. Here is what the {{edition}} edition found, what changed since last year and what the numbers mean.",
   "category": "Climate science",
-  "image": "/blog/images/carbon-budget.svg",
-  "image_alt": "Illustration of the shrinking carbon budget for 1.5 °C",
+  "image": "/blog/images/global-carbon-budget-2026.webp",
+  "image_alt": "Glowing coal embers in the dark, beside three Global Carbon Budget {{edition}} figures: {{fossil}} Gt of fossil CO₂ in {{year}}, {{total}} Gt of total CO₂ and {{budget}} Gt left for 1.5 °C",
   "published": "{{release_date}}",
   "updated": "{{release_date}}",
   "takeaways": [

@@ -70,6 +70,12 @@ Keep the slug (file name) of existing posts unchanged; their URLs are already in
 <blockquote>...</blockquote>
 ```
 
+### Live figures
+
+`{{ppm:key}}` in a post (meta or body) is replaced at build time with the latest Mauna Loa CO₂ figures from
+`tools/ppm/ppm.json` (keys: `latest_ppm`, `latest_month`, `season`, `change`, `latest_month_prev_year`, `record_ppm`,
+`record_month`, `record_ppm_int`). Use them instead of typing monthly figures by hand.
+
 ### Photo hero images
 
 A post can use a photo hero instead of an SVG illustration: an AI photo (Magnific) with the post's real figures
