@@ -1,0 +1,128 @@
+<!--draft
+Key-findings post for the Global Carbon Budget 2026. NOT built: drafts/ is outside tools/blog/content/.
+
+On release day:
+1. Fill "next" and "post" in tools/yearly/gcb.json from the new budget.
+2. Replace every [[WRITE: ...]] note below with text based on the report (sources in "sources").
+   Don't claim a "record", a "peak" or a direction of change until the report says so.
+3. python3 tools/yearly/gcb_update.py --draft
+   fills the {{...}} numbers, removes this comment and writes tools/blog/content/global-carbon-budget-2026.html.
+   It refuses while any {{...}} value is missing or any [[WRITE: ...]] note is left.
+4. python3 tools/blog/build.py
+Runbook: docs/GCB2026.md
+-->
+<!--meta
+{
+  "title": "Global Carbon Budget {{edition}}: key findings explained",
+  "h1": "Global Carbon Budget {{edition}}: the key findings, explained",
+  "description": "Global Carbon Budget {{edition}} explained in plain English: {{fossil}} Gt fossil CO₂, country trends, carbon sinks, {{ppm}} ppm and the {{budget}} Gt left for 1.5 °C.",
+  "dek": "The Global Carbon Project’s annual report is the reference count of the world’s CO₂. Here is what the {{edition}} edition found, what changed since last year and what the numbers mean.",
+  "category": "Climate science",
+  "image": "/blog/images/carbon-budget.svg",
+  "image_alt": "Illustration of the shrinking carbon budget for 1.5 °C",
+  "published": "{{release_date}}",
+  "updated": "{{release_date}}",
+  "takeaways": [
+    "Fossil CO₂ emissions were projected at {{fossil}} Gt in {{year}}, {{fossil_trend}} on {{prev_year}}; total CO₂ including land use was {{total}} Gt.",
+    "[[WRITE: one bullet on the biggest country changes, e.g. China, US, India, EU]]",
+    "Over {{sink_period}} the ocean absorbed about {{ocean_sink_pct}}% and land about {{land_sink_pct}}% of human CO₂ emissions; atmospheric CO₂ reached {{ppm}} ppm.",
+    "From 1 January {{budget_start}}, about {{budget}} Gt CO₂ remains for a 50% chance of 1.5 °C: roughly {{years_words}} years at {{year}} rates."
+  ],
+  "faq": [
+    ["What does the Global Carbon Budget {{edition}} say?", "Fossil CO₂ emissions were projected at {{fossil}} billion tonnes in {{year}}, {{fossil_trend}} on {{prev_year}}, plus {{landuse}} billion tonnes from land-use change, for a total of {{total}} billion tonnes. About {{budget}} billion tonnes of CO₂ remain from 1 January {{budget_start}} for a 50% chance of limiting warming to 1.5 °C."],
+    ["How much carbon budget is left for 1.5 °C?", "About {{budget}} billion tonnes of CO₂ from the start of {{budget_start}}, for a 50% chance, according to the Global Carbon Budget {{edition}}. That is roughly {{years_words}} years of emissions at the {{year}} rate, so it runs out around {{runout}} if emissions stay flat."],
+    ["Did global CO₂ emissions rise in {{year}}?", "[[WRITE: direct answer from the report, with the fossil change ({{fossil_change_signed}}) and the land-use change]]"],
+    ["How is the Global Carbon Budget calculated?", "The Global Carbon Project, a team of more than 100 scientists, combines energy statistics, land-use data, ocean and land models and atmospheric measurements. Figures for the current year are projections from data for most of the year, so they can be revised slightly in the next edition."],
+    ["When is the next Global Carbon Budget published?", "The Global Carbon Project usually releases its annual update in November, during the UN climate conference, and publishes the peer-reviewed paper in <em>Earth System Science Data</em> the following year."]
+  ],
+  "sources": [
+    ["[[WRITE: title of the Global Carbon Project press release]], Global Carbon Project, {{edition}}", "{{press_release_url}}"],
+    ["Friedlingstein et al., Global Carbon Budget {{edition}}, Earth System Science Data", "{{paper_url}}"],
+    ["The Global Carbon Budget FAQs {{edition}}, Global Carbon Project, {{edition}}", "{{faqs_url}}"],
+    ["[[WRITE: one or two independent analyses, e.g. Carbon Brief, with links; delete this line if none]]", "https://"],
+    ["Friedlingstein et al., Global Carbon Budget 2025, Earth System Science Data, 2026", "https://essd.copernicus.org/articles/18/3211/2026/"],
+    ["CO₂ emissions, Our World in Data", "https://ourworldindata.org/co2-emissions"]
+  ],
+  "related": ["carbon-budget-explained", "co2-ppm-atmosphere", "critical-climate-year-2025"]
+}
+-->
+<section>
+    <h2>The Global Carbon Budget {{edition}} in brief</h2>
+    <p>The Global Carbon Budget {{edition}} projects fossil CO₂ emissions of <strong>{{fossil}} billion tonnes (Gt) in {{year}}</strong>, {{fossil_trend}} on {{prev_year}}. With {{landuse}} Gt from land-use change, mainly deforestation, total CO₂ emissions were <strong>{{total}} Gt</strong>. [[WRITE: one sentence putting this in context: a record or not, faster or slower than recent years.]]</p>
+    <p>The remaining carbon budget for 1.5 °C is about <strong>{{budget}} Gt CO₂ from 1 January {{budget_start}}</strong> for a 50% chance, or roughly {{years_words}} years at the {{year}} rate. Atmospheric CO₂ was projected to average {{ppm}} parts per million (ppm) in {{year}}, {{ppm_above_preindustrial_pct}}% above pre-industrial levels.</p>
+    <div class="stat-row">
+        <div class="stat"><span class="stat-value">{{fossil}} Gt</span><span class="stat-label">Fossil CO₂ in {{year}} ({{fossil_change_signed}})</span></div>
+        <div class="stat"><span class="stat-value">{{total}} Gt</span><span class="stat-label">Total CO₂ including land use</span></div>
+        <div class="stat"><span class="stat-value">{{ppm}} ppm</span><span class="stat-label">Atmospheric CO₂, {{ppm_above_preindustrial_pct}}% above pre-industrial</span></div>
+        <div class="stat"><span class="stat-value">{{budget}} Gt</span><span class="stat-label">CO₂ left for 1.5 °C (50% chance), about {{years_int}} years</span></div>
+    </div>
+    <p>The Global Carbon Budget is produced each year by the Global Carbon Project, a team of more than 100 scientists. The {{edition}} edition was launched at {{launch_event}}. Figures for {{year}} are projections based on data for most of the year, so later editions can revise them slightly.</p>
+</section>
+
+<section>
+    <h2>How much CO₂ did the world emit in {{year}}?</h2>
+    <p>By fuel, the report projects coal at {{coal_change_pct_signed}}, oil at {{oil_change_pct_signed}} and natural gas at {{gas_change_pct_signed}} compared with {{prev_year}}. [[WRITE: one or two sentences on what drove the changes, e.g. aviation, weather, renewables.]]</p>
+    <p>Land-use change emissions changed by about {{landuse_change_pct_signed}} to {{landuse}} Gt. [[WRITE: the main reason, e.g. deforestation or fires.]] Confidence in the land-use figure is low: it is the hardest part of the budget to measure.</p>
+    <p>Put together, humanity released about {{total}} Gt of CO₂ in {{year}}. That is roughly {{per_second}} tonnes every second, the rate shown on our <a href="/">live CO₂ counter</a>.</p>
+</section>
+
+<section>
+    <h2>Which countries’ emissions rose or fell in {{year}}?</h2>
+    <div class="table-wrap"><table class="data-table">
+        <caption>Source: Global Carbon Budget {{edition}}, projections released {{release_date}}.</caption>
+        <thead><tr><th>Country or region</th><th class="num">Projected change in fossil CO₂, {{year}}</th></tr></thead>
+        <tbody>
+            <tr><td><a href="/co2-emissions/china">China</a></td><td class="num">{{china_change_pct_signed}}</td></tr>
+            <tr><td><a href="/co2-emissions/united-states">United States</a></td><td class="num">{{us_change_pct_signed}}</td></tr>
+            <tr><td><a href="/co2-emissions/india">India</a></td><td class="num">{{india_change_pct_signed}}</td></tr>
+            <tr><td>European Union</td><td class="num">{{eu_change_pct_signed}}</td></tr>
+            <tr><td><a href="/co2-emissions/japan">Japan</a></td><td class="num">{{japan_change_pct_signed}}</td></tr>
+            <tr><td>Rest of the world</td><td class="num">{{row_change_pct_signed}}</td></tr>
+            <tr><td><strong>World</strong></td><td class="num"><strong>{{fossil_change_signed}}</strong></td></tr>
+        </tbody>
+    </table></div>
+    <ul>
+        <li>[[WRITE: China, with the reason the report gives.]]</li>
+        <li>[[WRITE: United States.]]</li>
+        <li>[[WRITE: India.]]</li>
+        <li>[[WRITE: EU and Japan.]]</li>
+    </ul>
+    <p>You can compare every country’s total in our <a href="/co2-emissions-by-country">CO₂ emissions by country ranking</a>.</p>
+</section>
+
+<section>
+    <h2>How much CO₂ do the ocean and land absorb?</h2>
+    <p>Not all emitted CO₂ stays in the atmosphere. Over {{sink_period}} the ocean absorbed about <strong>{{ocean_sink_pct}}%</strong> of human CO₂ emissions and land ecosystems about <strong>{{land_sink_pct}}%</strong>. The rest accumulated in the air.</p>
+    <p>[[WRITE: what the report says about the sinks this year, e.g. land sink after El Niño, effect of warming on the sinks.]]</p>
+</section>
+
+<section>
+    <h2>What is the atmospheric CO₂ concentration?</h2>
+    <p>The report projects that atmospheric CO₂ averaged <strong>{{ppm}} ppm</strong> in {{year}}, up from {{ppm_prev_year}} ppm in {{prev_year}}. That is {{ppm_above_preindustrial_pct}}% above the pre-industrial level. For the latest monthly readings from Mauna Loa, see <a href="/blog/posts/co2-ppm-atmosphere">CO₂ ppm today</a>.</p>
+    <p>Concentration keeps rising as long as emissions exceed what the sinks remove. A fall in emissions slows the increase; only reaching net zero CO₂ stops it.</p>
+</section>
+
+<section>
+    <h2>How much carbon budget is left for 1.5 °C, 1.7 °C and 2 °C?</h2>
+    <p>A carbon budget is the total CO₂ that can still be emitted while keeping warming below a given level with a given probability. Because warming is roughly proportional to cumulative CO₂, every year of emissions is subtracted from it. Our <a href="/blog/posts/carbon-budget-explained">carbon budget explainer</a> covers how it works.</p>
+    <div class="table-wrap"><table class="data-table">
+        <caption>Source: Global Carbon Budget {{edition}}. Budgets from 1 January {{budget_start}}, 50% likelihood, relative to 1850–1900.</caption>
+        <thead><tr><th>Warming limit</th><th class="num">Remaining budget (Gt CO₂)</th><th class="num">Years at {{year}} emissions</th></tr></thead>
+        <tbody>
+            <tr><td>1.5 °C</td><td class="num">{{budget}}</td><td class="num">about {{years_int}}</td></tr>
+            <tr><td>1.7 °C</td><td class="num">{{budget_17_gt}}</td><td class="num">about {{budget_17_years}}</td></tr>
+            <tr><td>2 °C</td><td class="num">{{budget_2_gt}}</td><td class="num">about {{budget_2_years}}</td></tr>
+        </tbody>
+    </table></div>
+    <p>At {{year}} emission rates, the CO₂ consistent with a 50:50 chance of staying under 1.5 °C would be used up around {{runout}}. [[WRITE: how the authors describe the 1.5 °C budget this year, and the current estimate of human-caused warming with its source.]]</p>
+</section>
+
+<section>
+    <h2>What changed since last year’s report?</h2>
+    <p>The 2025 edition put fossil emissions at 38.1 Gt and total emissions at 42.2 Gt for 2025, with 170 Gt left for 1.5 °C from 1 January 2026. The {{edition}} edition gives {{fossil}} Gt and {{total}} Gt for {{year}}, and {{budget}} Gt left from 1 January {{budget_start}}. [[WRITE: explain the budget change: a year of emissions used up, plus any revisions to past emissions, warming or methods.]] Last year’s findings are summarised in our <a href="/blog/posts/critical-climate-year-2025">Global Carbon Budget 2025 guide</a>.</p>
+</section>
+
+<section>
+    <h2>What do the findings mean?</h2>
+    <p>[[WRITE: two or three conclusions in plain language, calm and precise, each tied to a number above. End with a link to a relevant guide, e.g. /blog/posts/beyond-2025-next-decade-climate.]]</p>
+</section>
