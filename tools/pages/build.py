@@ -23,7 +23,7 @@ UPDATED = ('2026-10-23', '23 October 2026')
 
 ASSETS = {
     'styles': '2026-10b', 'theme': '2026-10l', 'post': '2026-10e',
-    'nav': '2026-10f', 'footer': '2026-10m',
+    'nav': '2026-10f', 'footer': '2026-10n',
 }
 
 
@@ -31,7 +31,7 @@ def mailto(text=None):
     return f'<a href="mailto:{EMAIL}">{text or EMAIL}</a>'
 
 
-def page(slug, title, desc, h1, tag, dek, body, schema_type='WebPage'):
+def page(slug, title, desc, h1, tag, dek, body, schema_type='WebPage', og='home', head_extra='', ld_extra=None, script=''):
     url = f'{SITE}/{slug}'
     crumbs = json.dumps({'@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': [
         {'@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': SITE + '/'},
@@ -42,6 +42,7 @@ def page(slug, title, desc, h1, tag, dek, body, schema_type='WebPage'):
                        'publisher': {'@type': 'Organization', 'name': 'Carbon Emissions Counter', 'url': SITE + '/',
                                      'email': EMAIL}}, ensure_ascii=False)
     a = ASSETS
+    extra_ld = f'\n    <script type="application/ld+json">{json.dumps(ld_extra, ensure_ascii=False)}</script>' if ld_extra else ''
     return f'''<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,7 +57,7 @@ def page(slug, title, desc, h1, tag, dek, body, schema_type='WebPage'):
     <meta property="og:title" content="{title}">
     <meta property="og:description" content="{desc}">
     <meta property="og:site_name" content="Carbon Emissions Counter">
-    <meta property="og:image" content="{SITE}/og/home.jpg">
+    <meta property="og:image" content="{SITE}/og/{og}.jpg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="theme-color" content="#050b09">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -67,7 +68,7 @@ def page(slug, title, desc, h1, tag, dek, body, schema_type='WebPage'):
     <link rel="stylesheet" href="/css/theme-2026.css?v={a['theme']}">
     <link rel="stylesheet" href="/css/post-2026.css?v={a['post']}">
     <script type="application/ld+json">{crumbs}</script>
-    <script type="application/ld+json">{main}</script>
+    <script type="application/ld+json">{main}</script>{extra_ld}{head_extra}
 </head>
 <body>
     <div class="container">
@@ -89,7 +90,7 @@ def page(slug, title, desc, h1, tag, dek, body, schema_type='WebPage'):
         <div id="footer-placeholder"></div>
     </div>
     <script src="/shared/nav.js?v={a['nav']}" defer></script>
-    <script src="/shared/footer.js?v={a['footer']}" defer></script>
+    <script src="/shared/footer.js?v={a['footer']}" defer></script>{script}
 </body>
 </html>
 '''
@@ -237,6 +238,7 @@ terms = [
         '<ul class="checklist">',
         '    <li><strong>Quote, cite and share freely.</strong> You may quote our text and figures and share screenshots and links, as long as you credit <a href="/">Carbon Emissions Counter</a> with a link.</li>',
         '    <li><strong>Embed the counter.</strong> The <a href="/widget">counter widget</a> is free for any website. Please keep its credit link.</li>',
+        '    <li><strong>Download the data.</strong> Country data and reusable charts are on the <a href="/data">free data page</a>; the data is CC&nbsp;BY&nbsp;4.0.</li>',
         '    <li><strong>Underlying data.</strong> The emissions data comes from Our World in Data and the Global Carbon Project under the Creative Commons BY 4.0 licence, so you can use it directly from them.</li>',
         '</ul>',
         '<p>Please don&rsquo;t republish whole articles or copy the site&rsquo;s design or branding without permission.</p>'),
@@ -251,6 +253,133 @@ terms = [
     sec('Changes and contact',
         f'<p>We may update these terms. The date at the top shows the latest version, and continuing to use the site means you accept the current terms. Questions: {mailto()}. See also our <a href="/privacy">privacy policy</a>.</p>'),
 ]
+
+# ---------------------------------------------------------------------------
+# Free data and charts (/data)
+# ---------------------------------------------------------------------------
+
+DATA = json.load(open(os.path.join(ROOT, 'tools', 'countries', 'data.json'), encoding='utf-8'))
+DATA_YEAR = DATA['year']
+N_COUNTRIES = len(DATA['countries'])
+N_SERIES = sum(1 for c in DATA['countries'] if 'series' in c)
+WORLD_FROM = DATA['world']['series'][0][0]
+GCB_EDITION = json.load(open(os.path.join(ROOT, 'tools', 'yearly', 'gcb.json'), encoding='utf-8'))['current']['edition']
+CITATION = (f'Carbon Emissions Counter ({UPDATED[0][:4]}). <em>CO&#8322; emissions by country, {DATA_YEAR} data</em>. '
+            f'Based on Our World in Data and the Global Carbon Budget {GCB_EDITION}. {SITE}/data')
+
+
+def chart_posts():
+    """Blog posts with a photo hero (chart image), for the reusable charts gallery."""
+    import re
+    content = os.path.join(ROOT, 'tools', 'blog', 'content')
+    out = []
+    for f in sorted(os.listdir(content)):
+        if not f.endswith('.html'):
+            continue
+        raw = open(os.path.join(content, f), encoding='utf-8').read()
+        if '{{ppm:' in raw:  # monthly Mauna Loa figures, as the blog build fills them
+            ppm = json.load(open(os.path.join(ROOT, 'tools', 'ppm', 'ppm.json'), encoding='utf-8'))['text']
+            raw = re.sub(r'\{\{ppm:(\w+)\}\}', lambda x: ppm[x.group(1)], raw)
+        m = re.match(r'\s*<!--meta\s*(\{.*?\})\s*-->', raw, re.S)
+        meta = json.loads(m.group(1)) if m else {}
+        if meta.get('image', '').endswith('.webp') and '{{' not in meta.get('image_alt', ''):
+            out.append((meta.get('path') or f'/blog/posts/{f[:-5]}', meta['title'], meta['image'], meta['image_alt']))
+    return out
+
+
+def gallery():
+    items = '\n'.join(
+        f'    <li><a href="{img}"><img src="{img[:-5]}-800.webp" alt="{alt}" width="800" height="420" loading="lazy"></a>'
+        f'<span>{title} &middot; <a href="{path}">post</a></span></li>' for path, title, img, alt in chart_posts())
+    return f'<ul class="dl-gallery">\n{items}\n</ul>'
+
+
+data_secs = [
+    sec('Download the data',
+        f'<p>Two CSV files, free to use under <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC&nbsp;BY&nbsp;4.0</a>. They open in Excel, Google Sheets, R or Python.</p>',
+        '<div class="dl-files">',
+        f'    <a class="dl-file" href="/downloads/co2-emissions-by-country.csv" download><b>CO&#8322; emissions by country</b><span>{N_COUNTRIES} countries plus the world, {DATA_YEAR}: total, change, share, per person, population, cumulative since 1750, 1990 and 2005 levels</span><em>CSV &middot; 24 KB</em></a>',
+        f'    <a class="dl-file" href="/downloads/co2-emissions-time-series.csv" download><b>CO&#8322; emissions over time</b><span>World from {WORLD_FROM} and the {N_SERIES} countries with over 1 million people from 2000, to {DATA_YEAR}</span><em>CSV &middot; 100 KB</em></a>',
+        '</div>',
+        '<p>Figures are annual CO&#8322; from fossil fuels and industry (cement and other processes), excluding land-use change, in million tonnes (Mt). Column notes are in the <a href="/downloads/README.txt">README</a>. For the full dataset with more variables, go to the source: <a href="https://github.com/owid/co2-data" rel="noopener">Our World in Data on GitHub</a>.</p>',
+        sid='download'),
+    sec('Charts you can reuse',
+        '<p>Each guide on this site opens with a chart of its key figures. You can use them in lessons, presentations and articles with a credit and a link to the guide. Tap a chart for the full-size image.</p>',
+        gallery(),
+        '<p class="dl-note">The photos behind the charts are illustrations; every number comes from the sources listed in the guide.</p>',
+        sid='charts'),
+    sec('How to cite this site',
+        f'<p class="dl-cite" id="dlCite">{CITATION}</p>',
+        '<p><button type="button" class="dl-copy" id="dlCopy">Copy citation</button> <span class="dl-status" id="dlStatus" role="status"></span></p>',
+        '<p>For the live global counter, cite the <a href="/">home page</a>; for one country, cite its page, for example <a href="/co2-emissions/china">China</a>.</p>',
+        sid='cite'),
+    sec('Put the live counter on your site',
+        '<p>Show global CO&#8322; emissions rising, or the 1.5&nbsp;&deg;C carbon budget running out, with one line of code. It&rsquo;s free, sets no cookies and works on phones. <a href="/widget">Get the widget</a>.</p>',
+        sid='widget'),
+    sec('Licence and sources',
+        '<ul>',
+        f'    <li><strong>Data:</strong> {DATA["source"]}, CC&nbsp;BY&nbsp;4.0. Please credit &ldquo;Our World in Data and the Global Carbon Project, via Carbon Emissions Counter&rdquo; with a link to this page.</li>',
+        '    <li><strong>Charts and text:</strong> free to reuse with a credit and a link, as set out in the <a href="/terms">terms of use</a>.</li>',
+        '    <li><strong>How the numbers work:</strong> see <a href="/methodology">how the counter works</a>. Spotted a problem? <a href="/contact">Tell us</a>.</li>',
+        '</ul>',
+        sid='licence'),
+]
+
+DATA_HEAD = """
+    <style>
+        .dl-files { display: grid; gap: 12px; margin: 8px 0 18px; }
+        .dl-file { display: grid; gap: 4px; padding: 16px 18px; border-radius: 16px; border: 1px solid var(--t-border-strong); background: var(--t-surface); text-decoration: none !important; }
+        .dl-file:hover { border-color: var(--t-primary-bright); }
+        .dl-file b { color: var(--t-text); font-size: 1.0625rem; }
+        .dl-file span { color: var(--t-muted); font-size: 0.9688rem; line-height: 1.5; }
+        .dl-file em { color: var(--t-primary-bright); font: 500 0.875rem var(--t-mono); font-style: normal; }
+        .dl-gallery { list-style: none; padding: 0 !important; margin: 12px 0 8px; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+        .dl-gallery li { margin: 0; display: grid; gap: 6px; font-size: 0.875rem; color: var(--t-muted); line-height: 1.4; }
+        .dl-gallery img { display: block; width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--t-border); }
+        .dl-note { color: var(--t-muted); font-size: 0.9375rem; }
+        .dl-cite { overflow-wrap: anywhere; padding: 14px 16px; border-radius: 14px; border: 1px solid var(--t-border-strong); background: rgba(0, 0, 0, 0.3); font-size: 0.9688rem; }
+        .dl-copy { min-height: 44px; padding: 0 20px; border-radius: 999px; border: 0; background: var(--t-primary-bright); color: #022c22; font: 600 0.9375rem var(--t-sans); cursor: pointer; }
+        .dl-status { color: var(--t-primary-bright); font-size: 0.9375rem; }
+    </style>"""
+
+DATA_SCRIPT = """
+    <script>
+        (function () {
+            var btn = document.getElementById('dlCopy'), cite = document.getElementById('dlCite'), status = document.getElementById('dlStatus');
+            if (!btn || !cite) return;
+            btn.addEventListener('click', function () {
+                var text = cite.textContent;
+                var done = function () { status.textContent = 'Copied.'; };
+                if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, function () {});
+            });
+        })();
+    </script>"""
+
+DATA_LD = {
+    '@context': 'https://schema.org', '@type': 'Dataset',
+    'name': f'CO₂ emissions by country, {DATA_YEAR}',
+    'description': (f'Annual CO₂ emissions from fossil fuels and industry for {N_COUNTRIES} countries and the world in {DATA_YEAR}: '
+                    'total emissions in million tonnes, change on the previous year, share of the world total, emissions per person, '
+                    'population, cumulative emissions since 1750 and 1990 and 2005 levels, plus a yearly time series. '
+                    f'Based on Our World in Data and the Global Carbon Project (Global Carbon Budget {GCB_EDITION}).'),
+    'url': f'{SITE}/data',
+    'keywords': ['CO2 emissions', 'carbon dioxide', 'emissions by country', 'per capita emissions', 'climate change'],
+    'license': 'https://creativecommons.org/licenses/by/4.0/',
+    'isAccessibleForFree': True,
+    'temporalCoverage': f'{WORLD_FROM}/{DATA_YEAR}',
+    'spatialCoverage': 'World',
+    'variableMeasured': ['CO2 emissions (Mt)', 'CO2 emissions per person (t)', 'Share of world CO2 emissions (%)',
+                         'Cumulative CO2 emissions since 1750 (Mt)', 'Population'],
+    'creator': [{'@type': 'Organization', 'name': 'Global Carbon Project', 'url': 'https://globalcarbonbudget.org/'},
+                {'@type': 'Organization', 'name': 'Our World in Data', 'url': 'https://ourworldindata.org/co2-emissions'}],
+    'publisher': {'@type': 'Organization', 'name': 'Carbon Emissions Counter', 'url': SITE + '/'},
+    'isBasedOn': 'https://github.com/owid/co2-data',
+    'distribution': [
+        {'@type': 'DataDownload', 'encodingFormat': 'text/csv', 'contentUrl': f'{SITE}/downloads/co2-emissions-by-country.csv'},
+        {'@type': 'DataDownload', 'encodingFormat': 'text/csv', 'contentUrl': f'{SITE}/downloads/co2-emissions-time-series.csv'},
+    ],
+}
+
 
 PAGES = {
     'about': ('About Carbon Emissions Counter: Data, Standards, Team',
@@ -279,7 +408,14 @@ def main():
     for slug, (title, desc, h1, tag, dek, secs, stype) in PAGES.items():
         with open(os.path.join(STATIC, slug + '.html'), 'w', encoding='utf-8') as f:
             f.write(page(slug, title, desc, h1, tag, dek, '\n\n'.join(secs), stype))
-    print(f'pages: {", ".join(PAGES)} (ads {"on" if ADS else "off"}, contact {EMAIL})')
+    with open(os.path.join(STATIC, 'data.html'), 'w', encoding='utf-8') as f:
+        f.write(page('data', 'Free CO₂ Emissions Data by Country (CSV) and Charts',
+                     f'Download free CO₂ emissions data for {N_COUNTRIES} countries as CSV ({DATA_YEAR}), reuse our sourced climate charts, '
+                     'copy a citation and embed the live counter. CC BY 4.0.',
+                     'Free CO&#8322; data and charts', 'Free data',
+                     'Country emissions data to download, charts to reuse and a ready-made citation, for lessons, articles and research.',
+                     '\n\n'.join(data_secs), 'WebPage', og='data', head_extra=DATA_HEAD, ld_extra=DATA_LD, script=DATA_SCRIPT))
+    print(f'pages: {", ".join(PAGES)}, data (ads {"on" if ADS else "off"}, contact {EMAIL})')
 
 
 if __name__ == '__main__':

@@ -1,0 +1,215 @@
+country,iso_code,year,co2_mt,co2_change_on_previous_year_pct,share_of_world_pct,co2_per_person_t,population,cumulative_co2_since_1750_mt,cumulative_share_pct,co2_1990_mt,co2_2005_mt,page
+China,CHN,2024,12289.0,0.96,31.84,8.66,1419321284,285087.0,15.42,2483.5,5882.0,https://www.carbonemissionscounter.com/co2-emissions/china
+United States,USA,2024,4904.1,-0.29,12.71,14.2,345426566,434867.0,23.52,5131.8,6126.9,https://www.carbonemissionscounter.com/co2-emissions/united-states
+India,IND,2024,3193.5,4.27,8.27,2.2,1450935785,66073.0,3.57,578.0,1195.4,https://www.carbonemissionscounter.com/co2-emissions/india
+Russia,RUS,2024,1780.5,2.73,4.61,12.29,144820421,122808.0,6.64,2536.3,1564.0,https://www.carbonemissionscounter.com/co2-emissions/russia
+Japan,JPN,2024,961.9,-2.53,2.49,7.77,123753041,69612.0,3.77,1154.9,1286.4,https://www.carbonemissionscounter.com/co2-emissions/japan
+Indonesia,IDN,2024,812.2,6.53,2.1,2.87,283487933,17420.0,0.94,155.0,347.4,https://www.carbonemissionscounter.com/co2-emissions/indonesia
+Iran,IRN,2024,792.6,0.37,2.05,8.66,91567737,21811.0,1.18,211.1,466.8,https://www.carbonemissionscounter.com/co2-emissions/iran
+Saudi Arabia,SAU,2024,692.1,2.17,1.79,20.38,33962751,19020.0,1.03,182.0,412.2,https://www.carbonemissionscounter.com/co2-emissions/saudi-arabia
+South Korea,KOR,2024,583.7,-0.93,1.51,11.29,51717587,20708.0,1.12,250.5,498.7,https://www.carbonemissionscounter.com/co2-emissions/south-korea
+Germany,DEU,2024,572.3,-3.62,1.48,6.77,84552234,95136.0,5.14,1054.8,867.9,https://www.carbonemissionscounter.com/co2-emissions/germany
+Canada,CAN,2024,533.3,-2.24,1.38,13.42,39742429,35644.0,1.93,458.0,570.4,https://www.carbonemissionscounter.com/co2-emissions/canada
+Turkey,TUR,2024,513.0,5.36,1.33,5.87,87473800,12888.0,0.7,154.6,267.7,https://www.carbonemissionscounter.com/co2-emissions/turkey
+Brazil,BRA,2024,483.0,-0.21,1.25,2.28,211998565,18199.0,0.98,218.7,364.4,https://www.carbonemissionscounter.com/co2-emissions/brazil
+Mexico,MEX,2024,461.0,0.59,1.19,3.52,130861001,22016.0,1.19,316.7,463.4,https://www.carbonemissionscounter.com/co2-emissions/mexico
+South Africa,ZAF,2024,439.8,0.73,1.14,6.87,64007187,22827.0,1.23,312.9,416.2,https://www.carbonemissionscounter.com/co2-emissions/south-africa
+Australia,AUS,2024,386.7,0.62,1.0,14.48,26713206,20040.0,1.08,278.1,385.1,https://www.carbonemissionscounter.com/co2-emissions/australia
+Vietnam,VNM,2024,370.9,6.76,0.96,3.67,100987685,5669.0,0.31,21.3,95.8,https://www.carbonemissionscounter.com/co2-emissions/vietnam
+United Kingdom,GBR,2024,312.9,1.66,0.81,4.53,69138185,80079.0,4.33,601.9,570.3,https://www.carbonemissionscounter.com/co2-emissions/united-kingdom
+Italy,ITA,2024,301.9,-3.33,0.78,5.09,59342870,26006.0,1.41,438.2,501.4,https://www.carbonemissionscounter.com/co2-emissions/italy
+Malaysia,MYS,2024,290.2,5.03,0.75,8.16,35557670,7042.0,0.38,54.3,170.0,https://www.carbonemissionscounter.com/co2-emissions/malaysia
+Kazakhstan,KAZ,2024,287.0,0.28,0.74,13.94,20592574,14937.0,0.81,267.4,198.4,https://www.carbonemissionscounter.com/co2-emissions/kazakhstan
+Poland,POL,2024,272.9,-3.64,0.71,7.08,38539209,29044.0,1.57,376.3,322.6,https://www.carbonemissionscounter.com/co2-emissions/poland
+Thailand,THA,2024,267.8,1.17,0.69,3.74,71668010,8308.0,0.45,86.6,214.3,https://www.carbonemissionscounter.com/co2-emissions/thailand
+France,FRA,2024,264.2,-2.26,0.68,3.97,66548532,40048.0,2.17,394.9,416.3,https://www.carbonemissionscounter.com/co2-emissions/france
+Taiwan,TWN,2024,262.3,-1.8,0.68,11.3,23213964,10092.0,0.55,124.3,266.9,https://www.carbonemissionscounter.com/co2-emissions/taiwan
+Egypt,EGY,2024,258.4,3.28,0.67,2.22,116538256,7471.0,0.4,72.9,166.9,https://www.carbonemissionscounter.com/co2-emissions/egypt
+Iraq,IRQ,2024,233.6,2.5,0.6,5.07,46042015,5351.0,0.29,49.7,114.3,https://www.carbonemissionscounter.com/co2-emissions/iraq
+United Arab Emirates,ARE,2024,222.0,5.51,0.57,20.13,11027135,5824.0,0.32,51.9,115.3,https://www.carbonemissionscounter.com/co2-emissions/united-arab-emirates
+Spain,ESP,2024,220.3,2.23,0.57,4.6,47910533,15700.0,0.85,229.4,367.4,https://www.carbonemissionscounter.com/co2-emissions/spain
+Algeria,DZA,2024,198.2,-2.27,0.51,4.23,46814302,5477.0,0.3,75.9,109.6,https://www.carbonemissionscounter.com/co2-emissions/algeria
+Pakistan,PAK,2024,179.8,-3.8,0.47,0.72,251269160,5740.0,0.31,67.8,129.9,https://www.carbonemissionscounter.com/co2-emissions/pakistan
+Philippines,PHL,2024,174.9,8.63,0.45,1.51,115843663,3984.0,0.21,40.8,72.3,https://www.carbonemissionscounter.com/co2-emissions/philippines
+Argentina,ARG,2024,171.1,-4.09,0.44,3.74,45696153,9152.0,0.49,112.2,161.7,https://www.carbonemissionscounter.com/co2-emissions/argentina
+Ukraine,UKR,2024,142.5,2.3,0.37,3.76,37860221,31236.0,1.69,706.5,313.5,https://www.carbonemissionscounter.com/co2-emissions/ukraine
+Uzbekistan,UZB,2024,139.2,13.26,0.36,3.83,36361859,6751.0,0.36,103.1,121.6,https://www.carbonemissionscounter.com/co2-emissions/uzbekistan
+Nigeria,NGA,2024,135.8,4.95,0.35,0.58,232679482,4711.0,0.26,38.8,101.7,https://www.carbonemissionscounter.com/co2-emissions/nigeria
+Kuwait,KWT,2024,129.5,5.11,0.34,26.25,4934508,3876.0,0.21,37.9,74.6,https://www.carbonemissionscounter.com/co2-emissions/kuwait
+Qatar,QAT,2024,125.8,5.27,0.33,41.27,3048429,2591.0,0.14,11.4,47.7,https://www.carbonemissionscounter.com/co2-emissions/qatar
+Venezuela,VEN,2024,116.0,-3.01,0.3,4.08,28405544,7886.0,0.43,120.9,148.4,https://www.carbonemissionscounter.com/co2-emissions/venezuela
+Netherlands,NLD,2024,114.8,-1.88,0.3,6.3,18228740,12262.0,0.66,163.0,178.1,https://www.carbonemissionscounter.com/co2-emissions/netherlands
+Bangladesh,BGD,2024,108.3,3.64,0.28,0.62,173562366,2001.0,0.11,14.1,37.7,https://www.carbonemissionscounter.com/co2-emissions/bangladesh
+Colombia,COL,2024,92.7,3.0,0.24,1.75,52886360,3802.0,0.21,56.9,60.3,https://www.carbonemissionscounter.com/co2-emissions/colombia
+Belgium,BEL,2024,85.5,0.94,0.22,7.28,11738761,12906.0,0.7,120.3,125.7,https://www.carbonemissionscounter.com/co2-emissions/belgium
+Oman,OMN,2024,82.7,3.63,0.21,15.65,5281542,1673.0,0.09,11.3,31.8,https://www.carbonemissionscounter.com/co2-emissions/oman
+Turkmenistan,TKM,2024,81.0,-15.09,0.21,10.81,7494494,2742.0,0.15,33.4,47.9,https://www.carbonemissionscounter.com/co2-emissions/turkmenistan
+Chile,CHL,2024,78.7,1.42,0.2,3.98,19764774,3325.0,0.18,32.9,61.1,https://www.carbonemissionscounter.com/co2-emissions/chile
+Czechia,CZE,2024,75.6,-9.13,0.2,7.04,10735857,12332.0,0.67,164.3,125.7,https://www.carbonemissionscounter.com/co2-emissions/czechia
+Peru,PER,2024,70.2,6.2,0.18,2.05,34217850,2162.0,0.12,21.4,30.3,https://www.carbonemissionscounter.com/co2-emissions/peru
+Morocco,MAR,2024,69.1,0.14,0.18,1.81,38081176,2016.0,0.11,22.3,44.7,https://www.carbonemissionscounter.com/co2-emissions/morocco
+Romania,ROU,2024,68.6,1.03,0.18,3.6,19015096,8862.0,0.48,176.5,101.3,https://www.carbonemissionscounter.com/co2-emissions/romania
+Libya,LBY,2024,65.3,1.71,0.17,8.84,7381029,2490.0,0.14,36.5,56.0,https://www.carbonemissionscounter.com/co2-emissions/libya
+North Korea,PRK,2024,62.5,0.81,0.16,2.36,26498832,5493.0,0.3,118.4,75.0,https://www.carbonemissionscounter.com/co2-emissions/north-korea
+Austria,AUT,2024,56.4,-0.88,0.15,6.18,9120815,5750.0,0.31,62.2,79.1,https://www.carbonemissionscounter.com/co2-emissions/austria
+Belarus,BLR,2024,55.8,0.18,0.14,6.16,9056696,5184.0,0.28,108.5,59.4,https://www.carbonemissionscounter.com/co2-emissions/belarus
+Singapore,SGP,2024,53.9,5.48,0.14,9.24,5832387,2248.0,0.12,43.5,39.6,https://www.carbonemissionscounter.com/co2-emissions/singapore
+Greece,GRC,2024,53.4,2.69,0.14,5.31,10047813,4297.0,0.23,83.4,113.9,https://www.carbonemissionscounter.com/co2-emissions/greece
+Israel,ISR,2024,52.6,-5.05,0.14,5.61,9387015,2608.0,0.14,35.8,56.5,https://www.carbonemissionscounter.com/co2-emissions/israel
+Ecuador,ECU,2024,46.0,3.14,0.12,2.54,18135478,1391.0,0.07,16.5,30.7,https://www.carbonemissionscounter.com/co2-emissions/ecuador
+Mongolia,MNG,2024,44.7,1.13,0.12,12.86,3475541,861.0,0.05,9.8,8.5,https://www.carbonemissionscounter.com/co2-emissions/mongolia
+Serbia,SRB,2024,42.0,-2.1,0.11,6.24,6736217,2925.0,0.16,57.5,50.1,https://www.carbonemissionscounter.com/co2-emissions/serbia
+Hungary,HUN,2024,40.0,-0.74,0.1,4.14,9676135,5184.0,0.28,73.4,60.1,https://www.carbonemissionscounter.com/co2-emissions/hungary
+Azerbaijan,AZE,2024,39.8,-6.79,0.1,3.85,10336577,2637.0,0.14,51.3,34.2,https://www.carbonemissionscounter.com/co2-emissions/azerbaijan
+Bahrain,BHR,2024,39.0,0.52,0.1,24.27,1607059,1112.0,0.06,11.5,24.5,https://www.carbonemissionscounter.com/co2-emissions/bahrain
+Sweden,SWE,2024,38.1,3.81,0.1,3.59,10606993,5135.0,0.28,57.4,53.8,https://www.carbonemissionscounter.com/co2-emissions/sweden
+Norway,NOR,2024,37.2,-4.37,0.1,6.67,5576656,2787.0,0.15,35.0,43.3,https://www.carbonemissionscounter.com/co2-emissions/norway
+Portugal,PRT,2024,35.5,-5.59,0.09,3.41,10425291,2768.0,0.15,45.3,69.6,https://www.carbonemissionscounter.com/co2-emissions/portugal
+Trinidad and Tobago,TTO,2024,34.6,-2.54,0.09,22.93,1507778,1711.0,0.09,17.0,38.2,https://www.carbonemissionscounter.com/co2-emissions/trinidad-and-tobago
+Hong Kong,HKG,2024,33.3,0.91,0.09,4.49,7414914,1750.0,0.1,27.1,43.3,https://www.carbonemissionscounter.com/co2-emissions/hong-kong
+Ireland,IRL,2024,33.3,-0.89,0.09,6.34,5255016,2366.0,0.13,32.9,48.2,https://www.carbonemissionscounter.com/co2-emissions/ireland
+Dominican Republic,DOM,2024,33.1,4.09,0.09,2.9,11427558,869.0,0.05,8.9,17.9,https://www.carbonemissionscounter.com/co2-emissions/dominican-republic
+Tunisia,TUN,2024,32.7,3.15,0.09,2.66,12277103,1066.0,0.06,14.6,22.5,https://www.carbonemissionscounter.com/co2-emissions/tunisia
+New Zealand,NZL,2024,32.5,2.85,0.08,6.23,5213942,2012.0,0.11,25.5,37.4,https://www.carbonemissionscounter.com/co2-emissions/new-zealand
+Switzerland,CHE,2024,32.1,0.31,0.08,3.6,8921979,3158.0,0.17,44.1,45.8,https://www.carbonemissionscounter.com/co2-emissions/switzerland
+Syria,SYR,2024,31.8,0.32,0.08,1.29,24672758,2056.0,0.11,37.3,51.2,https://www.carbonemissionscounter.com/co2-emissions/syria
+Bulgaria,BGR,2024,31.6,-8.41,0.08,4.68,6757686,3984.0,0.21,76.6,50.6,https://www.carbonemissionscounter.com/co2-emissions/bulgaria
+Myanmar,MMR,2024,31.6,-0.63,0.08,0.58,54500086,728.0,0.04,4.2,11.5,https://www.carbonemissionscounter.com/co2-emissions/myanmar
+Finland,FIN,2024,29.8,-6.29,0.08,5.3,5617311,3325.0,0.18,56.9,57.1,https://www.carbonemissionscounter.com/co2-emissions/finland
+Slovakia,SVK,2024,29.1,-5.52,0.07,5.28,5506759,4028.0,0.22,61.5,42.9,https://www.carbonemissionscounter.com/co2-emissions/slovakia
+Bolivia,BOL,2024,28.7,16.67,0.07,2.31,12413318,641.0,0.04,10.0,12.3,https://www.carbonemissionscounter.com/co2-emissions/bolivia
+Denmark,DNK,2024,28.4,-1.39,0.07,4.75,5977417,4200.0,0.23,53.5,51.5,https://www.carbonemissionscounter.com/co2-emissions/denmark
+Cuba,CUB,2024,24.4,3.83,0.06,2.23,10979781,1814.0,0.1,29.6,25.7,https://www.carbonemissionscounter.com/co2-emissions/cuba
+Laos,LAO,2024,24.4,0.83,0.06,3.14,7769823,243.0,0.01,0.5,1.3,https://www.carbonemissionscounter.com/co2-emissions/laos
+Jordan,JOR,2024,23.2,0.43,0.06,2.01,11552885,793.0,0.04,10.6,20.8,https://www.carbonemissionscounter.com/co2-emissions/jordan
+Angola,AGO,2024,22.3,2.76,0.06,0.59,37885854,740.0,0.04,5.1,15.4,https://www.carbonemissionscounter.com/co2-emissions/angola
+Cambodia,KHM,2024,21.9,2.34,0.06,1.24,17638804,252.0,0.01,1.3,2.2,https://www.carbonemissionscounter.com/co2-emissions/cambodia
+Kenya,KEN,2024,21.2,0.0,0.06,0.38,56432946,551.0,0.03,5.8,8.5,https://www.carbonemissionscounter.com/co2-emissions/kenya
+Ghana,GHA,2024,21.0,4.48,0.05,0.61,34427417,427.0,0.02,3.5,6.1,https://www.carbonemissionscounter.com/co2-emissions/ghana
+Sri Lanka,LKA,2024,20.8,8.33,0.05,0.9,23103561,568.0,0.03,3.8,11.7,https://www.carbonemissionscounter.com/co2-emissions/sri-lanka
+Tanzania,TZA,2024,20.0,-1.48,0.05,0.29,68560162,345.0,0.02,2.1,5.4,https://www.carbonemissionscounter.com/co2-emissions/tanzania
+Guatemala,GTM,2024,19.9,1.02,0.05,1.08,18406366,516.0,0.03,4.7,12.0,https://www.carbonemissionscounter.com/co2-emissions/guatemala
+Bosnia and Herzegovina,BIH,2024,19.4,-2.51,0.05,6.14,3164256,1043.0,0.06,19.9,16.0,https://www.carbonemissionscounter.com/co2-emissions/bosnia-and-herzegovina
+Nepal,NPL,2024,18.8,2.73,0.05,0.63,29651054,232.0,0.01,0.7,3.0,https://www.carbonemissionscounter.com/co2-emissions/nepal
+Croatia,HRV,2024,18.5,0.0,0.05,4.76,3875325,1185.0,0.06,22.9,23.3,https://www.carbonemissionscounter.com/co2-emissions/croatia
+Ethiopia,ETH,2024,17.8,1.14,0.05,0.14,132059770,330.0,0.02,3.0,5.0,https://www.carbonemissionscounter.com/co2-emissions/ethiopia
+Sudan,SDN,2024,17.8,0.56,0.05,0.35,50448960,517.0,0.03,4.8,10.6,https://www.carbonemissionscounter.com/co2-emissions/sudan
+Lebanon,LBN,2024,15.7,0.64,0.04,2.7,5805962,795.0,0.04,7.9,16.6,https://www.carbonemissionscounter.com/co2-emissions/lebanon
+Cote d'Ivoire,CIV,2024,14.8,4.96,0.04,0.46,31934229,400.0,0.02,4.8,7.6,https://www.carbonemissionscounter.com/co2-emissions/cote-d-ivoire
+Senegal,SEN,2024,14.1,0.0,0.04,0.76,18501988,301.0,0.02,2.9,5.5,https://www.carbonemissionscounter.com/co2-emissions/senegal
+Zimbabwe,ZWE,2024,13.7,2.24,0.04,0.82,16634366,833.0,0.04,15.5,10.7,https://www.carbonemissionscounter.com/co2-emissions/zimbabwe
+Honduras,HND,2024,12.9,4.03,0.03,1.19,10825704,310.0,0.02,2.5,6.8,https://www.carbonemissionscounter.com/co2-emissions/honduras
+Slovenia,SVN,2024,12.8,6.67,0.03,6.02,2118692,911.0,0.05,15.1,16.9,https://www.carbonemissionscounter.com/co2-emissions/slovenia
+Panama,PAN,2024,12.7,-2.31,0.03,2.81,4515576,360.0,0.02,2.6,6.7,https://www.carbonemissionscounter.com/co2-emissions/panama
+Lithuania,LTU,2024,12.5,0.0,0.03,4.39,2859112,1610.0,0.09,35.7,13.9,https://www.carbonemissionscounter.com/co2-emissions/lithuania
+Brunei,BRN,2024,12.1,-3.2,0.03,26.05,462734,428.0,0.02,,,
+Zambia,ZMB,2024,12.0,1.69,0.03,0.56,21314962,301.0,0.02,2.4,2.2,https://www.carbonemissionscounter.com/co2-emissions/zambia
+Georgia,GEO,2024,11.8,-0.84,0.03,3.1,3807668,662.0,0.04,14.8,5.0,https://www.carbonemissionscounter.com/co2-emissions/georgia
+Kyrgyzstan,KGZ,2024,11.8,6.31,0.03,1.64,7186014,883.0,0.05,19.2,5.5,https://www.carbonemissionscounter.com/co2-emissions/kyrgyzstan
+Afghanistan,AFG,2024,10.8,2.86,0.03,0.25,42647502,243.0,0.01,2.0,1.9,https://www.carbonemissionscounter.com/co2-emissions/afghanistan
+Tajikistan,TJK,2024,10.7,3.88,0.03,1.01,10590930,518.0,0.03,12.3,2.4,https://www.carbonemissionscounter.com/co2-emissions/tajikistan
+Yemen,YEM,2024,10.1,0.0,0.03,0.25,40583173,708.0,0.04,9.6,21.8,https://www.carbonemissionscounter.com/co2-emissions/yemen
+Cameroon,CMR,2024,9.6,-1.03,0.03,0.33,29123748,309.0,0.02,2.6,5.4,https://www.carbonemissionscounter.com/co2-emissions/cameroon
+El Salvador,SLV,2024,9.0,3.45,0.02,1.42,6338197,265.0,0.01,2.5,6.3,https://www.carbonemissionscounter.com/co2-emissions/el-salvador
+Congo,COG,2024,8.8,6.02,0.02,1.4,6332969,191.0,0.01,1.0,4.4,https://www.carbonemissionscounter.com/co2-emissions/congo
+Costa Rica,CRI,2024,8.8,3.53,0.02,1.71,5129909,286.0,0.01,2.9,6.7,https://www.carbonemissionscounter.com/co2-emissions/costa-rica
+Mozambique,MOZ,2024,8.6,-5.49,0.02,0.25,34631767,211.0,0.01,1.0,1.8,https://www.carbonemissionscounter.com/co2-emissions/mozambique
+Jamaica,JAM,2024,8.4,3.7,0.02,2.96,2839182,485.0,0.03,7.5,10.4,https://www.carbonemissionscounter.com/co2-emissions/jamaica
+Papua New Guinea,PNG,2024,8.3,-1.19,0.02,0.79,10576509,210.0,0.01,2.2,5.0,https://www.carbonemissionscounter.com/co2-emissions/papua-new-guinea
+Estonia,EST,2024,8.3,-4.6,0.02,6.11,1360548,1668.0,0.09,36.9,17.1,https://www.carbonemissionscounter.com/co2-emissions/estonia
+Uruguay,URY,2024,8.0,5.26,0.02,2.35,3386583,477.0,0.03,4.0,5.7,https://www.carbonemissionscounter.com/co2-emissions/uruguay
+Paraguay,PRY,2024,7.9,3.95,0.02,1.15,6929152,209.0,0.01,2.1,3.8,https://www.carbonemissionscounter.com/co2-emissions/paraguay
+Botswana,BWA,2024,7.5,4.17,0.02,2.96,2521145,184.0,0.01,2.7,4.1,https://www.carbonemissionscounter.com/co2-emissions/botswana
+Armenia,ARM,2024,7.4,0.0,0.02,2.5,2973843,407.0,0.02,9.0,4.4,https://www.carbonemissionscounter.com/co2-emissions/armenia
+Cyprus,CYP,2024,7.3,1.39,0.02,5.37,1358287,322.0,0.02,4.6,8.0,https://www.carbonemissionscounter.com/co2-emissions/cyprus
+Luxembourg,LUX,2024,7.0,2.94,0.02,10.46,673042,783.0,0.04,,,
+Equatorial Guinea,GNQ,2024,7.0,1.45,0.02,3.7,1892523,163.0,0.01,0.1,6.2,https://www.carbonemissionscounter.com/co2-emissions/equatorial-guinea
+Mali,MLI,2024,7.0,4.48,0.02,0.28,24478597,100.0,0.01,0.4,1.5,https://www.carbonemissionscounter.com/co2-emissions/mali
+North Macedonia,MKD,2024,6.6,-9.59,0.02,3.63,1823011,538.0,0.03,11.1,8.6,https://www.carbonemissionscounter.com/co2-emissions/north-macedonia
+Burkina Faso,BFA,2024,6.5,3.17,0.02,0.28,23548782,96.0,0.01,0.6,1.1,https://www.carbonemissionscounter.com/co2-emissions/burkina-faso
+Latvia,LVA,2024,6.5,-1.52,0.02,3.45,1871874,981.0,0.05,19.7,7.8,https://www.carbonemissionscounter.com/co2-emissions/latvia
+Uganda,UGA,2024,6.3,1.61,0.02,0.13,50015091,131.0,0.01,0.8,2.0,https://www.carbonemissionscounter.com/co2-emissions/uganda
+Benin,BEN,2024,6.1,3.39,0.02,0.42,14462721,128.0,0.01,0.6,2.5,https://www.carbonemissionscounter.com/co2-emissions/benin
+Democratic Republic of Congo,COD,2024,5.9,0.0,0.01,0.05,109276264,239.0,0.01,4.2,2.3,https://www.carbonemissionscounter.com/co2-emissions/democratic-republic-of-congo
+Nicaragua,NIC,2024,5.6,3.7,0.01,0.81,6916136,198.0,0.01,2.0,4.3,https://www.carbonemissionscounter.com/co2-emissions/nicaragua
+Gabon,GAB,2024,5.4,1.89,0.01,2.13,2538953,307.0,0.02,4.5,6.2,https://www.carbonemissionscounter.com/co2-emissions/gabon
+Moldova,MDA,2024,5.3,0.0,0.01,1.75,3034967,1358.0,0.07,36.5,4.9,https://www.carbonemissionscounter.com/co2-emissions/moldova
+New Caledonia,NCL,2024,5.3,3.92,0.01,18.06,292655,172.0,0.01,,,
+Mauritania,MRT,2024,5.2,4.0,0.01,1.01,5169403,100.0,0.01,0.9,1.4,https://www.carbonemissionscounter.com/co2-emissions/mauritania
+Palestine,PSE,2024,4.8,0.0,0.01,0.87,5495447,78.0,0.0,0.9,2.7,https://www.carbonemissionscounter.com/co2-emissions/palestine
+Mauritius,MUS,2024,4.7,2.17,0.01,3.68,1271171,133.0,0.01,1.5,3.3,https://www.carbonemissionscounter.com/co2-emissions/mauritius
+Madagascar,MDG,2024,4.5,2.27,0.01,0.14,31964960,113.0,0.01,0.9,1.7,https://www.carbonemissionscounter.com/co2-emissions/madagascar
+Guyana,GUY,2024,4.5,2.27,0.01,5.43,831092,117.0,0.01,,,
+Albania,ALB,2024,4.4,0.0,0.01,1.59,2791756,308.0,0.02,5.5,4.3,https://www.carbonemissionscounter.com/co2-emissions/albania
+Guinea,GIN,2024,4.0,2.56,0.01,0.27,14754779,106.0,0.01,1.0,1.8,https://www.carbonemissionscounter.com/co2-emissions/guinea
+Iceland,ISL,2024,3.8,8.57,0.01,9.67,393404,172.0,0.01,,,
+Namibia,NAM,2024,3.5,2.94,0.01,1.15,3030127,87.0,0.01,,2.5,https://www.carbonemissionscounter.com/co2-emissions/namibia
+Niger,NER,2024,3.2,3.23,0.01,0.12,27032417,62.0,0.0,0.6,0.7,https://www.carbonemissionscounter.com/co2-emissions/niger
+Bahamas,BHS,2024,3.1,3.33,0.01,7.65,401282,181.0,0.01,,,
+Suriname,SUR,2024,3.0,3.45,0.01,4.71,634438,129.0,0.01,,,
+Haiti,HTI,2024,3.0,3.45,0.01,0.25,11772562,89.0,0.01,1.0,1.7,https://www.carbonemissionscounter.com/co2-emissions/haiti
+Chad,TCD,2024,2.8,0.0,0.01,0.14,20299131,51.0,0.0,0.4,0.9,https://www.carbonemissionscounter.com/co2-emissions/chad
+Togo,TGO,2024,2.8,3.7,0.01,0.33,8406554,77.0,0.0,1.0,1.7,https://www.carbonemissionscounter.com/co2-emissions/togo
+Lesotho,LSO,2024,2.6,4.0,0.01,1.1,2337428,72.0,0.0,1.5,2.0,https://www.carbonemissionscounter.com/co2-emissions/lesotho
+Montenegro,MNE,2024,2.4,0.0,0.01,3.72,638481,122.0,0.01,,,
+Maldives,MDV,2024,2.3,4.55,0.01,4.37,527801,34.0,0.0,,,
+Curacao,CUW,2024,2.3,4.55,0.01,12.34,185482,532.0,0.03,,,
+Rwanda,RWA,2024,2.0,0.0,0.01,0.14,14256573,37.0,0.0,0.5,0.5,https://www.carbonemissionscounter.com/co2-emissions/rwanda
+Malawi,MWI,2024,1.9,0.0,0.01,0.09,21655288,58.0,0.0,0.7,0.8,https://www.carbonemissionscounter.com/co2-emissions/malawi
+Malta,MLT,2024,1.7,-5.56,0.0,3.2,539612,111.0,0.01,,,
+South Sudan,SSD,2024,1.7,0.0,0.0,0.14,11943410,46.0,0.0,0.4,0.9,https://www.carbonemissionscounter.com/co2-emissions/south-sudan
+Bhutan,BTN,2024,1.7,6.25,0.0,2.09,791530,30.0,0.0,,,
+Fiji,FJI,2024,1.4,0.0,0.0,1.56,928800,54.0,0.0,,,
+Sierra Leone,SLE,2024,1.4,0.0,0.0,0.17,8642029,43.0,0.0,0.5,0.4,https://www.carbonemissionscounter.com/co2-emissions/sierra-leone
+Barbados,BRB,2024,1.4,7.69,0.0,4.83,282476,64.0,0.0,,,
+Somalia,SOM,2024,1.3,0.0,0.0,0.07,19009155,42.0,0.0,0.8,0.6,https://www.carbonemissionscounter.com/co2-emissions/somalia
+Macao,MAC,2024,1.1,10.0,0.0,1.47,720270,58.0,0.0,,,
+Eswatini,SWZ,2024,1.0,0.0,0.0,0.84,1242829,45.0,0.0,1.0,1.0,https://www.carbonemissionscounter.com/co2-emissions/eswatini
+French Polynesia,PYF,2024,0.9,0.0,0.0,3.27,281816,35.0,0.0,,,
+Aruba,ABW,2024,0.9,0.0,0.0,8.52,108076,76.0,0.0,,,
+Burundi,BDI,2024,0.9,0.0,0.0,0.07,14047788,17.0,0.0,0.2,0.2,https://www.carbonemissionscounter.com/co2-emissions/burundi
+Liberia,LBR,2024,0.9,12.5,0.0,0.15,5612813,53.0,0.0,0.5,0.7,https://www.carbonemissionscounter.com/co2-emissions/liberia
+Gambia,GMB,2024,0.8,0.0,0.0,0.29,2759999,18.0,0.0,0.2,0.3,https://www.carbonemissionscounter.com/co2-emissions/gambia
+Belize,BLZ,2024,0.8,0.0,0.0,1.91,417077,23.0,0.0,,,
+Eritrea,ERI,2024,0.7,0.0,0.0,0.21,3535610,19.0,0.0,,0.6,https://www.carbonemissionscounter.com/co2-emissions/eritrea
+Faroe Islands,FRO,2024,0.7,0.0,0.0,13.09,55419,34.0,0.0,,,
+Sint Maarten (Dutch part),SXM,2024,0.7,0.0,0.0,16.55,43372,62.0,0.0,,,
+East Timor,TLS,2024,0.7,16.67,0.0,0.48,1400638,12.0,0.0,,0.3,https://www.carbonemissionscounter.com/co2-emissions/east-timor
+Antigua and Barbuda,ATG,2024,0.7,16.67,0.0,7.09,93782,27.0,0.0,,,
+Seychelles,SYC,2024,0.7,16.67,0.0,5.0,130436,16.0,0.0,,,
+Greenland,GRL,2024,0.6,0.0,0.0,11.08,55864,35.0,0.0,,,
+Cape Verde,CPV,2024,0.6,0.0,0.0,1.13,524878,17.0,0.0,,,
+Djibouti,DJI,2024,0.6,0.0,0.0,0.48,1168726,21.0,0.0,0.3,0.4,https://www.carbonemissionscounter.com/co2-emissions/djibouti
+Comoros,COM,2024,0.6,20.0,0.0,0.64,866632,8.0,0.0,,,
+Bermuda,BMU,2024,0.6,20.0,0.0,8.51,64660,31.0,0.0,,,
+Saint Lucia,LCA,2024,0.5,0.0,0.0,2.99,179751,16.0,0.0,,,
+Andorra,AND,2024,0.4,0.0,0.0,5.18,81955,17.0,0.0,,,
+Central African Republic,CAF,2024,0.4,0.0,0.0,0.07,5330691,12.0,0.0,0.2,0.1,https://www.carbonemissionscounter.com/co2-emissions/central-african-republic
+Turks and Caicos Islands,TCA,2024,0.4,0.0,0.0,8.14,46563,8.0,0.0,,,
+Grenada,GRD,2024,0.4,0.0,0.0,3.22,117218,10.0,0.0,,,
+Guinea-Bissau,GNB,2024,0.3,0.0,0.0,0.15,2201360,8.0,0.0,0.1,0.1,https://www.carbonemissionscounter.com/co2-emissions/guinea-bissau
+Solomon Islands,SLB,2024,0.3,0.0,0.0,0.36,819206,12.0,0.0,,,
+Saint Kitts and Nevis,KNA,2024,0.3,50.0,0.0,5.54,46867,8.0,0.0,,,
+Saint Vincent and the Grenadines,VCT,2024,0.3,50.0,0.0,2.54,100630,8.0,0.0,,,
+Samoa,WSM,2024,0.2,0.0,0.0,1.13,218031,8.0,0.0,,,
+Palau,PLW,2024,0.2,0.0,0.0,12.76,17719,11.0,0.0,,,
+Vanuatu,VUT,2024,0.2,0.0,0.0,0.6,327786,6.0,0.0,,,
+British Virgin Islands,VGB,2024,0.2,0.0,0.0,4.87,39498,6.0,0.0,,,
+Dominica,DMA,2024,0.2,0.0,0.0,2.58,66226,5.0,0.0,,,
+Marshall Islands,MHL,2024,0.2,100.0,0.0,4.11,37572,4.0,0.0,,,
+Tonga,TON,2024,0.2,100.0,0.0,1.46,104192,5.0,0.0,,,
+Bonaire Sint Eustatius and Saba,BES,2024,0.2,100.0,0.0,4.95,30699,11.0,0.0,,,
+Micronesia,FSM,2024,0.2,100.0,0.0,1.33,113171,5.0,0.0,,,
+Anguilla,AIA,2024,0.1,0.0,0.0,10.13,14623,4.0,0.0,,,
+Sao Tome and Principe,STP,2024,0.1,0.0,0.0,0.6,235548,4.0,0.0,,,
+Liechtenstein,LIE,2024,0.1,0.0,0.0,3.3,39895,10.0,0.0,,,
+Cook Islands,COK,2024,0.1,0.0,0.0,5.82,13750,3.0,0.0,,,
+Kiribati,KIR,2024,0.1,0.0,0.0,0.54,134521,2.0,0.0,,,
+Nauru,NRU,2024,0.1,0.0,0.0,5.13,11968,5.0,0.0,,,
+Saint Pierre and Miquelon,SPM,2024,0.1,0.0,0.0,9.79,5652,4.0,0.0,,,
+Wallis and Futuna,WLF,2024,0.0,,0.0,2.7,11303,1.0,0.0,,,
+Montserrat,MSR,2024,0.0,,0.0,6.02,4414,2.0,0.0,,,
+Saint Helena,SHN,2024,0.0,,0.0,2.17,5262,0.0,0.0,,,
+Tuvalu,TUV,2024,0.0,,0.0,1.18,9669,0.0,0.0,,,
+Niue,NIU,2024,0.0,,0.0,4.14,1841,0.0,0.0,,,
+World,OWID_WRL,2024,38598.6,,100,4.73,8161972574,1849123.9,100,,,

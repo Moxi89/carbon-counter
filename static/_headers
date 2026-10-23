@@ -27,3 +27,8 @@
 
 /fonts/*
   Cache-Control: public, max-age=31536000, immutable
+
+# Data downloads (CSV) can be fetched from other sites and tools
+/downloads/*
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400

@@ -148,7 +148,7 @@ def foot(scripts):
         <div id="footer-placeholder"></div>
     </div>
     <script src="/shared/nav.js?v={V}f" defer></script>
-    <script src="/shared/footer.js?v={V}m" defer></script>
+    <script src="/shared/footer.js?v={V}n" defer></script>
 {extra}
 </body>
 </html>
