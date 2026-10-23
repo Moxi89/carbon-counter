@@ -866,3 +866,6 @@ section h2::after,
 @media (max-width: 340px) {
     .nav-link { padding: 8px 3px !important; font-size: 0.75rem !important; }
 }
+
+/* Legacy styles.css pads h1 on phones; page containers already handle gutters */
+h1 { padding-left: 0; padding-right: 0; }

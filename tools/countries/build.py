@@ -198,7 +198,7 @@ def head(title, description, path, extra_css, schema, img='home'):
     <link rel="preload" href="/fonts/fira-code-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="/css/styles.css?v=2026-10b">
     <link rel="stylesheet" href="/shared/nav-styles.css">
-    <link rel="stylesheet" href="/css/theme-2026.css?v={ASSET_V}j">
+    <link rel="stylesheet" href="/css/theme-2026.css?v={ASSET_V}k">
     <link rel="stylesheet" href="/css/{extra_css}?v={ASSET_V}b">
 {schema}
 </head>

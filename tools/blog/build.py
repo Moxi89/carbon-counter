@@ -121,7 +121,7 @@ def head(title, description, url, og_type, extra_css, schemas, img='home'):
     <link rel="preload" href="/fonts/fira-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="/css/styles.css?v=2026-10b">
     <link rel="stylesheet" href="/shared/nav-styles.css">
-    <link rel="stylesheet" href="/css/theme-2026.css?v={V}j">
+    <link rel="stylesheet" href="/css/theme-2026.css?v={V}k">
     <link rel="stylesheet" href="/css/post-2026.css?v={V}">{css}
 {chr(10).join(jsonld(s) for s in schemas)}
 </head>
