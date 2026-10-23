@@ -98,7 +98,9 @@ def extract(csv_path):
         'year': year,
         'source': 'Our World in Data based on the Global Carbon Project (Global Carbon Budget 2025)',
         'world': {'co2': round(num(world['co2']), 1), 'pc': round(num(world['co2_per_capita']), 2),
-                  'pop': int(num(world['population']))},
+                  'pop': int(num(world['population'])),
+                  'series': [[y, round(num(by[('World', y)]['co2']), 1)] for y in range(1950, year + 1)
+                             if ('World', y) in by and num(by[('World', y)]['co2']) is not None]},
         'countries': out,
     }
     with open(DATA_JSON, 'w', encoding='utf-8') as f:
@@ -723,6 +725,38 @@ def write_redirects(featured):
     print('_redirects: country routes updated')
 
 
+def history_svg(series):
+    """Area chart of global fossil CO2 since 1950 for the home page."""
+    w, h, l, r, t, b = 1000, 340, 46, 24, 20, 34
+    y0, y1 = series[0][0], series[-1][0]
+    vmax = 45000
+    x = lambda y: l + (y - y0) / (y1 - y0) * (w - l - r)
+    yv = lambda v: t + (1 - v / vmax) * (h - t - b)
+    pts = ' '.join(f'{x(yy):.1f},{yv(v):.1f}' for yy, v in series)
+    area = f'M{x(y0):.1f},{yv(0):.1f} L{pts.replace(" ", " L")} L{x(y1):.1f},{yv(0):.1f} Z'
+    grid = ''.join(f'<line x1="{l}" x2="{w - r}" y1="{yv(g * 1000):.1f}" y2="{yv(g * 1000):.1f}" class="cx-h-grid"/>'
+                   f'<text x="{l - 8}" y="{yv(g * 1000) + 4:.1f}" class="cx-h-axis" text-anchor="end">{g}</text>' for g in (10, 20, 30, 40))
+    years = ''.join(f'<text x="{x(yy):.1f}" y="{h - 10}" class="cx-h-axis" text-anchor="middle">{yy}</text>'
+                    for yy in range(1950, y1 + 1, 10))
+    d = dict(series)
+    notes = ''
+    for yy, label in ((2009, 'Financial crisis'), (2020, 'COVID-19')):
+        if yy in d:
+            notes += (f'<circle cx="{x(yy):.1f}" cy="{yv(d[yy]):.1f}" r="4" class="cx-h-note-dot"/>'
+                      f'<text x="{x(yy):.1f}" y="{yv(d[yy]) + 22:.1f}" class="cx-h-note" text-anchor="middle">{label}</text>')
+    last = series[-1]
+    first = series[0]
+    end = (f'<circle cx="{x(last[0]):.1f}" cy="{yv(last[1]):.1f}" r="6" class="cx-h-end"/>'
+           f'<text x="{x(last[0]) - 10:.1f}" y="{yv(last[1]) - 14:.1f}" class="cx-h-label" text-anchor="end">{last[1] / 1000:.1f} Gt in {last[0]}</text>'
+           f'<text x="{x(first[0]) + 4:.1f}" y="{yv(first[1]) - 26:.1f}" class="cx-h-label">{first[1] / 1000:.1f} Gt in {first[0]}</text>')
+    label = (f'Area chart of global fossil CO2 emissions from {first[0]} ({first[1] / 1000:.1f} billion tonnes) '
+             f'to {last[0]} ({last[1] / 1000:.1f} billion tonnes), with brief dips in 2009 and 2020.')
+    return (f'<svg class="cx-history-chart" viewBox="0 0 {w} {h}" role="img" aria-label="{e(label)}">'
+            f'<defs><linearGradient id="cxHistFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#34d399" stop-opacity="0.45"/>'
+            f'<stop offset="1" stop-color="#34d399" stop-opacity="0"/></linearGradient></defs>'
+            f'{grid}<path d="{area}" fill="url(#cxHistFill)"/><polyline points="{pts}" class="cx-h-line"/>{notes}{end}{years}</svg>')
+
+
 def update_home(data, featured):
     """Refresh the country picker and top-emitters bars on the home page."""
     p = os.path.join(STATIC, 'index.html')
@@ -741,6 +775,10 @@ def update_home(data, featured):
     s = fill(s, 'options', '\n' + opts + '\n                            ')
     s = fill(s, 'bars', '\n' + bars + '\n                        ')
     s = fill(s, 'year', str(data['year']))
+    if '<!-- countries:history -->' in s:
+        ser = data['world']['series']
+        s = fill(s, 'history', history_svg(ser))
+        s = fill(s, 'growth', f'{ser[-1][1] / ser[0][1]:.1f}')
     open(p, 'w', encoding='utf-8').write(s)
     print('index.html: country picker and top emitters updated')
 

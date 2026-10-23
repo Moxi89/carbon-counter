@@ -362,6 +362,47 @@ main > section + section { margin-top: 20px; }
 }
 
 /* --------------------------------------------------------------------------
+   Emissions history chart
+   -------------------------------------------------------------------------- */
+
+.cx-history {
+    padding: 28px 28px 22px;
+    border-radius: 24px;
+    border: 1px solid var(--t-border);
+    background: var(--t-surface);
+    box-shadow: var(--t-shadow);
+}
+
+.cx-history-head h2 {
+    margin: 0 0 4px !important;
+    text-align: left !important;
+    font-size: clamp(1.25rem, 2.4vw, 1.5rem) !important;
+    color: var(--t-text) !important;
+}
+
+.cx-history-head h2::after { display: none !important; }
+.cx-history-head p { margin: 0 0 12px; color: var(--t-muted); font-size: 0.9375rem; }
+.cx-history-chart { display: block; width: 100%; height: auto; }
+.cx-h-grid { stroke: rgba(255, 255, 255, 0.06); stroke-width: 1; }
+.cx-h-axis { fill: var(--t-subtle); font: 12px var(--t-mono); }
+.cx-h-line { fill: none; stroke: var(--t-primary-bright); stroke-width: 3; stroke-linejoin: round; }
+.cx-h-end { fill: var(--t-gold); stroke: #06100c; stroke-width: 3; }
+.cx-h-label { fill: var(--t-text); font: 600 15px var(--t-mono); }
+.cx-h-note { fill: var(--t-muted); font: 12px var(--t-sans); }
+.cx-h-note-dot { fill: #06100c; stroke: var(--t-muted); stroke-width: 2; }
+.cx-history-note { margin: 10px 0 0; color: var(--t-muted); font-size: 0.9375rem; line-height: 1.6; }
+.cx-history-note a { color: var(--t-primary-bright); text-decoration: none; }
+.cx-history-note a:hover { text-decoration: underline; }
+
+@media (max-width: 640px) {
+    .cx-history { padding: 20px 16px 16px; border-radius: 20px; }
+    .cx-h-axis { font-size: 30px; }
+    .cx-h-label { font-size: 34px; }
+    .cx-h-line { stroke-width: 5; }
+    .cx-h-note { display: none; }
+}
+
+/* --------------------------------------------------------------------------
    Key-figure grid
    -------------------------------------------------------------------------- */
 
