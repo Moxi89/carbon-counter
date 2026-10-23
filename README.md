@@ -4,7 +4,7 @@ Source for [carbonemissionscounter.com](https://www.carbonemissionscounter.com/)
 emissions, the remaining 1.5 °C carbon budget, CO₂ by country, a lifetime-emissions tool, an embeddable widget and a
 blog of sourced guides.
 
-Plain static HTML, CSS and JavaScript, hosted on **Cloudflare Pages** (output directory = repo root). Pushing to
+Plain static HTML, CSS and JavaScript, hosted on **Cloudflare Pages** (output directory = `static/`, so only files inside it are published). Pushing to
 `master` deploys the site.
 
 ## Layout
@@ -12,11 +12,11 @@ Plain static HTML, CSS and JavaScript, hosted on **Cloudflare Pages** (output di
 | Path | What it is |
 |---|---|
 | `static/` | The website. `index.html` is the home page. |
-| `_redirects` | Clean URLs (`/co2-emissions/japan` → `static/co2-emissions/japan.html`). The country block is generated. |
-| `_headers` | Security headers, caching, and framing rules for `/embed`. |
+| `static/_headers` | Security headers, long caching for versioned CSS/JS/fonts, and the rule that lets other sites frame `/embed`. If a page starts loading something from another domain, add that domain to the Content-Security-Policy here. |
+| `static/_redirects` | Redirects for old URLs. Clean URLs (`/co2-emissions/japan` → `co2-emissions/japan.html`) and the 404 page are handled by Cloudflare Pages itself. |
 | `static/shared/` | Navbar and footer, loaded on every page by `nav.js` and `footer.js` (footer.js also runs share buttons and scroll reveals). |
 | `static/css/theme-2026.css` | Design tokens and shared styles, loaded last on every page. Page styles: `home-2026.css`, `country-2026.css`, `post-2026.css`. |
-| `tools/countries/` | Builds the country pages, rankings, sitemap, redirects and the home page's country data. |
+| `tools/countries/` | Builds the country pages, rankings, sitemap and the home page's country data. |
 | `tools/blog/` | Builds the blog from `tools/blog/content/*.html`. Writing rules: `tools/blog/CONTENT_GUIDE.md`. |
 | `tools/og/` | Renders the 1200×630 social share images in `static/og/`. |
 | `static/js/motion-effects.js` | Count-up numbers, growing bars and gliding ranking rows on the home and country pages, using a slim self-hosted build of [Motion](https://motion.dev) (`static/js/vendor/motion.js`). Rebuild it with `npm install && npm run build:motion`. Skipped when the visitor prefers reduced motion. |
