@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "motion": "^14.6.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.10"
+  },
+  "private": true,
+  "scripts": {
+    "build:motion": "esbuild tools/motion/entry.js --bundle --minify --format=iife --global-name=Motion --target=es2018 --legal-comments=inline --outfile=static/js/vendor/motion.js"
+  }
+}

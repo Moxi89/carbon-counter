@@ -227,6 +227,8 @@ def foot(js):
     <script src="/shared/footer.js?v={ASSET_V}g" defer></script>
 
     <script src="/js/{js}?v={ASSET_V}" defer></script>
+    <script src="/js/vendor/motion.js?v=14.6.0-lite" defer></script>
+    <script src="/js/motion-effects.js?v={ASSET_V}a" defer></script>
 </body>
 </html>
 '''
