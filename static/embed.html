@@ -10,28 +10,34 @@
         @font-face { font-family: 'Fira Sans'; font-weight: 500; font-display: swap; src: url('/fonts/fira-sans-latin-500-normal.woff2') format('woff2'); }
         @font-face { font-family: 'Fira Code'; font-weight: 300 700; font-display: swap; src: url('/fonts/fira-code-latin-wght-normal.woff2') format('woff2-variations'); }
         :root { color-scheme: dark; }
+        /* 13px in a normal embed (about 520 x 170); grows with the window when opened full screen */
+        html { font-size: clamp(13px, min(2.66vw, 7.6vh), 48px); }
         * { box-sizing: border-box; margin: 0; }
         html, body { height: 100%; }
         body {
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 16px 20px;
+            padding: 1.2rem 1.5rem;
             font-family: 'Fira Sans', system-ui, sans-serif;
             color: #ecfdf5;
             background: radial-gradient(120% 120% at 100% 0%, rgba(16, 185, 129, 0.22), transparent 60%), #06100c;
             overflow: hidden;
         }
         body.light { color: #052e22; background: radial-gradient(120% 120% at 100% 0%, rgba(16, 185, 129, 0.16), transparent 60%), #f4fbf8; }
-        .label { display: flex; align-items: center; gap: 8px; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: #a3bfb4; }
+        .label { display: flex; align-items: center; gap: 0.6rem; font-size: 1rem; letter-spacing: 0.06em; text-transform: uppercase; color: #a3bfb4; }
         .light .label { color: #3b6656; }
-        .dot { flex: none; width: 8px; height: 8px; border-radius: 50%; background: #34d399; box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.6); animation: pulse 2s ease-out infinite; }
-        @keyframes pulse { 70% { box-shadow: 0 0 0 8px rgba(52, 211, 153, 0); } 100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); } }
-        .num { margin: 6px 0 2px; font-family: 'Fira Code', ui-monospace, monospace; font-weight: 600; font-size: clamp(22px, 9vw, 44px); letter-spacing: -0.03em; font-variant-numeric: tabular-nums; white-space: nowrap; color: #34d399; }
+        .dot { flex: none; width: 0.6rem; height: 0.6rem; border-radius: 50%; background: #34d399; box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.6); animation: pulse 2s ease-out infinite; }
+        .budget .dot { background: #fbbf24; animation-name: pulse-gold; }
+        @keyframes pulse { 70% { box-shadow: 0 0 0 0.6rem rgba(52, 211, 153, 0); } 100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); } }
+        @keyframes pulse-gold { 0% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.6); } 70% { box-shadow: 0 0 0 0.6rem rgba(251, 191, 36, 0); } 100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0); } }
+        .num { margin: 0.45rem 0 0.15rem; font-family: 'Fira Code', ui-monospace, monospace; font-weight: 600; font-size: clamp(22px, min(9vw, 3.4rem), 20rem); letter-spacing: -0.03em; font-variant-numeric: tabular-nums; white-space: nowrap; color: #34d399; }
         .light .num { color: #047857; }
-        .sub { font-size: 13px; color: #a3bfb4; }
+        .budget .num { color: #fbbf24; }
+        .light.budget .num { color: #b45309; }
+        .sub { font-size: 1rem; color: #a3bfb4; }
         .light .sub { color: #3b6656; }
-        .credit { margin-top: 10px; font-size: 12px; }
+        .credit { margin-top: 0.75rem; font-size: 0.92rem; }
         .credit a { color: #34d399; text-decoration: none; }
         .light .credit a { color: #047857; }
         .credit a:hover { text-decoration: underline; }
@@ -39,24 +45,50 @@
     </style>
 </head>
 <body>
-    <p class="label"><span class="dot" aria-hidden="true"></span><span>CO&#8322; emitted worldwide in <span id="y">2026</span></span></p>
+    <p class="label"><span class="dot" aria-hidden="true"></span><span id="label">CO&#8322; emitted worldwide in <span id="y">2026</span></span></p>
     <p class="num" id="n" aria-live="off">0</p>
-    <p class="sub">tonnes so far &middot; about 1,338 every second</p>
+    <p class="sub" id="sub">tonnes so far &middot; about 1,338 every second</p>
     <p class="credit"><a href="https://www.carbonemissionscounter.com/" target="_blank" rel="noopener">Live estimate by carbonemissionscounter.com</a></p>
     <script>
         (function () {
+            // Global Carbon Budget 2025: 42.2 Gt CO2 a year (fossil + land use);
+            // 170 Gt left from 1 January 2026 for a 50% chance of 1.5 °C.
             var params = new URLSearchParams(location.search);
-            if (params.get('theme') === 'light') document.body.className = 'light';
-            var PER_SECOND = 42.2e9 / (365 * 24 * 3600);
+            var light = params.get('theme') === 'light';
+            var budget = params.get('type') === 'budget';
+            document.body.className = (light ? 'light ' : '') + (budget ? 'budget' : '');
+            var SECONDS_PER_YEAR = 365 * 24 * 3600;
+            var PER_SECOND = 42.2e9 / SECONDS_PER_YEAR;
+            var BUDGET_T = 170e9;
+            var BUDGET_START = Date.UTC(2026, 0, 1);
+            var BUDGET_END = BUDGET_START + BUDGET_T / PER_SECOND * 1000;
             var el = document.getElementById('n');
+            var sub = document.getElementById('sub');
             var fmt = new Intl.NumberFormat('en-US');
             var now = new Date();
-            document.getElementById('y').textContent = now.getFullYear();
+            if (budget) {
+                document.title = 'Live 1.5 °C carbon budget countdown | Carbon Emissions Counter';
+                document.getElementById('label').textContent = 'CO₂ left in the 1.5 °C budget';
+            } else {
+                document.getElementById('y').textContent = now.getFullYear();
+            }
+            function timeLeft(t) {
+                var s = Math.floor((BUDGET_END - t) / 1000);
+                if (s <= 0) return 'tonnes · used up at today’s rate';
+                var years = Math.floor(s / SECONDS_PER_YEAR);
+                var days = Math.floor((s - years * SECONDS_PER_YEAR) / 86400);
+                return 'tonnes · runs out in ' + years + (years === 1 ? ' year ' : ' years ') + days + (days === 1 ? ' day' : ' days') + ' at today’s rate';
+            }
             var slow = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             function tick() {
-                var t = new Date();
-                var start = new Date(t.getFullYear(), 0, 1).getTime();
-                el.textContent = fmt.format(Math.floor((t - start) / 1000 * PER_SECOND));
+                var t = Date.now();
+                if (budget) {
+                    el.textContent = fmt.format(Math.max(0, Math.floor(BUDGET_T - (t - BUDGET_START) / 1000 * PER_SECOND)));
+                    sub.textContent = timeLeft(t);
+                } else {
+                    var start = new Date(new Date(t).getFullYear(), 0, 1).getTime();
+                    el.textContent = fmt.format(Math.floor((t - start) / 1000 * PER_SECOND));
+                }
             }
             tick();
             setInterval(tick, slow ? 1000 : 100);

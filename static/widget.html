@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Free Live CO₂ Counter Widget for Your Website</title>
-    <meta name="description" content="Add a free live CO₂ emissions counter to your website, school page or blog with one line of code. Dark and light themes, no tracking, works everywhere.">
+    <meta name="description" content="Add a free live CO₂ emissions counter or 1.5 °C carbon budget countdown to your website, school page or blog with one line of code. Dark and light themes, no tracking.">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <link rel="canonical" href="https://www.carbonemissionscounter.com/widget">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.carbonemissionscounter.com/widget">
     <meta property="og:title" content="Free live CO₂ counter widget for your website">
-    <meta property="og:description" content="Add a live global CO₂ emissions counter to any website with one line of code.">
+    <meta property="og:description" content="Add a live global CO₂ emissions counter or carbon budget countdown to any website with one line of code.">
     <meta property="og:site_name" content="Carbon Emissions Counter">
     <meta property="og:image" content="https://www.carbonemissionscounter.com/og/widget.jpg">
     <meta property="og:image:width" content="1200">
@@ -26,21 +26,55 @@
     <link rel="stylesheet" href="/css/theme-2026.css?v=2026-10l">
     <link rel="stylesheet" href="/css/post-2026.css?v=2026-10e">
     <style>
-        .wg-preview { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 24px 0; }
-        .wg-preview iframe { width: 100%; height: 170px; border: 1px solid var(--t-border); border-radius: 16px; display: block; }
-        .wg-code { position: relative; margin: 16px 0 8px; }
-        .wg-code textarea { width: 100%; min-height: 128px; padding: 14px 16px; border-radius: 14px; border: 1px solid var(--t-border-strong); background: rgba(0, 0, 0, 0.35); color: var(--t-text); font: 0.875rem/1.5 var(--t-mono); resize: vertical; }
-        .wg-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
-        .wg-btn { min-height: 44px; padding: 0 20px; border-radius: 999px; border: 0; background: var(--t-primary-bright); color: #022c22; font: 600 0.9375rem var(--t-sans); cursor: pointer; }
+        .wg-perks { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 0; padding: 0; list-style: none; }
+        .wg-perks li { display: inline-flex; align-items: center; gap: 6px; min-height: 32px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--t-border); background: var(--t-primary-soft); color: var(--t-text); font-size: 0.875rem; }
+        .wg-perks svg { width: 14px; height: 14px; stroke: var(--t-primary-bright); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+
+        /* Builder: live preview on a mock web page, then the options and code */
+        .wg-builder { margin: 28px 0 8px; border: 1px solid var(--t-border-strong); border-radius: 22px; overflow: hidden; background: var(--t-surface); box-shadow: var(--t-shadow); }
+        .wg-stage { background: radial-gradient(90% 120% at 0% 0%, rgba(52, 211, 153, 0.14), transparent 60%), rgba(0, 0, 0, 0.3); border-bottom: 1px solid var(--t-border); }
+        .wg-browser { display: flex; align-items: center; gap: 6px; padding: 10px 14px; border-bottom: 1px solid var(--t-border); }
+        .wg-browser i { width: 9px; height: 9px; border-radius: 50%; background: rgba(255, 255, 255, 0.16); }
+        .wg-browser span { margin-left: 8px; padding: 3px 12px; border-radius: 999px; background: rgba(255, 255, 255, 0.06); color: var(--t-subtle); font: 0.75rem var(--t-mono); }
+        .wg-stage-body { padding: 24px 16px 28px; }
+        .wg-stage-body.is-light { background: #e9f3ef; }
+        .wg-stage iframe { display: block; width: 100%; max-width: 520px; height: 170px; margin: 0 auto; border: 0; border-radius: 16px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35); }
+        .wg-stage-body.is-light iframe { box-shadow: 0 10px 30px rgba(6, 78, 59, 0.15); }
+        .wg-panel { padding: 20px 20px 22px; }
+        .wg-panel h2 { margin: 0 0 16px; font-size: 1.25rem; }
+        .wg-fields { display: flex; flex-wrap: wrap; gap: 14px 24px; margin-bottom: 16px; }
+        .wg-field-label { display: block; margin-bottom: 6px; color: var(--t-subtle); font-size: 0.8125rem; letter-spacing: 0.06em; text-transform: uppercase; }
+        .wg-seg { display: inline-flex; padding: 4px; border-radius: 12px; border: 1px solid var(--t-border); background: rgba(0, 0, 0, 0.25); }
+        .wg-seg button { min-height: 38px; padding: 0 14px; border: 0; border-radius: 9px; background: transparent; color: var(--t-muted); font: 500 0.9375rem var(--t-sans); cursor: pointer; }
+        .wg-seg button:hover { color: var(--t-text); }
+        .wg-seg button[aria-pressed='true'] { background: var(--t-surface-raised); color: var(--t-text); box-shadow: inset 0 0 0 1px var(--t-border-strong); }
+        .wg-code textarea { display: block; width: 100%; min-height: 112px; padding: 12px 14px; border-radius: 14px; border: 1px solid var(--t-border-strong); background: rgba(0, 0, 0, 0.35); color: var(--t-text); font: 0.8125rem/1.55 var(--t-mono); resize: vertical; }
+        .wg-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 12px; }
+        .wg-btn { display: inline-flex; align-items: center; gap: 8px; min-height: 46px; padding: 0 22px; border-radius: 999px; border: 0; background: var(--t-primary-bright); color: #022c22; font: 600 0.9375rem var(--t-sans); cursor: pointer; text-decoration: none; }
         .wg-btn:hover { background: #6ee7b7; }
-        .wg-theme { display: inline-flex; padding: 4px; border-radius: 12px; border: 1px solid var(--t-border); }
-        .wg-theme button { min-height: 36px; padding: 0 14px; border: 0; border-radius: 9px; background: transparent; color: var(--t-muted); font: 500 0.9375rem var(--t-sans); cursor: pointer; }
-        .wg-theme button[aria-pressed='true'] { background: var(--t-surface-raised); color: var(--t-text); }
+        .wg-btn-ghost { background: transparent; color: var(--t-text); box-shadow: inset 0 0 0 1px var(--t-border-strong); }
+        .wg-btn-ghost:hover { background: rgba(255, 255, 255, 0.06); }
+        .wg-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+        .wg-status { min-height: 1.5em; margin: 8px 0 0; color: var(--t-primary-bright); font-size: 0.9375rem; }
         .wg-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-        .wg-status { color: var(--t-primary-bright); font-size: 0.9375rem; }
+
+        /* Who it's for */
+        .wg-uses { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin: 8px 0 18px; }
+        .wg-use { padding: 16px 18px; border-radius: 16px; border: 1px solid var(--t-border); background: var(--t-surface); }
+        .wg-use svg { width: 26px; height: 26px; margin-bottom: 8px; stroke: var(--t-primary-bright); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+        .wg-use h3 { margin: 0 0 4px !important; font-size: 1.0625rem !important; }
+        .wg-use p { margin: 0; color: var(--t-muted); font-size: 0.9688rem; line-height: 1.55; }
+
+        /* Platform steps */
+        .wg-steps { margin: 8px 0 14px; border: 1px solid var(--t-border); border-radius: 16px; overflow: hidden; }
+        .wg-step { display: grid; grid-template-columns: 9.5rem 1fr; gap: 4px 16px; padding: 12px 16px; border-top: 1px solid var(--t-border); font-size: 0.9688rem; line-height: 1.55; }
+        .wg-step:first-child { border-top: 0; }
+        .wg-step dt { color: var(--t-text); font-weight: 600; }
+        .wg-step dd { margin: 0; color: var(--t-muted); }
+        @media (max-width: 520px) { .wg-step { grid-template-columns: 1fr; } }
     </style>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.carbonemissionscounter.com/"},{"@type":"ListItem","position":2,"name":"CO₂ counter widget","item":"https://www.carbonemissionscounter.com/widget"}]}</script>
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is the CO₂ counter widget free?","acceptedAnswer":{"@type":"Answer","text":"Yes. The widget is free for any website, including schools, blogs, businesses and non-profits. Please keep the small credit link."}},{"@type":"Question","name":"Does the widget track visitors or use cookies?","acceptedAnswer":{"@type":"Answer","text":"No. The widget is a small static page with a few lines of JavaScript. It sets no cookies and loads no analytics or third-party scripts."}},{"@type":"Question","name":"Where do the widget's numbers come from?","acceptedAnswer":{"@type":"Answer","text":"It uses the Global Carbon Budget 2025 estimate of 42.2 billion tonnes of CO₂ a year (fossil fuels plus land-use change), spread evenly over the year: about 1,338 tonnes per second."}}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is the CO₂ counter widget free?","acceptedAnswer":{"@type":"Answer","text":"Yes. Both widgets are free for any website, including schools, blogs, businesses and non-profits. Please keep the small credit link."}},{"@type":"Question","name":"Does the widget track visitors or use cookies?","acceptedAnswer":{"@type":"Answer","text":"No. The widget is a small static page with a few lines of JavaScript. It sets no cookies and loads no analytics or third-party scripts."}},{"@type":"Question","name":"Where do the widget's numbers come from?","acceptedAnswer":{"@type":"Answer","text":"Both widgets use the Global Carbon Budget 2025. The counter spreads its estimate of 42.2 billion tonnes of CO₂ a year (fossil fuels plus land-use change) evenly over the year: about 1,338 tonnes per second. The carbon budget countdown starts from 170 billion tonnes left on 1 January 2026, for a 50% chance of keeping warming to 1.5 °C, and counts down at the same rate."}},{"@type":"Question","name":"Can I show the counter on a big screen or in a presentation?","acceptedAnswer":{"@type":"Answer","text":"Yes. Choose a widget and theme, then select Open full screen. The numbers grow to fill the window, so you can show it on a projector or TV, or share that browser window in a video call."}}]}</script>
 </head>
 <body>
     <div class="container">
@@ -52,22 +86,38 @@
                 <header class="bp-header">
                     <p class="bp-tag">Free widget</p>
                     <h1 class="bp-title">Add a live CO&#8322; counter to your website</h1>
-                    <p class="bp-dek">One line of code, no sign-up, no tracking. Ideal for school pages, climate blogs, sustainability reports and event screens.</p>
+                    <p class="bp-dek">Show global CO&#8322; emissions rising, or the 1.5&nbsp;&deg;C carbon budget running out, on your school page, blog, report or event screen. Copy one line of code.</p>
+                    <ul class="wg-perks">
+                        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>Free</li>
+                        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>No sign-up</li>
+                        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>No cookies or tracking</li>
+                        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>Works on phones</li>
+                    </ul>
                 </header>
 
-                <div class="wg-preview" aria-label="Widget preview">
-                    <iframe src="/embed" title="Live CO2 counter, dark theme" loading="lazy"></iframe>
-                    <iframe src="/embed?theme=light" title="Live CO2 counter, light theme" loading="lazy"></iframe>
-                </div>
-
-                <div class="bp-body">
-                    <section>
+                <section class="wg-builder" aria-labelledby="get-the-code">
+                    <div class="wg-stage">
+                        <div class="wg-browser" aria-hidden="true"><i></i><i></i><i></i><span>your-website.com</span></div>
+                        <div class="wg-stage-body" id="wgStage">
+                            <iframe id="wgPreview" src="/embed" title="Widget preview: live CO2 emissions counter"></iframe>
+                        </div>
+                    </div>
+                    <div class="wg-panel">
                         <h2 id="get-the-code">Get the code</h2>
-                        <p>Choose a theme, copy the code and paste it into your page&rsquo;s HTML where you want the counter to appear.</p>
-                        <div class="wg-actions">
-                            <div class="wg-theme" role="group" aria-label="Theme">
-                                <button type="button" data-theme="dark" aria-pressed="true">Dark</button>
-                                <button type="button" data-theme="light" aria-pressed="false">Light</button>
+                        <div class="wg-fields">
+                            <div>
+                                <span class="wg-field-label" id="wgTypeLabel">Widget</span>
+                                <div class="wg-seg" role="group" aria-labelledby="wgTypeLabel">
+                                    <button type="button" data-type="emissions" aria-pressed="true">CO&#8322; counter</button>
+                                    <button type="button" data-type="budget" aria-pressed="false">Carbon budget</button>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="wg-field-label" id="wgThemeLabel">Theme</span>
+                                <div class="wg-seg" role="group" aria-labelledby="wgThemeLabel">
+                                    <button type="button" data-theme="dark" aria-pressed="true">Dark</button>
+                                    <button type="button" data-theme="light" aria-pressed="false">Light</button>
+                                </div>
                             </div>
                         </div>
                         <div class="wg-code">
@@ -75,16 +125,60 @@
                             <textarea id="wgCode" readonly spellcheck="false"></textarea>
                         </div>
                         <div class="wg-actions">
-                            <button type="button" class="wg-btn" id="wgCopy">Copy code</button>
-                            <span class="wg-status" id="wgStatus" role="status"></span>
+                            <button type="button" class="wg-btn" id="wgCopy"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copy code</button>
+                            <a class="wg-btn wg-btn-ghost" id="wgFull" href="/embed" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>Open full screen</a>
                         </div>
+                        <p class="wg-status" id="wgStatus" role="status"></p>
+                    </div>
+                </section>
+
+                <div class="bp-body">
+                    <section>
+                        <h2 id="who-its-for">Who uses it</h2>
+                        <div class="wg-uses">
+                            <div class="wg-use">
+                                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6l9-3 9 3-9 3-9-3z"/><path d="M7 8v5c0 1.5 2.2 3 5 3s5-1.5 5-3V8"/><path d="M21 6v6"/></svg>
+                                <h3>Classrooms</h3>
+                                <p>Open a lesson on climate change with a number students can watch grow.</p>
+                            </div>
+                            <div class="wg-use">
+                                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4z"/><path d="M13 7l4 4"/></svg>
+                                <h3>Blogs and newsrooms</h3>
+                                <p>Put the scale of global emissions right next to your climate story.</p>
+                            </div>
+                            <div class="wg-use">
+                                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V9l6-4v16"/><path d="M10 21V3l10 5v13"/><path d="M2 21h20"/></svg>
+                                <h3>Sustainability pages</h3>
+                                <p>Set your organisation&rsquo;s targets against the global picture.</p>
+                            </div>
+                            <div class="wg-use">
+                                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+                                <h3>Events and screens</h3>
+                                <p>Run it full screen at talks, exhibitions and climate events.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h2 id="add-it">Add it to your site in a minute</h2>
+                        <p>Copy the code above, then:</p>
+                        <dl class="wg-steps">
+                            <div class="wg-step"><dt>WordPress</dt><dd>Add a <strong>Custom HTML</strong> block, paste the code and update the page.</dd></div>
+                            <div class="wg-step"><dt>Wix</dt><dd>Choose <strong>Add Elements &rarr; Embed Code &rarr; Embed HTML</strong>, select <em>Code</em> and paste.</dd></div>
+                            <div class="wg-step"><dt>Squarespace</dt><dd>Add a <strong>Code</strong> block, paste the code and save.</dd></div>
+                            <div class="wg-step"><dt>Google Sites</dt><dd>Choose <strong>Insert &rarr; Embed &rarr; Embed code</strong>, paste, then insert.</dd></div>
+                            <div class="wg-step"><dt>Any other site</dt><dd>Paste the code into the page&rsquo;s HTML where the counter should appear.</dd></div>
+                            <div class="wg-step"><dt>Slides and screens</dt><dd>Select <strong>Open full screen</strong> and show that browser window. The numbers grow to fit.</dd></div>
+                        </dl>
+                        <p>Some free website plans block embed code. If the counter doesn&rsquo;t appear, check your plan&rsquo;s embed settings.</p>
                     </section>
 
                     <section>
                         <h2 id="how-it-works">How it works</h2>
                         <ul class="checklist">
-                            <li>Shows CO&#8322; emitted worldwide so far this year, updating several times a second.</li>
-                            <li>Uses the Global Carbon Budget 2025 figure of 42.2 billion tonnes a year (about 1,338 tonnes per second). See <a href="/methodology">how the counter works</a>.</li>
+                            <li><strong>CO&#8322; counter:</strong> CO&#8322; emitted worldwide so far this year, using the Global Carbon Budget 2025 figure of 42.2 billion tonnes a year (about 1,338 tonnes per second).</li>
+                            <li><strong>Carbon budget:</strong> CO&#8322; the world can still emit for a 50% chance of keeping warming to 1.5&nbsp;&deg;C. It starts from 170 billion tonnes on 1 January 2026 (Global Carbon Budget 2025) and counts down at today&rsquo;s rate.</li>
+                            <li>Both are estimates spread evenly over time, not live measurements. See <a href="/methodology">how the counter works</a>.</li>
                             <li>Resizes to fit: works from about 260 px wide. A height of 160&ndash;180 px fits best.</li>
                             <li>No cookies, no analytics, no third-party scripts, and calm motion for visitors who prefer reduced motion.</li>
                         </ul>
@@ -94,9 +188,10 @@
 
                 <section class="bp-faq" aria-labelledby="faq-title">
                     <h2 id="faq-title">Questions and answers</h2>
-                    <details class="bp-faq-item"><summary>Is the CO&#8322; counter widget free?</summary><p>Yes. The widget is free for any website, including schools, blogs, businesses and non-profits. Please keep the small credit link.</p></details>
+                    <details class="bp-faq-item"><summary>Is the CO&#8322; counter widget free?</summary><p>Yes. Both widgets are free for any website, including schools, blogs, businesses and non-profits. Please keep the small credit link.</p></details>
                     <details class="bp-faq-item"><summary>Does the widget track visitors or use cookies?</summary><p>No. The widget is a small static page with a few lines of JavaScript. It sets no cookies and loads no analytics or third-party scripts.</p></details>
-                    <details class="bp-faq-item"><summary>Where do the widget&rsquo;s numbers come from?</summary><p>It uses the Global Carbon Budget 2025 estimate of 42.2 billion tonnes of CO&#8322; a year (fossil fuels plus land-use change), spread evenly over the year: about 1,338 tonnes per second.</p></details>
+                    <details class="bp-faq-item"><summary>Where do the widget&rsquo;s numbers come from?</summary><p>Both widgets use the Global Carbon Budget 2025. The counter spreads its estimate of 42.2 billion tonnes of CO&#8322; a year (fossil fuels plus land-use change) evenly over the year: about 1,338 tonnes per second. The carbon budget countdown starts from 170 billion tonnes left on 1 January 2026, for a 50% chance of keeping warming to 1.5&nbsp;&deg;C, and counts down at the same rate.</p></details>
+                    <details class="bp-faq-item"><summary>Can I show the counter on a big screen or in a presentation?</summary><p>Yes. Choose a widget and theme, then select <strong>Open full screen</strong>. The numbers grow to fill the window, so you can show it on a projector or TV, or share that browser window in a video call.</p></details>
                 </section>
             </article>
         </main>
@@ -104,26 +199,49 @@
     </div>
     <script>
         (function () {
+            var SITE = 'https://www.carbonemissionscounter.com';
             var code = document.getElementById('wgCode');
             var status = document.getElementById('wgStatus');
-            var theme = 'dark';
-            function render() {
-                var src = 'https://www.carbonemissionscounter.com/embed' + (theme === 'light' ? '?theme=light' : '');
-                code.value = '<iframe src="' + src + '" title="Live CO2 emissions counter" width="100%" height="170" style="border:0;border-radius:16px;max-width:520px" loading="lazy"></iframe>\n' +
-                    '<p style="font-size:12px"><a href="https://www.carbonemissionscounter.com/">Live CO2 counter</a> by Carbon Emissions Counter</p>';
+            var preview = document.getElementById('wgPreview');
+            var stage = document.getElementById('wgStage');
+            var full = document.getElementById('wgFull');
+            var state = { type: 'emissions', theme: 'dark' };
+            var TITLES = { emissions: 'Live CO2 emissions counter', budget: 'Live carbon budget countdown (1.5 \u00b0C)' };
+
+            function query() {
+                var q = [];
+                if (state.type === 'budget') q.push('type=budget');
+                if (state.theme === 'light') q.push('theme=light');
+                return q.length ? '?' + q.join('&') : '';
             }
-            document.querySelectorAll('[data-theme]').forEach(function (b) {
-                b.addEventListener('click', function () {
-                    theme = b.getAttribute('data-theme');
-                    document.querySelectorAll('[data-theme]').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
-                    render();
-                    status.textContent = '';
+            function render() {
+                var path = '/embed' + query();
+                code.value = '<iframe src="' + SITE + path + '" title="' + TITLES[state.type] + '" width="100%" height="170" style="border:0;border-radius:16px;max-width:520px" loading="lazy"></iframe>\n' +
+                    '<p style="font-size:12px">Live data: <a href="' + SITE + '/">Carbon Emissions Counter</a></p>';
+                if (preview.getAttribute('src') !== path) preview.setAttribute('src', path);
+                preview.title = 'Widget preview: ' + TITLES[state.type];
+                stage.classList.toggle('is-light', state.theme === 'light');
+                full.href = path;
+                status.textContent = '';
+            }
+            function bind(attr, key) {
+                var buttons = document.querySelectorAll('[' + attr + ']');
+                buttons.forEach(function (b) {
+                    b.addEventListener('click', function () {
+                        state[key] = b.getAttribute(attr);
+                        buttons.forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+                        render();
+                    });
                 });
-            });
+            }
+            bind('data-type', 'type');
+            bind('data-theme', 'theme');
+
             document.getElementById('wgCopy').addEventListener('click', function () {
                 var done = function () { status.textContent = 'Copied. Paste it into your page.'; };
-                if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(code.value).then(done, function () { code.select(); });
-                else { code.select(); try { document.execCommand('copy'); done(); } catch (e) {} }
+                var fallback = function () { code.select(); try { document.execCommand('copy'); done(); } catch (e) {} };
+                if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(code.value).then(done, fallback);
+                else fallback();
             });
             render();
         })();
