@@ -20,6 +20,7 @@ import argparse
 import csv
 import html
 import json
+import math
 import os
 import re
 from datetime import date
@@ -28,7 +29,14 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 STATIC = os.path.join(ROOT, 'static')
 DATA_JSON = os.path.join(os.path.dirname(__file__), 'data.json')
 SITE = 'https://www.carbonemissionscounter.com'
-FEATURED = 60            # countries that get their own page
+FEATURED_MIN_POP = 1_000_000   # countries with at least this population get their own page
+NAME_FIXES = {'Micronesia (country)': 'Micronesia'}
+# Extra search terms for the ranking tables (appended to data-name)
+ALIASES = {'United States': ' usa us america', 'United Kingdom': ' uk britain great britain england scotland wales',
+           'United Arab Emirates': ' uae emirates', 'South Korea': ' korea republic of korea', 'North Korea': ' dprk',
+           'Russia': ' russian federation', 'Czechia': ' czech republic', 'Turkey': ' turkiye', 'Netherlands': ' holland',
+           'Democratic Republic of Congo': ' drc congo-kinshasa', 'Congo': ' congo-brazzaville', 'Iran': ' persia',
+           'Cote d\'Ivoire': ' ivory coast', 'Myanmar': ' burma', 'Eswatini': ' swaziland', 'Taiwan': ' chinese taipei'}
 SERIES_FROM = 2000       # first year in the trend chart
 ASSET_V = '2026-10'      # cache-busting tag for shared assets
 NOW_YEAR = date.today().year
@@ -62,7 +70,8 @@ def extract(csv_path):
     year = max(int(r['year']) for r in rows if r['co2'] and len(r['iso_code']) == 3)
     world = by[('World', year)]
     countries = [r for r in rows if int(r['year']) == year and len(r['iso_code']) == 3
-                 and not r['iso_code'].startswith('OWID') and num(r['co2']) is not None]
+                 and not r['iso_code'].startswith('OWID') and num(r['co2']) is not None
+                 and (num(r['co2']) or 0) > 0 and num(r['population'])]
     countries.sort(key=lambda r: -num(r['co2']))
 
     cum_sorted = sorted(countries, key=lambda r: -(num(r['cumulative_co2']) or 0))
@@ -70,8 +79,9 @@ def extract(csv_path):
 
     out = []
     for i, r in enumerate(countries):
-        name = r['country']
-        prev = by.get((name, year - 1), {})
+        src = r['country']
+        name = NAME_FIXES.get(src, src)
+        prev = by.get((src, year - 1), {})
         c = {
             'name': name, 'iso': r['iso_code'], 'slug': slugify(name), 'rank': i + 1,
             'co2': round(num(r['co2']), 1),
@@ -81,15 +91,15 @@ def extract(csv_path):
             'pop': int(num(r['population'])) if num(r['population']) else None,
             'cum': round(num(r['cumulative_co2']) or 0, 0),
             'cum_share': round(num(r['share_global_cumulative_co2']), 2) if num(r['share_global_cumulative_co2']) is not None else None,
-            'cum_rank': cum_rank[name],
+            'cum_rank': cum_rank[src],
         }
-        if i < FEATURED:
-            c['series'] = [[y, round(num(by[(name, y)]['co2']), 1)] for y in range(SERIES_FROM, year + 1)
-                           if (name, y) in by and num(by[(name, y)]['co2']) is not None]
+        if (num(r['population']) or 0) >= FEATURED_MIN_POP:
+            c['series'] = [[y, round(num(by[(src, y)]['co2']), 1)] for y in range(SERIES_FROM, year + 1)
+                           if (src, y) in by and num(by[(src, y)]['co2']) is not None]
             peak = max(((int(rr['year']), num(rr['co2'])) for (n, _), rr in by.items()
-                        if n == name and num(rr['co2']) is not None), key=lambda t: t[1])
+                        if n == src and num(rr['co2']) is not None), key=lambda t: t[1])
             c['peak'] = [peak[0], round(peak[1], 1)]
-            y2005 = num(by.get((name, 2005), {}).get('co2'))
+            y2005 = num(by.get((src, 2005), {}).get('co2'))
             c['co2_2005'] = round(y2005, 1) if y2005 else None
             c['fuels'] = [[label, round(num(r[key]) or 0, 1)] for key, label in FUELS]
         out.append(c)
@@ -199,7 +209,7 @@ def head(title, description, path, extra_css, schema, img='home'):
     <link rel="stylesheet" href="/css/styles.css?v=2026-10b">
     <link rel="stylesheet" href="/shared/nav-styles.css">
     <link rel="stylesheet" href="/css/theme-2026.css?v={ASSET_V}k">
-    <link rel="stylesheet" href="/css/{extra_css}?v={ASSET_V}b">
+    <link rel="stylesheet" href="/css/{extra_css}?v={ASSET_V}d">
 {schema}
 </head>
 <body>
@@ -276,25 +286,40 @@ def source_html(year):
 # Country page
 # ---------------------------------------------------------------------------
 
+def nice_step(vmax):
+    raw = vmax / 3
+    mag = 10 ** math.floor(math.log10(raw)) if raw > 0 else 1
+    for m in (1, 2, 2.5, 5, 10):
+        if raw <= m * mag:
+            return m * mag
+    return 10 * mag
+
+
 def trend_svg(series, name):
-    w, h, pad_l, pad_b, pad_t = 640, 220, 8, 22, 10
+    """Bar chart: bars in an SVG that stretches to the card; axis labels and gridlines are HTML."""
+    w, h = 640, 200
     vals = [v for _, v in series]
-    vmax = max(vals) * 1.08
+    step = nice_step(max(vals))
+    top = step * math.ceil(max(vals) * 1.04 / step)
     n = len(series)
-    bw = (w - pad_l * 2) / n
+    bw = w / n
     bars = []
     for i, (y, v) in enumerate(series):
-        bh = (v / vmax) * (h - pad_b - pad_t)
-        x = pad_l + i * bw + bw * 0.15
+        bh = (v / top) * h
+        x = i * bw + bw * 0.15
         cls = 'cc-bar cc-bar-last' if i == n - 1 else 'cc-bar'
-        bars.append(f'<rect class="{cls}" x="{x:.1f}" y="{h - pad_b - bh:.1f}" width="{bw * 0.7:.1f}" height="{bh:.1f}" rx="2"><title>{y}: {v:,.1f} Mt</title></rect>')
-    labels = ''.join(f'<text class="cc-axis" x="{pad_l + i * bw + bw / 2:.1f}" y="{h - 6}" text-anchor="middle">{y}</text>'
-                     for i, (y, _) in enumerate(series) if y % 5 == 0 or i == n - 1)
+        bars.append(f'<rect class="{cls}" x="{x:.1f}" y="{h - bh:.1f}" width="{bw * 0.7:.1f}" height="{bh:.1f}" rx="2"><title>{y}: {v:,.1f} Mt</title></rect>')
+    grid = ''.join(f'<span class="cc-grid" style="bottom:{g / top * 100:.2f}%"><em>{g:,.0f}</em></span>'
+                   for g in [step * k for k in range(1, int(round(top / step)) + 1)])
+    xlab = ''.join(f'<span style="left:{(i + 0.5) / n * 100:.2f}%">{y}</span>'
+                   for i, (y, _) in enumerate(series) if y % 5 == 0 or i == n - 1)
     first, last = series[0], series[-1]
     label = (f'Bar chart of {name} CO2 emissions from {first[0]} to {last[0]}: '
              f'{first[1]:,.0f} million tonnes in {first[0]}, {last[1]:,.0f} million tonnes in {last[0]}.')
-    return (f'<svg class="cc-trend" viewBox="0 0 {w} {h}" role="img" aria-label="{e(label)}" preserveAspectRatio="none">'
-            + ''.join(bars) + labels + '</svg>')
+    return (f'<figure class="cc-trend-fig"><div class="cc-trend-plot" role="img" aria-label="{e(label)}">{grid}'
+            f'<svg class="cc-trend" viewBox="0 0 {w} {h}" preserveAspectRatio="none" aria-hidden="true">' + ''.join(bars) + '</svg></div>'
+            f'<div class="cc-trend-x" aria-hidden="true">{xlab}</div>'
+            f'<figcaption class="cc-trend-cap">Million tonnes of CO&#8322; a year</figcaption></figure>')
 
 
 def country_page(c, data, by_rank, featured_slugs):
@@ -358,7 +383,7 @@ def country_page(c, data, by_rank, featured_slugs):
     fuel_bar = ''.join(f'<span class="cc-fuel cc-fuel-{slugify(l)}" style="width:{v / fuel_total * 100:.2f}%" title="{e(l)} {v / fuel_total * 100:.1f}%"></span>'
                        for l, v in fuels)
     fuel_list = ''.join(f'<li><span class="cc-swatch cc-fuel-{slugify(l)}" aria-hidden="true"></span><span>{e(l)}</span>'
-                        f'<strong>{v / fuel_total * 100:.0f}%</strong><em>{short_t(v)}</em></li>' for l, v in fuels)
+                        f'<strong>{v / fuel_total * 100:.0f}%</strong><em>{v:,.0f} Mt</em></li>' if v >= 100 else f'<strong>{v / fuel_total * 100:.0f}%</strong><em>{v:,.1f} Mt</em></li>' for l, v in fuels)
     table_rows = ''.join(f'<tr><th scope="row">{y}</th><td>{v:,.1f}</td></tr>' for y, v in reversed(c['series']))
 
     faqs = [
@@ -393,7 +418,7 @@ def country_page(c, data, by_rank, featured_slugs):
     stats = ''.join([
         stat(f'CO&#8322; in {year}', short_t(c['co2']), f'{tonnes(c["co2"])}'),
         stat('World rank', f'#{c["rank"]}', f'of {n_countries} countries'),
-        stat('Share of world', pct(c['share']), f'world total {short_t(world["co2"])}'),
+        stat('Share of world', pct(c['share']), f'world total {world["co2"] / 1000:.1f} Gt'),
         stat('Per person', f'{c["pc"]:.1f} t' if c['pc'] else '–', f'world average {world["pc"]:.1f} t'),
         stat(f'Change vs {year - 1}', f'<span class="{growth_cls}">{growth:+.1f}%</span>' if growth is not None else '–',
              f'{year - 1}: {short_t(c["prev"])}' if c['prev'] else ''),
@@ -477,11 +502,11 @@ def ranking_page(data, featured_slugs):
     for c in cs:
         nm = e(c['name'])
         link = f'<a href="/co2-emissions/{c["slug"]}">{nm}</a>' if c['slug'] in featured_slugs else nm
-        g = change_pct(c['co2'], c['prev']) if c['prev'] else None
+        g = change_pct(c['co2'], c['prev']) if c['prev'] and c['co2'] >= 1 else None
         pc_txt = f'{c["pc"]:.1f}' if c['pc'] is not None else '–'
         gtxt = f'<span class="{"cc-up" if g > 0 else "cc-down"}">{g:+.1f}%</span>' if g is not None else '–'
         rows.append(
-            f'<tr data-name="{nm.lower()}" data-co2="{c["co2"]}" data-pc="{c["pc"] if c["pc"] is not None else -1}" data-rate="{per_second_t(c["co2"]):.4f}">'
+            f'<tr data-name="{nm.lower()}{ALIASES.get(c["name"], "")}" data-co2="{c["co2"]}" data-pc="{c["pc"] if c["pc"] is not None else -1}" data-rate="{per_second_t(c["co2"]):.4f}">'
             f'<td class="cc-rank">{c["rank"]}</td><th scope="row">{link}</th>'
             f'<td class="cc-num">{c["co2"]:,.1f}</td>'
             f'<td class="cc-num cc-col-share">{pct(c["share"]) if c["share"] is not None else "–"}</td>'
@@ -580,7 +605,7 @@ def list_page(data, featured_slugs, kind):
         return f'<a href="/co2-emissions/{c["slug"]}">{nm}</a>' if c['slug'] in featured_slugs else nm
 
     def row(i, c, cells):
-        return (f'<tr data-name="{e(c["name"]).lower()}"><td class="cc-rank">{i}</td>'
+        return (f'<tr data-name="{e(c["name"]).lower()}{ALIASES.get(c["name"], "")}"><td class="cc-rank">{i}</td>'
                 f'<th scope="row">{name_cell(c)}</th>{cells}</tr>')
 
     if kind == 'per-capita':

@@ -89,10 +89,9 @@ emoji icons, no `<img>` other than existing files in `/blog/images/`.
 7. **Internal links (3-6 per post, natural anchor text):**
    - Live counter: `/`
    - CO₂ by country ranking: `/co2-emissions-by-country`
-   - Country pages: `/co2-emissions/<slug>` for: china, united-states, india, russia, japan, indonesia, iran,
-     saudi-arabia, south-korea, germany, canada, turkey, brazil, mexico, south-africa, australia, vietnam,
-     united-kingdom, italy, malaysia, kazakhstan, poland, thailand, france, taiwan, egypt, iraq,
-     united-arab-emirates, spain, algeria
+   - Country pages: `/co2-emissions/<slug>` exist for every country with over 1 million people (159 pages), e.g.
+     china, united-states, india, germany, united-kingdom, sweden, norway, new-zealand. Slugs are lowercase names
+     with hyphens; check `static/co2-emissions/` if unsure.
    - How the counter works: `/carbon-tracking-guide`
    - Other posts: `/blog/posts/<slug>` (see list below)
 8. **FAQ:** 3-5 questions phrased the way people search, each answered directly.

@@ -986,3 +986,4 @@ a.cx-bar-name { color: var(--t-muted); text-decoration: none; }
 html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 @media (max-width: 640px) { .cx-jump a { font-size: 0.875rem; padding: 0 12px; } }
+.cx-history-src { display: block; margin-top: 6px; color: var(--t-subtle); font-size: 0.8125rem; }

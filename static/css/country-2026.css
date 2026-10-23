@@ -210,7 +210,15 @@
 }
 
 /* Trend chart */
-.cc-trend { display: block; width: 100%; height: 220px; }
+.cc-trend-fig { margin: 0; }
+.cc-trend-plot { position: relative; height: 200px; margin-left: 44px; border-bottom: 1px solid var(--t-border-strong); }
+.cc-trend { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+.cc-grid { position: absolute; left: 0; right: 0; height: 0; border-top: 1px dashed rgba(255, 255, 255, 0.07); }
+.cc-grid em { position: absolute; right: calc(100% + 8px); top: -0.6em; color: var(--t-subtle); font: normal 0.6875rem/1.2 var(--t-mono); white-space: nowrap; }
+.cc-trend-x { position: relative; height: 22px; margin-left: 44px; }
+.cc-trend-x span { position: absolute; top: 6px; transform: translateX(-50%); color: var(--t-subtle); font: 0.6875rem/1.2 var(--t-mono); white-space: nowrap; }
+.cc-trend-cap { margin: 6px 0 0; color: var(--t-subtle); font-size: 0.75rem; }
+@media (max-width: 480px) { .cc-trend-plot { height: 170px; } .cc-trend-x span:nth-child(even):not(:last-child) { display: none; } }
 .cc-bar { fill: rgba(52, 211, 153, 0.45); }
 .cc-bar:hover { fill: rgba(52, 211, 153, 0.8); }
 .cc-bar-last { fill: var(--t-primary-bright); }
@@ -490,3 +498,9 @@
 @media (prefers-reduced-motion: reduce) {
     .cc-dot { animation: none; }
 }
+
+/* Ranking tables: full-height tap targets on country names; unlinked names read as plain text */
+.cc-table th[scope="row"] a { display: block; padding: 12px 0; margin: -12px 0; }
+.cc-ranking th[scope="row"] { font-weight: 500; }
+.cc-ranking th[scope="row"]:not(:has(a)) { color: var(--t-muted); font-weight: 400; }
+.cc-fuel-list em { white-space: nowrap; }
