@@ -62,9 +62,10 @@ def main():
             job = {'name': f'blog-{slug}', 'kicker': meta['category'], 'title': meta['title'],
                    'image': os.path.join(ROOT, 'static', meta['image'].lstrip('/'))}
             hero = heroes.get(slug)
-            if hero and hero.get('og') == 'photo':
+            if hero:
+                # Bare photo behind the title, mirrored so its subject sits on the right
                 job['image'] = os.path.join(ROOT, 'tools', 'blog', 'heroes', 'photos', slug + '.jpg')
-                job['flip'] = bool(hero.get('og_flip'))
+                job['flip'] = hero.get('side') == 'right'
                 if hero.get('og_sub'):
                     job['sub'] = hero['og_sub']
                 if hero.get('budget'):

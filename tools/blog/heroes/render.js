@@ -27,26 +27,39 @@ function budgetFigures() {
 
 function chart(c) {
     const max = Math.max(...c.rows.map((r) => r[1]));
-    const rows = c.rows.map(([name, v], i) => `<li><b>${esc(name)}</b><span>${v.toFixed(1)}${esc(c.suffix || '')}</span><i><em class="${i === 0 ? 'hot' : ''}" style="width:${Math.max(1.2, (v / max) * 100)}%"></em></i></li>`).join('');
+    const dp = c.decimals === undefined ? 1 : c.decimals;
+    const rows = c.rows.map(([name, v], i) => `<li><b>${esc(name)}</b><span>${v.toLocaleString('en-US', { minimumFractionDigits: dp, maximumFractionDigits: dp })}${esc(c.suffix || '')}</span><i><em class="${i === 0 ? 'hot' : ''}" style="width:${Math.max(1.2, (v / max) * 100)}%"></em></i></li>`).join('');
     return `<p class="kicker plain">${esc(c.kicker)}</p><ol class="rows">${rows}</ol><p class="src">${esc(c.source)}</p>`;
+}
+
+// One big figure: { kicker, value, unit, lines: [plain, bold], source, green }
+function stat(t) {
+    const lines = (t.lines || []).map((l, i) => `<p class="sub${i ? ' strong' : ''}">${esc(l)}</p>`).join('');
+    return `<p class="kicker${t.green ? '' : ' gold'}">${esc(t.kicker)}</p>
+<p class="big${t.green ? ' green' : ''}">${esc(t.value)}${t.unit ? `<small>${esc(t.unit)}</small>` : ''}</p>${lines}
+<p class="src">${esc(t.source)}</p>`;
+}
+
+// Two or three figures, stacked: { kicker, items: [[value, label], ...], source, gold }
+function stats(t) {
+    const items = t.items.map(([v, l]) => `<li><b>${esc(v)}</b><span>${esc(l)}</span></li>`).join('');
+    return `${t.kicker ? `<p class="kicker">${esc(t.kicker)}</p>` : ''}<ol class="stats${t.gold ? ' gold' : ''}">${items}</ol><p class="src">${esc(t.source)}</p>`;
 }
 
 function budget() {
     const b = budgetFigures();
-    return `<p class="kicker gold">1.5&nbsp;&deg;C carbon budget left</p>
-<p class="big">${b.gt}<small>Gt CO&#8322;</small></p>
-<p class="sub">from 1 January ${b.start} &middot; 50% chance</p>
-<p class="sub strong">About ${b.years} years at today&rsquo;s rate</p>
-<p class="src">Source: Global Carbon Budget ${b.edition}</p>`;
+    return stat({ kicker: '1.5 °C carbon budget left', value: String(b.gt), unit: 'Gt CO₂',
+        lines: [`from 1 January ${b.start} · 50% chance`, `About ${b.years} years at today’s rate`],
+        source: `Source: Global Carbon Budget ${b.edition}` });
 }
 
 function page(slug, job) {
     const photo = 'file://' + path.join(HERE, 'photos', slug + '.jpg');
     const right = job.side === 'right';
     const shade = right
-        ? 'linear-gradient(270deg,rgba(5,11,9,.92) 0%,rgba(5,11,9,.78) 34%,rgba(5,11,9,.2) 58%,transparent 70%)'
-        : 'linear-gradient(90deg,rgba(5,11,9,.92) 0%,rgba(5,11,9,.75) 36%,rgba(5,11,9,.15) 60%,transparent 72%)';
-    const body = job.chart ? chart(job.chart) : job.budget ? budget() : '';
+        ? 'linear-gradient(270deg,rgba(5,11,9,.94) 0%,rgba(5,11,9,.84) 38%,rgba(5,11,9,.35) 60%,transparent 74%)'
+        : 'linear-gradient(90deg,rgba(5,11,9,.94) 0%,rgba(5,11,9,.84) 38%,rgba(5,11,9,.35) 60%,transparent 74%)';
+    const body = job.chart ? chart(job.chart) : job.stat ? stat(job.stat) : job.stats ? stats(job.stats) : job.budget ? budget() : '';
     return `<!doctype html><html><head><meta charset="utf-8"><style>
 @font-face{font-family:'Fira Sans';font-weight:500;src:url('${FONTS}/fira-sans-latin-500-normal.woff2')}
 @font-face{font-family:'Fira Sans';font-weight:600;src:url('${FONTS}/fira-sans-latin-600-normal.woff2')}
@@ -68,10 +81,16 @@ body{width:${W}px;height:${H}px;overflow:hidden;background:#050b09;font-family:'
 .rows em{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#10b981,#34d399)}
 .rows em.hot{background:linear-gradient(90deg,#d97706,#fbbf24)}
 .big{font:600 280px/0.9 'Fira Code',monospace;letter-spacing:-.05em;color:#fbbf24;text-shadow:0 0 60px rgba(251,191,36,.25)}
+.big.green{color:#34d399;text-shadow:0 0 60px rgba(52,211,153,.25)}
 .big small{font:500 64px 'Fira Sans',sans-serif;letter-spacing:0;margin-left:20px;color:#fde68a}
 .sub{margin-top:30px;font-size:52px;line-height:1.15;color:#c9dcd4}
 .sub.strong{margin-top:12px;color:#ecfdf5;font-weight:600}
 .src{margin-top:32px;font-size:30px;color:#9db9ae}
+.stats{list-style:none;padding:0;display:grid;gap:34px}
+.stats li{display:grid;gap:8px}
+.stats b{font:600 104px/1 'Fira Code',monospace;letter-spacing:-.04em;color:#34d399}
+.stats.gold b{color:#fbbf24}
+.stats span{font-size:44px;line-height:1.18;color:#dce9e3}
 </style></head><body><img class="photo" src="${photo}"><div class="shade"></div><div class="panel">${body}</div></body></html>`;
 }
 
@@ -87,6 +106,12 @@ body{width:${W}px;height:${H}px;overflow:hidden;background:#050b09;font-family:'
         await p.goto('file://' + tmp);
         await p.evaluate(() => document.fonts.ready);
         await p.waitForFunction(() => [...document.images].every((i) => i.complete && i.naturalWidth));
+        // Shrink the figures to fit when long labels wrap (60 px margin top and bottom)
+        await p.evaluate(() => {
+            const el = document.querySelector('.panel');
+            const max = innerHeight - 120;
+            if (el.offsetHeight > max) el.style.zoom = (max / el.offsetHeight).toFixed(3);
+        });
         const png = (await p.screenshot({ type: 'png' })).toString('base64');
         // Chromium encodes WebP; write a full-size and a phone-size file.
         const out = await enc.evaluate(async ({ png, sizes }) => {
