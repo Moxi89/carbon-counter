@@ -100,7 +100,10 @@ def extract(csv_path):
         'world': {'co2': round(num(world['co2']), 1), 'pc': round(num(world['co2_per_capita']), 2),
                   'pop': int(num(world['population'])),
                   'series': [[y, round(num(by[('World', y)]['co2']), 1)] for y in range(1950, year + 1)
-                             if ('World', y) in by and num(by[('World', y)]['co2']) is not None]},
+                             if ('World', y) in by and num(by[('World', y)]['co2']) is not None],
+                  # [year, annual Mt, cumulative Mt since 1750] for the "since you were born" tool
+                  'cum_series': [[y, round(num(by[('World', y)]['co2']), 1), round(num(by[('World', y)]['cumulative_co2']), 1)]
+                                 for y in range(1900, year + 1) if ('World', y) in by and num(by[('World', y)]['cumulative_co2']) is not None]},
         'countries': out,
     }
     with open(DATA_JSON, 'w', encoding='utf-8') as f:
@@ -195,9 +198,7 @@ def head(title, description, path, extra_css, schema, img='home'):
     <link rel="preload" href="/fonts/fira-code-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/shared/nav-styles.css">
-    <link rel="stylesheet" href="/shared/footer-styles.css" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="/shared/cookie-banner.css" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="/css/theme-2026.css?v={ASSET_V}g">
+    <link rel="stylesheet" href="/css/theme-2026.css?v={ASSET_V}h">
     <link rel="stylesheet" href="/css/{extra_css}?v={ASSET_V}b">
 {schema}
 </head>
@@ -213,8 +214,8 @@ def foot(js):
         <div id="footer-placeholder"></div>
     </div>
     <script src="/shared/nav.js?v={ASSET_V}" defer></script>
-    <script src="/shared/footer.js?v={ASSET_V}e" defer></script>
-    <script src="/shared/cookie-banner.js?v=2026-10" defer></script>
+    <script src="/shared/footer.js?v={ASSET_V}f" defer></script>
+
     <script src="/js/{js}?v={ASSET_V}" defer></script>
 </body>
 </html>
@@ -760,6 +761,31 @@ def history_svg(series):
             f'{grid}<path d="{area}" fill="url(#cxHistFill)"/><polyline points="{pts}" class="cx-h-line"/>{notes}{end}{years}</svg>')
 
 
+def born_html(cum_series, born=1990):
+    """Result block for the home page's "since you were born" tool, plus its data for home-2026.js."""
+    by = {y: (a, c) for y, a, c in cum_series}
+    last_y, last_a, last_c = cum_series[-1]
+    a, c = by[born]
+    since = last_c - (c - a)
+    pct = since / last_c * 100
+    rise = (last_a / a - 1) * 100
+    payload = json.dumps({'s': cum_series}, separators=(',', ':'))
+    return (f'<div class="cx-born-result" id="cxBornResult" aria-live="polite">\n'
+            f'                    <p class="cx-born-main"><span class="cx-born-pct" id="cxBornPct">{pct:.0f}%</span>'
+            f'<span class="cx-born-text">of all fossil CO&#8322; ever emitted has been released since <span id="cxBornY">{born}</span>.</span></p>\n'
+            f'                    <div class="cx-born-bar" aria-hidden="true"><span id="cxBornBar" style="width: {pct:.1f}%"></span></div>\n'
+            f'                    <p class="cx-born-bar-labels" aria-hidden="true"><span>1750</span><span id="cxBornBarY">{born}</span><span>{last_y}</span></p>\n'
+            f'                    <dl class="cx-born-facts">\n'
+            f'                        <div><dt>Emitted since <span class="cx-born-y">{born}</span></dt><dd id="cxBornTotal">{since / 1000:,.0f} billion t</dd></div>\n'
+            f'                        <div><dt>Per year in <span class="cx-born-y">{born}</span></dt><dd id="cxBornThen">{a / 1000:.1f} billion t</dd></div>\n'
+            f'                        <div><dt>Per year in {last_y}</dt><dd><span>{last_a / 1000:.1f} billion t</span> <small id="cxBornRise">{"+" if rise >= 0 else "&minus;"}{abs(rise):,.0f}%</small></dd></div>\n'
+            f'                    </dl>\n'
+            f'                    <div class="cx-born-actions"><button type="button" class="t-share" id="cxBornShare"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg><span>Share my result</span></button></div>\n'
+            f'                    <p class="cx-born-note">Fossil fuels and industry, 1750&ndash;{last_y}. Source: Our World in Data, based on the Global Carbon Project.</p>\n'
+            f'                </div>\n'
+            f'                <script type="application/json" id="cxBornData">{payload}</script>\n                ')
+
+
 def update_home(data, featured):
     """Refresh the country picker and top-emitters bars on the home page."""
     p = os.path.join(STATIC, 'index.html')
@@ -782,6 +808,8 @@ def update_home(data, featured):
         ser = data['world']['series']
         s = fill(s, 'history', history_svg(ser))
         s = fill(s, 'growth', f'{ser[-1][1] / ser[0][1]:.1f}')
+    if '<!-- countries:born -->' in s and data['world'].get('cum_series'):
+        s = fill(s, 'born', born_html(data['world']['cum_series']))
     open(p, 'w', encoding='utf-8').write(s)
     print('index.html: country picker and top emitters updated')
 
