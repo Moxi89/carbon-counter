@@ -241,8 +241,8 @@ def foot(js):
     return f'''        </main>
         <div id="footer-placeholder"></div>
     </div>
-    <script src="/shared/nav.js?v={ASSET_V}e" defer></script>
-    <script src="/shared/footer.js?v={ASSET_V}l" defer></script>
+    <script src="/shared/nav.js?v={ASSET_V}f" defer></script>
+    <script src="/shared/footer.js?v={ASSET_V}m" defer></script>
 
     <script src="/js/{js}?v={ASSET_V}" defer></script>
     <script src="/js/vendor/motion.js?v=14.6.0-lite" defer></script>
