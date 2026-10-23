@@ -383,7 +383,9 @@ def country_page(c, data, by_rank, featured_slugs):
     fuel_bar = ''.join(f'<span class="cc-fuel cc-fuel-{slugify(l)}" style="width:{v / fuel_total * 100:.2f}%" title="{e(l)} {v / fuel_total * 100:.1f}%"></span>'
                        for l, v in fuels)
     fuel_list = ''.join(f'<li><span class="cc-swatch cc-fuel-{slugify(l)}" aria-hidden="true"></span><span>{e(l)}</span>'
-                        f'<strong>{v / fuel_total * 100:.0f}%</strong><em>{v:,.0f} Mt</em></li>' if v >= 100 else f'<strong>{v / fuel_total * 100:.0f}%</strong><em>{v:,.1f} Mt</em></li>' for l, v in fuels)
+                        f'<strong>{v / fuel_total * 100:.0f}%</strong><em>{v:,.0f} Mt</em></li>' if v >= 100 else
+                        f'<li><span class="cc-swatch cc-fuel-{slugify(l)}" aria-hidden="true"></span><span>{e(l)}</span>'
+                        f'<strong>{v / fuel_total * 100:.0f}%</strong><em>{v:,.1f} Mt</em></li>' for l, v in fuels)
     table_rows = ''.join(f'<tr><th scope="row">{y}</th><td>{v:,.1f}</td></tr>' for y, v in reversed(c['series']))
 
     faqs = [
