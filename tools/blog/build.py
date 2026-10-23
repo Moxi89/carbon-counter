@@ -123,7 +123,7 @@ def head(title, description, url, og_type, extra_css, schemas, img='home'):
     <link rel="preload" href="/fonts/fira-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="/css/styles.css?v=2026-10b">
     <link rel="stylesheet" href="/shared/nav-styles.css">
-    <link rel="stylesheet" href="/css/theme-2026.css?v={V}k">
+    <link rel="stylesheet" href="/css/theme-2026.css?v={V}l">
     <link rel="stylesheet" href="/css/post-2026.css?v={V}e">{css}
 {chr(10).join(jsonld(s) for s in schemas)}
 </head>
@@ -139,8 +139,8 @@ def foot(scripts):
     return f'''        </main>
         <div id="footer-placeholder"></div>
     </div>
-    <script src="/shared/nav.js?v={V}d" defer></script>
-    <script src="/shared/footer.js?v={V}i" defer></script>
+    <script src="/shared/nav.js?v={V}e" defer></script>
+    <script src="/shared/footer.js?v={V}l" defer></script>
 {extra}
 </body>
 </html>
@@ -164,6 +164,10 @@ def card(p, heading='h3', eager=0):
 def build_post(p, by_slug):
     url = SITE + p['path']
     body, toc = add_heading_ids(p['body'])
+    # Ad position (filled only when ads are switched on; see tools/ads/apply.py)
+    parts = body.split('</section>')
+    if len(parts) > 3:
+        body = '</section>'.join(parts[:2]) + '</section>\n<!-- ad:in_article --><!-- /ad:in_article -->' + '</section>'.join(parts[2:])
     words = len(strip(body).split())
     p['minutes'] = max(1, math.ceil(words / 220))
 
@@ -182,7 +186,7 @@ def build_post(p, by_slug):
         {'@context': 'https://schema.org', '@type': 'BlogPosting', 'mainEntityOfPage': {'@type': 'WebPage', '@id': url},
          'headline': p['h1'], 'description': p['description'], 'image': f'{SITE}/og/blog-{p["slug"]}.jpg',
          'datePublished': p['published'], 'dateModified': p['updated'], 'wordCount': words,
-         'author': {'@type': 'Organization', 'name': 'Carbon Emissions Counter editorial team', 'url': SITE + '/#about-section'},
+         'author': {'@type': 'Organization', 'name': 'Carbon Emissions Counter editorial team', 'url': SITE + '/about'},
          'publisher': PUBLISHER, 'articleSection': p['category'],
          'citation': [u for _, u in p['sources']]},
         {'@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': [
@@ -202,7 +206,7 @@ def build_post(p, by_slug):
                     <p class="bp-tag">{e(p["category"])}</p>
                     <h1 class="bp-title">{e(p["h1"])}</h1>
                     {f'<p class="bp-dek">{e(p["dek"])}</p>' if p.get("dek") else ''}
-                    <p class="bp-meta"><time datetime="{p["updated"]}">Updated {nice_date(p["updated"])}</time>{published_note} &middot; {p["minutes"]} min read</p>
+                    <p class="bp-meta">By the <a href="/about#editorial">Carbon Emissions Counter editorial team</a> &middot; <time datetime="{p["updated"]}">Updated {nice_date(p["updated"])}</time>{published_note} &middot; {p["minutes"]} min read</p>
                     <p class="bp-share"><button type="button" class="t-share" data-share aria-label="Share this page"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg><span>Share</span></button></p>
                     <figure class="bp-hero-image"><img src="{e(p["image"])}" alt="{e(p["image_alt"])}" width="1200" height="630"></figure>
                 </header>
@@ -218,6 +222,7 @@ def build_post(p, by_slug):
 {body}
                 </div>
 
+                <!-- ad:before_faq --><!-- /ad:before_faq -->
                 {f'<section class="bp-faq" aria-labelledby="faq-title"><h2 id="faq-title">Questions and answers</h2>{faq_html}</section>' if faqs else ''}
 
                 <section class="bp-sources" aria-labelledby="sources-title">

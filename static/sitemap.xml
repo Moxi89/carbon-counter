@@ -49,6 +49,18 @@
         <priority>0.5</priority>
     </url>
     <url>
+        <loc>https://www.carbonemissionscounter.com/about</loc>
+        <lastmod>2026-10-23</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.4</priority>
+    </url>
+    <url>
+        <loc>https://www.carbonemissionscounter.com/contact</loc>
+        <lastmod>2026-10-23</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    <url>
         <loc>https://www.carbonemissionscounter.com/privacy</loc>
         <lastmod>2026-10-23</lastmod>
         <changefreq>yearly</changefreq>
@@ -1027,6 +1039,12 @@
         <priority>0.6</priority>
     </url>
     <url>
+        <loc>https://www.carbonemissionscounter.com/blog/posts/carbon-budget-explained</loc>
+        <lastmod>2026-10-23</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
         <loc>https://www.carbonemissionscounter.com/blog/posts/carbon-footprint-calculator-guide</loc>
         <lastmod>2026-10-23</lastmod>
         <changefreq>monthly</changefreq>
@@ -1034,6 +1052,12 @@
     </url>
     <url>
         <loc>https://www.carbonemissionscounter.com/blog/posts/climate-tech-innovations-2026</loc>
+        <lastmod>2026-10-23</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.carbonemissionscounter.com/blog/posts/co2-ppm-atmosphere</loc>
         <lastmod>2026-10-23</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
@@ -1063,6 +1087,12 @@
         <priority>0.6</priority>
     </url>
     <url>
+        <loc>https://www.carbonemissionscounter.com/blog/posts/net-zero-explained</loc>
+        <lastmod>2026-10-23</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
         <loc>https://www.carbonemissionscounter.com/blog/posts/renewable-energy-guide-2026</loc>
         <lastmod>2026-10-23</lastmod>
         <changefreq>monthly</changefreq>
@@ -1070,6 +1100,12 @@
     </url>
     <url>
         <loc>https://www.carbonemissionscounter.com/blog/posts/save-energy-at-home</loc>
+        <lastmod>2026-10-23</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.carbonemissionscounter.com/blog/posts/scope-1-2-3-emissions</loc>
         <lastmod>2026-10-23</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>

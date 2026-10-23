@@ -26,10 +26,13 @@ Plain static HTML, CSS and JavaScript, hosted on **Cloudflare Pages** (output di
 ```bash
 python3 tools/countries/build.py                   # country pages, rankings, sitemap, home page data
 python3 tools/blog/build.py                        # blog posts, blog index, home page article cards
+python3 tools/pages/build.py                       # about, contact, privacy, terms (reads tools/site_config.json)
+python3 tools/ads/apply.py                         # AdSense on/off (reads tools/site_config.json); run last
 python3 tools/og/jobs.py > /tmp/og.json && node tools/og/render.js /tmp/og.json   # share images (needs Playwright)
 ```
 
 Preview locally with `cd static && python3 -m http.server 8000` (clean URLs need the `.html` suffix locally).
+Advertising is prepared but off; see `docs/ADSENSE.md` for the approval and launch checklist.
 
 **Caching:** files in `/shared/` and `/css/`, `/js/` are cached for a long time. When you change one, bump its
 `?v=` value everywhere it is referenced (the generators use `ASSET_V` / `V` plus a letter).

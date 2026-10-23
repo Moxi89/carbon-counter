@@ -1,0 +1,13 @@
+{
+  "contact_email": "hello@carbonemissionscounter.com",
+  "ads": {
+    "enabled": false,
+    "client": "ca-pub-0000000000000000",
+    "mode": "auto",
+    "slots": {
+      "in_article": "",
+      "after_data": "",
+      "before_faq": ""
+    }
+  }
+}

@@ -504,3 +504,10 @@
 .cc-ranking th[scope="row"] { font-weight: 500; }
 .cc-ranking th[scope="row"]:not(:has(a)) { color: var(--t-muted); font-weight: 400; }
 .cc-fuel-list em { white-space: nowrap; }
+
+/* "In context" facts */
+.cc-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 16px; }
+.cc-fact { padding: 20px; border-radius: 20px; border: 1px solid var(--t-border); background: var(--t-surface); }
+.cc-fact-value { margin: 0; color: var(--t-primary-bright); font: 600 1.5rem/1.2 var(--t-mono); font-variant-numeric: tabular-nums; }
+.cc-fact-label { margin: 4px 0 10px; color: var(--t-text); font-weight: 600; font-size: 0.9375rem; }
+.cc-fact-text { margin: 0; color: var(--t-muted); font-size: 0.9375rem; line-height: 1.6; }

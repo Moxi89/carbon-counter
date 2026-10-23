@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+  <defs>
+    <radialGradient id="glow" cx="0.717" cy="0.476" r="0.6">
+      <stop offset="0" stop-color="#fbbf24" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#fbbf24" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="warm" cx="0.08" cy="1" r="0.7">
+      <stop offset="0" stop-color="#fbbf24" stop-opacity="0.10"/>
+      <stop offset="1" stop-color="#fbbf24" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="fade" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#050b09" stop-opacity="1"/>
+      <stop offset="0.45" stop-color="#050b09" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#34d399"/>
+      <stop offset="1" stop-color="#10b981" stop-opacity="0.35"/>
+    </linearGradient>
+    <linearGradient id="barGold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fbbf24"/>
+      <stop offset="1" stop-color="#fbbf24" stop-opacity="0.3"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#06100c"/>
+  <g stroke="#34d399" stroke-opacity="0.07" stroke-width="1"><path d="M0 0V630"/><path d="M48 0V630"/><path d="M96 0V630"/><path d="M144 0V630"/><path d="M192 0V630"/><path d="M240 0V630"/><path d="M288 0V630"/><path d="M336 0V630"/><path d="M384 0V630"/><path d="M432 0V630"/><path d="M480 0V630"/><path d="M528 0V630"/><path d="M576 0V630"/><path d="M624 0V630"/><path d="M672 0V630"/><path d="M720 0V630"/><path d="M768 0V630"/><path d="M816 0V630"/><path d="M864 0V630"/><path d="M912 0V630"/><path d="M960 0V630"/><path d="M1008 0V630"/><path d="M1056 0V630"/><path d="M1104 0V630"/><path d="M1152 0V630"/><path d="M1200 0V630"/><path d="M0 0H1200"/><path d="M0 48H1200"/><path d="M0 96H1200"/><path d="M0 144H1200"/><path d="M0 192H1200"/><path d="M0 240H1200"/><path d="M0 288H1200"/><path d="M0 336H1200"/><path d="M0 384H1200"/><path d="M0 432H1200"/><path d="M0 480H1200"/><path d="M0 528H1200"/><path d="M0 576H1200"/><path d="M0 624H1200"/></g>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <rect width="1200" height="630" fill="url(#warm)"/>
+  <rect width="1200" height="630" fill="url(#fade)"/>
+  <g stroke-linecap="round" stroke-linejoin="round">
+
+    <path d="M250 450a190 190 0 0 1 380 0" stroke="rgba(236,253,245,0.35)" stroke-width="16"/>
+    <path d="M250 450a190 190 0 0 1 56-134" stroke="#fbbf24" stroke-width="18"/>
+    <path d="M440 450l-120-86" stroke="#ecfdf5" stroke-width="7"/><circle cx="440" cy="450" r="16" fill="#ecfdf5"/>
+    <text x="236" y="500" font-family="monospace" font-size="30" font-weight="700" fill="#fbbf24">E</text>
+    <text x="616" y="500" font-family="monospace" font-size="30" font-weight="700" fill="#ecfdf5" fill-opacity="0.5">F</text>
+    <rect x="720" y="250" width="380" height="56" rx="28" stroke="#ecfdf5" stroke-opacity="0.6" stroke-width="4"/>
+    <rect x="728" y="258" width="300" height="40" rx="20" fill="url(#bar)"/>
+    <rect x="1028" y="258" width="64" height="40" rx="20" fill="#fbbf24"/>
+    <rect x="720" y="350" width="64" height="76" rx="12" stroke="#fbbf24" stroke-opacity="0.7" stroke-width="3" fill="rgba(251,191,36,0.06)"/><rect x="798" y="350" width="64" height="76" rx="12" stroke="#fbbf24" stroke-opacity="0.7" stroke-width="3" fill="rgba(251,191,36,0.06)"/><rect x="876" y="350" width="64" height="76" rx="12" stroke="#fbbf24" stroke-opacity="0.7" stroke-width="3" fill="rgba(251,191,36,0.06)"/><rect x="954" y="350" width="64" height="76" rx="12" stroke="#fbbf24" stroke-opacity="0.7" stroke-width="3" fill="rgba(251,191,36,0.06)"/><rect x="1032" y="350" width="64" height="76" rx="12" stroke="#fbbf24" stroke-opacity="0.7" stroke-width="3" fill="rgba(251,191,36,0.06)"/>
+    <path d="M700 161V179M691 170H709" stroke="#fbbf24" stroke-width="3"/><path d="M1150 512V528M1142 520H1158" stroke="#34d399" stroke-width="3"/>
+
+  </g>
+</svg>

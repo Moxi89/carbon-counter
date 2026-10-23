@@ -869,3 +869,25 @@ section h2::after,
 
 /* Legacy styles.css pads h1 on phones; page containers already handle gutters */
 h1 { padding-left: 0; padding-right: 0; }
+
+/* Ad slots (only present when ads are switched on: tools/ads/apply.py).
+   Space is reserved up front so the page doesn't jump when an ad loads. */
+.ad-slot {
+    display: block;
+    width: 100%;
+    max-width: 728px;
+    min-height: 300px;
+    margin: 40px auto;
+    padding: 12px 0;
+    border-top: 1px solid var(--t-border);
+    border-bottom: 1px solid var(--t-border);
+    text-align: center;
+}
+.ad-label {
+    margin: 0 0 8px !important;
+    color: var(--t-subtle) !important;
+    font: 500 0.6875rem/1.4 var(--t-mono) !important;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+.ad-slot .adsbygoogle { min-height: 280px; }

@@ -63,6 +63,18 @@ def num(v):
 # Data extraction
 # ---------------------------------------------------------------------------
 
+def latest(by, name, year, col, with_production=False, back=8):
+    """Most recent [year, value] (optionally with that year's production CO2) within `back` years."""
+    for y in range(year, year - back, -1):
+        r = by.get((name, y))
+        if r and num(r.get(col)) is not None:
+            v = round(num(r[col]), 3 if num(r[col]) < 10 else 1)
+            if with_production:
+                return [y, v, round(num(r['co2']), 1)] if num(r.get('co2')) else None
+            return [y, v]
+    return None
+
+
 def extract(csv_path):
     rows = list(csv.DictReader(open(csv_path, encoding='utf-8')))
     by = {(r['country'], int(r['year'])): r for r in rows}
@@ -101,12 +113,19 @@ def extract(csv_path):
             y2005 = num(by.get((src, 2005), {}).get('co2'))
             c['co2_2005'] = round(y2005, 1) if y2005 else None
             c['fuels'] = [[label, round(num(r[key]) or 0, 1)] for key, label in FUELS]
+            # Context figures for the "beyond the headline number" section
+            c['co2_1990'] = round(num(by.get((src, 1990), {}).get('co2')), 1) if num(by.get((src, 1990), {}).get('co2')) else None
+            c['cons'] = latest(by, src, year, 'consumption_co2', with_production=True)
+            c['gdp_int'] = latest(by, src, year, 'co2_per_gdp')
+            c['energy_int'] = latest(by, src, year, 'co2_per_unit_energy')
         out.append(c)
 
     data = {
         'year': year,
         'source': 'Our World in Data based on the Global Carbon Project (Global Carbon Budget 2025)',
         'world': {'co2': round(num(world['co2']), 1), 'pc': round(num(world['co2_per_capita']), 2),
+                  'gdp_int': latest(by, 'World', year, 'co2_per_gdp'),
+                  'energy_int': latest(by, 'World', year, 'co2_per_unit_energy'),
                   'pop': int(num(world['population'])),
                   'series': [[y, round(num(by[('World', y)]['co2']), 1)] for y in range(1950, year + 1)
                              if ('World', y) in by and num(by[('World', y)]['co2']) is not None],
@@ -207,8 +226,8 @@ def head(title, description, path, extra_css, schema, img='home'):
     <link rel="preload" href="/fonts/fira-code-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="/css/styles.css?v=2026-10b">
     <link rel="stylesheet" href="/shared/nav-styles.css">
-    <link rel="stylesheet" href="/css/theme-2026.css?v={ASSET_V}k">
-    <link rel="stylesheet" href="/css/{extra_css}?v={ASSET_V}d">
+    <link rel="stylesheet" href="/css/theme-2026.css?v={ASSET_V}l">
+    <link rel="stylesheet" href="/css/{extra_css}?v={ASSET_V}e">
 {schema}
 </head>
 <body>
@@ -222,8 +241,8 @@ def foot(js):
     return f'''        </main>
         <div id="footer-placeholder"></div>
     </div>
-    <script src="/shared/nav.js?v={ASSET_V}d" defer></script>
-    <script src="/shared/footer.js?v={ASSET_V}i" defer></script>
+    <script src="/shared/nav.js?v={ASSET_V}e" defer></script>
+    <script src="/shared/footer.js?v={ASSET_V}l" defer></script>
 
     <script src="/js/{js}?v={ASSET_V}" defer></script>
     <script src="/js/vendor/motion.js?v=14.6.0-lite" defer></script>
@@ -266,7 +285,8 @@ def faq_html(faqs):
                     <summary>{e(q)}</summary>
                     <p>{a}</p>
                 </details>''' for q, a in faqs)
-    return f'''            <section class="cc-section" aria-labelledby="faq-title">
+    return f'''            <!-- ad:before_faq --><!-- /ad:before_faq -->
+            <section class="cc-section" aria-labelledby="faq-title">
                 <h2 class="cc-h2" id="faq-title">Questions and answers</h2>
                 <div class="cc-faq">
 {items}
@@ -321,6 +341,84 @@ def trend_svg(series, name):
             f'<svg class="cc-trend" viewBox="0 0 {w} {h}" preserveAspectRatio="none" aria-hidden="true">' + ''.join(bars) + '</svg></div>'
             f'<div class="cc-trend-x" aria-hidden="true">{xlab}</div>'
             f'<figcaption class="cc-trend-cap">Million tonnes of CO&#8322; a year</figcaption></figure>')
+
+
+def context_facts(c, data):
+    """Country-specific context (share of people vs emissions, change since 1990,
+    consumption-based emissions, carbon intensity). Returns (section_html, extra_faqs)."""
+    year, world = data['year'], data['world']
+    name, the_name = c['name'], the(c['name'])
+    cards, faqs = [], []
+
+    def card(value, label, text):
+        cards.append(f'<div class="cc-fact"><p class="cc-fact-value">{value}</p><p class="cc-fact-label">{label}</p>'
+                     f'<p class="cc-fact-text">{text}</p></div>')
+
+    if c.get('pop') and world.get('pop') and c.get('co2'):
+        pop_share = c['pop'] / world['pop'] * 100
+        co2_share = c['co2'] / world['co2'] * 100
+        more = co2_share > pop_share
+        f2 = lambda v: f'{v:.2f}%' if v < 1 else f'{v:.1f}%'
+        card(f'{f2(pop_share)} vs {f2(co2_share)}', 'Share of people vs share of CO&#8322;',
+             f'{cap(e(the_name))} is home to {f2(pop_share)} of the world&rsquo;s population and produces {f2(co2_share)} of its fossil CO&#8322;, '
+             + ('so its share of emissions is larger than its share of people.' if more else 'so its share of emissions is smaller than its share of people.'))
+
+    if c.get('co2_1990'):
+        ch = (c['co2'] - c['co2_1990']) / c['co2_1990'] * 100
+        w1990 = 22732.1  # world fossil CO2 in 1990, Mt (Our World in Data)
+        wch = (world['co2'] - w1990) / w1990 * 100
+        card(f'{"+" if ch >= 0 else "&minus;"}{abs(ch):,.0f}%', 'Change since 1990',
+             f'Emissions in {year} were {abs(ch):,.0f}% {"higher" if ch >= 0 else "lower"} than in 1990, the baseline year of the Kyoto Protocol '
+             f'({c["co2_1990"]:,.1f} Mt then). World emissions rose {wch:,.0f}% over the same period.')
+
+    if c.get('cons'):
+        y, cons, prod = c['cons']
+        diff = (cons - prod) / prod * 100
+        lead = f'Counting the CO&#8322; in goods it imports and exports, {e(the_name)} was responsible for {cons:,.1f} Mt in {y}, '
+        if abs(diff) < 3:
+            text = lead + f'about the same as the {prod:,.1f} Mt produced within its borders.'
+            ans = f'About {cons:,.1f} million tonnes in {y}, roughly the same as its production-based emissions of {prod:,.1f} million tonnes.'
+        elif diff > 0:
+            text = lead + f'{diff:,.0f}% more than the {prod:,.1f} Mt produced at home: it is a net importer of emissions.'
+            ans = (f'About {cons:,.1f} million tonnes in {y}, {diff:,.0f}% more than the {prod:,.1f} million tonnes emitted within its borders, '
+                   'because it imports more carbon-intensive goods than it exports.')
+        else:
+            text = lead + f'{abs(diff):,.0f}% less than the {prod:,.1f} Mt produced at home: part of its output is consumed elsewhere.'
+            ans = (f'About {cons:,.1f} million tonnes in {y}, {abs(diff):,.0f}% less than the {prod:,.1f} million tonnes emitted within its borders, '
+                   'because part of what it produces is exported and consumed in other countries.')
+        card(f'{cons:,.0f} Mt', f'Consumption-based CO&#8322; ({y})', text)
+        faqs.append((f'What are {poss(the_name)} consumption-based CO₂ emissions?',
+                     ans + ' Consumption-based accounting adds the emissions embodied in imports and subtracts those in exports.'))
+
+    if c.get('energy_int') and world.get('energy_int'):
+        y, v = c['energy_int']
+        r = v / world['energy_int'][1]
+        verdict = ('a much more fossil-heavy energy mix than the world average' if r > 1.3 else
+                   'a more fossil-heavy energy mix than the world average' if r > 1.08 else
+                   'a much cleaner energy mix than the world average' if r < 0.7 else
+                   'a cleaner energy mix than the world average' if r < 0.92 else 'an energy mix close to the world average')
+        card(f'{v:,.0f} g', 'CO&#8322; per kWh of energy',
+             f'Each kilowatt-hour of primary energy used in {e(the_name)} came with about {v:,.0f} g of CO&#8322; in {y} '
+             f'(world: {world["energy_int"][1]:,.0f} g), pointing to {verdict}.')
+
+    if c.get('gdp_int') and world.get('gdp_int'):
+        y, v = c['gdp_int']
+        r = v / world['gdp_int'][1]
+        comp = (f'{r:.1f}&times; the world average' if r > 1.1 else
+                f'{(1 - r) * 100:.0f}% below the world average' if r < 0.9 else 'close to the world average')
+        card(f'{v:.2f} kg', 'CO&#8322; per dollar of GDP',
+             f'Its economy emitted {v:.2f} kg of CO&#8322; for each dollar of output in {y} (adjusted for purchasing power), {comp} '
+             f'of {world["gdp_int"][1]:.2f} kg.')
+
+    if not cards:
+        return '', faqs
+    section = ('            <section class="cc-section" aria-labelledby="cc-context-title">\n'
+               f'                <h2 class="cc-h2" id="cc-context-title">{e(name)} in context</h2>\n'
+               f'                <div class="cc-facts">{"".join(cards)}</div>\n'
+               '                <p class="cc-note">Figures from Our World in Data, based on the Global Carbon Project; '
+               'latest year available for each measure.</p>\n'
+               '            </section>\n\n')
+    return section, faqs
 
 
 def country_page(c, data, by_rank, featured_slugs):
@@ -406,6 +504,9 @@ def country_page(c, data, by_rank, featured_slugs):
          + ('largest historical contribution of any country.' if c['cum_rank'] == 1 else f'{ordinal(c["cum_rank"])} largest historical contribution.')),
     ]
 
+    context_html, context_faqs = context_facts(c, data)
+    faqs = faqs[:4] + context_faqs + faqs[4:]
+
     title = f'{name} CO₂ Emissions {NOW_YEAR}: Live Counter, Per Capita & Trend'
     desc = (f'{name} emitted {short_t(c["co2"])} of CO₂ in {year} ({pct(c["share"])} of the world, #{c["rank"]}). '
             f'Live counter, per-person emissions, trend since {SERIES_FROM} and main sources.')
@@ -442,6 +543,7 @@ def country_page(c, data, by_rank, featured_slugs):
             </section>
 
             <section class="cc-stats" aria-label="Key figures">{stats}</section>
+            <!-- ad:after_data --><!-- /ad:after_data -->
 
             <section class="cc-section cc-two">
                 <div class="cc-card">
@@ -461,7 +563,7 @@ def country_page(c, data, by_rank, featured_slugs):
                 </div>
             </section>
 
-            <section class="cc-section">
+{context_html}            <section class="cc-section">
                 <h2 class="cc-h2">How {e(the_name)} compares</h2>
                 <div class="cc-table-wrap">
                     <table class="cc-table">
@@ -716,7 +818,7 @@ def list_page(data, featured_slugs, kind):
 
 STATIC_URLS = [
     ('/', 'daily', '1.0'), ('/co2-emissions-by-country', 'weekly', '0.9'), ('/co2-emissions-per-capita', 'monthly', '0.8'), ('/historical-co2-emissions-by-country', 'monthly', '0.8'),
-    ('/carbon-tracking-guide', 'monthly', '0.8'), ('/methodology', 'monthly', '0.6'), ('/blog/', 'weekly', '0.7'), ('/widget', 'monthly', '0.5'),
+    ('/carbon-tracking-guide', 'monthly', '0.8'), ('/methodology', 'monthly', '0.6'), ('/blog/', 'weekly', '0.7'), ('/widget', 'monthly', '0.5'), ('/about', 'yearly', '0.4'), ('/contact', 'yearly', '0.3'),
     ('/privacy', 'yearly', '0.2'), ('/terms', 'yearly', '0.2'),
 ]
 
