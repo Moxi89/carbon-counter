@@ -23,7 +23,7 @@ UPDATED = ('2026-10-23', '23 October 2026')
 
 ASSETS = {
     'styles': '2026-10b', 'theme': '2026-10l', 'post': '2026-10e',
-    'nav': '2026-10e', 'footer': '2026-10l',
+    'nav': '2026-10f', 'footer': '2026-10m',
 }
 
 
