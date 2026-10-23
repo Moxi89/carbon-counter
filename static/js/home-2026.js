@@ -8,7 +8,7 @@
     const PER_SECOND_T = EMISSIONS_PER_YEAR_T / SECONDS_PER_YEAR; // ~1,338 t
     const BUDGET_START_GT = 170;                      // 1.5 °C, 50% likelihood
     const BUDGET_START = Date.UTC(2026, 0, 1);        // GCB 2025 counts from 1 January 2026
-    const BUDGET_END = BUDGET_START + (BUDGET_START_GT / 42.2) * SECONDS_PER_YEAR * 1000;
+    const BUDGET_END = BUDGET_START + (BUDGET_START_GT / (EMISSIONS_PER_YEAR_T / 1e9)) * SECONDS_PER_YEAR * 1000;
 
     // Country figures live on the <option> elements (share %, annual Mt),
     // written by tools/countries/build.py from the latest annual data.
@@ -59,7 +59,7 @@
         const countryRate = (parseFloat(selected().dataset.mt) || 0) * 1e6 / SECONDS_PER_YEAR;
         el.countryValue.textContent = fmt.format(Math.floor((now - yearStart) / 1000 * countryRate));
 
-        const usedGt = Math.max(0, (now - BUDGET_START) / 1000 / SECONDS_PER_YEAR * 42.2);
+        const usedGt = Math.max(0, (now - BUDGET_START) / 1000 / SECONDS_PER_YEAR * EMISSIONS_PER_YEAR_T / 1e9);
         const leftGt = Math.max(0, BUDGET_START_GT - usedGt);
         const usedPct = Math.min(100, usedGt / BUDGET_START_GT * 100);
         el.budget.textContent = leftGt.toFixed(2);
