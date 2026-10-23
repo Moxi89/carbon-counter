@@ -64,6 +64,9 @@ and certified). Publish it for the site. Optionally add the **US state regulatio
      home and country pages, and before each FAQ.
 2. Run the four build commands above. Privacy and terms automatically gain the advertising sections
    (Google cookies, opt-out links, consent), and About states that the site is ad-funded.
+   `apply.py` also updates the two short "no ads" statements (home page About section and the footer).
+   Because the footer is a shared, long-cached file, bump the `footer.html?v=` value in
+   `static/shared/footer.js` and the `footer.js?v=` value in all pages when it says so.
 
 ## 5. Security policy (CSP)
 

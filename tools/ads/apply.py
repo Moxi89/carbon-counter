@@ -33,6 +33,18 @@ CFG = json.load(open(os.path.join(ROOT, 'tools', 'site_config.json'), encoding='
 NO_ADS = {'404.html', 'embed.html', 'widget.html', 'about.html', 'contact.html', 'privacy.html', 'terms.html'}
 
 HEAD_A, HEAD_Z = '<!-- ads:head -->', '<!-- /ads:head -->'
+
+# Short statements about ads that must change when ads go live: (ads off, ads on)
+AD_TEXT = {
+    'home-about': ('It is independent, free, has no ads and sets no cookies.',
+                   'It is independent and free, funded by clearly labelled ads.'),
+    'footer': ('No cookies, no tracking.', 'Ad-supported &middot; <a href="/privacy">Privacy and ad choices</a>'),
+}
+TEXT_RE = re.compile(r'<!-- adtext:([a-z-]+) -->.*?<!-- /adtext:\1 -->', re.S)
+
+
+def swap_text(html, enabled):
+    return TEXT_RE.sub(lambda m: f'<!-- adtext:{m.group(1)} -->{AD_TEXT[m.group(1)][1 if enabled else 0]}<!-- /adtext:{m.group(1)} -->', html)
 SLOT_RE = re.compile(r'<!-- ad:([a-z_]+) -->.*?<!-- /ad:\1 -->', re.S)
 
 
@@ -66,6 +78,7 @@ def process(path, enabled, client, mode, slots, has_client):
             return slot_html(name, client, slots[name])
         return f'<!-- ad:{name} --><!-- /ad:{name} -->'
     html = SLOT_RE.sub(fill, html)
+    html = swap_text(html, enabled)
     if html != orig:
         open(path, 'w', encoding='utf-8').write(html)
         return True
@@ -89,6 +102,14 @@ def main():
             continue
         if process(p, enabled, client, mode, slots, has_client):
             changed += 1
+    # The shared footer is loaded on every page: keep its ad wording in step
+    # (bump the footer.html ?v= in static/shared/footer.js when this changes it)
+    footer = os.path.join(STATIC, 'shared', 'footer.html')
+    ftxt = open(footer, encoding='utf-8').read()
+    new = swap_text(ftxt, enabled)
+    if new != ftxt:
+        open(footer, 'w', encoding='utf-8').write(new)
+        print('shared/footer.html wording updated: bump its ?v= in static/shared/footer.js')
     ads_txt = os.path.join(STATIC, 'ads.txt')
     if has_client:  # ads.txt is safe (and recommended) as soon as you have a publisher id
         with open(ads_txt, 'w', encoding='utf-8') as f:
