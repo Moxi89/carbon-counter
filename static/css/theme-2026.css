@@ -663,6 +663,23 @@ footer.glassmorphism,
 }
 
 .footer-brand h4 { color: var(--t-text) !important; font-family: var(--t-sans) !important; }
+
+/* Footer headings are plain text (not h4/h5) so the page's heading order stays valid */
+.footer-title {
+    margin: 0 0 0.5rem;
+    font-size: 1.375rem;
+    font-weight: 700;
+    color: var(--t-text);
+}
+
+.footer-heading {
+    margin: 0 0 0.75rem;
+    color: var(--t-primary-bright);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
 .footer-brand p,
 .copyright { color: var(--t-subtle) !important; }
 
@@ -674,8 +691,10 @@ footer.glassmorphism,
 }
 
 .footer-section a {
+    display: flex !important;
+    align-items: center;
+    min-height: 36px;
     color: var(--t-muted) !important;
-    min-height: 32px;
 }
 
 .footer-section a:hover { color: var(--t-text) !important; }

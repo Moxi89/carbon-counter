@@ -1,47 +1,43 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="800" height="400" viewBox="0 0 800 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <!-- Background with eco gradient -->
-    <rect width="800" height="400" fill="url(#eco-gradient)"/>
-    
-    <!-- Family group silhouette -->
-    <g transform="translate(200, 50)">
-        <!-- Adult 1 -->
-        <path d="M200,100 C220,100 235,85 235,65 C235,45 220,30 200,30 C180,30 165,45 165,65 C165,85 180,100 200,100 Z" fill="#4AE290"/>
-        <path d="M165,110 L235,110 L250,300 L150,300 Z" fill="#4AE290"/>
-        
-        <!-- Adult 2 -->
-        <path d="M300,100 C320,100 335,85 335,65 C335,45 320,30 300,30 C280,30 265,45 265,65 C265,85 280,100 300,100 Z" fill="#4AE290"/>
-        <path d="M265,110 L335,110 L350,300 L250,300 Z" fill="#4AE290"/>
-        
-        <!-- Child -->
-        <path d="M250,80 C265,80 275,70 275,55 C275,40 265,30 250,30 C235,30 225,40 225,55 C225,70 235,80 250,80 Z" fill="#4AE290"/>
-        <path d="M225,90 L275,90 L285,250 L215,250 Z" fill="#4AE290"/>
-    </g>
-    
-    <!-- Eco symbols -->
-    <g transform="translate(50, 50)">
-        <!-- Recycling symbol -->
-        <path d="M50,50 L80,90 L20,90 Z" fill="#1A2332" stroke="#4AE290" stroke-width="2"/>
-        <circle cx="50" cy="70" r="30" fill="none" stroke="#4AE290" stroke-width="2"/>
-        
-        <!-- Tree symbol -->
-        <path d="M650,50 L680,100 L620,100 Z" fill="#1A2332" stroke="#4AE290" stroke-width="2"/>
-        <rect x="645" y="100" width="10" height="30" fill="#4AE290"/>
-        
-        <!-- Solar panel -->
-        <rect x="100" y="250" width="60" height="40" fill="#1A2332" stroke="#4AE290" stroke-width="2"/>
-        <line x1="110" y1="250" x2="110" y2="290" stroke="#4AE290"/>
-        <line x1="120" y1="250" x2="120" y2="290" stroke="#4AE290"/>
-        <line x1="130" y1="250" x2="130" y2="290" stroke="#4AE290"/>
-        <line x1="140" y1="250" x2="140" y2="290" stroke="#4AE290"/>
-        <line x1="150" y1="250" x2="150" y2="290" stroke="#4AE290"/>
-    </g>
-    
-    <!-- Gradient definition -->
-    <defs>
-        <linearGradient id="eco-gradient" x1="0" y1="0" x2="800" y2="400" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" style="stop-color:#0B1321"/>
-            <stop offset="100%" style="stop-color:#1A2332"/>
-        </linearGradient>
-    </defs>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+  <defs>
+    <radialGradient id="glow" cx="0.517" cy="0.603" r="0.6">
+      <stop offset="0" stop-color="#34d399" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#34d399" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="warm" cx="0.08" cy="1" r="0.7">
+      <stop offset="0" stop-color="#fbbf24" stop-opacity="0.10"/>
+      <stop offset="1" stop-color="#fbbf24" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="fade" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#050b09" stop-opacity="1"/>
+      <stop offset="0.45" stop-color="#050b09" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#34d399"/>
+      <stop offset="1" stop-color="#10b981" stop-opacity="0.35"/>
+    </linearGradient>
+    <linearGradient id="barGold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fbbf24"/>
+      <stop offset="1" stop-color="#fbbf24" stop-opacity="0.3"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#06100c"/>
+  <g stroke="#34d399" stroke-opacity="0.07" stroke-width="1"><path d="M0 0V630"/><path d="M48 0V630"/><path d="M96 0V630"/><path d="M144 0V630"/><path d="M192 0V630"/><path d="M240 0V630"/><path d="M288 0V630"/><path d="M336 0V630"/><path d="M384 0V630"/><path d="M432 0V630"/><path d="M480 0V630"/><path d="M528 0V630"/><path d="M576 0V630"/><path d="M624 0V630"/><path d="M672 0V630"/><path d="M720 0V630"/><path d="M768 0V630"/><path d="M816 0V630"/><path d="M864 0V630"/><path d="M912 0V630"/><path d="M960 0V630"/><path d="M1008 0V630"/><path d="M1056 0V630"/><path d="M1104 0V630"/><path d="M1152 0V630"/><path d="M1200 0V630"/><path d="M0 0H1200"/><path d="M0 48H1200"/><path d="M0 96H1200"/><path d="M0 144H1200"/><path d="M0 192H1200"/><path d="M0 240H1200"/><path d="M0 288H1200"/><path d="M0 336H1200"/><path d="M0 384H1200"/><path d="M0 432H1200"/><path d="M0 480H1200"/><path d="M0 528H1200"/><path d="M0 576H1200"/><path d="M0 624H1200"/></g>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <rect width="1200" height="630" fill="url(#warm)"/>
+  <rect width="1200" height="630" fill="url(#fade)"/>
+  <g stroke-linecap="round" stroke-linejoin="round">
+
+    <path d="M520 470h160l-20 90H540z" stroke="#fbbf24" stroke-width="6" fill="rgba(251,191,36,0.1)"/>
+    <path d="M600 470V320" stroke="#34d399" stroke-width="6"/>
+    <path d="M600 380c-80 0-120-40-130-110 80 0 124 40 130 110z" stroke="#34d399" stroke-width="6" fill="rgba(52,211,153,0.14)"/>
+    <path d="M600 340c10-80 60-120 140-124-4 82-60 124-140 124z" stroke="#34d399" stroke-width="6" fill="rgba(52,211,153,0.14)"/>
+    <circle cx="300" cy="200" r="56" stroke="#fbbf24" stroke-width="6"/>
+    <path d="M382 200l16 0" stroke="#fbbf24" stroke-width="5"/><path d="M218 200l-16 0" stroke="#fbbf24" stroke-width="5"/><path d="M300 282l0 16" stroke="#fbbf24" stroke-width="5"/><path d="M300 118l0 -16" stroke="#fbbf24" stroke-width="5"/><path d="M357 257l11 11" stroke="#fbbf24" stroke-width="5"/><path d="M243 257l-11 11" stroke="#fbbf24" stroke-width="5"/><path d="M357 143l11 -11" stroke="#fbbf24" stroke-width="5"/><path d="M243 143l-11 -11" stroke="#fbbf24" stroke-width="5"/>
+    <path d="M860 420l90-70 90 70v140H860z" stroke="#38bdf8" stroke-width="5" fill="rgba(56,189,248,0.06)"/>
+    <rect x="926" y="480" width="48" height="80" rx="6" stroke="#38bdf8" stroke-width="4"/>
+    <path d="M280 560H1100" stroke="rgba(236,253,245,0.35)" stroke-width="3"/>
+    <path d="M1000 240c0-20 30-20 30 0 0-20 30-20 30 0 0 24-30 40-30 40s-30-16-30-40z" stroke="#34d399" stroke-width="5" fill="rgba(52,211,153,0.15)"/>
+
+  </g>
 </svg>

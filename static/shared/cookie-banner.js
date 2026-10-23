@@ -60,7 +60,7 @@ class CookieConsent {
 
 // Load cookie banner
 document.addEventListener('DOMContentLoaded', () => {
-    fetch('/shared/cookie-banner.html')
+    fetch('/shared/cookie-banner.html?v=2026-10')
         .then(response => response.text())
         .then(html => {
             document.body.insertAdjacentHTML('beforeend', html);

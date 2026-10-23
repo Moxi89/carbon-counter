@@ -1,40 +1,41 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="800" height="400" viewBox="0 0 800 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <!-- Background with subtle gradient -->
-    <rect width="800" height="400" fill="url(#paint0_linear)"/>
-    
-    <!-- House Outline -->
-    <path d="M300 150L400 80L500 150L500 300L300 300L300 150Z" fill="#1A2332" stroke="#4AE290" stroke-width="4"/>
-    
-    <!-- Solar Panel -->
-    <rect x="320" y="120" width="60" height="40" fill="#1A2332" stroke="#4AE290" stroke-width="2"/>
-    <line x1="340" y1="120" x2="340" y2="160" stroke="#4AE290" stroke-width="1"/>
-    <line x1="360" y1="120" x2="360" y2="160" stroke="#4AE290" stroke-width="1"/>
-    
-    <!-- Window with Energy Rating -->
-    <rect x="420" y="180" width="40" height="60" fill="#0B1321" stroke="#4AE290" stroke-width="2"/>
-    <path d="M430 200L450 200M430 210L450 210" stroke="#4AE290" stroke-width="2"/>
-    
-    <!-- Door -->
-    <rect x="340" y="230" width="40" height="70" fill="#0B1321" stroke="#4AE290" stroke-width="2"/>
-    
-    <!-- Energy Efficiency Arrows -->
-    <path d="M580 150L600 130L620 150" stroke="#4AE290" stroke-width="3"/>
-    <path d="M580 170L600 150L620 170" stroke="#4AE290" stroke-width="3"/>
-    
-    <!-- Leaf Elements -->
-    <path d="M200 200C230 170 230 230 200 200Z" fill="#4AE290"/>
-    <path d="M650 250C680 220 680 280 650 250Z" fill="#4AE290"/>
-    
-    <!-- Energy Stars -->
-    <path d="M180 150L190 170L200 150L190 130L180 150Z" fill="#4AE290"/>
-    <path d="M600 300L610 320L620 300L610 280L600 300Z" fill="#4AE290"/>
-    
-    <!-- Gradient Definition -->
-    <defs>
-        <linearGradient id="paint0_linear" x1="0" y1="0" x2="800" y2="400" gradientUnits="userSpaceOnUse">
-            <stop offset="0" stop-color="#0B1321"/>
-            <stop offset="1" stop-color="#1A2332"/>
-        </linearGradient>
-    </defs>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+  <defs>
+    <radialGradient id="glow" cx="0.633" cy="0.508" r="0.6">
+      <stop offset="0" stop-color="#34d399" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#34d399" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="warm" cx="0.08" cy="1" r="0.7">
+      <stop offset="0" stop-color="#fbbf24" stop-opacity="0.10"/>
+      <stop offset="1" stop-color="#fbbf24" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="fade" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#050b09" stop-opacity="1"/>
+      <stop offset="0.45" stop-color="#050b09" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#34d399"/>
+      <stop offset="1" stop-color="#10b981" stop-opacity="0.35"/>
+    </linearGradient>
+    <linearGradient id="barGold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fbbf24"/>
+      <stop offset="1" stop-color="#fbbf24" stop-opacity="0.3"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#06100c"/>
+  <g stroke="#34d399" stroke-opacity="0.07" stroke-width="1"><path d="M0 0V630"/><path d="M48 0V630"/><path d="M96 0V630"/><path d="M144 0V630"/><path d="M192 0V630"/><path d="M240 0V630"/><path d="M288 0V630"/><path d="M336 0V630"/><path d="M384 0V630"/><path d="M432 0V630"/><path d="M480 0V630"/><path d="M528 0V630"/><path d="M576 0V630"/><path d="M624 0V630"/><path d="M672 0V630"/><path d="M720 0V630"/><path d="M768 0V630"/><path d="M816 0V630"/><path d="M864 0V630"/><path d="M912 0V630"/><path d="M960 0V630"/><path d="M1008 0V630"/><path d="M1056 0V630"/><path d="M1104 0V630"/><path d="M1152 0V630"/><path d="M1200 0V630"/><path d="M0 0H1200"/><path d="M0 48H1200"/><path d="M0 96H1200"/><path d="M0 144H1200"/><path d="M0 192H1200"/><path d="M0 240H1200"/><path d="M0 288H1200"/><path d="M0 336H1200"/><path d="M0 384H1200"/><path d="M0 432H1200"/><path d="M0 480H1200"/><path d="M0 528H1200"/><path d="M0 576H1200"/><path d="M0 624H1200"/></g>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <rect width="1200" height="630" fill="url(#warm)"/>
+  <rect width="1200" height="630" fill="url(#fade)"/>
+  <g stroke-linecap="round" stroke-linejoin="round">
+
+    <path d="M300 300L470 170L640 300V500H300z" stroke="#34d399" stroke-width="6" fill="rgba(52,211,153,0.06)"/>
+    <rect x="430" y="390" width="80" height="110" rx="8" stroke="#34d399" stroke-width="5"/>
+    <rect x="340" y="320" width="70" height="60" rx="8" stroke="#38bdf8" stroke-width="4"/><rect x="530" y="320" width="70" height="60" rx="8" stroke="#38bdf8" stroke-width="4"/>
+    <circle cx="880" cy="320" r="120" stroke="#ecfdf5" stroke-opacity="0.8" stroke-width="6" fill="rgba(6,16,12,0.8)"/>
+    <path d="M790 380a120 120 0 0 1 60-170" stroke="#fbbf24" stroke-width="10"/>
+    <path d="M880 320l-50-60" stroke="#ecfdf5" stroke-width="6"/><circle cx="880" cy="320" r="12" fill="#ecfdf5"/>
+    <path d="M1060 200v170M1030 340l30 32 30-32" stroke="#34d399" stroke-width="7"/>
+    <path d="M220 171V189M211 180H229" stroke="#fbbf24" stroke-width="3"/>
+
+  </g>
 </svg>

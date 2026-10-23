@@ -164,7 +164,7 @@ def per_second_t(mt):
 # Shared page chrome
 # ---------------------------------------------------------------------------
 
-def head(title, description, path, extra_css, schema):
+def head(title, description, path, extra_css, schema, img='home'):
     url = SITE + path
     return f'''<!DOCTYPE html>
 <html lang="en">
@@ -179,7 +179,12 @@ def head(title, description, path, extra_css, schema):
     <meta property="og:url" content="{url}">
     <meta property="og:title" content="{e(title)}">
     <meta property="og:description" content="{e(description)}">
-    <meta name="twitter:card" content="summary">
+    <meta property="og:image" content="{SITE}/og/{img}.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="{e(title)}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="{SITE}/og/{img}.jpg">
     <meta name="theme-color" content="#050b09">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="icon" type="image/png" href="/favicon.png">
@@ -188,10 +193,10 @@ def head(title, description, path, extra_css, schema):
     <link rel="preload" href="/fonts/fira-code-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/shared/nav-styles.css">
-    <link rel="stylesheet" href="/shared/footer-styles.css">
-    <link rel="stylesheet" href="/shared/cookie-banner.css">
-    <link rel="stylesheet" href="/css/theme-2026.css?v={ASSET_V}d">
-    <link rel="stylesheet" href="/css/{extra_css}?v={ASSET_V}">
+    <link rel="stylesheet" href="/shared/footer-styles.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="/shared/cookie-banner.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="/css/theme-2026.css?v={ASSET_V}f">
+    <link rel="stylesheet" href="/css/{extra_css}?v={ASSET_V}b">
 {schema}
 </head>
 <body>
@@ -206,8 +211,8 @@ def foot(js):
         <div id="footer-placeholder"></div>
     </div>
     <script src="/shared/nav.js?v={ASSET_V}" defer></script>
-    <script src="/shared/footer.js?v={ASSET_V}c" defer></script>
-    <script src="/shared/cookie-banner.js" defer></script>
+    <script src="/shared/footer.js?v={ASSET_V}d" defer></script>
+    <script src="/shared/cookie-banner.js?v=2026-10" defer></script>
     <script src="/js/{js}?v={ASSET_V}" defer></script>
 </body>
 </html>
@@ -437,8 +442,17 @@ def country_page(c, data, by_rank, featured_slugs):
             </section>
 
 {faq_html(faqs)}
+            <section class="cc-section" aria-labelledby="reading-title">
+                <h2 class="cc-h2" id="reading-title">Related reading</h2>
+                <ul class="cc-reading">
+                    <li><a href="/co2-emissions-per-capita">CO&#8322; emissions per capita: every country ranked</a></li>
+                    <li><a href="/historical-co2-emissions-by-country">Historical CO&#8322; emissions since 1750</a></li>
+                    <li><a href="/blog/posts/critical-climate-year-2025">Global Carbon Budget 2025: key findings explained</a></li>
+                    <li><a href="/blog/posts/carbon-footprint-calculator-guide">Calculate your own carbon footprint</a></li>
+                </ul>
+            </section>
 {source_html(year)}'''
-    return head(title, desc, path, 'country-2026.css', schema) + body + foot('country-2026.js')
+    return head(title, desc, path, 'country-2026.css', schema, f'country-{c["slug"]}') + body + foot('country-2026.js')
 
 
 # ---------------------------------------------------------------------------
@@ -513,6 +527,7 @@ def ranking_page(data, featured_slugs):
                 <p class="cc-lede"><strong>{cap(the(top[0]["name"]))}</strong> emits the most CO&#8322; ({short_t(top[0]["co2"])}, {pct(top[0]["share"])} of the world), followed by
                     {the(top[1]["name"])} and {the(top[2]["name"])}. Per person, {pc_top[0]["name"]} ranks highest at {pc_top[0]["pc"]:.1f}&nbsp;tonnes, against a world average of {world["pc"]:.1f}&nbsp;t.</p>
                 <div class="cc-podium">{podium}</div>
+                <p class="cc-more"><a href="/co2-emissions-per-capita">Emissions per person &rarr;</a> &middot; <a href="/historical-co2-emissions-by-country">Historical emissions since 1750 &rarr;</a></p>
             </section>
 
             <section class="cc-section" aria-labelledby="rank-title">
@@ -543,7 +558,122 @@ def ranking_page(data, featured_slugs):
 
 {faq_html(faqs)}
 {source_html(year)}'''
-    return head(title, desc, path, 'country-2026.css', schema) + body + foot('country-2026.js')
+    return head(title, desc, path, 'country-2026.css', schema, 'co2-emissions-by-country') + body + foot('country-2026.js')
+
+
+# ---------------------------------------------------------------------------
+# Per-capita and historical ranking pages
+# ---------------------------------------------------------------------------
+
+def list_page(data, featured_slugs, kind):
+    year, world = data['year'], data['world']
+    cs = data['countries']
+    big = [c for c in cs if c['pop'] and c['pop'] >= 1_000_000]
+
+    def name_cell(c):
+        nm = e(c['name'])
+        return f'<a href="/co2-emissions/{c["slug"]}">{nm}</a>' if c['slug'] in featured_slugs else nm
+
+    def row(i, c, cells):
+        return (f'<tr data-name="{e(c["name"]).lower()}"><td class="cc-rank">{i}</td>'
+                f'<th scope="row">{name_cell(c)}</th>{cells}</tr>')
+
+    if kind == 'per-capita':
+        path = '/co2-emissions-per-capita'
+        rows_src = sorted([c for c in big if c['pc'] is not None], key=lambda c: -c['pc'])
+        top = rows_src[:3]
+        above = sum(1 for c in rows_src if c['pc'] > world['pc'])
+        title = f'CO₂ Emissions per Capita by Country {NOW_YEAR}: Full Ranking'
+        h1, h1_plain = 'CO&#8322; Emissions per Capita', 'CO₂ emissions per capita'
+        desc = (f'CO₂ emissions per person for {len(rows_src)} countries ({year} data). {top[0]["name"]} leads at '
+                f'{top[0]["pc"]:.1f} t; the world average is {world["pc"]:.1f} t. Compare any country.')
+        lede = (f'The average person on Earth was responsible for <strong>{world["pc"]:.1f} tonnes</strong> of fossil CO&#8322; in {year}. '
+                f'Among countries with over a million people, <strong>{e(top[0]["name"])}</strong> is highest at {top[0]["pc"]:.1f}&nbsp;t per person, '
+                f'and {above} of {len(rows_src)} countries are above the world average.')
+        head_cols = ('<th scope="col">#</th><th scope="col">Country</th><th scope="col" class="cc-num">Per person (t)</th>'
+                     '<th scope="col" class="cc-num">vs world</th><th scope="col" class="cc-num cc-col-share">Total (Mt)</th>')
+        rows = ''.join(row(i, c, f'<td class="cc-num">{c["pc"]:.1f}</td><td class="cc-num">{c["pc"] / world["pc"]:.1f}&times;</td>'
+                                 f'<td class="cc-num cc-col-share">{c["co2"]:,.1f}</td>') for i, c in enumerate(rows_src, 1))
+        lowest = rows_src[-1]
+        get = lambda n: next(c for c in cs if c['name'] == n)
+        us, cn, ind = get('United States'), get('China'), get('India')
+        faqs = [
+            ('Which country has the highest CO₂ emissions per person?',
+             f'Among countries with more than one million people, {top[0]["name"]} has the highest fossil CO₂ emissions per person at '
+             f'{top[0]["pc"]:.1f} tonnes a year, followed by {top[1]["name"]} ({top[1]["pc"]:.1f} t) and {top[2]["name"]} ({top[2]["pc"]:.1f} t). '
+             'Oil and gas production and very high energy use explain most of the top places.'),
+            ('What is the average CO₂ emissions per person in the world?',
+             f'About {world["pc"]:.1f} tonnes of fossil CO₂ per person in {year}. Including land-use change, the figure is a little over 5 tonnes.'),
+            ('How do the US, China and India compare per person?',
+             f'The United States emits {us["pc"]:.1f} t per person, China {cn["pc"]:.1f} t and India {ind["pc"]:.1f} t. China emits far more in total, '
+             f'but each American is responsible for roughly {us["pc"] / cn["pc"]:.1f} times as much CO₂ as each person in China.'),
+            ('Which countries emit the least CO₂ per person?',
+             f'The lowest per-person emissions are in low-income countries, many in sub-Saharan Africa, at well under 0.5 tonnes; '
+             f'{lowest["name"]} is at {lowest["pc"]:.2f} t.'),
+        ]
+        ogimg = 'co2-emissions-per-capita'
+        other = '<a href="/historical-co2-emissions-by-country">Historical emissions since 1750 &rarr;</a>'
+    else:
+        path = '/historical-co2-emissions-by-country'
+        rows_src = sorted([c for c in cs if c['cum']], key=lambda c: -c['cum'])
+        top = rows_src[:3]
+        title = 'Historical CO₂ Emissions by Country: Cumulative since 1750'
+        h1, h1_plain = 'Historical CO&#8322; Emissions by Country', 'Historical CO₂ emissions by country'
+        desc = (f'Cumulative fossil CO₂ emissions since 1750 for {len(rows_src)} countries. {top[0]["name"]} has emitted the most '
+                f'({top[0]["cum_share"]:.1f}%), then {top[1]["name"]} and {top[2]["name"]}.')
+        lede = (f'CO&#8322; stays in the atmosphere for centuries, so historical totals matter for warming. Since 1750, '
+                f'<strong>{e(the(top[0]["name"]))}</strong> has emitted the most fossil CO&#8322; ({top[0]["cum"] / 1000:,.0f}&nbsp;Gt, '
+                f'{top[0]["cum_share"]:.1f}% of the total), followed by {e(the(top[1]["name"]))} and {e(the(top[2]["name"]))}.')
+        head_cols = ('<th scope="col">#</th><th scope="col">Country</th><th scope="col" class="cc-num">Since 1750 (Gt)</th>'
+                     f'<th scope="col" class="cc-num">Share</th><th scope="col" class="cc-num cc-col-share">{year} (Mt)</th>')
+        rows = ''.join(row(i, c, f'<td class="cc-num">{c["cum"] / 1000:,.1f}</td>'
+                                 f'<td class="cc-num">{pct(c["cum_share"]) if c["cum_share"] is not None else "–"}</td>'
+                                 f'<td class="cc-num cc-col-share">{c["co2"]:,.1f}</td>') for i, c in enumerate(rows_src, 1))
+        top10 = sum(c['cum_share'] or 0 for c in rows_src[:10])
+        faqs = [
+            ('Which country has emitted the most CO₂ in history?',
+             f'{cap(the(top[0]["name"]))} has emitted the most fossil CO₂ since 1750: about {top[0]["cum"] / 1000:,.0f} billion tonnes, '
+             f'{top[0]["cum_share"]:.1f}% of the world total. {cap(the(top[1]["name"]))} is second ({top[1]["cum_share"]:.1f}%) and '
+             f'{the(top[2]["name"])} third ({top[2]["cum_share"]:.1f}%).'),
+            ('Why do historical emissions matter?',
+             'Warming depends on the total amount of CO₂ added to the atmosphere over time, because CO₂ stays there for centuries. '
+             'That is why the carbon budget for 1.5 °C is expressed as a total, and why historical responsibility is part of climate negotiations.'),
+            ('How concentrated are historical emissions?',
+             f'Very. The ten largest historical emitters account for about {top10:.0f}% of all fossil CO₂ emitted since 1750.'),
+            ('Do these figures include deforestation?',
+             'No. They cover fossil fuels and industry (coal, oil, gas, cement and flaring). Including land-use change would raise the '
+             'totals of countries with large historical deforestation, such as Brazil and Indonesia.'),
+        ]
+        ogimg = 'historical-co2-emissions-by-country'
+        other = '<a href="/co2-emissions-per-capita">Emissions per person &rarr;</a>'
+
+    schema = '\n'.join(jsonld(x) for x in [
+        breadcrumb_ld([('Home', '/'), ('CO₂ emissions by country', '/co2-emissions-by-country'), (h1_plain, path)]),
+        faq_ld(faqs),
+        dataset_ld(h1_plain, desc, path, year),
+    ])
+    crumbs = (f'<nav class="cc-crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span>'
+              f'<a href="/co2-emissions-by-country">CO&#8322; emissions by country</a><span aria-hidden="true">/</span>'
+              f'<span aria-current="page">{h1}</span></nav>')
+    body = (f'            {crumbs}\n\n'
+            f'            <section class="cc-hero" aria-labelledby="cc-title">\n'
+            f'                <p class="cc-eyebrow"><span class="cc-dot" aria-hidden="true"></span>{len(rows_src)} countries &middot; {year} data</p>\n'
+            f'                <h1 class="cc-title" id="cc-title">{h1}</h1>\n'
+            f'                <p class="cc-lede">{lede}</p>\n'
+            f'                <p class="cc-more"><a href="/co2-emissions-by-country">Total emissions ranking &rarr;</a> &middot; {other}</p>\n'
+            f'            </section>\n\n'
+            f'            <section class="cc-section" aria-labelledby="rank-title">\n'
+            f'                <div class="cc-table-head">\n'
+            f'                    <h2 class="cc-h2" id="rank-title">Full ranking</h2>\n'
+            f'                    <div class="cc-controls"><label class="cc-search"><span class="cc-visually-hidden">Find a country</span>'
+            f'<input type="search" id="ccFilter" placeholder="Find a country" autocomplete="off"></label></div>\n'
+            f'                </div>\n'
+            f'                <div class="cc-table-wrap"><table class="cc-table cc-ranking" id="ccRanking">'
+            f'<thead><tr>{head_cols}</tr></thead><tbody>{rows}</tbody></table></div>\n'
+            f'                <p class="cc-note" id="ccNoResults" hidden>No country matches that search.</p>\n'
+            f'            </section>\n\n'
+            + faq_html(faqs) + source_html(year))
+    return path, head(title, desc, path, 'country-2026.css', schema, ogimg) + body + foot('country-2026.js')
 
 
 # ---------------------------------------------------------------------------
@@ -551,7 +681,7 @@ def ranking_page(data, featured_slugs):
 # ---------------------------------------------------------------------------
 
 STATIC_URLS = [
-    ('/', 'daily', '1.0'), ('/co2-emissions-by-country', 'weekly', '0.9'),
+    ('/', 'daily', '1.0'), ('/co2-emissions-by-country', 'weekly', '0.9'), ('/co2-emissions-per-capita', 'monthly', '0.8'), ('/historical-co2-emissions-by-country', 'monthly', '0.8'),
     ('/carbon-tracking-guide', 'monthly', '0.7'), ('/blog', 'weekly', '0.7'),
     ('/privacy', 'yearly', '0.2'), ('/terms', 'yearly', '0.2'),
 ]
@@ -578,7 +708,9 @@ def write_redirects(featured):
     p = os.path.join(ROOT, '_redirects')
     text = open(p, encoding='utf-8').read()
     start, end = '# BEGIN country pages (generated by tools/countries/build.py)', '# END country pages'
-    block = [start, '/co2-emissions-by-country  /static/co2-emissions-by-country.html  200']
+    block = [start, '/co2-emissions-by-country  /static/co2-emissions-by-country.html  200',
+             '/co2-emissions-per-capita  /static/co2-emissions-per-capita.html  200',
+             '/historical-co2-emissions-by-country  /static/historical-co2-emissions-by-country.html  200']
     block += [f'/co2-emissions/{c["slug"]}  /static/co2-emissions/{c["slug"]}.html  200' for c in featured]
     block.append(end)
     block = '\n'.join(block)
@@ -629,7 +761,11 @@ def main():
             f.write(country_page(c, data, by_rank, featured_slugs))
     with open(os.path.join(STATIC, 'co2-emissions-by-country.html'), 'w', encoding='utf-8') as f:
         f.write(ranking_page(data, featured_slugs))
-    print(f'pages: ranking + {len(featured)} countries')
+    for kind in ('per-capita', 'historical'):
+        path, page = list_page(data, featured_slugs, kind)
+        with open(os.path.join(STATIC, path.lstrip('/') + '.html'), 'w', encoding='utf-8') as f:
+            f.write(page)
+    print(f'pages: ranking, per capita, historical + {len(featured)} countries')
     write_sitemap(featured)
     write_redirects(featured)
     update_home(data, featured)

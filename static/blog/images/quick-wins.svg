@@ -1,76 +1,41 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="800" height="400" viewBox="0 0 800 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <!-- Definitions -->
-    <defs>
-        <linearGradient id="bg-gradient" x1="0" y1="0" x2="800" y2="400">
-            <stop offset="0%" style="stop-color:#1A2332"/>
-            <stop offset="100%" style="stop-color:#0B1321"/>
-        </linearGradient>
-        <!-- Glow effect -->
-        <filter id="glow">
-            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-            <feMerge>
-                <feMergeNode in="coloredBlur"/>
-                <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-        </filter>
-    </defs>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+  <defs>
+    <radialGradient id="glow" cx="0.683" cy="0.524" r="0.6">
+      <stop offset="0" stop-color="#34d399" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#34d399" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="warm" cx="0.08" cy="1" r="0.7">
+      <stop offset="0" stop-color="#fbbf24" stop-opacity="0.10"/>
+      <stop offset="1" stop-color="#fbbf24" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="fade" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#050b09" stop-opacity="1"/>
+      <stop offset="0.45" stop-color="#050b09" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#34d399"/>
+      <stop offset="1" stop-color="#10b981" stop-opacity="0.35"/>
+    </linearGradient>
+    <linearGradient id="barGold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fbbf24"/>
+      <stop offset="1" stop-color="#fbbf24" stop-opacity="0.3"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#06100c"/>
+  <g stroke="#34d399" stroke-opacity="0.07" stroke-width="1"><path d="M0 0V630"/><path d="M48 0V630"/><path d="M96 0V630"/><path d="M144 0V630"/><path d="M192 0V630"/><path d="M240 0V630"/><path d="M288 0V630"/><path d="M336 0V630"/><path d="M384 0V630"/><path d="M432 0V630"/><path d="M480 0V630"/><path d="M528 0V630"/><path d="M576 0V630"/><path d="M624 0V630"/><path d="M672 0V630"/><path d="M720 0V630"/><path d="M768 0V630"/><path d="M816 0V630"/><path d="M864 0V630"/><path d="M912 0V630"/><path d="M960 0V630"/><path d="M1008 0V630"/><path d="M1056 0V630"/><path d="M1104 0V630"/><path d="M1152 0V630"/><path d="M1200 0V630"/><path d="M0 0H1200"/><path d="M0 48H1200"/><path d="M0 96H1200"/><path d="M0 144H1200"/><path d="M0 192H1200"/><path d="M0 240H1200"/><path d="M0 288H1200"/><path d="M0 336H1200"/><path d="M0 384H1200"/><path d="M0 432H1200"/><path d="M0 480H1200"/><path d="M0 528H1200"/><path d="M0 576H1200"/><path d="M0 624H1200"/></g>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <rect width="1200" height="630" fill="url(#warm)"/>
+  <rect width="1200" height="630" fill="url(#fade)"/>
+  <g stroke-linecap="round" stroke-linejoin="round">
 
-    <!-- Background -->
-    <rect width="800" height="400" fill="url(#bg-gradient)"/>
+    <circle cx="820" cy="340" r="150" stroke="#34d399" stroke-width="6" fill="rgba(52,211,153,0.06)"/>
+    <path d="M800 168h40M820 168v22" stroke="#34d399" stroke-width="6"/>
+    <path d="M940 210l20-20" stroke="#34d399" stroke-width="6"/>
+    <path d="M820 340V250" stroke="#ecfdf5" stroke-width="6"/><path d="M820 340l62 36" stroke="#fbbf24" stroke-width="6"/>
+    <circle cx="820" cy="340" r="10" fill="#ecfdf5"/>
+    <path d="M820 190a150 150 0 0 1 130 75" stroke="#fbbf24" stroke-width="10"/>
+    <rect x="240" y="200" width="34" height="34" rx="9" stroke="#34d399" stroke-width="4" fill="rgba(52,211,153,0.12)"/><path d="M248 217l8 8 14-16" stroke="#34d399" stroke-width="4"/><rect x="300" y="208" width="220" height="18" rx="9" fill="rgba(236,253,245,0.35)"/><rect x="240" y="280" width="34" height="34" rx="9" stroke="#34d399" stroke-width="4" fill="rgba(52,211,153,0.12)"/><path d="M248 297l8 8 14-16" stroke="#34d399" stroke-width="4"/><rect x="300" y="288" width="180" height="18" rx="9" fill="rgba(236,253,245,0.35)"/><rect x="240" y="360" width="34" height="34" rx="9" stroke="#34d399" stroke-width="4" fill="rgba(52,211,153,0.12)"/><path d="M248 377l8 8 14-16" stroke="#34d399" stroke-width="4"/><rect x="300" y="368" width="140" height="18" rx="9" fill="rgba(236,253,245,0.35)"/><rect x="240" y="440" width="34" height="34" rx="9" stroke="#34d399" stroke-width="4" fill="rgba(52,211,153,0.12)"/><path d="M248 457l8 8 14-16" stroke="#34d399" stroke-width="4"/><rect x="300" y="448" width="100" height="18" rx="9" fill="rgba(236,253,245,0.35)"/>
+    <path d="M1080 150V170M1070 160H1090" stroke="#fbbf24" stroke-width="3"/><path d="M620 510V530M610 520H630" stroke="#34d399" stroke-width="3"/>
 
-    <!-- Clock with recycling arrows -->
-    <g transform="translate(400, 200)" filter="url(#glow)">
-        <!-- Clock face -->
-        <circle cx="0" cy="0" r="80" stroke="#4AE290" stroke-width="3" fill="none"/>
-        
-        <!-- Clock hands -->
-        <line x1="0" y1="0" x2="0" y2="-60" stroke="#4AE290" stroke-width="4" transform="rotate(300)"/>
-        <line x1="0" y1="0" x2="40" y2="0" stroke="#4AE290" stroke-width="4" transform="rotate(60)"/>
-        
-        <!-- Center dot -->
-        <circle cx="0" cy="0" r="4" fill="#4AE290"/>
-        
-        <!-- Time markers -->
-        <line x1="0" y1="-75" x2="0" y2="-65" stroke="#4AE290" stroke-width="2" />
-        <line x1="0" y1="-75" x2="0" y2="-65" stroke="#4AE290" stroke-width="2" transform="rotate(90)" />
-        <line x1="0" y1="-75" x2="0" y2="-65" stroke="#4AE290" stroke-width="2" transform="rotate(180)" />
-        <line x1="0" y1="-75" x2="0" y2="-65" stroke="#4AE290" stroke-width="2" transform="rotate(270)" />
-        
-        <!-- Quick win text -->
-        <text x="0" y="-95" fill="#4AE290" text-anchor="middle" font-size="14">5 MIN</text>
-    </g>
-
-    <!-- Quick win icons -->
-    <g filter="url(#glow)">
-        <!-- Power strip icon -->
-        <g transform="translate(200, 200)">
-            <rect x="-30" y="-15" width="60" height="30" rx="5" stroke="#4AE290" stroke-width="2" fill="none"/>
-            <circle cx="-15" cy="0" r="5" fill="#4AE290" opacity="0.7"/>
-            <circle cx="15" cy="0" r="5" fill="#4AE290" opacity="0.7"/>
-        </g>
-
-        <!-- Water drop icon -->
-        <g transform="translate(600, 200)">
-            <path d="M0,-30 C20,-30 30,-10 30,10 C30,30 15,40 0,40 C-15,40 -30,30 -30,10 C-30,-10 -20,-30 0,-30" 
-                  stroke="#4AE290" stroke-width="2" fill="none"/>
-            <path d="M0,-20 C10,-20 15,0 15,10 C15,20 7.5,25 0,25 C-7.5,25 -15,20 -15,10 C-15,0 -10,-20 0,-20" 
-                  fill="#4AE290" opacity="0.3"/>
-        </g>
-    </g>
-
-    <!-- Decorative elements -->
-    <g filter="url(#glow)">
-        <!-- Lightning bolts -->
-        <path d="M100,150 L120,130 L110,170 L130,150" stroke="#4AE290" stroke-width="2" fill="none"/>
-        <path d="M700,250 L720,230 L710,270 L730,250" stroke="#4AE290" stroke-width="2" fill="none"/>
-        
-        <!-- Sparkles -->
-        <path d="M150,300 L170,320 L150,340 L130,320 Z" fill="#4AE290" opacity="0.5"/>
-        <path d="M650,100 L670,120 L650,140 L630,120 Z" fill="#4AE290" opacity="0.5"/>
-        
-        <!-- Small dots -->
-        <circle cx="200" cy="100" r="3" fill="#4AE290" opacity="0.7"/>
-        <circle cx="600" cy="300" r="3" fill="#4AE290" opacity="0.7"/>
-    </g>
+  </g>
 </svg>
