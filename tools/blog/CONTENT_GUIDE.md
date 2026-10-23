@@ -92,7 +92,7 @@ emoji icons, no `<img>` other than existing files in `/blog/images/`.
    - Country pages: `/co2-emissions/<slug>` exist for every country with over 1 million people (159 pages), e.g.
      china, united-states, india, germany, united-kingdom, sweden, norway, new-zealand. Slugs are lowercase names
      with hyphens; check `static/co2-emissions/` if unsure.
-   - How the counter works: `/carbon-tracking-guide`
+   - How the counter works: `/methodology`
    - Other posts: `/blog/posts/<slug>` (see list below)
 8. **FAQ:** 3-5 questions phrased the way people search, each answered directly.
 9. **Dates:** keep each post's original `published` date; set `updated` to the day you revise it.
@@ -115,7 +115,7 @@ https://essd.copernicus.org/articles/18/3211/2026/ · Our World in Data https://
 
 ## Existing posts (slugs)
 
-2026-climate-outlook · beyond-2025-next-decade-climate · carbon-footprint-calculator-guide ·
+2026-climate-outlook · beyond-2025-next-decade-climate · carbon-footprint-calculator-guide · carbon-tracking (published at `/carbon-tracking-guide` via `"path"`) ·
 climate-tech-innovations-2026 · critical-climate-year-2025 · family-eco-activities · five-minute-carbon-hacks ·
 food-climate-solutions · renewable-energy-guide-2026 · save-energy-at-home · track-home-energy ·
 transportation-climate-guide

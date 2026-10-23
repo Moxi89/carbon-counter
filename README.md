@@ -44,7 +44,7 @@ The Global Carbon Project publishes the new **Global Carbon Budget** every Novem
    - `static/js/home-2026.js` (`EMISSIONS_PER_YEAR_T`, `BUDGET_START_GT`, `BUDGET_START`)
    - `static/embed.html` (`PER_SECOND`) and `static/widget.html` text
    - `static/index.html` (hero text, budget section, key figures, FAQ, structured data)
-   - `static/carbon-tracking-guide.html` (method page)
+   - `static/methodology.html` (method page)
    - `tools/blog/CONTENT_GUIDE.md` (core figures table), then review posts in `tools/blog/content/`
 3. Rebuild everything (see above), re-render share images, and check the site.
 
