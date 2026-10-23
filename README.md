@@ -41,6 +41,9 @@ Advertising is prepared but off; see `docs/ADSENSE.md` for the approval and laun
 
 The Global Carbon Project publishes the new **Global Carbon Budget** every November. To update:
 
+**Shortcut:** `tools/yearly/gcb_update.py` updates all the global figures in one go from the numbers in
+`tools/yearly/gcb.json`, and `tools/blog/drafts/` holds the key-findings post. Step-by-step: `docs/GCB2026.md`.
+
 1. **Country data:** download `owid-co2-data.csv` from
    [Our World in Data](https://github.com/owid/co2-data) and run `python3 tools/countries/build.py --csv owid-co2-data.csv`.
 2. **Global figures** (total emissions, fossil and land-use split, remaining 1.5 °C budget and its start date). Update them in:
