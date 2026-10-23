@@ -147,11 +147,19 @@ def foot(scripts):
 '''
 
 
+
+def img_set(src, sizes):
+    """srcset for photo heroes (tools/blog/heroes): a 1600 px .webp plus an 800 px copy for phones."""
+    if not src.endswith('.webp'):
+        return ''
+    small = src[:-5] + '-800.webp'
+    return f' srcset="{e(small)} 800w, {e(src)} 1600w" sizes="{sizes}"'
+
 def card(p, heading='h3', eager=0):
     # eager: 2 = first visible card (LCP), 1 = above the fold, 0 = lazy
     load = {2: 'fetchpriority="high"', 1: 'decoding="async"'}.get(eager, 'loading="lazy"')
     return f'''<a class="bp-card" href="{p["path"]}" data-category="{e(p["category"])}">
-                    <img src="{e(p["image"])}" alt="" {load} width="1200" height="630">
+                    <img src="{e(p["image"])}"{img_set(p["image"], "(max-width: 700px) 100vw, 400px")} alt="" {load} width="1200" height="630">
                     <span class="bp-card-body">
                         <span class="bp-tag">{e(p["category"])}</span>
                         <{heading} class="bp-card-title">{e(p["h1"])}</{heading}>
@@ -208,7 +216,7 @@ def build_post(p, by_slug):
                     {f'<p class="bp-dek">{e(p["dek"])}</p>' if p.get("dek") else ''}
                     <p class="bp-meta">By the <a href="/about#editorial">Carbon Emissions Counter editorial team</a> &middot; <time datetime="{p["updated"]}">Updated {nice_date(p["updated"])}</time>{published_note} &middot; {p["minutes"]} min read</p>
                     <p class="bp-share"><button type="button" class="t-share" data-share aria-label="Share this page"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg><span>Share</span></button></p>
-                    <figure class="bp-hero-image"><img src="{e(p["image"])}" alt="{e(p["image_alt"])}" width="1200" height="630"></figure>
+                    <figure class="bp-hero-image"><img src="{e(p["image"])}"{img_set(p["image"], "(max-width: 860px) 100vw, 820px")} alt="{e(p["image_alt"])}" width="1200" height="630" fetchpriority="high"></figure>
                 </header>
 
                 <aside class="bp-takeaways" aria-labelledby="takeaways-title">
@@ -288,7 +296,7 @@ def update_home(by_slug):
     p = os.path.join(STATIC, 'index.html')
     s = open(p, encoding='utf-8').read()
     cards = '\n'.join(f'''                    <a href="{q["path"]}" class="blog-card">
-                        <img src="{e(q["image"])}" alt="" width="1200" height="630" loading="lazy">
+                        <img src="{e(q["image"])}"{img_set(q["image"], "(max-width: 700px) 100vw, 400px")} alt="" width="1200" height="630" loading="lazy">
                         <div class="card-content">
                             <h3>{e(q["h1"])}</h3>
                             <p>{e(q["description"])}</p>

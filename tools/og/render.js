@@ -16,7 +16,7 @@ function page(job) {
     const leaf = `<svg viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>`;
     let visual = '';
     if (job.image) {
-        visual = `<img class="art" src="file://${job.image}">`;
+        visual = `<img class="art${job.flip ? ' flip' : ''}" src="file://${job.image}">`;
     } else if (job.bars && job.bars.length) {
         const max = Math.max(...job.bars);
         visual = `<div class="bars">${job.bars.map((v, i) => `<span style="height:${(v / max) * 100}%" class="${i === job.bars.length - 1 ? 'last' : ''}"></span>`).join('')}</div>`;
@@ -35,6 +35,7 @@ body{width:1200px;height:630px;overflow:hidden;font-family:'Fira Sans',sans-seri
  background:radial-gradient(700px 420px at 85% 40%,rgba(16,185,129,.22),transparent 70%),radial-gradient(600px 400px at 0% 100%,rgba(251,191,36,.08),transparent 70%),#06100c;position:relative}
 body:before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(52,211,153,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(52,211,153,.06) 1px,transparent 1px);background-size:48px 48px}
 .art{position:absolute;inset:0;width:1200px;height:630px;object-fit:cover;opacity:.95}
+.art.flip{transform:scaleX(-1)}
 .shade{position:absolute;inset:0;background:linear-gradient(90deg,#06100c 0%,rgba(6,16,12,.92) 38%,rgba(6,16,12,.15) 70%,transparent)}
 .wrap{position:absolute;inset:0;padding:64px 72px;display:flex;flex-direction:column}
 .brand{display:flex;align-items:center;gap:12px;font-weight:700;font-size:26px}

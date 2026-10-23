@@ -1,0 +1,26 @@
+{
+  "_help": "Photo hero images for blog posts. Photos (no text or numbers in them) are in photos/<slug>.jpg; the real, sourced figures are drawn on top by render.js. 'side' is where the figures go. 'og' picks the share-image background: 'hero' (the finished hero) or 'photo' (the bare photo, mirrored if 'og_flip'), with 'og_sub' as its line of text. Run: node tools/blog/heroes/render.js",
+  "food-climate-solutions": {
+    "side": "right",
+    "og": "photo",
+    "chart": {
+      "kicker": "kg CO₂e per kg of food",
+      "rows": [
+        ["Beef (beef herd)", 99.5],
+        ["Cheese", 23.9],
+        ["Poultry", 9.9],
+        ["Beans and lentils", 1.8],
+        ["Bread (wheat)", 1.6]
+      ],
+      "suffix": " kg",
+      "source": "Source: Poore & Nemecek (2018), via Our World in Data. Global averages."
+    },
+    "og_flip": true,
+    "og_sub": "Beef 99.5 kg CO₂e per kg · beans and lentils 1.8 kg"
+  },
+  "carbon-budget-explained": {
+    "side": "left",
+    "og": "photo",
+    "budget": true
+  }
+}

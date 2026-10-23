@@ -28,6 +28,7 @@ python3 tools/countries/build.py   # country pages, rankings, sitemap, home data
 python3 tools/blog/build.py        # posts from tools/blog/content/*.html (rules: tools/blog/CONTENT_GUIDE.md)
 python3 tools/pages/build.py       # about, contact, privacy, terms
 python3 tools/ads/apply.py         # AdSense on/off from tools/site_config.json (run last)
+node tools/blog/heroes/render.js    # photo hero images: Magnific photo + real figures (tools/blog/heroes/heroes.json)
 python3 tools/og/jobs.py > /tmp/og.json && node tools/og/render.js /tmp/og.json   # share images
 python3 tools/blog/images.py       # blog SVG illustrations
 npm run build:motion               # slim Motion build → static/js/vendor/motion.js
