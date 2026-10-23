@@ -207,7 +207,7 @@ def head(title, description, path, extra_css, schema, img='home'):
     <link rel="preload" href="/fonts/fira-code-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="/css/styles.css?v=2026-10b">
     <link rel="stylesheet" href="/shared/nav-styles.css">
-    <link rel="stylesheet" href="/css/theme-2026.css?v={ASSET_V}k">
+    <link rel="stylesheet" href="/css/theme-2026.css?v={ASSET_V}l">
     <link rel="stylesheet" href="/css/{extra_css}?v={ASSET_V}d">
 {schema}
 </head>
@@ -222,8 +222,8 @@ def foot(js):
     return f'''        </main>
         <div id="footer-placeholder"></div>
     </div>
-    <script src="/shared/nav.js?v={ASSET_V}d" defer></script>
-    <script src="/shared/footer.js?v={ASSET_V}i" defer></script>
+    <script src="/shared/nav.js?v={ASSET_V}e" defer></script>
+    <script src="/shared/footer.js?v={ASSET_V}j" defer></script>
 
     <script src="/js/{js}?v={ASSET_V}" defer></script>
     <script src="/js/vendor/motion.js?v=14.6.0-lite" defer></script>
@@ -266,7 +266,8 @@ def faq_html(faqs):
                     <summary>{e(q)}</summary>
                     <p>{a}</p>
                 </details>''' for q, a in faqs)
-    return f'''            <section class="cc-section" aria-labelledby="faq-title">
+    return f'''            <!-- ad:before_faq --><!-- /ad:before_faq -->
+            <section class="cc-section" aria-labelledby="faq-title">
                 <h2 class="cc-h2" id="faq-title">Questions and answers</h2>
                 <div class="cc-faq">
 {items}
@@ -442,6 +443,7 @@ def country_page(c, data, by_rank, featured_slugs):
             </section>
 
             <section class="cc-stats" aria-label="Key figures">{stats}</section>
+            <!-- ad:after_data --><!-- /ad:after_data -->
 
             <section class="cc-section cc-two">
                 <div class="cc-card">
@@ -716,7 +718,7 @@ def list_page(data, featured_slugs, kind):
 
 STATIC_URLS = [
     ('/', 'daily', '1.0'), ('/co2-emissions-by-country', 'weekly', '0.9'), ('/co2-emissions-per-capita', 'monthly', '0.8'), ('/historical-co2-emissions-by-country', 'monthly', '0.8'),
-    ('/carbon-tracking-guide', 'monthly', '0.8'), ('/methodology', 'monthly', '0.6'), ('/blog/', 'weekly', '0.7'), ('/widget', 'monthly', '0.5'),
+    ('/carbon-tracking-guide', 'monthly', '0.8'), ('/methodology', 'monthly', '0.6'), ('/blog/', 'weekly', '0.7'), ('/widget', 'monthly', '0.5'), ('/about', 'yearly', '0.4'), ('/contact', 'yearly', '0.3'),
     ('/privacy', 'yearly', '0.2'), ('/terms', 'yearly', '0.2'),
 ]
 

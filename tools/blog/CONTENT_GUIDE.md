@@ -111,7 +111,8 @@ emoji icons, no `<img>` other than existing files in `/blog/images/`.
 | Top emitters 2024 (fossil) | China 31.8% (12.29 Gt), US 12.7% (4.90 Gt), India 8.3% (3.19 Gt) | Our World in Data / GCP |
 
 Source links: Global Carbon Budget https://globalcarbonbudget.org/ · ESSD paper
-https://essd.copernicus.org/articles/18/3211/2026/ · Our World in Data https://ourworldindata.org/co2-emissions
+https://essd.copernicus.org/articles/18/3211/2026/ (Global Carbon Budget 2025 paper) · Indicators of Global Climate
+Change 2025 https://essd.copernicus.org/articles/18/3889/2026/ · Our World in Data https://ourworldindata.org/co2-emissions
 
 ## Existing posts (slugs)
 

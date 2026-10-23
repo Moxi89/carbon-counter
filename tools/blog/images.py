@@ -6,6 +6,7 @@
 Each image is 1200x630: deep green-black background, soft glow, faint data grid,
 and line-art in emerald / gold / sky. The file names match what the posts use.
 """
+import math
 import os
 
 OUT = os.path.join(os.path.dirname(__file__), '..', '..', 'static', 'blog', 'images')
@@ -245,6 +246,69 @@ IMAGES['carbon-tracking'] = frame(f'''
     <path d="M776 440h308" stroke="{DIM}" stroke-width="3"/>
     {sparkle(400, 170, 9, EM)}{sparkle(690, 540, 8, GOLD)}
 ''', glow=(900, 300))
+
+# Scope 1-2-3: bakery in the centre, van (1), power line (2), suppliers and customers (3)
+IMAGES['scope-emissions'] = frame(f"""
+    <path d="M520 470V330l80-60 80 60v140z" stroke="{INK}" stroke-opacity="0.85" stroke-width="5" fill="rgba(6,16,12,0.85)"/>
+    <rect x="574" y="400" width="52" height="70" rx="6" stroke="{INK}" stroke-opacity="0.6" stroke-width="4"/>
+    <path d="M650 300v-46h22v62" stroke="{GOLD}" stroke-width="5"/>
+    <path d="M656 238c6-10-4-16 2-26M668 236c6-10-4-16 2-26" stroke="{GOLD}" stroke-opacity="0.6" stroke-width="3"/>
+    <rect x="300" y="410" width="120" height="56" rx="10" stroke="{GOLD}" stroke-width="5" fill="rgba(251,191,36,0.08)"/>
+    <path d="M420 426h34l20 22v18h-54z" stroke="{GOLD}" stroke-width="5"/>
+    <circle cx="332" cy="470" r="13" stroke="{GOLD}" stroke-width="5" fill="#06100c"/><circle cx="446" cy="470" r="13" stroke="{GOLD}" stroke-width="5" fill="#06100c"/>
+    <path d="M760 130v120M730 150h60M738 190h44" stroke="{SKY}" stroke-width="5"/>
+    <path d="M760 250c-40 30-80 40-120 70" stroke="{SKY}" stroke-width="4" stroke-dasharray="8 10"/>
+    <rect x="860" y="250" width="70" height="56" rx="8" stroke="{EM}" stroke-width="4"/><rect x="940" y="250" width="70" height="56" rx="8" stroke="{EM}" stroke-width="4"/>
+    <rect x="900" y="196" width="70" height="56" rx="8" stroke="{EM}" stroke-width="4" fill="rgba(52,211,153,0.12)"/>
+    <path d="M860 420h90l40 40v24H860z" stroke="{EM}" stroke-width="5"/>
+    <path d="M690 400c60-10 110-30 160-90M690 440c70 10 120 10 170 0" stroke="{EM}" stroke-width="3" stroke-dasharray="6 10"/>
+    <circle cx="360" cy="370" r="22" fill="{GOLD}"/><text x="360" y="379" text-anchor="middle" font-family="monospace" font-size="24" font-weight="700" fill="#06100c">1</text>
+    <circle cx="806" cy="140" r="22" fill="{SKY}"/><text x="806" y="149" text-anchor="middle" font-family="monospace" font-size="24" font-weight="700" fill="#06100c">2</text>
+    <circle cx="1050" cy="240" r="22" fill="{EM}"/><text x="1050" y="249" text-anchor="middle" font-family="monospace" font-size="24" font-weight="700" fill="#06100c">3</text>
+    <path d="M260 520H1100" stroke="{DIM}" stroke-width="3"/>
+""", glow=(640, 320))
+
+# CO2 ppm: the Keeling curve, a rising line with a yearly wiggle
+_pts = []
+for i in range(0, 661):
+    x = 300 + i * 1.2
+    year = i / 660.0
+    base = 470 - (year * 230 + year * year * 90)
+    _pts.append(f'{x:.1f},{base - 9 * math.sin(i / 660.0 * 2 * math.pi * 30):.1f}')
+IMAGES['co2-ppm'] = frame(f"""
+    <path d="M290 500H1110M290 500V140" stroke="{DIM}" stroke-width="3"/>
+    {''.join(f'<path d="M290 {y}H1110" stroke="{EM}" stroke-opacity="0.12" stroke-width="2"/>' for y in (200, 280, 360, 440))}
+    <polyline points="{' '.join(_pts)}" stroke="{EM}" stroke-width="4" fill="none"/>
+    <circle cx="1092" cy="{470 - 320 - 9 * math.sin(2 * math.pi * 30):.1f}" r="12" fill="{GOLD}"/>
+    <circle cx="1092" cy="{470 - 320:.1f}" r="26" stroke="{GOLD}" stroke-opacity="0.4" stroke-width="3"/>
+    <text x="300" y="168" font-family="monospace" font-size="28" font-weight="600" fill="{INK}" fill-opacity="0.85">ppm</text>
+    {sparkle(220, 220, 9, EM)}{sparkle(1150, 540, 8, GOLD)}
+""", glow=(860, 260))
+
+# Carbon budget: a fuel gauge running low next to a draining bar
+IMAGES['carbon-budget'] = frame(f"""
+    <path d="M250 450a190 190 0 0 1 380 0" stroke="{DIM}" stroke-width="16"/>
+    <path d="M250 450a190 190 0 0 1 56-134" stroke="{GOLD}" stroke-width="18"/>
+    <path d="M440 450l-120-86" stroke="{INK}" stroke-width="7"/><circle cx="440" cy="450" r="16" fill="{INK}"/>
+    <text x="236" y="500" font-family="monospace" font-size="30" font-weight="700" fill="{GOLD}">E</text>
+    <text x="616" y="500" font-family="monospace" font-size="30" font-weight="700" fill="{INK}" fill-opacity="0.5">F</text>
+    <rect x="720" y="250" width="380" height="56" rx="28" stroke="{INK}" stroke-opacity="0.6" stroke-width="4"/>
+    <rect x="728" y="258" width="300" height="40" rx="20" fill="url(#bar)"/>
+    <rect x="1028" y="258" width="64" height="40" rx="20" fill="{GOLD}"/>
+    {''.join(f'<rect x="{720 + i * 78}" y="350" width="64" height="76" rx="12" stroke="{GOLD}" stroke-opacity="0.7" stroke-width="3" fill="rgba(251,191,36,0.06)"/>' for i in range(5))}
+    {sparkle(700, 170, 9, GOLD)}{sparkle(1150, 520, 8, EM)}
+""", glow=(860, 300), accent=GOLD)
+
+# Net zero: falling emission bars meet removals at a zero line
+IMAGES['net-zero'] = frame(f"""
+    <path d="M260 400H1080" stroke="{INK}" stroke-opacity="0.7" stroke-width="4"/>
+    <text x="1094" y="410" font-family="monospace" font-size="28" font-weight="700" fill="{INK}" fill-opacity="0.8">0</text>
+    {''.join(f'<rect x="{300 + i * 78}" y="{400 - h}" width="52" height="{h}" rx="8" fill="url(#barGold)"/>' for i, h in enumerate([230, 220, 200, 170, 135, 100, 70, 45, 25, 12]))}
+    {''.join(f'<rect x="{300 + i * 78}" y="404" width="52" height="{h}" rx="8" fill="url(#bar)"/>' for i, h in enumerate([0, 0, 4, 8, 12, 16, 22, 30, 38, 46]))}
+    <path d="M1118 330c-30-30-30-70 0-100 30 30 30 70 0 100z" stroke="{EM}" stroke-width="5" fill="rgba(52,211,153,0.15)"/>
+    <path d="M1118 330v-90" stroke="{EM}" stroke-width="4"/>
+    {sparkle(240, 180, 9, GOLD)}{sparkle(1160, 200, 8, EM)}
+""", glow=(780, 380))
 
 
 def main():

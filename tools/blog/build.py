@@ -123,7 +123,7 @@ def head(title, description, url, og_type, extra_css, schemas, img='home'):
     <link rel="preload" href="/fonts/fira-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="/css/styles.css?v=2026-10b">
     <link rel="stylesheet" href="/shared/nav-styles.css">
-    <link rel="stylesheet" href="/css/theme-2026.css?v={V}k">
+    <link rel="stylesheet" href="/css/theme-2026.css?v={V}l">
     <link rel="stylesheet" href="/css/post-2026.css?v={V}e">{css}
 {chr(10).join(jsonld(s) for s in schemas)}
 </head>
@@ -139,8 +139,8 @@ def foot(scripts):
     return f'''        </main>
         <div id="footer-placeholder"></div>
     </div>
-    <script src="/shared/nav.js?v={V}d" defer></script>
-    <script src="/shared/footer.js?v={V}i" defer></script>
+    <script src="/shared/nav.js?v={V}e" defer></script>
+    <script src="/shared/footer.js?v={V}j" defer></script>
 {extra}
 </body>
 </html>
@@ -164,6 +164,10 @@ def card(p, heading='h3', eager=0):
 def build_post(p, by_slug):
     url = SITE + p['path']
     body, toc = add_heading_ids(p['body'])
+    # Ad position (filled only when ads are switched on; see tools/ads/apply.py)
+    parts = body.split('</section>')
+    if len(parts) > 3:
+        body = '</section>'.join(parts[:2]) + '</section>\n<!-- ad:in_article --><!-- /ad:in_article -->' + '</section>'.join(parts[2:])
     words = len(strip(body).split())
     p['minutes'] = max(1, math.ceil(words / 220))
 
@@ -218,6 +222,7 @@ def build_post(p, by_slug):
 {body}
                 </div>
 
+                <!-- ad:before_faq --><!-- /ad:before_faq -->
                 {f'<section class="bp-faq" aria-labelledby="faq-title"><h2 id="faq-title">Questions and answers</h2>{faq_html}</section>' if faqs else ''}
 
                 <section class="bp-sources" aria-labelledby="sources-title">
