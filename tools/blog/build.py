@@ -145,9 +145,11 @@ def foot(scripts):
 '''
 
 
-def card(p, heading='h3'):
+def card(p, heading='h3', eager=0):
+    # eager: 2 = first visible card (LCP), 1 = above the fold, 0 = lazy
+    load = {2: 'fetchpriority="high"', 1: 'decoding="async"'}.get(eager, 'loading="lazy"')
     return f'''<a class="bp-card" href="/blog/posts/{p["slug"]}" data-category="{e(p["category"])}">
-                    <img src="{e(p["image"])}" alt="" loading="lazy" width="1200" height="630">
+                    <img src="{e(p["image"])}" alt="" {load} width="1200" height="630">
                     <span class="bp-card-body">
                         <span class="bp-tag">{e(p["category"])}</span>
                         <{heading} class="bp-card-title">{e(p["h1"])}</{heading}>
@@ -261,7 +263,7 @@ def build_index(posts):
             <div class="bp-chips" role="group" aria-label="Filter by topic">{chips}</div>
 
             <div class="bp-grid bp-index-grid" id="bpGrid">
-                {''.join(card(p, 'h2') for p in posts)}
+                {''.join(card(p, 'h2', eager=2 if i == 0 else int(i < 3)) for i, p in enumerate(posts))}
             </div>
 '''
     page += foot(['/blog/js/blog-2026.js'])
