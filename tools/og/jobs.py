@@ -47,6 +47,8 @@ def main():
                      'sub': f'in {year} · {c["share"]:.1f}% of the world · {c["pc"]:.1f} t per person',
                      'bars': [v for _, v in c['series']]})
 
+    heroes = json.load(open(os.path.join(ROOT, 'tools', 'blog', 'heroes', 'heroes.json'), encoding='utf-8'))
+    gcb = json.load(open(os.path.join(ROOT, 'tools', 'yearly', 'gcb.json'), encoding='utf-8'))['current']
     content = os.path.join(ROOT, 'tools', 'blog', 'content')
     if os.path.isdir(content):
         for f in sorted(os.listdir(content)):
@@ -56,8 +58,20 @@ def main():
             if not m:
                 continue
             meta = json.loads(m.group(1))
-            jobs.append({'name': f'blog-{f[:-5]}', 'kicker': meta['category'], 'title': meta['title'],
-                         'image': os.path.join(ROOT, 'static', meta['image'].lstrip('/'))})
+            slug = f[:-5]
+            job = {'name': f'blog-{slug}', 'kicker': meta['category'], 'title': meta['title'],
+                   'image': os.path.join(ROOT, 'static', meta['image'].lstrip('/'))}
+            hero = heroes.get(slug)
+            if hero:
+                # Bare photo behind the title, mirrored so its subject sits on the right
+                job['image'] = os.path.join(ROOT, 'tools', 'blog', 'heroes', 'photos', slug + '.jpg')
+                job['flip'] = hero.get('side') == 'right'
+                if hero.get('og_sub'):
+                    job['sub'] = hero['og_sub']
+                if hero.get('budget'):
+                    job['big'] = f"{gcb['budget_15_gt']} Gt"
+                    job['sub'] = f"CO₂ left for 1.5 °C from 1 January {gcb['budget_start_year']}"
+            jobs.append(job)
     print(json.dumps(jobs, ensure_ascii=False))
 
 

@@ -70,6 +70,17 @@ Keep the slug (file name) of existing posts unchanged; their URLs are already in
 <blockquote>...</blockquote>
 ```
 
+### Photo hero images
+
+A post can use a photo hero instead of an SVG illustration: an AI photo (Magnific) with the post's real figures
+drawn on top. The photo must contain **no text, numbers, charts or logos**, and must not show a real, identifiable
+place or event as if it were real. All figures come from `tools/blog/heroes/heroes.json` (or `tools/yearly/gcb.json`
+for the carbon budget) and must match the post and its sources.
+
+1. Save the photo as `tools/blog/heroes/photos/<slug>.jpg` (2400 × 1350, leave one side empty for the figures).
+2. Add the post to `tools/blog/heroes/heroes.json`, run `node tools/blog/heroes/render.js`.
+3. Set `"image": "/blog/images/<slug>.webp"` and an `image_alt` that describes the photo and the figures.
+
 Plain `h2`, `h3`, `p`, `ul`, `ol`, `strong`, `em` and `a` are styled automatically. No inline styles, no
 emoji icons, no `<img>` other than existing files in `/blog/images/`.
 

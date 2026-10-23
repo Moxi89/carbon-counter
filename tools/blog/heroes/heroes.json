@@ -1,0 +1,219 @@
+{
+  "_help": "Photo hero images for blog posts. Photos (no text or numbers in them) are in photos/<slug>.jpg; the real, sourced figures are drawn on top by render.js. 'side' is where the figures go (the empty side of the photo). Overlay: 'chart' (bars), 'stat' (one big figure), 'stats' (two or three figures) or 'budget' (from tools/yearly/gcb.json). Share images use the bare photo, mirrored when the figures are on the right, with 'og_sub' as their line of text. Run: node tools/blog/heroes/render.js",
+  "2026-climate-outlook": {
+    "side": "left",
+    "stats": {
+      "kicker": "Warming above pre-industrial",
+      "gold": true,
+      "items": [
+        ["1.37 °C", "human-caused warming in 2025"],
+        ["1.63 °C", "global temperature, September 2026"],
+        ["2.8 °C", "by 2100 under current policies"]
+      ],
+      "source": "Sources: Indicators of Global Climate Change 2025; Copernicus; UNEP Emissions Gap Report 2026"
+    },
+    "og_sub": "1.37 °C of human-caused warming in 2025; 2.8 °C by 2100 on current policies"
+  },
+  "beyond-2025-next-decade-climate": {
+    "side": "right",
+    "stats": {
+      "kicker": "The decade ahead",
+      "items": [
+        ["~2030", "long-term warming reaches 1.5 °C at current rates"],
+        ["45%", "cut from 2025 levels needed by 2035"],
+        ["11–15%", "what full national pledges deliver by 2035"]
+      ],
+      "source": "Sources: Indicators of Global Climate Change 2025; UNEP Emissions Gap Report 2026"
+    },
+    "og_sub": "Long-term warming reaches 1.5 °C around 2030 at current rates"
+  },
+  "carbon-budget-explained": {
+    "side": "left",
+    "budget": true
+  },
+  "carbon-footprint-calculator-guide": {
+    "side": "left",
+    "chart": {
+      "kicker": "Fossil CO₂ per person a year, 2024",
+      "rows": [
+        ["United States", 14.2],
+        ["World average", 4.7],
+        ["India", 2.2]
+      ],
+      "suffix": " t",
+      "source": "Source: Global Carbon Project via Our World in Data"
+    },
+    "og_sub": "World average: 4.7 t of fossil CO₂ per person a year"
+  },
+  "carbon-tracking": {
+    "side": "left",
+    "stat": {
+      "kicker": "Activity × emission factor",
+      "green": true,
+      "value": "2.0",
+      "unit": "t CO₂e",
+      "lines": ["a year from 12,000 km in a petrol car", "at 0.163 kg CO₂e per km"],
+      "source": "Factor: UK DESNZ 2025"
+    },
+    "og_sub": "Emissions = activity data × emission factor"
+  },
+  "climate-tech-innovations-2026": {
+    "side": "right",
+    "stats": {
+      "kicker": "Clean tech in 2025",
+      "items": [
+        ["692 GW", "renewable capacity added, a record"],
+        ["$70/kWh", "stationary battery storage packs"],
+        ["20 million+", "electric cars sold"]
+      ],
+      "source": "Sources: IRENA; BNEF; IEA Global EV Outlook 2026"
+    },
+    "og_sub": "A record 692 GW of renewable capacity added in 2025"
+  },
+  "co2-ppm-atmosphere": {
+    "side": "left",
+    "stat": {
+      "kicker": "Record monthly CO₂, Mauna Loa",
+      "green": true,
+      "value": "432.3",
+      "unit": "ppm",
+      "lines": ["May 2026", "Rising about 2.5 ppm a year"],
+      "source": "Source: NOAA"
+    },
+    "og_sub": "A record 432.3 ppm at Mauna Loa in May 2026"
+  },
+  "critical-climate-year-2025": {
+    "side": "left",
+    "stats": {
+      "kicker": "Global Carbon Budget 2025",
+      "gold": true,
+      "items": [
+        ["38.1 Gt", "fossil CO₂ in 2025, a record (+1.1%)"],
+        ["42.2 Gt", "total CO₂ including land use"],
+        ["425.7 ppm", "CO₂ in the atmosphere"]
+      ],
+      "source": "Source: Global Carbon Budget 2025"
+    },
+    "og_sub": "A record 38.1 Gt of fossil CO₂ in 2025"
+  },
+  "family-eco-activities": {
+    "side": "right",
+    "stats": {
+      "kicker": "Numbers for family projects",
+      "items": [
+        ["79 kg", "food wasted per person a year at home"],
+        ["95%", "energy saved by recycling aluminium"],
+        ["16–340 kg", "CO₂ a city tree absorbs a year"]
+      ],
+      "source": "Sources: UNEP Food Waste Index 2024; International Aluminium Institute; USDA Forest Service"
+    },
+    "og_sub": "Households waste about 79 kg of food per person a year"
+  },
+  "five-minute-carbon-hacks": {
+    "side": "left",
+    "stat": {
+      "kicker": "Biggest quick win",
+      "value": "1.6",
+      "unit": "t CO₂e",
+      "lines": ["saved by replacing one long-haul return flight", "More than tips 5–15 combined"],
+      "source": "Source: UK DESNZ 2025 factors, economy, ~7,000 km each way"
+    },
+    "og_sub": "Replacing one long-haul return flight saves about 1.6 t CO₂e"
+  },
+  "food-climate-solutions": {
+    "side": "right",
+    "chart": {
+      "kicker": "kg CO₂e per kg of food",
+      "rows": [
+        ["Beef (beef herd)", 99.5],
+        ["Cheese", 23.9],
+        ["Poultry", 9.9],
+        ["Beans and lentils", 1.8],
+        ["Bread (wheat)", 1.6]
+      ],
+      "suffix": " kg",
+      "source": "Source: Poore & Nemecek (2018), via Our World in Data. Global averages."
+    },
+    "og_sub": "Beef 99.5 kg CO₂e per kg · beans and lentils 1.8 kg"
+  },
+  "net-zero-explained": {
+    "side": "right",
+    "stats": {
+      "kicker": "Net zero targets cover",
+      "items": [
+        ["74%", "of global emissions (at least)"],
+        ["77%", "of world GDP"],
+        ["79%", "of the world’s population"]
+      ],
+      "source": "Source: Net Zero Tracker, Net Zero Stocktake 2025"
+    },
+    "og_sub": "Net zero targets cover at least 74% of global emissions"
+  },
+  "renewable-energy-guide-2026": {
+    "side": "left",
+    "stat": {
+      "kicker": "Electricity from renewables, 2025",
+      "green": true,
+      "value": "33.8",
+      "unit": "%",
+      "lines": ["of global electricity, ahead of coal (33.0%)", "Solar generation grew a record 30%"],
+      "source": "Source: Ember, Global Electricity Review 2026"
+    },
+    "og_sub": "Renewables overtook coal: 33.8% of global electricity in 2025"
+  },
+  "save-energy-at-home": {
+    "side": "right",
+    "stats": {
+      "kicker": "Biggest home savings",
+      "items": [
+        ["~7%", "heating saved per 1 °C lower thermostat"],
+        ["~15%", "heating and cooling saved by sealing and insulating"],
+        ["75%+", "less electricity for LEDs than old bulbs"]
+      ],
+      "source": "Sources: IEA; ENERGY STAR; US DOE"
+    },
+    "og_sub": "Turn the heating down 1 °C to save about 7%"
+  },
+  "scope-1-2-3-emissions": {
+    "side": "left",
+    "stat": {
+      "kicker": "Scope 3 vs own operations",
+      "value": "26×",
+      "unit": "",
+      "lines": ["supply-chain emissions vs scope 1 and 2", "Average for companies reporting to CDP, 2023"],
+      "source": "Source: CDP, 2024"
+    },
+    "og_sub": "Supply-chain emissions average 26 times companies’ own"
+  },
+  "track-home-energy": {
+    "side": "right",
+    "chart": {
+      "kicker": "Grid CO₂ per kWh of electricity, 2025",
+      "rows": [
+        ["World", 458],
+        ["United States", 384],
+        ["European Union", 210]
+      ],
+      "suffix": " g",
+      "decimals": 0,
+      "source": "Source: Ember, Global Electricity Review 2026"
+    },
+    "og_sub": "CO₂ = kWh × grid intensity: 458 g per kWh worldwide"
+  },
+  "transportation-climate-guide": {
+    "side": "left",
+    "chart": {
+      "kicker": "g CO₂e per passenger-km",
+      "rows": [
+        ["Domestic flight", 246],
+        ["Petrol car, driver alone", 170],
+        ["UK national rail", 35],
+        ["Eurostar", 4]
+      ],
+      "suffix": " g",
+      "decimals": 0,
+      "source": "Source: UK DESNZ factors via Our World in Data"
+    },
+    "og_sub": "A domestic flight emits about 7 times more per km than UK rail"
+  }
+}
