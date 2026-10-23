@@ -131,6 +131,7 @@
 
     function show(year) {
         const r = compute(year);
+        const from = parseInt($('cxBornPct').textContent, 10) || 0;
         current = r;
         $('cxBornPct').textContent = Math.round(r.pct) + '%';
         $('cxBornY').textContent = year;
@@ -140,6 +141,8 @@
         $('cxBornTotal').textContent = fmt.format(Math.round(r.since / 1000)) + ' billion t';
         $('cxBornThen').textContent = (r.annual / 1000).toFixed(1) + ' billion t';
         $('cxBornRise').textContent = (r.rise >= 0 ? '+' : '−') + fmt.format(Math.round(Math.abs(r.rise))) + '%';
+        // Optional animation hook (js/motion-effects.js)
+        document.dispatchEvent(new CustomEvent('cx:born', { detail: { from: from } }));
     }
 
     function valid(v) {

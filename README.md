@@ -19,6 +19,7 @@ Plain static HTML, CSS and JavaScript, hosted on **Cloudflare Pages** (output di
 | `tools/countries/` | Builds the country pages, rankings, sitemap, redirects and the home page's country data. |
 | `tools/blog/` | Builds the blog from `tools/blog/content/*.html`. Writing rules: `tools/blog/CONTENT_GUIDE.md`. |
 | `tools/og/` | Renders the 1200×630 social share images in `static/og/`. |
+| `static/js/motion-effects.js` | Count-up numbers, growing bars and gliding ranking rows on the home and country pages, using a slim self-hosted build of [Motion](https://motion.dev) (`static/js/vendor/motion.js`). Rebuild it with `npm install && npm run build:motion`. Skipped when the visitor prefers reduced motion. |
 
 ## Building
 
