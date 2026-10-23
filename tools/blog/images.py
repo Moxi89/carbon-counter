@@ -227,6 +227,25 @@ IMAGES['family-eco-activities'] = frame(f'''
     <path d="M1000 240c0-20 30-20 30 0 0-20 30-20 30 0 0 24-30 40-30 40s-30-16-30-40z" stroke="{EM}" stroke-width="5" fill="rgba(52,211,153,0.15)"/>
 ''', glow=(620, 380))
 
+# Carbon tracking: scope 1-3 icons feeding a live dashboard
+IMAGES['carbon-tracking'] = frame(f'''
+    <path d="M150 470V330l70 44v-44l70 44v-44l70 44V250h40v220z" stroke="{GOLD}" stroke-width="5" fill="rgba(251,191,36,0.08)"/>
+    <path d="M180 470h260" stroke="{DIM}" stroke-width="3"/>
+    <path d="M520 200l-40 80h44l-30 80 86-110h-48l30-50z" stroke="{SKY}" stroke-width="5" fill="rgba(56,189,248,0.10)"/>
+    <rect x="460" y="400" width="56" height="40" rx="8" stroke="{EM}" stroke-width="4"/>
+    <rect x="540" y="400" width="56" height="40" rx="8" stroke="{EM}" stroke-width="4"/>
+    <path d="M516 420h24M596 420h24" stroke="{EM}" stroke-width="4"/>
+    <rect x="620" y="400" width="56" height="40" rx="8" fill="rgba(52,211,153,0.18)" stroke="{EM}" stroke-width="4"/>
+    <path d="M660 300c40 0 50-20 80-20" stroke="{DIM}" stroke-width="3" stroke-dasharray="6 10"/>
+    <rect x="740" y="150" width="380" height="330" rx="28" stroke="{INK}" stroke-opacity="0.75" stroke-width="5" fill="rgba(6,16,12,0.88)"/>
+    <path d="M776 196h90" stroke="{EM}" stroke-width="8"/><path d="M880 196h50" stroke="{DIM}" stroke-width="8"/>
+    <path d="M780 400l46-30 40 16 44-52 40 20 46-64 48-26" stroke="{EM}" stroke-width="6"/>
+    <path d="M780 400l46-30 40 16 44-52 40 20 46-64 48-26V440H780z" fill="rgba(52,211,153,0.10)" stroke="none"/>
+    <circle cx="1044" cy="264" r="11" fill="{GOLD}"/><circle cx="1044" cy="264" r="22" stroke="{GOLD}" stroke-opacity="0.4" stroke-width="3"/>
+    <path d="M776 440h308" stroke="{DIM}" stroke-width="3"/>
+    {sparkle(400, 170, 9, EM)}{sparkle(690, 540, 8, GOLD)}
+''', glow=(900, 300))
+
 
 def main():
     os.makedirs(OUT, exist_ok=True)

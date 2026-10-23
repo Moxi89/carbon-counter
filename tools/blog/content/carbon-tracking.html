@@ -1,0 +1,136 @@
+<!--meta
+{
+  "path": "/carbon-tracking-guide",
+  "title": "Carbon Tracking: How to Track Carbon Emissions (2026 Guide)",
+  "h1": "Carbon tracking: how to track carbon emissions, from your home to a whole company",
+  "description": "What carbon tracking is and how to do it: track your own footprint, measure company emissions across scopes 1, 2 and 3, and what real-time tracking shows.",
+  "dek": "Carbon tracking means turning what you use into tonnes of CO₂. Here is how it works, how to do it for yourself or a business, and how much “real time” is really possible.",
+  "category": "How-to",
+  "image": "/blog/images/carbon-tracking.svg",
+  "image_alt": "Illustration of a factory, electricity and supply-chain icons feeding a live emissions dashboard",
+  "published": "2026-10-23",
+  "updated": "2026-10-23",
+  "takeaways": [
+    "Carbon tracking is simple arithmetic: activity data (kWh, litres, km) × an emission factor = kg of CO₂ or CO₂e.",
+    "For a household, five numbers cover most of the footprint: car km, flights, electricity, heating fuel and diet.",
+    "Companies track three scopes: their own fuel (scope 1), bought energy (scope 2) and the value chain (scope 3), which is usually the largest.",
+    "Very little is measured live. Power plant stacks and some electricity grids report hourly or half-hourly; most other figures, including global totals, are estimates.",
+    "Track the same way every year and change one thing at a time: consistency matters more than precision."
+  ],
+  "faq": [
+    ["What is carbon tracking?", "Carbon tracking is measuring or estimating the greenhouse gases caused by an activity, a household or an organisation, usually in tonnes of CO₂ or CO₂-equivalent (CO₂e), and following the number over time. Most tracking multiplies activity data, such as kWh of electricity or kilometres driven, by an emission factor."],
+    ["How do I track my own carbon emissions?", "Collect a year of electricity and heating bills, your car’s annual distance and your flights, then multiply each by an emission factor. Our <a href=\"/blog/posts/carbon-footprint-calculator-guide#fpCalc\">free carbon footprint calculator</a> does the arithmetic and shows which category is largest."],
+    ["How do companies track carbon emissions?", "They follow the Greenhouse Gas Protocol: scope 1 covers fuel burned on site and in company vehicles, scope 2 covers purchased electricity, heat and steam, and scope 3 covers the rest of the value chain, from purchased goods to the use of sold products. Data comes from meters, invoices, travel systems and supplier information, multiplied by published emission factors."],
+    ["Is real-time carbon tracking possible?", "Partly. Large power plants measure stack emissions continuously, and grid operators such as Great Britain’s publish electricity carbon intensity every half hour. Almost everything else, including national and global totals, is estimated from fuel and activity data and published weeks to months later. Live counters like ours spread those estimates over time."],
+    ["What is the best carbon tracking tool?", "For individuals, a calculator that uses your real kWh and kilometres, plus your energy supplier’s smart-meter data, is enough. Businesses usually start with a spreadsheet and move to carbon accounting software once scope 3 data and audit requirements grow. Look for tools that show their emission factors and follow the GHG Protocol."]
+  ],
+  "sources": [
+    ["GHG Protocol Corporate Accounting and Reporting Standard, World Resources Institute and WBCSD", "https://ghgprotocol.org/corporate-standard"],
+    ["GHG Protocol Scope 2 Guidance, World Resources Institute and WBCSD, 2015", "https://ghgprotocol.org/scope-2-guidance"],
+    ["GHG Protocol Corporate Value Chain (Scope 3) Standard, World Resources Institute and WBCSD", "https://ghgprotocol.org/corporate-value-chain-scope-3-standard"],
+    ["Greenhouse gas reporting: conversion factors 2025, UK Department for Energy Security and Net Zero, 2025", "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2025"],
+    ["GHG Emission Factors Hub, US Environmental Protection Agency", "https://www.epa.gov/climateleadership/ghg-emission-factors-hub"],
+    ["Clean Air Markets Program Data (power plant emissions), US Environmental Protection Agency", "https://campd.epa.gov/"],
+    ["Carbon Intensity API for Great Britain, National Energy System Operator", "https://carbonintensity.org.uk/"],
+    ["Electricity Maps: live carbon intensity of electricity", "https://app.electricitymaps.com/"],
+    ["Carbon Monitor: near-real-time daily CO₂ emissions estimates", "https://carbonmonitor.org/"],
+    ["Climate TRACE: independent emissions inventory", "https://climatetrace.org/"],
+    ["Orbiting Carbon Observatory-2 (OCO-2), NASA Jet Propulsion Laboratory", "https://ocov2.jpl.nasa.gov/"],
+    ["Global Carbon Budget 2025, Global Carbon Project, 2025", "https://globalcarbonbudget.org/"],
+    ["Global Electricity Review 2026, Ember, 2026", "https://ember-energy.org/latest-insights/global-electricity-review-2026/electricity-demand-and-supply-trends/"]
+  ],
+  "related": ["carbon-footprint-calculator-guide", "track-home-energy", "five-minute-carbon-hacks"]
+}
+-->
+<section>
+    <h2>What is carbon tracking?</h2>
+    <p><strong>Carbon tracking is measuring or estimating the greenhouse gases behind an activity and following that number over time.</strong> The result is usually given in kilograms or tonnes of CO₂, or CO₂e (CO₂-equivalent) when other gases such as methane are included.</p>
+    <p>Almost all carbon tracking, from a household to a multinational, uses the same formula:</p>
+    <div class="callout"><strong>Emissions = activity data × emission factor.</strong> Activity data is what you used: kWh of electricity, litres of fuel, kilometres travelled. The emission factor says how much CO₂e each unit causes, and comes from published sources such as the UK government’s conversion factors or the US EPA’s Emission Factors Hub.</div>
+    <p>For example, driving 12,000 km in an average petrol car at 0.163 kg CO₂e per km (UK DESNZ 2025) gives about <strong>1,960 kg, or 2.0 tonnes</strong>, a year. The live <a href="/">global CO₂ counter</a> uses the same idea at planetary scale: the world’s yearly total of 42.2 billion tonnes, spread evenly over every second.</p>
+</section>
+
+<section>
+    <h2>How to track your personal carbon footprint</h2>
+    <p>Five numbers cover most of a typical footprint in a high-income country. You can find all of them in about ten minutes:</p>
+    <div class="table-wrap"><table class="data-table">
+        <caption>Where to find the data, and the factor to multiply it by. Factors: UK DESNZ 2025 unless noted.</caption>
+        <thead><tr><th>What</th><th>Where to find it</th><th class="num">Factor</th></tr></thead>
+        <tbody>
+            <tr><td>Car</td><td>Annual mileage from your service record or MOT/inspection history</td><td class="num">0.163 kg/km (petrol)</td></tr>
+            <tr><td>Flights</td><td>Booking emails for the past year</td><td class="num">≈1.6 t per long-haul return</td></tr>
+            <tr><td>Electricity</td><td>Annual kWh on your bill or supplier app</td><td class="num">458 g/kWh world average (Ember)</td></tr>
+            <tr><td>Heating</td><td>Gas kWh on your bill, or litres of oil or LPG delivered</td><td class="num">0.183 kg/kWh (gas)</td></tr>
+            <tr><td>Food</td><td>Your typical diet</td><td class="num">1.0–2.6 t a year</td></tr>
+        </tbody>
+    </table></div>
+    <ol>
+        <li><strong>Collect one year of data</strong>, so seasons even out.</li>
+        <li><strong>Enter it in a calculator</strong> that shows its emission factors. Our <a href="/blog/posts/carbon-footprint-calculator-guide#fpCalc">carbon footprint calculator</a> takes about two minutes and lists the three changes that would cut your total most.</li>
+        <li><strong>Track monthly where it’s easy.</strong> Smart meters and energy apps show electricity and gas use by day or hour; see <a href="/blog/posts/track-home-energy">how to track your home energy use</a>.</li>
+        <li><strong>Repeat once a year</strong> with the same method, and compare categories rather than chasing decimals.</li>
+    </ol>
+    <p>For context, the world average is about 4.7 tonnes of fossil CO₂ per person a year, but it ranges from well under 1 tonne in many low-income countries to over 14 tonnes in the United States. You can compare countries in the <a href="/co2-emissions-per-capita">CO₂ per person ranking</a>.</p>
+</section>
+
+<section>
+    <h2>How to track carbon emissions in a business</h2>
+    <p>Organisations track emissions with the <strong>Greenhouse Gas Protocol</strong>, the standard behind most corporate climate reporting. It splits emissions into three scopes:</p>
+    <div class="table-wrap"><table class="data-table">
+        <caption>The three scopes of the GHG Protocol, with typical data sources.</caption>
+        <thead><tr><th>Scope</th><th>What it covers</th><th>Typical data</th></tr></thead>
+        <tbody>
+            <tr><td><strong>Scope 1</strong></td><td>Fuel burned on site and in company vehicles, plus process and refrigerant leaks</td><td>Gas and fuel invoices, fleet fuel cards, refrigerant logs</td></tr>
+            <tr><td><strong>Scope 2</strong></td><td>Purchased electricity, heat, steam and cooling</td><td>Utility bills and meters, energy contracts</td></tr>
+            <tr><td><strong>Scope 3</strong></td><td>The rest of the value chain, in 15 categories: purchased goods, transport, business travel, commuting, use and disposal of sold products and more</td><td>Spend data, supplier figures, travel bookings, product data</td></tr>
+        </tbody>
+    </table></div>
+    <p>A practical way to start:</p>
+    <ol>
+        <li><strong>Set the boundary.</strong> Decide which sites, subsidiaries and vehicles count, and pick a base year.</li>
+        <li><strong>Measure scopes 1 and 2 first.</strong> The data is in invoices you already have, and it is usually accurate to a few percent. For electricity, the GHG Protocol asks for two figures: a <em>location-based</em> one using the grid average, and a <em>market-based</em> one that reflects renewable contracts.</li>
+        <li><strong>Screen scope 3.</strong> Estimate every category roughly, often from spend data, then improve the largest ones with real supplier data. For most companies, scope 3 is the biggest part of the footprint.</li>
+        <li><strong>Choose emission factors and document them</strong>: for example the UK government’s annual conversion factors or the US EPA Emission Factors Hub. Use the same sources every year.</li>
+        <li><strong>Report and set targets.</strong> A growing number of disclosure rules, including the EU’s Corporate Sustainability Reporting Directive and the ISSB’s climate standard, build on the GHG Protocol, so tracking it well now saves work later.</li>
+    </ol>
+    <div class="callout callout-warn"><strong>Watch out:</strong> buying carbon offsets does not reduce the emissions you track. Report gross emissions first and show any offsets separately.</div>
+</section>
+
+<section>
+    <h2>Is real-time carbon tracking possible?</h2>
+    <p>Partly. It helps to separate what is actually <strong>measured</strong> as it happens from what is <strong>estimated</strong>:</p>
+    <ul class="checklist">
+        <li><strong>Power plant stacks:</strong> large US power plants measure CO₂ continuously and report hourly data, published through the EPA’s Clean Air Markets Program Data.</li>
+        <li><strong>Electricity grids:</strong> Great Britain’s grid operator publishes carbon intensity every half hour with a forecast, and Electricity Maps shows live estimates for many countries. Useful for timing laundry, EV charging or data-centre work.</li>
+        <li><strong>Smart meters:</strong> they record your home’s electricity and gas use every half hour or hour; multiply by a factor to get near-real-time household emissions.</li>
+        <li><strong>Daily national estimates:</strong> Carbon Monitor estimates CO₂ emissions by country and sector each day from power, traffic and industry data.</li>
+        <li><strong>Facility-level estimates:</strong> Climate TRACE combines satellite imagery and machine learning to estimate emissions from millions of individual sources.</li>
+        <li><strong>Satellites:</strong> NASA’s OCO-2 measures CO₂ <em>concentrations</em> in the air, not emissions directly; turning them into emissions takes modelling.</li>
+    </ul>
+    <p>Global totals are different: the <a href="https://globalcarbonbudget.org/" rel="noopener">Global Carbon Budget</a> is published once a year. A live counter such as ours spreads that yearly estimate over every second, so it shows the expected running total, not a measurement. <a href="/methodology">How the counter works</a> explains the method and its uncertainty.</p>
+</section>
+
+<section>
+    <h2>What to look for in a carbon tracking tool or dashboard</h2>
+    <ul class="checklist">
+        <li><strong>It shows its emission factors and sources</strong>, with the year. A tool that hides them can’t be checked.</li>
+        <li><strong>It uses your real activity data</strong> (kWh, litres, km) rather than spending alone where you have it.</li>
+        <li><strong>It follows the GHG Protocol</strong> scopes and reports location- and market-based electricity separately.</li>
+        <li><strong>It keeps an audit trail</strong>: who entered what, from which invoice, and when factors changed.</li>
+        <li><strong>It shows trends, not just a total</strong>: by month, site and category, so you can see what is working.</li>
+        <li><strong>It exports your data</strong> in an open format, so you are not locked in.</li>
+    </ul>
+    <p>For a household, a spreadsheet plus our <a href="/blog/posts/carbon-footprint-calculator-guide#fpCalc">calculator</a> is enough. Small businesses often manage scopes 1 and 2 in a spreadsheet too; dedicated carbon accounting software earns its cost once scope 3 data, multiple sites or audits come in.</p>
+</section>
+
+<section>
+    <h2>Common carbon tracking mistakes</h2>
+    <ul>
+        <li><strong>Mixing units:</strong> kWh and MWh, miles and kilometres, CO₂ and CO₂e. Write the unit next to every number.</li>
+        <li><strong>Using an old or wrong-country factor:</strong> grid factors change every year as renewables grow; the UK’s fell to about 126 g/kWh in 2025, while the world average is about 458 g.</li>
+        <li><strong>Double counting:</strong> counting electric car charging in both “car” and “electricity”, or a supplier’s emissions in two scope 3 categories.</li>
+        <li><strong>Changing the method every year</strong>, which makes progress impossible to see. If you must change it, restate the base year.</li>
+        <li><strong>Chasing precision on small items</strong> while estimating the biggest category roughly. Spend your effort where the tonnes are.</li>
+    </ul>
+    <p>Want to see the big picture? Watch the world’s emissions add up on the <a href="/">live CO₂ counter</a>, or compare countries in the <a href="/co2-emissions-by-country">CO₂ emissions by country</a> ranking.</p>
+</section>

@@ -28,7 +28,13 @@
         <loc>https://www.carbonemissionscounter.com/carbon-tracking-guide</loc>
         <lastmod>2026-10-23</lastmod>
         <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.carbonemissionscounter.com/methodology</loc>
+        <lastmod>2026-10-23</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
     </url>
     <url>
         <loc>https://www.carbonemissionscounter.com/blog</loc>

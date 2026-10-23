@@ -223,7 +223,7 @@ def foot(js):
         <div id="footer-placeholder"></div>
     </div>
     <script src="/shared/nav.js?v={ASSET_V}c" defer></script>
-    <script src="/shared/footer.js?v={ASSET_V}g" defer></script>
+    <script src="/shared/footer.js?v={ASSET_V}h" defer></script>
 
     <script src="/js/{js}?v={ASSET_V}" defer></script>
     <script src="/js/vendor/motion.js?v=14.6.0-lite" defer></script>
@@ -279,7 +279,7 @@ def source_html(year):
     return f'''            <p class="cc-source">Data: <a href="https://ourworldindata.org/co2-emissions" rel="noopener">Our World in Data</a>, based on the
                 <a href="https://globalcarbonbudget.org/" rel="noopener">Global Carbon Project</a> (Global Carbon Budget 2025), CC&nbsp;BY&nbsp;4.0.
                 Annual figures are fossil-fuel and industry CO&#8322; for {year}, the latest complete year. Live counters are estimates that assume {year} emission rates continue.
-                <a href="/carbon-tracking-guide">How the counter works &rarr;</a></p>
+                <a href="/methodology">How the counter works &rarr;</a></p>
 '''
 
 
@@ -716,7 +716,7 @@ def list_page(data, featured_slugs, kind):
 
 STATIC_URLS = [
     ('/', 'daily', '1.0'), ('/co2-emissions-by-country', 'weekly', '0.9'), ('/co2-emissions-per-capita', 'monthly', '0.8'), ('/historical-co2-emissions-by-country', 'monthly', '0.8'),
-    ('/carbon-tracking-guide', 'monthly', '0.7'), ('/blog', 'weekly', '0.7'), ('/widget', 'monthly', '0.5'),
+    ('/carbon-tracking-guide', 'monthly', '0.8'), ('/methodology', 'monthly', '0.6'), ('/blog', 'weekly', '0.7'), ('/widget', 'monthly', '0.5'),
     ('/privacy', 'yearly', '0.2'), ('/terms', 'yearly', '0.2'),
 ]
 

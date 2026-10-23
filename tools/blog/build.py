@@ -60,6 +60,8 @@ def load():
             raise SystemExit(f'{f}: missing <!--meta {{...}} --> header')
         meta = json.loads(m.group(1))
         meta['slug'] = f[:-5]
+        # Optional "path": publish at a top-level URL (e.g. /carbon-tracking-guide) instead of /blog/posts/<slug>
+        meta['path'] = meta.get('path') or f'/blog/posts/{meta["slug"]}'
         meta['body'] = m.group(2).strip()
         for key in ('title', 'h1', 'description', 'category', 'image', 'image_alt', 'published', 'updated', 'takeaways', 'sources'):
             if key not in meta:
@@ -138,7 +140,7 @@ def foot(scripts):
         <div id="footer-placeholder"></div>
     </div>
     <script src="/shared/nav.js?v={V}c" defer></script>
-    <script src="/shared/footer.js?v={V}g" defer></script>
+    <script src="/shared/footer.js?v={V}h" defer></script>
 {extra}
 </body>
 </html>
@@ -148,7 +150,7 @@ def foot(scripts):
 def card(p, heading='h3', eager=0):
     # eager: 2 = first visible card (LCP), 1 = above the fold, 0 = lazy
     load = {2: 'fetchpriority="high"', 1: 'decoding="async"'}.get(eager, 'loading="lazy"')
-    return f'''<a class="bp-card" href="/blog/posts/{p["slug"]}" data-category="{e(p["category"])}">
+    return f'''<a class="bp-card" href="{p["path"]}" data-category="{e(p["category"])}">
                     <img src="{e(p["image"])}" alt="" {load} width="1200" height="630">
                     <span class="bp-card-body">
                         <span class="bp-tag">{e(p["category"])}</span>
@@ -160,7 +162,7 @@ def card(p, heading='h3', eager=0):
 
 
 def build_post(p, by_slug):
-    url = f'{SITE}/blog/posts/{p["slug"]}'
+    url = SITE + p['path']
     body, toc = add_heading_ids(p['body'])
     words = len(strip(body).split())
     p['minutes'] = max(1, math.ceil(words / 220))
@@ -236,7 +238,7 @@ def build_post(p, by_slug):
             </section>""" if related else ''}
 '''
     page += foot(p.get('scripts', []))
-    out = os.path.join(STATIC, 'blog', 'posts', p['slug'] + '.html')
+    out = os.path.join(STATIC, p['path'].lstrip('/') + '.html')
     open(out, 'w', encoding='utf-8').write(page)
     return words
 
@@ -253,7 +255,7 @@ def build_index(posts):
     desc = 'Practical, sourced guides on carbon footprints, home energy, food, transport and climate science, updated for 2026.'
     schemas = [{'@context': 'https://schema.org', '@type': 'Blog', 'name': 'Carbon Emissions Counter blog', 'url': url,
                 'description': desc, 'publisher': PUBLISHER,
-                'blogPost': [{'@type': 'BlogPosting', 'headline': p['h1'], 'url': f'{SITE}/blog/posts/{p["slug"]}',
+                'blogPost': [{'@type': 'BlogPosting', 'headline': p['h1'], 'url': SITE + p['path'],
                               'dateModified': p['updated']} for p in posts]}]
     page = head(title, desc, url, 'website', [], schemas) + f'''            <nav class="bp-crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">Blog</span></nav>
 
@@ -273,14 +275,14 @@ def build_index(posts):
 
 
 PINNED = 'carbon-footprint-calculator-guide'
-HOME_FEATURED = ['carbon-footprint-calculator-guide', 'food-climate-solutions', 'transportation-climate-guide']
+HOME_FEATURED = ['carbon-footprint-calculator-guide', 'carbon-tracking', 'food-climate-solutions']
 
 
 def update_home(by_slug):
     """Fill the home page's article cards from the featured posts."""
     p = os.path.join(STATIC, 'index.html')
     s = open(p, encoding='utf-8').read()
-    cards = '\n'.join(f'''                    <a href="/blog/posts/{q["slug"]}" class="blog-card">
+    cards = '\n'.join(f'''                    <a href="{q["path"]}" class="blog-card">
                         <img src="{e(q["image"])}" alt="" width="1200" height="630" loading="lazy">
                         <div class="card-content">
                             <h3>{e(q["h1"])}</h3>
