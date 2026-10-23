@@ -1,0 +1,30 @@
+{
+  "_help": "Mauna Loa monthly CO2 (NOAA). Written by tools/ppm/update.py; used by {{ppm:key}} in blog posts and by the CO2 ppm hero image. Seeded on 23 Oct 2026 from the post text; the first update replaces it with NOAA data.",
+  "source": "https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_mlo.csv",
+  "latest": [
+    2026,
+    9,
+    426.07
+  ],
+  "prev_year": [
+    2025,
+    9,
+    null
+  ],
+  "record": [
+    2026,
+    5,
+    432.3
+  ],
+  "text": {
+    "latest_ppm": "426.07",
+    "latest_ppm_1dp": "426.1",
+    "latest_month": "September 2026",
+    "latest_month_prev_year": "September 2025",
+    "season": "near the yearly low",
+    "change": "about 1.7 ppm above",
+    "record_ppm": "432.3",
+    "record_ppm_int": "432",
+    "record_month": "May 2026"
+  }
+}

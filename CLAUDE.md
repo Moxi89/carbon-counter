@@ -34,6 +34,10 @@ python3 tools/blog/images.py       # SVG illustrations (fallback for posts witho
 npm run build:motion               # slim Motion build → static/js/vendor/motion.js
 ```
 
+## Monthly CO₂ ppm update
+- `python3 tools/ppm/update.py` downloads NOAA's Mauna Loa monthly data (gml.noaa.gov) into `tools/ppm/ppm.json`. The CO₂ ppm post uses `{{ppm:key}}` placeholders filled by the blog build, and its hero and share image read the same file. Then rebuild the blog, heroes and share images.
+- A scheduled task runs this on the 9th of each month and opens a PR.
+
 ## Rules
 - Files under `/css/`, `/js/` and `/shared/` are cached for a long time. When one changes, bump its `?v=` everywhere it's referenced. The generators use `ASSET_V`/`V` plus a letter.
 - No inline `onclick`/`onload` handlers: the strict CSP planned for AdSense blocks them.

@@ -1,5 +1,5 @@
 {
-  "_help": "Photo hero images for blog posts. Photos (no text or numbers in them) are in photos/<slug>.jpg; the real, sourced figures are drawn on top by render.js. 'side' is where the figures go (the empty side of the photo). Overlay: 'chart' (bars), 'stat' (one big figure), 'stats' (two or three figures) or 'budget' (from tools/yearly/gcb.json). Share images use the bare photo, mirrored when the figures are on the right, with 'og_sub' as their line of text. Run: node tools/blog/heroes/render.js",
+  "_help": "Photo hero images for blog posts. Photos (no text or numbers in them) are in photos/<slug>.jpg; the real, sourced figures are drawn on top by render.js. 'side' is where the figures go (the empty side of the photo). Overlay: 'chart' (bars), 'stat' (one big figure), 'stats' (two or three figures) 'budget' (from tools/yearly/gcb.json) 'ppm' (latest Mauna Loa month, from tools/ppm/ppm.json) or 'gcb' (key findings of the current edition, from tools/yearly/gcb.json). Posts that are not published yet are skipped. Share images use the bare photo, mirrored when the figures are on the right, with 'og_sub' as their line of text. Run: node tools/blog/heroes/render.js",
   "2026-climate-outlook": {
     "side": "left",
     "stats": {
@@ -72,15 +72,7 @@
   },
   "co2-ppm-atmosphere": {
     "side": "left",
-    "stat": {
-      "kicker": "Record monthly CO₂, Mauna Loa",
-      "green": true,
-      "value": "432.3",
-      "unit": "ppm",
-      "lines": ["May 2026", "Rising about 2.5 ppm a year"],
-      "source": "Source: NOAA"
-    },
-    "og_sub": "A record 432.3 ppm at Mauna Loa in May 2026"
+    "ppm": true
   },
   "critical-climate-year-2025": {
     "side": "left",
@@ -135,6 +127,10 @@
       "source": "Source: Poore & Nemecek (2018), via Our World in Data. Global averages."
     },
     "og_sub": "Beef 99.5 kg CO₂e per kg · beans and lentils 1.8 kg"
+  },
+  "global-carbon-budget-2026": {
+    "side": "left",
+    "gcb": true
   },
   "net-zero-explained": {
     "side": "right",
