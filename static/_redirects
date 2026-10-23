@@ -1,0 +1,12 @@
+# Cloudflare Pages reads this file from the output directory (static/).
+# Clean URLs (/privacy -> privacy.html, /co2-emissions/japan -> co2-emissions/japan.html)
+# and the 404 page are handled by Pages itself, so they need no rules here.
+
+# Old pages
+/co2-live  /  301
+/blog/category/*  /blog/  301
+/blog/posts/smart-home-energy-savings  /blog/  301
+/blog/posts/kitchen-hidden-co2  /blog/  301
+
+# Old links that included the /static/ folder
+/static/*  /:splat  301
