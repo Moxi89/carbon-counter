@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Load footer content
-    fetch('/shared/footer.html?v=2026-10h')
+    fetch('/shared/footer.html?v=2026-10i')
         .then(response => response.text())
         .then(data => {
             const footerPlaceholder = document.getElementById('footer-placeholder');

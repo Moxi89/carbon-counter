@@ -139,8 +139,8 @@ def foot(scripts):
     return f'''        </main>
         <div id="footer-placeholder"></div>
     </div>
-    <script src="/shared/nav.js?v={V}c" defer></script>
-    <script src="/shared/footer.js?v={V}h" defer></script>
+    <script src="/shared/nav.js?v={V}d" defer></script>
+    <script src="/shared/footer.js?v={V}i" defer></script>
 {extra}
 </body>
 </html>
@@ -187,7 +187,7 @@ def build_post(p, by_slug):
          'citation': [u for _, u in p['sources']]},
         {'@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': [
             {'@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': SITE + '/'},
-            {'@type': 'ListItem', 'position': 2, 'name': 'Blog', 'item': SITE + '/blog'},
+            {'@type': 'ListItem', 'position': 2, 'name': 'Blog', 'item': SITE + '/blog/'},
             {'@type': 'ListItem', 'position': 3, 'name': p['h1'], 'item': url}]},
     ]
     if faqs:
@@ -195,7 +195,7 @@ def build_post(p, by_slug):
             {'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': strip(a)}} for q, a in faqs]})
 
     published_note = '' if p['published'] == p['updated'] else f' &middot; First published {nice_date(p["published"])}'
-    page = head(p['title'], p['description'], url, 'article', [], schemas, f'blog-{p["slug"]}') + f'''            <nav class="bp-crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/blog">Blog</a><span aria-hidden="true">/</span><span aria-current="page">{e(p["h1"])}</span></nav>
+    page = head(p['title'], p['description'], url, 'article', [], schemas, f'blog-{p["slug"]}') + f'''            <nav class="bp-crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/blog/">Blog</a><span aria-hidden="true">/</span><span aria-current="page">{e(p["h1"])}</span></nav>
 
             <article class="bp-article">
                 <header class="bp-header">
@@ -250,7 +250,7 @@ def build_index(posts):
     cats = sorted({p['category'] for p in posts})
     chips = '<button type="button" class="bp-chip" data-filter="all" aria-pressed="true">All</button>' + ''.join(
         f'<button type="button" class="bp-chip" data-filter="{e(c)}" aria-pressed="false">{e(c)}</button>' for c in cats)
-    url = SITE + '/blog'
+    url = SITE + '/blog/'
     title = 'Climate & Carbon Emissions Blog: Guides and Explainers'
     desc = 'Practical, sourced guides on carbon footprints, home energy, food, transport and climate science, updated for 2026.'
     schemas = [{'@context': 'https://schema.org', '@type': 'Blog', 'name': 'Carbon Emissions Counter blog', 'url': url,

@@ -222,8 +222,8 @@ def foot(js):
     return f'''        </main>
         <div id="footer-placeholder"></div>
     </div>
-    <script src="/shared/nav.js?v={ASSET_V}c" defer></script>
-    <script src="/shared/footer.js?v={ASSET_V}h" defer></script>
+    <script src="/shared/nav.js?v={ASSET_V}d" defer></script>
+    <script src="/shared/footer.js?v={ASSET_V}i" defer></script>
 
     <script src="/js/{js}?v={ASSET_V}" defer></script>
     <script src="/js/vendor/motion.js?v=14.6.0-lite" defer></script>
@@ -716,7 +716,7 @@ def list_page(data, featured_slugs, kind):
 
 STATIC_URLS = [
     ('/', 'daily', '1.0'), ('/co2-emissions-by-country', 'weekly', '0.9'), ('/co2-emissions-per-capita', 'monthly', '0.8'), ('/historical-co2-emissions-by-country', 'monthly', '0.8'),
-    ('/carbon-tracking-guide', 'monthly', '0.8'), ('/methodology', 'monthly', '0.6'), ('/blog', 'weekly', '0.7'), ('/widget', 'monthly', '0.5'),
+    ('/carbon-tracking-guide', 'monthly', '0.8'), ('/methodology', 'monthly', '0.6'), ('/blog/', 'weekly', '0.7'), ('/widget', 'monthly', '0.5'),
     ('/privacy', 'yearly', '0.2'), ('/terms', 'yearly', '0.2'),
 ]
 
