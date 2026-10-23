@@ -124,6 +124,10 @@
 /co2-emissions/serbia  /static/co2-emissions/serbia.html  200
 # END country pages
 
+# Embeddable widget
+/embed  /static/embed.html  200
+/widget  /static/widget.html  200
+
 # Catch-all for clean URLs
 /*  /static/:splat  200
 

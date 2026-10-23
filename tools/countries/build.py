@@ -197,7 +197,7 @@ def head(title, description, path, extra_css, schema, img='home'):
     <link rel="stylesheet" href="/shared/nav-styles.css">
     <link rel="stylesheet" href="/shared/footer-styles.css" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="/shared/cookie-banner.css" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="/css/theme-2026.css?v={ASSET_V}f">
+    <link rel="stylesheet" href="/css/theme-2026.css?v={ASSET_V}g">
     <link rel="stylesheet" href="/css/{extra_css}?v={ASSET_V}b">
 {schema}
 </head>
@@ -213,7 +213,7 @@ def foot(js):
         <div id="footer-placeholder"></div>
     </div>
     <script src="/shared/nav.js?v={ASSET_V}" defer></script>
-    <script src="/shared/footer.js?v={ASSET_V}d" defer></script>
+    <script src="/shared/footer.js?v={ASSET_V}e" defer></script>
     <script src="/shared/cookie-banner.js?v=2026-10" defer></script>
     <script src="/js/{js}?v={ASSET_V}" defer></script>
 </body>
@@ -441,6 +441,7 @@ def country_page(c, data, by_rank, featured_slugs):
                     </table>
                 </div>
                 <p class="cc-more"><a href="/co2-emissions-by-country">See all {n_countries} countries &rarr;</a> &middot; <a href="/">Global live counter &rarr;</a></p>
+                <p class="cc-share"><button type="button" class="t-share" data-share aria-label="Share this page"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg><span>Share</span></button></p>
             </section>
 
 {faq_html(faqs)}
@@ -530,6 +531,7 @@ def ranking_page(data, featured_slugs):
                     {the(top[1]["name"])} and {the(top[2]["name"])}. Per person, {pc_top[0]["name"]} ranks highest at {pc_top[0]["pc"]:.1f}&nbsp;tonnes, against a world average of {world["pc"]:.1f}&nbsp;t.</p>
                 <div class="cc-podium">{podium}</div>
                 <p class="cc-more"><a href="/co2-emissions-per-capita">Emissions per person &rarr;</a> &middot; <a href="/historical-co2-emissions-by-country">Historical emissions since 1750 &rarr;</a></p>
+                <p class="cc-share"><button type="button" class="t-share" data-share aria-label="Share this page"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg><span>Share</span></button></p>
             </section>
 
             <section class="cc-section" aria-labelledby="rank-title">
@@ -663,6 +665,7 @@ def list_page(data, featured_slugs, kind):
             f'                <h1 class="cc-title" id="cc-title">{h1}</h1>\n'
             f'                <p class="cc-lede">{lede}</p>\n'
             f'                <p class="cc-more"><a href="/co2-emissions-by-country">Total emissions ranking &rarr;</a> &middot; {other}</p>\n'
+            f'                <p class="cc-share"><button type=\"button\" class=\"t-share\" data-share aria-label=\"Share this page\"><svg viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"18\" cy=\"5\" r=\"3\"/><circle cx=\"6\" cy=\"12\" r=\"3\"/><circle cx=\"18\" cy=\"19\" r=\"3\"/><path d=\"m8.6 13.5 6.8 4M15.4 6.5l-6.8 4\"/></svg><span>Share</span></button></p>\n'
             f'            </section>\n\n'
             f'            <section class="cc-section" aria-labelledby="rank-title">\n'
             f'                <div class="cc-table-head">\n'
@@ -684,7 +687,7 @@ def list_page(data, featured_slugs, kind):
 
 STATIC_URLS = [
     ('/', 'daily', '1.0'), ('/co2-emissions-by-country', 'weekly', '0.9'), ('/co2-emissions-per-capita', 'monthly', '0.8'), ('/historical-co2-emissions-by-country', 'monthly', '0.8'),
-    ('/carbon-tracking-guide', 'monthly', '0.7'), ('/blog', 'weekly', '0.7'),
+    ('/carbon-tracking-guide', 'monthly', '0.7'), ('/blog', 'weekly', '0.7'), ('/widget', 'monthly', '0.5'),
     ('/privacy', 'yearly', '0.2'), ('/terms', 'yearly', '0.2'),
 ]
 

@@ -123,7 +123,7 @@ def head(title, description, url, og_type, extra_css, schemas, img='home'):
     <link rel="stylesheet" href="/shared/nav-styles.css">
     <link rel="stylesheet" href="/shared/footer-styles.css" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="/shared/cookie-banner.css" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="/css/theme-2026.css?v={V}f">
+    <link rel="stylesheet" href="/css/theme-2026.css?v={V}g">
     <link rel="stylesheet" href="/css/post-2026.css?v={V}">{css}
 {chr(10).join(jsonld(s) for s in schemas)}
 </head>
@@ -140,7 +140,7 @@ def foot(scripts):
         <div id="footer-placeholder"></div>
     </div>
     <script src="/shared/nav.js?v={V}" defer></script>
-    <script src="/shared/footer.js?v={V}d" defer></script>
+    <script src="/shared/footer.js?v={V}e" defer></script>
     <script src="/shared/cookie-banner.js?v=2026-10" defer></script>{extra}
 </body>
 </html>
@@ -201,6 +201,7 @@ def build_post(p, by_slug):
                     <h1 class="bp-title">{e(p["h1"])}</h1>
                     {f'<p class="bp-dek">{e(p["dek"])}</p>' if p.get("dek") else ''}
                     <p class="bp-meta"><time datetime="{p["updated"]}">Updated {nice_date(p["updated"])}</time>{published_note} &middot; {p["minutes"]} min read</p>
+                    <p class="bp-share"><button type="button" class="t-share" data-share aria-label="Share this page"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg><span>Share</span></button></p>
                     <figure class="bp-hero-image"><img src="{e(p["image"])}" alt="{e(p["image_alt"])}" width="1200" height="630"></figure>
                 </header>
 

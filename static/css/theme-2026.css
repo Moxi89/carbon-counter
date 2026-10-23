@@ -854,3 +854,23 @@ section h2::after,
     padding: 0 16px !important;
     font-size: 0.875rem !important;
 }
+
+/* Share button (handled in shared/footer.js) */
+.cc-share, .bp-share { margin: 14px 0 0; }
+.t-share {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 40px;
+    padding: 0 16px;
+    border-radius: 999px;
+    border: 1px solid var(--t-border-strong);
+    background: rgba(52, 211, 153, 0.06);
+    color: var(--t-text);
+    font: 500 0.9375rem/1 var(--t-sans);
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+.t-share svg { color: var(--t-primary-bright); flex: none; }
+.t-share:hover { background: rgba(52, 211, 153, 0.14); border-color: var(--t-primary-bright); }
+.t-share:focus-visible { outline: 2px solid var(--t-primary-bright); outline-offset: 2px; }
