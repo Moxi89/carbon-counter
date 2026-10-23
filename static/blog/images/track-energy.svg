@@ -1,71 +1,48 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="800" height="400" viewBox="0 0 800 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <!-- Background with gradient -->
-    <defs>
-        <linearGradient id="bg-gradient" x1="0" y1="0" x2="800" y2="400">
-            <stop offset="0%" style="stop-color:#1A2332"/>
-            <stop offset="100%" style="stop-color:#0B1321"/>
-        </linearGradient>
-        <!-- Glow effect -->
-        <filter id="glow">
-            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-            <feMerge>
-                <feMergeNode in="coloredBlur"/>
-                <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-        </filter>
-    </defs>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+  <defs>
+    <radialGradient id="glow" cx="0.717" cy="0.476" r="0.6">
+      <stop offset="0" stop-color="#34d399" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#34d399" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="warm" cx="0.08" cy="1" r="0.7">
+      <stop offset="0" stop-color="#fbbf24" stop-opacity="0.10"/>
+      <stop offset="1" stop-color="#fbbf24" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="fade" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#050b09" stop-opacity="1"/>
+      <stop offset="0.45" stop-color="#050b09" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#34d399"/>
+      <stop offset="1" stop-color="#10b981" stop-opacity="0.35"/>
+    </linearGradient>
+    <linearGradient id="barGold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fbbf24"/>
+      <stop offset="1" stop-color="#fbbf24" stop-opacity="0.3"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#06100c"/>
+  <g stroke="#34d399" stroke-opacity="0.07" stroke-width="1"><path d="M0 0V630"/><path d="M48 0V630"/><path d="M96 0V630"/><path d="M144 0V630"/><path d="M192 0V630"/><path d="M240 0V630"/><path d="M288 0V630"/><path d="M336 0V630"/><path d="M384 0V630"/><path d="M432 0V630"/><path d="M480 0V630"/><path d="M528 0V630"/><path d="M576 0V630"/><path d="M624 0V630"/><path d="M672 0V630"/><path d="M720 0V630"/><path d="M768 0V630"/><path d="M816 0V630"/><path d="M864 0V630"/><path d="M912 0V630"/><path d="M960 0V630"/><path d="M1008 0V630"/><path d="M1056 0V630"/><path d="M1104 0V630"/><path d="M1152 0V630"/><path d="M1200 0V630"/><path d="M0 0H1200"/><path d="M0 48H1200"/><path d="M0 96H1200"/><path d="M0 144H1200"/><path d="M0 192H1200"/><path d="M0 240H1200"/><path d="M0 288H1200"/><path d="M0 336H1200"/><path d="M0 384H1200"/><path d="M0 432H1200"/><path d="M0 480H1200"/><path d="M0 528H1200"/><path d="M0 576H1200"/><path d="M0 624H1200"/></g>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <rect width="1200" height="630" fill="url(#warm)"/>
+  <rect width="1200" height="630" fill="url(#fade)"/>
+  <g stroke-linecap="round" stroke-linejoin="round">
 
-    <!-- Background -->
-    <rect width="800" height="400" fill="url(#bg-gradient)"/>
+    <rect x="620" y="150" width="480" height="330" rx="28" stroke="#ecfdf5" stroke-opacity="0.75" stroke-width="5" fill="rgba(6,16,12,0.85)"/>
+    <rect x="660" y="350" width="34" height="90" rx="6" fill="url(#bar)"/>
+<rect x="714" y="310" width="34" height="130" rx="6" fill="url(#bar)"/>
+<rect x="768" y="370" width="34" height="70" rx="6" fill="url(#bar)"/>
+<rect x="822" y="280" width="34" height="160" rx="6" fill="url(#bar)"/>
+<rect x="876" y="330" width="34" height="110" rx="6" fill="url(#bar)"/>
+<rect x="930" y="380" width="34" height="60" rx="6" fill="url(#bar)"/>
+<rect x="984" y="300" width="34" height="140" rx="6" fill="url(#barGold)"/>
+    <path d="M650 440h420" stroke="rgba(236,253,245,0.35)" stroke-width="3"/>
+    <path d="M660 200h120" stroke="#34d399" stroke-width="8"/><path d="M800 200h70" stroke="rgba(236,253,245,0.35)" stroke-width="8"/>
+    <path d="M230 470a160 160 0 0 1 320 0" stroke="rgba(236,253,245,0.35)" stroke-width="10"/>
+    <path d="M230 470a160 160 0 0 1 220-148" stroke="#34d399" stroke-width="12"/>
+    <path d="M390 470l60-90" stroke="#ecfdf5" stroke-width="6"/><circle cx="390" cy="470" r="12" fill="#ecfdf5"/>
+    <rect x="340" y="180" width="100" height="100" rx="24" stroke="#38bdf8" stroke-width="5"/>
+    <circle cx="372" cy="230" r="7" fill="#38bdf8"/><circle cx="408" cy="230" r="7" fill="#38bdf8"/>
 
-    <!-- Grid lines -->
-    <g stroke="#4AE290" stroke-opacity="0.2">
-        <line x1="100" y1="50" x2="700" y2="50" />
-        <line x1="100" y1="150" x2="700" y2="150" />
-        <line x1="100" y1="250" x2="700" y2="250" />
-        <line x1="100" y1="350" x2="700" y2="350" />
-        <line x1="100" y1="50" x2="100" y2="350" />
-        <line x1="250" y1="50" x2="250" y2="350" />
-        <line x1="400" y1="50" x2="400" y2="350" />
-        <line x1="550" y1="50" x2="550" y2="350" />
-        <line x1="700" y1="50" x2="700" y2="350" />
-    </g>
-
-    <!-- Energy usage graph -->
-    <g filter="url(#glow)">
-        <!-- Main graph line -->
-        <path d="M100,200 C250,150 400,250 550,100 S700,150 700,150" 
-              stroke="#4AE290" 
-              stroke-width="3" 
-              fill="none"
-              stroke-linecap="round"/>
-
-        <!-- Data points -->
-        <circle cx="100" cy="200" r="6" fill="#4AE290"/>
-        <circle cx="250" cy="150" r="6" fill="#4AE290"/>
-        <circle cx="400" cy="250" r="6" fill="#4AE290"/>
-        <circle cx="550" cy="100" r="6" fill="#4AE290"/>
-        <circle cx="700" cy="150" r="6" fill="#4AE290"/>
-    </g>
-
-    <!-- House icon with energy symbol -->
-    <g transform="translate(400,80)" filter="url(#glow)">
-        <!-- House -->
-        <path d="M-40,-20 L0,-50 L40,-20 L40,30 L-40,30 Z" 
-              stroke="#4AE290" 
-              stroke-width="2" 
-              fill="none"/>
-        <!-- Energy bolt -->
-        <path d="M-10,0 L0,-15 L10,-5 L0,15 Z" 
-              fill="#4AE290"/>
-    </g>
-
-    <!-- Decorative elements -->
-    <g filter="url(#glow)">
-        <circle cx="150" cy="350" r="4" fill="#4AE290" opacity="0.5"/>
-        <circle cx="650" cy="50" r="4" fill="#4AE290" opacity="0.5"/>
-        <path d="M720,200 L740,220 L760,200 L740,180 Z" fill="#4AE290" opacity="0.7"/>
-        <path d="M40,150 L60,170 L80,150 L60,130 Z" fill="#4AE290" opacity="0.7"/>
-    </g>
+  </g>
 </svg>

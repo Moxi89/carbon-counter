@@ -8,7 +8,7 @@
     const PER_SECOND_T = EMISSIONS_PER_YEAR_T / SECONDS_PER_YEAR; // ~1,338 t
     const BUDGET_START_GT = 170;                      // 1.5 °C, 50% likelihood
     const BUDGET_START = Date.UTC(2026, 0, 1);        // GCB 2025 counts from 1 January 2026
-    const BUDGET_END = BUDGET_START + (BUDGET_START_GT / 42.2) * SECONDS_PER_YEAR * 1000;
+    const BUDGET_END = BUDGET_START + (BUDGET_START_GT / (EMISSIONS_PER_YEAR_T / 1e9)) * SECONDS_PER_YEAR * 1000;
 
     // Country figures live on the <option> elements (share %, annual Mt),
     // written by tools/countries/build.py from the latest annual data.
@@ -21,6 +21,7 @@
         country: $('cxCountry'), countryValue: $('cxCountryValue'), countryShare: $('cxCountryShare'),
         countryBar: $('cxCountryBar'), countryYear: $('cxCountryYear'), countryLink: $('cxCountryLink'), pause: $('cxPause')
     };
+    document.querySelectorAll('.current-year').forEach((n) => { n.textContent = new Date().getFullYear(); });
     if (!el.year) return;
 
     const fmt = new Intl.NumberFormat('en-US');
@@ -58,7 +59,7 @@
         const countryRate = (parseFloat(selected().dataset.mt) || 0) * 1e6 / SECONDS_PER_YEAR;
         el.countryValue.textContent = fmt.format(Math.floor((now - yearStart) / 1000 * countryRate));
 
-        const usedGt = Math.max(0, (now - BUDGET_START) / 1000 / SECONDS_PER_YEAR * 42.2);
+        const usedGt = Math.max(0, (now - BUDGET_START) / 1000 / SECONDS_PER_YEAR * EMISSIONS_PER_YEAR_T / 1e9);
         const leftGt = Math.max(0, BUDGET_START_GT - usedGt);
         const usedPct = Math.min(100, usedGt / BUDGET_START_GT * 100);
         el.budget.textContent = leftGt.toFixed(2);
@@ -102,4 +103,98 @@
     setCountry();
     render(Date.now());
     requestAnimationFrame(tick);
+})();
+
+// "Since you were born": share of all fossil CO2 (since 1750) emitted after a given year.
+// Data: [year, annual Mt, cumulative Mt] from Our World in Data, written by tools/countries/build.py.
+(function () {
+    'use strict';
+    const dataEl = document.getElementById('cxBornData');
+    const form = document.getElementById('cxBornForm');
+    if (!dataEl || !form) return;
+
+    const series = JSON.parse(dataEl.textContent).s;
+    const byYear = new Map(series.map((r) => [r[0], r]));
+    const first = series[0][0];
+    const [lastYear, lastAnnual, lastCum] = series[series.length - 1];
+    const input = document.getElementById('cxBornYear');
+    const error = document.getElementById('cxBornError');
+    const $ = (id) => document.getElementById(id);
+    const fmt = new Intl.NumberFormat('en-US');
+    let current = null;
+
+    function compute(year) {
+        const [, annual, cum] = byYear.get(year);
+        const since = lastCum - (cum - annual);
+        return { year, annual, since, pct: since / lastCum * 100, rise: (lastAnnual / annual - 1) * 100 };
+    }
+
+    function show(year) {
+        const r = compute(year);
+        current = r;
+        $('cxBornPct').textContent = Math.round(r.pct) + '%';
+        $('cxBornY').textContent = year;
+        $('cxBornBarY').textContent = year;
+        $('cxBornBar').style.width = r.pct.toFixed(1) + '%';
+        document.querySelectorAll('.cx-born-y').forEach((el) => { el.textContent = year; });
+        $('cxBornTotal').textContent = fmt.format(Math.round(r.since / 1000)) + ' billion t';
+        $('cxBornThen').textContent = (r.annual / 1000).toFixed(1) + ' billion t';
+        $('cxBornRise').textContent = (r.rise >= 0 ? '+' : '−') + fmt.format(Math.round(Math.abs(r.rise))) + '%';
+    }
+
+    function valid(v) {
+        const y = parseInt(v, 10);
+        return String(y) === String(v).trim() && byYear.has(y) ? y : null;
+    }
+
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const y = valid(input.value);
+        if (y === null) {
+            error.textContent = 'Enter a year between ' + first + ' and ' + lastYear + '.';
+            error.hidden = false;
+            input.setAttribute('aria-invalid', 'true');
+            input.focus();
+            return;
+        }
+        error.hidden = true;
+        input.removeAttribute('aria-invalid');
+        show(y);
+        try { history.replaceState(null, '', '?born=' + y + '#since-you-were-born'); } catch (e) { /* ignore */ }
+    });
+
+    const shareBtn = document.getElementById('cxBornShare');
+    shareBtn.addEventListener('click', () => {
+        const r = current || compute(parseInt(input.value, 10) || 1990);
+        const url = 'https://www.carbonemissionscounter.com/?born=' + r.year + '#since-you-were-born';
+        const text = Math.round(r.pct) + '% of all the fossil CO₂ ever emitted has been released since I was born in ' + r.year + '. What about you?';
+        const label = shareBtn.querySelector('span');
+        const flash = (msg) => { label.textContent = msg; setTimeout(() => { label.textContent = 'Share my result'; }, 2200); };
+        if (navigator.share) {
+            navigator.share({ title: 'CO₂ since I was born', text: text, url: url }).catch(() => {});
+        } else if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text + ' ' + url).then(() => flash('Copied'), () => flash('Copy failed'));
+        } else {
+            window.prompt('Copy this:', text + ' ' + url);
+        }
+    });
+
+    const param = new URLSearchParams(location.search).get('born');
+    const fromUrl = param && valid(param);
+    if (fromUrl) { input.value = fromUrl; show(fromUrl); }
+})();
+
+// Copy the suggested citation, with today's date as the access date
+(function () {
+    const btn = document.getElementById('cxCiteCopy');
+    const cite = document.getElementById('cxCite');
+    if (!btn || !cite) return;
+    btn.addEventListener('click', () => {
+        const accessed = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+        const text = cite.textContent.replace(/\s+/g, ' ').trim() + ' (accessed ' + accessed + ').';
+        const label = btn.querySelector('span');
+        const done = () => { label.textContent = 'Copied'; setTimeout(() => { label.textContent = 'Copy citation'; }, 2200); };
+        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, () => window.prompt('Copy this citation:', text));
+        else window.prompt('Copy this citation:', text);
+    });
 })();

@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Load footer content
-    fetch('/shared/footer.html?v=2026-10')
+    fetch('/shared/footer.html?v=2026-10g')
         .then(response => response.text())
         .then(data => {
             const footerPlaceholder = document.getElementById('footer-placeholder');
@@ -39,3 +39,26 @@ document.addEventListener('DOMContentLoaded', function() {
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
     else start();
 })();
+
+// Share buttons: native share sheet on phones, copy link elsewhere
+document.addEventListener('click', function (event) {
+    const btn = event.target.closest('[data-share]');
+    if (!btn) return;
+    const canonical = document.querySelector('link[rel="canonical"]');
+    const url = canonical ? canonical.href : location.href;
+    const title = document.title;
+    const label = btn.querySelector('span');
+    const flash = (text) => {
+        if (!label) return;
+        label.textContent = text;
+        clearTimeout(btn._t);
+        btn._t = setTimeout(() => { label.textContent = 'Share'; }, 2200);
+    };
+    if (navigator.share) {
+        navigator.share({ title: title, url: url }).catch(() => {});
+    } else if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(() => flash('Link copied'), () => flash('Copy failed'));
+    } else {
+        window.prompt('Copy this link:', url);
+    }
+});

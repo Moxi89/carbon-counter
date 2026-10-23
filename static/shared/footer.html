@@ -1,32 +1,37 @@
-<footer class="glassmorphism">
-    <div class="footer-content">
-        <div class="footer-main">
-            <div class="footer-brand">
-                <h4>Carbon Counter</h4>
-                <p>Making sustainability simple and measurable</p>
-            </div>
-            <div class="footer-nav">
-                <div class="footer-section">
-                    <h5>Resources</h5>
-                    <nav>
-                        <a href="/blog">Blog</a>
-                        <a href="/#counter-section">Counters</a>
-                        <a href="/co2-emissions-by-country">CO₂ by country</a>
-                        <a href="/#faq-section">FAQ</a>
-                        <a href="/privacy">Privacy Policy</a>
-                        <a href="/terms">Terms of Service</a>
-                    </nav>
-                </div>
-                <div class="footer-section">
-                    <h5>Company</h5>
-                    <nav>
-                        <a href="/#about-section">About</a>
-                    </nav>
-                </div>
-            </div>
+<footer class="sf" aria-labelledby="sf-title">
+    <div class="sf-inner">
+        <div class="sf-brand">
+            <p class="sf-title" id="sf-title">
+                <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+                Carbon Emissions Counter
+            </p>
+            <p class="sf-tag">Live, sourced estimates of global CO&#8322; emissions, the 1.5&nbsp;&deg;C carbon budget and every major emitter.</p>
+            <p class="sf-source">Data: <a href="https://globalcarbonbudget.org/" rel="noopener">Global Carbon Budget 2025</a> and <a href="https://ourworldindata.org/co2-emissions" rel="noopener">Our World in Data</a> (CC&nbsp;BY&nbsp;4.0).</p>
         </div>
-        <div class="footer-bottom">
-            <p class="copyright">&copy; <span class="footer-year">2026</span> Carbon Counter. Making a difference, one measurement at a time.</p>
-        </div>
+        <nav class="sf-col" aria-label="Data">
+            <p class="sf-head">Data</p>
+            <a href="/">Live CO&#8322; counter</a>
+            <a href="/co2-emissions-by-country">CO&#8322; by country</a>
+            <a href="/co2-emissions-per-capita">CO&#8322; per person</a>
+            <a href="/historical-co2-emissions-by-country">Historical emissions</a>
+            <a href="/widget">Free counter widget</a>
+        </nav>
+        <nav class="sf-col" aria-label="Learn">
+            <p class="sf-head">Learn</p>
+            <a href="/blog/posts/carbon-footprint-calculator-guide#fpCalc">Footprint calculator</a>
+            <a href="/blog">Guides and explainers</a>
+            <a href="/carbon-tracking-guide">How the counter works</a>
+            <a href="/#faq-section">FAQ</a>
+        </nav>
+        <nav class="sf-col" aria-label="Site">
+            <p class="sf-head">Site</p>
+            <a href="/#about-section">About</a>
+            <a href="/privacy">Privacy</a>
+            <a href="/terms">Terms</a>
+        </nav>
+    </div>
+    <div class="sf-bottom">
+        <p>&copy; <span class="footer-year">2026</span> Carbon Emissions Counter &middot; No cookies, no tracking.</p>
+        <a href="#top" class="sf-top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">Back to top &uarr;</a>
     </div>
 </footer>

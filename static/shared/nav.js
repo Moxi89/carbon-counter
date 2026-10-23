@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Load navbar HTML
-    fetch('/shared/navbar.html?v=2026-10')
+    fetch('/shared/navbar.html?v=2026-10c')
         .then(response => response.text())
         .then(data => {
             document.getElementById('navbar-placeholder').innerHTML = data;
@@ -71,43 +71,43 @@ document.addEventListener('DOMContentLoaded', () => {
             lastScroll = currentScroll;
         });
         
-        // Set active link based on current section
-        function setActiveLink() {
-            const sections = document.querySelectorAll('section[id]');
-            const scrollPosition = window.scrollY + 100;
-            
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.offsetHeight;
-                const sectionId = section.getAttribute('id');
-                
-                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                    navLinks.forEach(link => {
-                        link.classList.remove('active');
-                        if (link.getAttribute('href').includes(sectionId)) {
-                            link.classList.add('active');
-                        }
-                    });
-                }
+        // Highlight the current page; on the home page, follow the section in view
+        const path = window.location.pathname.replace(/\.html$/, '').replace(/\/index$/, '/');
+        const isHome = path === '/' || path === '';
+        const pageLink = (() => {
+            if (path.indexOf('/blog/posts/carbon-footprint-calculator-guide') === 0) return '/blog/posts/carbon-footprint-calculator-guide#fpCalc';
+            if (path.indexOf('/blog') === 0) return '/blog';
+            if (path.indexOf('/co2-emissions') === 0 || path.indexOf('/historical-co2') === 0) return '/co2-emissions-by-country';
+            return null;
+        })();
+
+        function mark(href) {
+            navLinks.forEach(link => {
+                const on = link.getAttribute('href') === href;
+                link.classList.toggle('active', on);
+                if (on && !isHome) link.setAttribute('aria-current', 'page');
+                else link.removeAttribute('aria-current');
             });
-            
-            // Handle home link
-            if (scrollPosition < 100) {
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === '/') {
-                        link.classList.add('active');
-                    }
-                });
-            }
         }
-        
-        // Set active link on page load
-        setActiveLink();
-        
-        // Update active link on scroll
-        window.addEventListener('scroll', setActiveLink);
-        
+
+        function setActiveLink() {
+            if (!isHome) return;
+            const y = window.scrollY + 120;
+            let current = '/';
+            ['faq-section', 'about-section'].forEach(id => {
+                const s = document.getElementById(id);
+                if (s && y >= s.offsetTop && y < s.offsetTop + s.offsetHeight) current = '/#' + id;
+            });
+            mark(current);
+        }
+
+        if (isHome) {
+            setActiveLink();
+            window.addEventListener('scroll', setActiveLink, { passive: true });
+        } else if (pageLink) {
+            mark(pageLink);
+        }
+
         // Handle smooth scrolling for anchor links
         navLinks.forEach(link => {
             link.addEventListener('click', (e) => {

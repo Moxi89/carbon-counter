@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Live CO₂ Counter Widget for Your Website</title>
+    <meta name="description" content="Add a free live CO₂ emissions counter to your website, school page or blog with one line of code. Dark and light themes, no tracking, works everywhere.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://www.carbonemissionscounter.com/widget">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.carbonemissionscounter.com/widget">
+    <meta property="og:title" content="Free live CO₂ counter widget for your website">
+    <meta property="og:description" content="Add a live global CO₂ emissions counter to any website with one line of code.">
+    <meta property="og:site_name" content="Carbon Emissions Counter">
+    <meta property="og:image" content="https://www.carbonemissionscounter.com/og/widget.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://www.carbonemissionscounter.com/og/widget.jpg">
+    <meta name="theme-color" content="#050b09">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="stylesheet" href="/css/styles.css?v=2026-10b">
+    <link rel="stylesheet" href="/shared/nav-styles.css">
+    <link rel="stylesheet" href="/css/theme-2026.css?v=2026-10k">
+    <link rel="stylesheet" href="/css/post-2026.css?v=2026-10e">
+    <style>
+        .wg-preview { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 24px 0; }
+        .wg-preview iframe { width: 100%; height: 170px; border: 1px solid var(--t-border); border-radius: 16px; display: block; }
+        .wg-code { position: relative; margin: 16px 0 8px; }
+        .wg-code textarea { width: 100%; min-height: 128px; padding: 14px 16px; border-radius: 14px; border: 1px solid var(--t-border-strong); background: rgba(0, 0, 0, 0.35); color: var(--t-text); font: 0.875rem/1.5 var(--t-mono); resize: vertical; }
+        .wg-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+        .wg-btn { min-height: 44px; padding: 0 20px; border-radius: 999px; border: 0; background: var(--t-primary-bright); color: #022c22; font: 600 0.9375rem var(--t-sans); cursor: pointer; }
+        .wg-btn:hover { background: #6ee7b7; }
+        .wg-theme { display: inline-flex; padding: 4px; border-radius: 12px; border: 1px solid var(--t-border); }
+        .wg-theme button { min-height: 36px; padding: 0 14px; border: 0; border-radius: 9px; background: transparent; color: var(--t-muted); font: 500 0.9375rem var(--t-sans); cursor: pointer; }
+        .wg-theme button[aria-pressed='true'] { background: var(--t-surface-raised); color: var(--t-text); }
+        .wg-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+        .wg-status { color: var(--t-primary-bright); font-size: 0.9375rem; }
+    </style>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.carbonemissionscounter.com/"},{"@type":"ListItem","position":2,"name":"CO₂ counter widget","item":"https://www.carbonemissionscounter.com/widget"}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is the CO₂ counter widget free?","acceptedAnswer":{"@type":"Answer","text":"Yes. The widget is free for any website, including schools, blogs, businesses and non-profits. Please keep the small credit link."}},{"@type":"Question","name":"Does the widget track visitors or use cookies?","acceptedAnswer":{"@type":"Answer","text":"No. The widget is a small static page with a few lines of JavaScript. It sets no cookies and loads no analytics or third-party scripts."}},{"@type":"Question","name":"Where do the widget's numbers come from?","acceptedAnswer":{"@type":"Answer","text":"It uses the Global Carbon Budget 2025 estimate of 42.2 billion tonnes of CO₂ a year (fossil fuels plus land-use change), spread evenly over the year: about 1,338 tonnes per second."}}]}</script>
+</head>
+<body>
+    <div class="container">
+        <div id="navbar-placeholder"></div>
+        <main role="main" class="bp-main">
+            <nav class="bp-crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">CO&#8322; counter widget</span></nav>
+
+            <article class="bp-article">
+                <header class="bp-header">
+                    <p class="bp-tag">Free widget</p>
+                    <h1 class="bp-title">Add a live CO&#8322; counter to your website</h1>
+                    <p class="bp-dek">One line of code, no sign-up, no tracking. Ideal for school pages, climate blogs, sustainability reports and event screens.</p>
+                </header>
+
+                <div class="wg-preview" aria-label="Widget preview">
+                    <iframe src="/embed" title="Live CO2 counter, dark theme" loading="lazy"></iframe>
+                    <iframe src="/embed?theme=light" title="Live CO2 counter, light theme" loading="lazy"></iframe>
+                </div>
+
+                <div class="bp-body">
+                    <section>
+                        <h2 id="get-the-code">Get the code</h2>
+                        <p>Choose a theme, copy the code and paste it into your page&rsquo;s HTML where you want the counter to appear.</p>
+                        <div class="wg-actions">
+                            <div class="wg-theme" role="group" aria-label="Theme">
+                                <button type="button" data-theme="dark" aria-pressed="true">Dark</button>
+                                <button type="button" data-theme="light" aria-pressed="false">Light</button>
+                            </div>
+                        </div>
+                        <div class="wg-code">
+                            <label for="wgCode" class="wg-sr">Embed code</label>
+                            <textarea id="wgCode" readonly spellcheck="false"></textarea>
+                        </div>
+                        <div class="wg-actions">
+                            <button type="button" class="wg-btn" id="wgCopy">Copy code</button>
+                            <span class="wg-status" id="wgStatus" role="status"></span>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h2 id="how-it-works">How it works</h2>
+                        <ul class="checklist">
+                            <li>Shows CO&#8322; emitted worldwide so far this year, updating several times a second.</li>
+                            <li>Uses the Global Carbon Budget 2025 figure of 42.2 billion tonnes a year (about 1,338 tonnes per second). See <a href="/carbon-tracking-guide">how the counter works</a>.</li>
+                            <li>Resizes to fit: works from about 260 px wide. A height of 160&ndash;180 px fits best.</li>
+                            <li>No cookies, no analytics, no third-party scripts, and calm motion for visitors who prefer reduced motion.</li>
+                        </ul>
+                        <div class="callout"><strong>Please keep the credit link.</strong> It&rsquo;s how the counter stays free, and it lets your readers explore the full data, including <a href="/co2-emissions-by-country">emissions by country</a>.</div>
+                    </section>
+                </div>
+
+                <section class="bp-faq" aria-labelledby="faq-title">
+                    <h2 id="faq-title">Questions and answers</h2>
+                    <details class="bp-faq-item"><summary>Is the CO&#8322; counter widget free?</summary><p>Yes. The widget is free for any website, including schools, blogs, businesses and non-profits. Please keep the small credit link.</p></details>
+                    <details class="bp-faq-item"><summary>Does the widget track visitors or use cookies?</summary><p>No. The widget is a small static page with a few lines of JavaScript. It sets no cookies and loads no analytics or third-party scripts.</p></details>
+                    <details class="bp-faq-item"><summary>Where do the widget&rsquo;s numbers come from?</summary><p>It uses the Global Carbon Budget 2025 estimate of 42.2 billion tonnes of CO&#8322; a year (fossil fuels plus land-use change), spread evenly over the year: about 1,338 tonnes per second.</p></details>
+                </section>
+            </article>
+        </main>
+        <div id="footer-placeholder"></div>
+    </div>
+    <script>
+        (function () {
+            var code = document.getElementById('wgCode');
+            var status = document.getElementById('wgStatus');
+            var theme = 'dark';
+            function render() {
+                var src = 'https://www.carbonemissionscounter.com/embed' + (theme === 'light' ? '?theme=light' : '');
+                code.value = '<iframe src="' + src + '" title="Live CO2 emissions counter" width="100%" height="170" style="border:0;border-radius:16px;max-width:520px" loading="lazy"></iframe>\n' +
+                    '<p style="font-size:12px"><a href="https://www.carbonemissionscounter.com/">Live CO2 counter</a> by Carbon Emissions Counter</p>';
+            }
+            document.querySelectorAll('[data-theme]').forEach(function (b) {
+                b.addEventListener('click', function () {
+                    theme = b.getAttribute('data-theme');
+                    document.querySelectorAll('[data-theme]').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+                    render();
+                    status.textContent = '';
+                });
+            });
+            document.getElementById('wgCopy').addEventListener('click', function () {
+                var done = function () { status.textContent = 'Copied. Paste it into your page.'; };
+                if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(code.value).then(done, function () { code.select(); });
+                else { code.select(); try { document.execCommand('copy'); done(); } catch (e) {} }
+            });
+            render();
+        })();
+    </script>
+    <script src="/shared/nav.js?v=2026-10c" defer></script>
+    <script src="/shared/footer.js?v=2026-10g" defer></script>
+
+</body>
+</html>

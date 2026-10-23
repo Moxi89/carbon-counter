@@ -165,7 +165,7 @@ a { color: var(--t-primary-bright); }
 }
 
 .nav-logo .home-link::after {
-    content: 'CO\2082  Counter';
+    content: 'Carbon Emissions Counter';
     font-weight: 600;
     font-size: 1rem;
     letter-spacing: -0.01em;
@@ -650,51 +650,19 @@ section > h2 {
 .live-dot { background: var(--t-primary-bright) !important; box-shadow: 0 0 12px var(--t-primary-bright) !important; }
 
 /* --------------------------------------------------------------------------
-   Footer & cookie banner
+   Footer
    -------------------------------------------------------------------------- */
 
-footer.glassmorphism,
-.site-footer {
-    background: rgba(5, 11, 9, 0.6) !important;
-    border: 0 !important;
-    border-top: 1px solid var(--t-border) !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-}
+/* The footer styles live at the end of this file (.sf-*) */
 
-.footer-brand h4 { color: var(--t-text) !important; font-family: var(--t-sans) !important; }
-.footer-brand p,
-.copyright { color: var(--t-subtle) !important; }
-
-.footer-section h5 {
-    color: var(--t-primary-bright) !important;
-    font-size: 0.8125rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-}
-
-.footer-section a {
-    color: var(--t-muted) !important;
-    min-height: 32px;
-}
-
-.footer-section a:hover { color: var(--t-text) !important; }
-
-.cookie-banner {
-    background: rgba(8, 19, 15, 0.97) !important;
-    border: 1px solid var(--t-border-strong) !important;
-    border-radius: var(--t-radius) !important;
-    box-shadow: 0 24px 48px -16px rgba(0, 0, 0, 0.8) !important;
-    font-family: var(--t-sans) !important;
-}
-
-.cookie-content p { color: var(--t-muted) !important; }
-
-.cookie-banner .btn { min-height: 40px; border-radius: 999px !important; }
 
 /* --------------------------------------------------------------------------
    Phones: icon-only brand and tighter links so all 7 fit
    -------------------------------------------------------------------------- */
+
+@media (max-width: 1100px) {
+    .nav-logo .home-link::after { content: 'CO\2082  Counter'; }
+}
 
 @media (max-width: 768px) {
     .nav-link { padding: 8px 6px !important; }
@@ -792,46 +760,112 @@ section h2::after,
     .background-particles { display: none !important; }
 }
 
+/* Share button (handled in shared/footer.js) */
+.cc-share, .bp-share { margin: 14px 0 0; }
+.t-share {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 40px;
+    padding: 0 16px;
+    border-radius: 999px;
+    border: 1px solid var(--t-border-strong);
+    background: rgba(52, 211, 153, 0.06);
+    color: var(--t-text);
+    font: 500 0.9375rem/1 var(--t-sans);
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+.t-share svg { color: var(--t-primary-bright); flex: none; }
+.t-share:hover { background: rgba(52, 211, 153, 0.14); border-color: var(--t-primary-bright); }
+.t-share:focus-visible { outline: 2px solid var(--t-primary-bright); outline-offset: 2px; }
+
 /* --------------------------------------------------------------------------
-   Cookie banner: compact bar at the bottom instead of a large box
+   Site footer (shared/footer.html)
    -------------------------------------------------------------------------- */
 
-.cookie-banner {
-    left: 16px !important;
-    right: 16px !important;
-    bottom: 16px !important;
-    top: auto !important;
-    width: auto !important;
-    max-width: 640px !important;
-    margin: 0 auto !important;
-    padding: 14px 16px !important;
-    transform: none !important;
+#footer-placeholder { margin-top: auto; }
+.sf {
+    margin-top: 64px;
+    border-top: 1px solid var(--t-border);
+    background: linear-gradient(180deg, rgba(8, 19, 15, 0.4), rgba(5, 11, 9, 0.9));
+    font-family: var(--t-sans);
 }
-
-.cookie-content {
-    display: flex !important;
-    flex-direction: row !important;
+.sf-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) repeat(3, minmax(0, 1fr));
+    gap: 40px;
+    max-width: 1152px;
+    margin: 0 auto;
+    padding: 56px 24px 40px;
+}
+.sf-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 12px;
+    color: var(--t-text);
+    font-size: 1.0625rem;
+    font-weight: 600;
+}
+.sf-title svg { color: var(--t-primary-bright); flex: none; }
+.sf-tag { margin: 0 0 12px; max-width: 34ch; color: var(--t-muted); font-size: 0.9375rem; line-height: 1.6; }
+.sf-source { margin: 0; color: var(--t-subtle); font-size: 0.8125rem; line-height: 1.6; }
+.sf-source a { color: var(--t-muted); text-decoration: underline; text-decoration-color: var(--t-border-strong); text-underline-offset: 3px; }
+.sf-source a:hover { color: var(--t-primary-bright); }
+.sf-col { display: flex; flex-direction: column; align-items: flex-start; }
+.sf-head {
+    margin: 0 0 8px;
+    color: var(--t-subtle);
+    font: 600 0.75rem/1.4 var(--t-mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+.sf-col a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 36px;
+    color: var(--t-muted);
+    font-size: 0.9375rem;
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+.sf-col a:hover { color: var(--t-primary-bright); }
+.sf-bottom {
+    display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    gap: 12px !important;
-    text-align: left !important;
+    gap: 8px 24px;
+    max-width: 1152px;
+    margin: 0 auto;
+    padding: 20px 24px 32px;
+    border-top: 1px solid var(--t-border);
+    color: var(--t-subtle);
+    font-size: 0.8125rem;
+}
+.sf-bottom p { margin: 0; }
+.sf-top { display: inline-flex; align-items: center; min-height: 36px; color: var(--t-muted); text-decoration: none; }
+.sf-top:hover { color: var(--t-primary-bright); }
+@media (max-width: 900px) {
+    .sf-inner { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px 24px; padding-top: 44px; }
+    .sf-brand { grid-column: 1 / -1; }
+}
+@media (max-width: 560px) {
+    .sf-inner { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 40px 16px 28px; }
+    .sf-bottom { padding: 18px 16px 28px; }
+}
+.sf p { padding: 0; }
+.sf-col a { line-height: 1.35; padding: 6px 0; }
+
+/* Very small phones: drop FAQ from the bar (it's in the footer) so the rest fits */
+@media (max-width: 400px) {
+    .nav-link[href="/#faq-section"] { display: none !important; }
+    .nav-link { padding: 8px 5px !important; }
+}
+@media (max-width: 340px) {
+    .nav-link { padding: 8px 3px !important; font-size: 0.75rem !important; }
 }
 
-.cookie-content p {
-    flex: 1 1 16rem;
-    margin: 0 !important;
-    font-size: 0.875rem !important;
-    line-height: 1.5 !important;
-}
-
-.cookie-buttons {
-    display: flex !important;
-    gap: 8px !important;
-    margin: 0 !important;
-}
-
-.cookie-banner .btn {
-    padding: 0 16px !important;
-    font-size: 0.875rem !important;
-}
+/* Legacy styles.css pads h1 on phones; page containers already handle gutters */
+h1 { padding-left: 0; padding-right: 0; }

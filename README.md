@@ -1,39 +1,53 @@
-# Real-Time Carbon Emissions Counter
+# Carbon Emissions Counter
 
-A real-time visualization of global carbon emissions, providing live tracking of CO₂ emissions worldwide.
+Source for [carbonemissionscounter.com](https://www.carbonemissionscounter.com/): a live estimate of global CO₂
+emissions, the remaining 1.5 °C carbon budget, CO₂ by country, a lifetime-emissions tool, an embeddable widget and a
+blog of sourced guides.
 
-## Features
+Plain static HTML, CSS and JavaScript, hosted on **Cloudflare Pages** (output directory = repo root). Pushing to
+`master` deploys the site.
 
-- Real-time CO₂ emissions counter
-- Annual emissions tracking
-- Carbon budget countdown
-- Mobile-responsive design
+## Layout
 
-## Tech Stack
+| Path | What it is |
+|---|---|
+| `static/` | The website. `index.html` is the home page. |
+| `_redirects` | Clean URLs (`/co2-emissions/japan` → `static/co2-emissions/japan.html`). The country block is generated. |
+| `_headers` | Security headers, caching, and framing rules for `/embed`. |
+| `static/shared/` | Navbar and footer, loaded on every page by `nav.js` and `footer.js` (footer.js also runs share buttons and scroll reveals). |
+| `static/css/theme-2026.css` | Design tokens and shared styles, loaded last on every page. Page styles: `home-2026.css`, `country-2026.css`, `post-2026.css`. |
+| `tools/countries/` | Builds the country pages, rankings, sitemap, redirects and the home page's country data. |
+| `tools/blog/` | Builds the blog from `tools/blog/content/*.html`. Writing rules: `tools/blog/CONTENT_GUIDE.md`. |
+| `tools/og/` | Renders the 1200×630 social share images in `static/og/`. |
 
-- HTML5/CSS3
-- Vanilla JavaScript
-- Cloudflare Pages for hosting
+## Building
 
-## Development
-
-1. Clone the repository
 ```bash
-git clone https://github.com/yourusername/carbon-counter.git
-cd carbon-counter
+python3 tools/countries/build.py                   # country pages, rankings, sitemap, home page data
+python3 tools/blog/build.py                        # blog posts, blog index, home page article cards
+python3 tools/og/jobs.py > /tmp/og.json && node tools/og/render.js /tmp/og.json   # share images (needs Playwright)
 ```
 
-2. Open `index.html` in your browser to view the site locally
+Preview locally with `cd static && python3 -m http.server 8000` (clean URLs need the `.html` suffix locally).
 
-## Deployment
+**Caching:** files in `/shared/` and `/css/`, `/js/` are cached for a long time. When you change one, bump its
+`?v=` value everywhere it is referenced (the generators use `ASSET_V` / `V` plus a letter).
 
-The site is automatically deployed to Cloudflare Pages when changes are pushed to the main branch.
+## Yearly data update (each November)
 
-## Data Sources
+The Global Carbon Project publishes the new **Global Carbon Budget** every November. To update:
 
-- IPCC (Intergovernmental Panel on Climate Change)
-- Global Carbon Project
+1. **Country data:** download `owid-co2-data.csv` from
+   [Our World in Data](https://github.com/owid/co2-data) and run `python3 tools/countries/build.py --csv owid-co2-data.csv`.
+2. **Global figures** (total emissions, fossil and land-use split, remaining 1.5 °C budget and its start date). Update them in:
+   - `static/js/home-2026.js` (`EMISSIONS_PER_YEAR_T`, `BUDGET_START_GT`, `BUDGET_START`)
+   - `static/embed.html` (`PER_SECOND`) and `static/widget.html` text
+   - `static/index.html` (hero text, budget section, key figures, FAQ, structured data)
+   - `static/carbon-tracking-guide.html` (method page)
+   - `tools/blog/CONTENT_GUIDE.md` (core figures table), then review posts in `tools/blog/content/`
+3. Rebuild everything (see above), re-render share images, and check the site.
 
-## License
+## Data sources
 
-MIT License - See LICENSE file for details
+- [Global Carbon Budget](https://globalcarbonbudget.org/) (Global Carbon Project): global totals and the carbon budget.
+- [Our World in Data](https://ourworldindata.org/co2-emissions): country data, CC BY 4.0.
