@@ -122,7 +122,7 @@ def head(title, description, url, og_type, extra_css, schemas, img='home'):
     <link rel="stylesheet" href="/css/styles.css?v=2026-10b">
     <link rel="stylesheet" href="/shared/nav-styles.css">
     <link rel="stylesheet" href="/css/theme-2026.css?v={V}k">
-    <link rel="stylesheet" href="/css/post-2026.css?v={V}b">{css}
+    <link rel="stylesheet" href="/css/post-2026.css?v={V}e">{css}
 {chr(10).join(jsonld(s) for s in schemas)}
 </head>
 <body>

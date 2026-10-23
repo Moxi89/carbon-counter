@@ -536,3 +536,11 @@
 
 /* Legacy styles.css centres h3 with flexbox; article headings are left-aligned */
 .bp-body h3 { display: block !important; text-align: left !important; }
+/* Fieldsets default to min-content width; let long select options shrink instead of widening the page */
+.fp-group { min-width: 0; }
+.fp-calc select, .fp-calc input { max-width: 100%; min-width: 0; }
+.fp-combo { min-width: 0; }
+.fp-combo input { flex: 1 1 auto; }
+.fp-form { grid-template-columns: minmax(0, 1fr); }
+@media (max-width: 760px) { .fp-group { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 360px) { .fp-sticky-label { display: none; } .fp-sticky { gap: 8px; padding: 10px 12px; } }
