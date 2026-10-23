@@ -10,3 +10,7 @@
 
 # Old links that included the /static/ folder
 /static/*  /:splat  301
+
+# Stray URLs Google found under the legal pages (e.g. /terms/terms/)
+/terms/*  /terms  301
+/privacy/*  /privacy  301
