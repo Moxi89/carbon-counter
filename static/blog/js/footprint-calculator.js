@@ -21,7 +21,14 @@
     // Electricity grid intensity, kg CO2e per kWh.
     var GRID = { world: 0.458, us: 0.384, eu: 0.170, uk: 0.126, low: 0.020 };
 
-    var GAS_KG_PER_KWH = 0.183; // natural gas, gross CV (DESNZ 2025)
+    // Heating fuels, kg CO2e per kWh, gross CV (DESNZ 2025). 'none' = electric (counted in electricity), 'other' = not counted.
+    var HEAT = { gas: 0.183, oil: 0.247, lpg: 0.214 };
+    var HEAT_LABEL = { gas: 'Gas use (kWh a year)', oil: 'Heating oil use (kWh a year)', lpg: 'LPG use (kWh a year)' };
+    var HEAT_HINT = {
+        gas: 'Typical UK home: 11,500 kWh. Your bill shows kWh.',
+        oil: '1 litre of heating oil is about 10.4 kWh, so 1,000 litres is about 10,400 kWh.',
+        lpg: '1 litre of LPG is about 7.1 kWh, so 1,000 litres is about 7,100 kWh.'
+    };
 
     // Diets, tonnes CO2e per year (Scarborough et al. 2014: kg CO2e per 2,000 kcal per day x 365).
     var DIET = { high: 2.62, medium: 2.05, low: 1.70, fish: 1.43, veg: 1.39, vegan: 1.05 };
@@ -72,8 +79,9 @@
         var elecKwh = num('fpElec', 0);
         var elec = elecKwh * grid / 1000 / people;
 
-        var gasKwh = val('fpHeat', 'gas') === 'gas' ? num('fpGas', 0) : 0;
-        var heat = gasKwh * GAS_KG_PER_KWH / 1000 / people;
+        var heatType = val('fpHeat', 'gas');
+        var heatKwh = HEAT[heatType] ? num('fpGas', 0) : 0;
+        var heat = heatKwh * (HEAT[heatType] || 0) / 1000 / people;
 
         var dietKey = val('fpDiet', 'medium');
         var food = DIET[dietKey] || DIET.medium;
@@ -91,6 +99,8 @@
         var total = parts.reduce(function (s, p) { return s + p[2]; }, 0);
 
         setText('fpTotal', total.toFixed(1));
+        setText('fpStickyTotal', total.toFixed(1) + ' t CO\u2082e');
+        lastTotal = total;
         setText('fpWorld', compare(total, WORLD_AVG, 'the world average of 4.7 t (fossil CO₂ per person)'));
         setText('fpTarget', compare(total, TARGET_2030, 'the 2.5 t per person 1.5 °C-aligned lifestyle target for 2030'));
 
@@ -180,16 +190,95 @@
     }
 
     function syncHeat() {
+        var type = val('fpHeat', 'gas');
         var gasField = el('fpGasField');
-        if (gasField) gasField.hidden = val('fpHeat', 'gas') !== 'gas';
+        if (gasField) gasField.hidden = !HEAT[type];
+        if (HEAT[type]) {
+            setText('fpGasLabel', HEAT_LABEL[type]);
+            setText('fpGasHint', HEAT_HINT[type]);
+        }
+        // No car: the distance doesn't apply
+        var noCar = val('fpFuel', 'petrol') === 'none';
+        ['fpCarKm', 'fpCarUnit'].forEach(function (id) { var n = el(id); if (n) n.disabled = noCar; });
     }
+
+    // Shareable state: every field is mirrored in the URL (?km=12000&fuel=petrol...)
+    var FIELDS = { km: 'fpCarKm', unit: 'fpCarUnit', fuel: 'fpFuel', short: 'fpShort', long: 'fpLong', people: 'fpPeople',
+        elec: 'fpElec', grid: 'fpGrid', heat: 'fpHeat', fuelkwh: 'fpGas', diet: 'fpDiet', shop: 'fpShop' };
+    var lastTotal = 0;
+
+    function readUrl() {
+        var q = new URLSearchParams(location.search);
+        Object.keys(FIELDS).forEach(function (k) {
+            var n = el(FIELDS[k]);
+            if (!n || !q.has(k)) return;
+            var v = q.get(k);
+            if (n.tagName === 'SELECT') {
+                if ([].some.call(n.options, function (o) { return o.value === v; })) n.value = v;
+            } else if (/^\d+(\.\d+)?$/.test(v)) {
+                n.value = v;
+            }
+        });
+    }
+
+    function stateQuery() {
+        var q = new URLSearchParams();
+        Object.keys(FIELDS).forEach(function (k) {
+            var n = el(FIELDS[k]);
+            if (n && n.value !== '') q.set(k, n.value);
+        });
+        return q.toString();
+    }
+
+    var urlTimer;
+    function writeUrl() {
+        clearTimeout(urlTimer);
+        urlTimer = setTimeout(function () {
+            try { history.replaceState(null, '', location.pathname + '?' + stateQuery() + location.hash); } catch (e) { /* ignore */ }
+        }, 400);
+    }
+
+    function update() { syncHeat(); calc(); writeUrl(); }
 
     var form = el('fpForm');
     if (form) {
-        form.addEventListener('input', function () { syncHeat(); calc(); });
-        form.addEventListener('change', function () { syncHeat(); calc(); });
+        form.addEventListener('input', update);
+        form.addEventListener('change', update);
         form.addEventListener('submit', function (ev) { ev.preventDefault(); calc(); });
     }
+
+    var shareBtn = el('fpShare');
+    if (shareBtn) {
+        shareBtn.addEventListener('click', function () {
+            var canonical = document.querySelector('link[rel="canonical"]');
+            var url = (canonical ? canonical.href : location.origin + location.pathname) + '?' + stateQuery() + '#fpCalc';
+            var r = lastTotal / WORLD_AVG;
+            var text = 'My carbon footprint is about ' + lastTotal.toFixed(1) + ' t CO\u2082e a year' +
+                (r > 1.05 ? ', ' + r.toFixed(1) + '\u00d7 the world average' : r < 0.95 ? ', below the world average' : '') +
+                '. Estimate yours in two minutes:';
+            var label = shareBtn.querySelector('span');
+            var flash = function (msg) { label.textContent = msg; setTimeout(function () { label.textContent = 'Share my result'; }, 2200); };
+            if (navigator.share) {
+                navigator.share({ title: 'My carbon footprint', text: text, url: url }).catch(function () {});
+            } else if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text + ' ' + url).then(function () { flash('Link copied'); }, function () { flash('Copy failed'); });
+            } else {
+                window.prompt('Copy this link:', text + ' ' + url);
+            }
+        });
+    }
+
+    var resetBtn = el('fpReset');
+    if (resetBtn && form) {
+        resetBtn.addEventListener('click', function () {
+            form.reset();
+            syncHeat();
+            calc();
+            try { history.replaceState(null, '', location.pathname + location.hash); } catch (e) { /* ignore */ }
+        });
+    }
+
+    readUrl();
     root.classList.add('fp-ready');
     syncHeat();
     calc();

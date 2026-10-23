@@ -122,7 +122,7 @@ def head(title, description, url, og_type, extra_css, schemas, img='home'):
     <link rel="stylesheet" href="/css/styles.css?v=2026-10b">
     <link rel="stylesheet" href="/shared/nav-styles.css">
     <link rel="stylesheet" href="/css/theme-2026.css?v={V}k">
-    <link rel="stylesheet" href="/css/post-2026.css?v={V}">{css}
+    <link rel="stylesheet" href="/css/post-2026.css?v={V}b">{css}
 {chr(10).join(jsonld(s) for s in schemas)}
 </head>
 <body>
@@ -133,12 +133,12 @@ def head(title, description, url, og_type, extra_css, schemas, img='home'):
 
 
 def foot(scripts):
-    extra = ''.join(f'\n    <script src="{s}?v={V}" defer></script>' for s in scripts)
+    extra = ''.join(f'\n    <script src="{s}?v={V}b" defer></script>' for s in scripts)
     return f'''        </main>
         <div id="footer-placeholder"></div>
     </div>
-    <script src="/shared/nav.js?v={V}b" defer></script>
-    <script src="/shared/footer.js?v={V}f" defer></script>
+    <script src="/shared/nav.js?v={V}c" defer></script>
+    <script src="/shared/footer.js?v={V}g" defer></script>
 {extra}
 </body>
 </html>

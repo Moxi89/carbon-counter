@@ -120,13 +120,16 @@
                     <label for="fpHeat">Main heating</label>
                     <select id="fpHeat" name="heat">
                         <option value="gas" selected>Natural gas</option>
-                        <option value="none">None, or electric (already in electricity)</option>
+                        <option value="oil">Heating oil</option>
+                        <option value="lpg">LPG (bottled or tank gas)</option>
+                        <option value="none">Electric or heat pump (already in electricity)</option>
+                        <option value="other">Wood, district heating or none</option>
                     </select>
                 </div>
                 <div class="fp-field" id="fpGasField">
-                    <label for="fpGas">Gas use (kWh a year)</label>
+                    <label for="fpGas" id="fpGasLabel">Gas use (kWh a year)</label>
                     <input id="fpGas" name="gas" type="number" inputmode="decimal" min="0" step="500" value="11500">
-                    <span class="fp-hint">Typical UK home: 11,500 kWh</span>
+                    <span class="fp-hint" id="fpGasHint">Typical UK home: 11,500 kWh. Bills show kWh; 1 litre of heating oil is about 10.4 kWh.</span>
                 </div>
             </fieldset>
 
@@ -152,9 +155,15 @@
                     </select>
                 </div>
             </fieldset>
+
+            <div class="fp-sticky" aria-hidden="true">
+                <span class="fp-sticky-label">Your total</span>
+                <strong class="fp-sticky-total" id="fpStickyTotal">–</strong>
+                <a class="fp-sticky-link" href="#fpResults" tabindex="-1">See breakdown &darr;</a>
+            </div>
         </form>
 
-        <div class="fp-results">
+        <div class="fp-results" id="fpResults">
             <div class="fp-summary" aria-live="polite">
                 <p class="fp-total-label">Your estimated footprint</p>
                 <p class="fp-total"><span id="fpTotal">–</span> <span class="fp-unit">t CO₂e a year</span></p>
@@ -164,6 +173,10 @@
             <ul class="fp-bars" id="fpBreakdown"></ul>
             <p class="fp-tips-title">Your three biggest wins</p>
             <ol class="fp-tips" id="fpTips"></ol>
+            <div class="fp-actions">
+                <button type="button" class="t-share" id="fpShare"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg><span>Share my result</span></button>
+                <button type="button" class="fp-reset" id="fpReset">Reset</button>
+            </div>
             <p class="fp-note">A rough, per-person estimate. The world average counts fossil CO₂ produced inside each country, so the comparison is indicative, not like-for-like.</p>
         </div>
     </div>
@@ -237,6 +250,8 @@
             <tr><td>Electricity, United Kingdom</td><td class="num">126 g/kWh</td><td>Carbon Brief, 2025</td></tr>
             <tr><td>Electricity, mostly renewable or nuclear</td><td class="num">20 g/kWh</td><td>RTE, France 2025 (19.6 g)</td></tr>
             <tr><td>Natural gas (gross calorific value)</td><td class="num">0.183 kg/kWh</td><td>UK DESNZ 2025</td></tr>
+            <tr><td>Heating oil (burning oil)</td><td class="num">0.247 kg/kWh</td><td>UK DESNZ 2025</td></tr>
+            <tr><td>LPG</td><td class="num">0.214 kg/kWh</td><td>UK DESNZ 2025</td></tr>
             <tr><td>Diet: high / medium / low meat</td><td class="num">2.62 / 2.05 / 1.70 t</td><td>Scarborough et al. 2014</td></tr>
             <tr><td>Diet: pescatarian / vegetarian / vegan</td><td class="num">1.43 / 1.39 / 1.05 t</td><td>Scarborough et al. 2014</td></tr>
             <tr><td>Shopping and other: low / medium / high</td><td class="num">1.0 / 2.0 / 3.5 t</td><td>Our assumption (see below)</td></tr>

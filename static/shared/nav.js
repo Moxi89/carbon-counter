@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Load navbar HTML
-    fetch('/shared/navbar.html?v=2026-10b')
+    fetch('/shared/navbar.html?v=2026-10c')
         .then(response => response.text())
         .then(data => {
             document.getElementById('navbar-placeholder').innerHTML = data;
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const path = window.location.pathname.replace(/\.html$/, '').replace(/\/index$/, '/');
         const isHome = path === '/' || path === '';
         const pageLink = (() => {
-            if (path.indexOf('/blog/posts/carbon-footprint-calculator-guide') === 0) return '/blog/posts/carbon-footprint-calculator-guide';
+            if (path.indexOf('/blog/posts/carbon-footprint-calculator-guide') === 0) return '/blog/posts/carbon-footprint-calculator-guide#fpCalc';
             if (path.indexOf('/blog') === 0) return '/blog';
             if (path.indexOf('/co2-emissions') === 0 || path.indexOf('/historical-co2') === 0) return '/co2-emissions-by-country';
             return null;

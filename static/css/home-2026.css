@@ -987,3 +987,11 @@ html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 @media (max-width: 640px) { .cx-jump a { font-size: 0.875rem; padding: 0 12px; } }
 .cx-history-src { display: block; margin-top: 6px; color: var(--t-subtle); font-size: 0.8125rem; }
+.blog-card h3 { display: block !important; text-align: left !important; }
+/* Phones: pause becomes a compact icon button beside the two figures */
+@media (max-width: 640px) {
+    .cx-hero-meta { flex-wrap: nowrap; }
+    .cx-chip { flex: 1 1 0; }
+    .cx-pause { flex: 0 0 48px; width: 48px; padding: 0 !important; justify-content: center; }
+    .cx-pause-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}

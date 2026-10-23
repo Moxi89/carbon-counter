@@ -223,8 +223,8 @@ def foot(js):
     return f'''        </main>
         <div id="footer-placeholder"></div>
     </div>
-    <script src="/shared/nav.js?v={ASSET_V}b" defer></script>
-    <script src="/shared/footer.js?v={ASSET_V}f" defer></script>
+    <script src="/shared/nav.js?v={ASSET_V}c" defer></script>
+    <script src="/shared/footer.js?v={ASSET_V}g" defer></script>
 
     <script src="/js/{js}?v={ASSET_V}" defer></script>
 </body>
@@ -477,7 +477,7 @@ def country_page(c, data, by_rank, featured_slugs):
                     <li><a href="/co2-emissions-per-capita">CO&#8322; emissions per capita: every country ranked</a></li>
                     <li><a href="/historical-co2-emissions-by-country">Historical CO&#8322; emissions since 1750</a></li>
                     <li><a href="/blog/posts/critical-climate-year-2025">Global Carbon Budget 2025: key findings explained</a></li>
-                    <li><a href="/blog/posts/carbon-footprint-calculator-guide">Calculate your own carbon footprint</a></li>
+                    <li><a href="/blog/posts/carbon-footprint-calculator-guide#fpCalc">Calculate your own carbon footprint</a></li>
                 </ul>
             </section>
 {source_html(year)}'''
