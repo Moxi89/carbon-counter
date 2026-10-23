@@ -72,6 +72,10 @@ AdSense only supports a strict, nonce-based CSP, and a static site can't create 
 1. Copy `docs/adsense/_middleware.js` to `functions/_middleware.js` (repo root). It is a Cloudflare Pages Function
    that adds a fresh nonce to every `<script>` and sends Google's recommended strict policy.
 2. In `static/_headers`, delete the `Content-Security-Policy` line under `/*` (the function now sets it).
+   Tested on 23 October 2026 in Cloudflare's local simulator (`npx wrangler pages dev static`): every page
+   type (home, country, rankings, blog, calculator, guide, widget, embed, about) runs with no CSP errors,
+   each request gets a fresh nonce, `/embed` stays frameable, and CSS/JS/images pass through untouched.
+   Keep pages free of inline event handlers (`onclick=`, `onload=`): the strict policy blocks them.
 3. **Cloudflare Web Analytics:** its automatically injected beacon won't carry the nonce. In Cloudflare →
    Web Analytics → the site → switch to **manual JS snippet**, and add that snippet before `</body>` in the
    templates so it gets a nonce too.

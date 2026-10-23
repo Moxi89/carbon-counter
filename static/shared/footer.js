@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Load footer content
-    fetch('/shared/footer.html?v=2026-10j')
+    fetch('/shared/footer.html?v=2026-10k')
         .then(response => response.text())
         .then(data => {
             const footerPlaceholder = document.getElementById('footer-placeholder');
@@ -61,4 +61,13 @@ document.addEventListener('click', function (event) {
     } else {
         window.prompt('Copy this link:', url);
     }
+});
+
+// "Back to top" in the footer (no inline handlers, so it works under a strict CSP)
+document.addEventListener('click', function (event) {
+    const link = event.target.closest('[data-top]');
+    if (!link) return;
+    event.preventDefault();
+    const smooth = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: smooth ? 'smooth' : 'auto' });
 });
