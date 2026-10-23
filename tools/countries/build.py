@@ -196,9 +196,9 @@ def head(title, description, path, extra_css, schema, img='home'):
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="preload" href="/fonts/fira-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/fira-code-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/styles.css?v=2026-10b">
     <link rel="stylesheet" href="/shared/nav-styles.css">
-    <link rel="stylesheet" href="/css/theme-2026.css?v={ASSET_V}h">
+    <link rel="stylesheet" href="/css/theme-2026.css?v={ASSET_V}j">
     <link rel="stylesheet" href="/css/{extra_css}?v={ASSET_V}b">
 {schema}
 </head>
@@ -213,7 +213,7 @@ def foot(js):
     return f'''        </main>
         <div id="footer-placeholder"></div>
     </div>
-    <script src="/shared/nav.js?v={ASSET_V}" defer></script>
+    <script src="/shared/nav.js?v={ASSET_V}b" defer></script>
     <script src="/shared/footer.js?v={ASSET_V}f" defer></script>
 
     <script src="/js/{js}?v={ASSET_V}" defer></script>

@@ -119,9 +119,9 @@ def head(title, description, url, og_type, extra_css, schemas, img='home'):
     <link rel="icon" type="image/png" href="/favicon.png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="preload" href="/fonts/fira-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/styles.css?v=2026-10b">
     <link rel="stylesheet" href="/shared/nav-styles.css">
-    <link rel="stylesheet" href="/css/theme-2026.css?v={V}h">
+    <link rel="stylesheet" href="/css/theme-2026.css?v={V}j">
     <link rel="stylesheet" href="/css/post-2026.css?v={V}">{css}
 {chr(10).join(jsonld(s) for s in schemas)}
 </head>
@@ -137,7 +137,7 @@ def foot(scripts):
     return f'''        </main>
         <div id="footer-placeholder"></div>
     </div>
-    <script src="/shared/nav.js?v={V}" defer></script>
+    <script src="/shared/nav.js?v={V}b" defer></script>
     <script src="/shared/footer.js?v={V}f" defer></script>
 {extra}
 </body>

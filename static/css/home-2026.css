@@ -110,7 +110,7 @@ main > section + section { margin-top: 20px; }
 .cx-big {
     margin: 8px 0 4px !important;
     font-family: var(--t-mono);
-    font-size: clamp(2.4rem, 9.2vw, 6.75rem);
+    font-size: clamp(1.9rem, 9.6vw, 6.75rem);
     font-weight: 600;
     line-height: 1.05;
     letter-spacing: -0.04em;

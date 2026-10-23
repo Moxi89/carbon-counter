@@ -165,7 +165,7 @@ a { color: var(--t-primary-bright); }
 }
 
 .nav-logo .home-link::after {
-    content: 'CO\2082  Counter';
+    content: 'Carbon Emissions Counter';
     font-weight: 600;
     font-size: 1rem;
     letter-spacing: -0.01em;
@@ -660,6 +660,10 @@ section > h2 {
    Phones: icon-only brand and tighter links so all 7 fit
    -------------------------------------------------------------------------- */
 
+@media (max-width: 1100px) {
+    .nav-logo .home-link::after { content: 'CO\2082  Counter'; }
+}
+
 @media (max-width: 768px) {
     .nav-link { padding: 8px 6px !important; }
     .nav-items { gap: 2px !important; }
@@ -853,3 +857,12 @@ section h2::after,
 }
 .sf p { padding: 0; }
 .sf-col a { line-height: 1.35; padding: 6px 0; }
+
+/* Very small phones: drop FAQ from the bar (it's in the footer) so the rest fits */
+@media (max-width: 400px) {
+    .nav-link[href="/#faq-section"] { display: none !important; }
+    .nav-link { padding: 8px 5px !important; }
+}
+@media (max-width: 340px) {
+    .nav-link { padding: 8px 3px !important; font-size: 0.75rem !important; }
+}
