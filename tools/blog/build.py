@@ -243,6 +243,8 @@ def build_post(p, by_slug):
 
 def build_index(posts):
     posts = sorted(posts, key=lambda p: (p['updated'], p['published']), reverse=True)
+    # The calculator is the most useful page in the blog: keep it first
+    posts.sort(key=lambda p: p['slug'] != PINNED)
     cats = sorted({p['category'] for p in posts})
     chips = '<button type="button" class="bp-chip" data-filter="all" aria-pressed="true">All</button>' + ''.join(
         f'<button type="button" class="bp-chip" data-filter="{e(c)}" aria-pressed="false">{e(c)}</button>' for c in cats)
@@ -270,6 +272,7 @@ def build_index(posts):
     open(os.path.join(STATIC, 'blog', 'index.html'), 'w', encoding='utf-8').write(page)
 
 
+PINNED = 'carbon-footprint-calculator-guide'
 HOME_FEATURED = ['carbon-footprint-calculator-guide', 'food-climate-solutions', 'transportation-climate-guide']
 
 

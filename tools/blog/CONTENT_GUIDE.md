@@ -19,7 +19,7 @@ Keep the slug (file name) of existing posts unchanged; their URLs are already in
   "h1": "On-page headline (can be a little longer than the title)",
   "description": "Meta description, 140-158 characters. Plain, specific, says what the reader gets.",
   "dek": "One or two sentences under the headline.",
-  "category": "Guides",
+  "category": "How-to",
   "image": "/blog/images/existing-image.svg",
   "image_alt": "What the illustration shows",
   "published": "2025-01-17",
@@ -47,7 +47,7 @@ Keep the slug (file name) of existing posts unchanged; their URLs are already in
 
 ### Categories (use exactly one)
 
-`Guides` · `Home energy` · `Food` · `Transport` · `Climate science` · `Climate tech` · `Family`
+`How-to` · `Home energy` · `Food` · `Transport` · `Climate science` · `Climate tech` · `Family`
 
 ## Components you can use in the body
 

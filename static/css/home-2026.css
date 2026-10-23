@@ -394,12 +394,15 @@ main > section + section { margin-top: 20px; }
 .cx-history-note a { color: var(--t-primary-bright); text-decoration: none; }
 .cx-history-note a:hover { text-decoration: underline; }
 
+.cx-history-chart--compact { display: none; }
+.cx-h-start { fill: var(--t-muted); stroke: #06100c; stroke-width: 2; }
 @media (max-width: 640px) {
     .cx-history { padding: 20px 16px 16px; border-radius: 20px; }
-    .cx-h-axis { font-size: 30px; }
-    .cx-h-label { font-size: 34px; }
-    .cx-h-line { stroke-width: 5; }
-    .cx-h-note { display: none; }
+    .cx-history-chart--full { display: none; }
+    .cx-history-chart--compact { display: block; }
+    .cx-history-chart--compact .cx-h-axis { font-size: 20px; }
+    .cx-history-chart--compact .cx-h-label { font-size: 24px; }
+    .cx-history-chart--compact .cx-h-line { stroke-width: 4; }
 }
 
 /* --------------------------------------------------------------------------

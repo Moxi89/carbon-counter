@@ -724,9 +724,20 @@ def write_sitemap(featured):
     urls += [(f'/co2-emissions/{c["slug"]}', 'weekly', '0.8') for c in featured]
     posts = sorted(f[:-5] for f in os.listdir(os.path.join(STATIC, 'blog', 'posts')) if f.endswith('.html'))
     urls += [(f'/blog/posts/{p}', 'monthly', '0.6') for p in posts]
+
+    def lastmod(u):
+        # Blog posts: their own "updated" date, so lastmod only moves when a post really changes
+        if u.startswith('/blog/posts/'):
+            src = os.path.join(ROOT, 'tools', 'blog', 'content', u.rsplit('/', 1)[1] + '.html')
+            if os.path.exists(src):
+                m = re.search(r'"updated":\s*"(\d{4}-\d{2}-\d{2})"', open(src, encoding='utf-8').read())
+                if m:
+                    return m.group(1)
+        return today
+
     body = '\n'.join(f'''    <url>
         <loc>{SITE}{u}</loc>
-        <lastmod>{today}</lastmod>
+        <lastmod>{lastmod(u)}</lastmod>
         <changefreq>{cf}</changefreq>
         <priority>{pr}</priority>
     </url>''' for u, cf, pr in urls)
@@ -754,9 +765,13 @@ def write_redirects(featured):
     print('_redirects: country routes updated')
 
 
-def history_svg(series):
-    """Area chart of global fossil CO2 since 1950 for the home page."""
-    w, h, l, r, t, b = 1000, 340, 46, 24, 20, 34
+def history_svg(series, compact=False):
+    """Area chart of global fossil CO2 since 1950 for the home page.
+    compact=True draws a taller version with fewer labels for phones."""
+    if compact:
+        w, h, l, r, t, b = 600, 400, 40, 18, 44, 34
+    else:
+        w, h, l, r, t, b = 1000, 340, 46, 24, 20, 34
     y0, y1 = series[0][0], series[-1][0]
     vmax = 45000
     x = lambda y: l + (y - y0) / (y1 - y0) * (w - l - r)
@@ -766,24 +781,30 @@ def history_svg(series):
     grid = ''.join(f'<line x1="{l}" x2="{w - r}" y1="{yv(g * 1000):.1f}" y2="{yv(g * 1000):.1f}" class="cx-h-grid"/>'
                    f'<text x="{l - 8}" y="{yv(g * 1000) + 4:.1f}" class="cx-h-axis" text-anchor="end">{g}</text>' for g in (10, 20, 30, 40))
     years = ''.join(f'<text x="{x(yy):.1f}" y="{h - 10}" class="cx-h-axis" text-anchor="middle">{yy}</text>'
-                    for yy in range(1950, y1 + 1, 10))
+                    for yy in range(1950, y1 + 1, 20 if compact else 10))
     d = dict(series)
     notes = ''
     for yy, label in ((2009, 'Financial crisis'), (2020, 'COVID-19')):
         if yy in d:
-            notes += (f'<circle cx="{x(yy):.1f}" cy="{yv(d[yy]):.1f}" r="4" class="cx-h-note-dot"/>'
-                      f'<text x="{x(yy):.1f}" y="{yv(d[yy]) + 22:.1f}" class="cx-h-note" text-anchor="middle">{label}</text>')
+            notes += f'<circle cx="{x(yy):.1f}" cy="{yv(d[yy]):.1f}" r="4" class="cx-h-note-dot"/>'
+            if not compact:
+                notes += f'<text x="{x(yy):.1f}" y="{yv(d[yy]) + 22:.1f}" class="cx-h-note" text-anchor="middle">{label}</text>'
     last = series[-1]
     first = series[0]
     end = (f'<circle cx="{x(last[0]):.1f}" cy="{yv(last[1]):.1f}" r="6" class="cx-h-end"/>'
-           f'<text x="{x(last[0]) - 10:.1f}" y="{yv(last[1]) - 14:.1f}" class="cx-h-label" text-anchor="end">{last[1] / 1000:.1f} Gt in {last[0]}</text>'
-           f'<text x="{x(first[0]) + 4:.1f}" y="{yv(first[1]) - 26:.1f}" class="cx-h-label">{first[1] / 1000:.1f} Gt in {first[0]}</text>')
+           f'<text x="{x(last[0]) - 10:.1f}" y="{yv(last[1]) - 14:.1f}" class="cx-h-label" text-anchor="end">{last[1] / 1000:.1f} Gt in {last[0]}</text>')
+    if not compact:
+        end += f'<text x="{x(first[0]) + 4:.1f}" y="{yv(first[1]) - 26:.1f}" class="cx-h-label">{first[1] / 1000:.1f} Gt in {first[0]}</text>'
+    else:
+        end += f'<circle cx="{x(first[0]):.1f}" cy="{yv(first[1]):.1f}" r="5" class="cx-h-start"/>'
     label = (f'Area chart of global fossil CO2 emissions from {first[0]} ({first[1] / 1000:.1f} billion tonnes) '
              f'to {last[0]} ({last[1] / 1000:.1f} billion tonnes), with brief dips in 2009 and 2020.')
-    return (f'<svg class="cx-history-chart" viewBox="0 0 {w} {h}" role="img" aria-label="{e(label)}">'
-            f'<defs><linearGradient id="cxHistFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#34d399" stop-opacity="0.45"/>'
+    gid = 'cxHistFillC' if compact else 'cxHistFill'
+    cls = 'cx-history-chart cx-history-chart--compact' if compact else 'cx-history-chart cx-history-chart--full'
+    return (f'<svg class="{cls}" viewBox="0 0 {w} {h}" role="img" aria-label="{e(label)}">'
+            f'<defs><linearGradient id="{gid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#34d399" stop-opacity="0.45"/>'
             f'<stop offset="1" stop-color="#34d399" stop-opacity="0"/></linearGradient></defs>'
-            f'{grid}<path d="{area}" fill="url(#cxHistFill)"/><polyline points="{pts}" class="cx-h-line"/>{notes}{end}{years}</svg>')
+            f'{grid}<path d="{area}" fill="url(#{gid})"/><polyline points="{pts}" class="cx-h-line"/>{notes}{end}{years}</svg>')
 
 
 def born_html(cum_series, born=1990):
@@ -831,7 +852,7 @@ def update_home(data, featured):
     s = fill(s, 'year', str(data['year']))
     if '<!-- countries:history -->' in s:
         ser = data['world']['series']
-        s = fill(s, 'history', history_svg(ser))
+        s = fill(s, 'history', history_svg(ser) + history_svg(ser, compact=True))
         s = fill(s, 'growth', f'{ser[-1][1] / ser[0][1]:.1f}')
     if '<!-- countries:born -->' in s and data['world'].get('cum_series'):
         s = fill(s, 'born', born_html(data['world']['cum_series']))
