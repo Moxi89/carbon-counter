@@ -84,7 +84,11 @@ AdSense only supports a strict, nonce-based CSP, and a static site can't create 
 3. **Cloudflare Web Analytics:** its automatically injected beacon won't carry the nonce. In Cloudflare →
    Web Analytics → the site → switch to **manual JS snippet**, and add that snippet before `</body>` in the
    templates so it gets a nonce too.
-4. Pages Functions count against Cloudflare's free Workers quota (100,000 requests a day); fine for this site
+4. **Cloudflare Email Obfuscation** (Scrape Shield) rewrites the contact address and adds a decoding script that
+   won't carry the nonce, so under the strict policy the address would show as "[email protected]". Turn
+   Email Obfuscation off in Cloudflare (Scrape Shield) on launch day, or exempt `/contact`, and check the
+   Contact page afterwards.
+5. Pages Functions count against Cloudflare's free Workers quota (100,000 requests a day); fine for this site
    today, but keep an eye on it as traffic grows.
 
 ## 6. After launch
