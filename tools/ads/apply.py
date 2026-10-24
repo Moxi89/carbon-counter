@@ -36,9 +36,9 @@ HEAD_A, HEAD_Z = '<!-- ads:head -->', '<!-- /ads:head -->'
 
 # Short statements about ads that must change when ads go live: (ads off, ads on)
 AD_TEXT = {
-    'home-about': ('It is independent, free, has no ads and sets no cookies.',
+    'home-about': ('It is independent, free, and has no ads or tracking.',
                    'It is independent and free, funded by clearly labelled ads.'),
-    'footer': ('No cookies, no tracking.', 'Ad-supported &middot; <a href="/privacy">Privacy and ad choices</a>'),
+    'footer': ('No ads, no tracking.', 'Ad-supported &middot; <a href="/privacy">Privacy and ad choices</a>'),
 }
 TEXT_RE = re.compile(r'<!-- adtext:([a-z-]+) -->.*?<!-- /adtext:\1 -->', re.S)
 

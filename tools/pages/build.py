@@ -19,11 +19,11 @@ SITE = 'https://www.carbonemissionscounter.com'
 CONFIG = json.load(open(os.path.join(ROOT, 'tools', 'site_config.json'), encoding='utf-8'))
 EMAIL = CONFIG['contact_email']
 ADS = CONFIG['ads']['enabled']
-UPDATED = ('2026-10-23', '23 October 2026')
+UPDATED = ('2026-10-24', '24 October 2026')
 
 ASSETS = {
     'styles': '2026-10b', 'theme': '2026-10l', 'post': '2026-10e',
-    'nav': '2026-10f', 'footer': '2026-10n',
+    'nav': '2026-10f', 'footer': '2026-10o',
 }
 
 
@@ -171,11 +171,12 @@ if ADS:
         sec('The short version',
             '<div class="callout"><strong>In short:</strong> no accounts and no forms. The counters and the footprint calculator run in your browser. We show ads from Google, which uses cookies; in the EEA, the UK and Switzerland we ask for your consent first, and you can change your choice at any time.</div>'),
         sec('What we collect',
-            '<p>We do not ask for or store personal information. There are no sign-ups, forms or newsletters.</p>',
+            '<p>We don&rsquo;t ask for personal information: there are no sign-ups, forms or newsletters.</p>',
             '<ul>',
             '    <li><strong>Server logs.</strong> Our hosting provider (Cloudflare) processes technical data such as your IP address, browser type and the pages requested, to deliver the site and protect it from abuse.</li>',
             '    <li><strong>Page-view statistics.</strong> We use Cloudflare Web Analytics, which counts visits in aggregate without cookies and without following you across websites.</li>',
             '    <li><strong>Things you type.</strong> Your birth year in the lifetime tool and your answers in the calculator stay in your browser. If you share a result, only the link you choose to share contains them.</li>',
+            f'<li><strong>Emails you send us.</strong> Messages to {mailto()} are forwarded by Cloudflare to our inbox. We see your email address and message, use them only to reply, keep them no longer than needed, and delete them if you ask.</li>',
             '</ul>'),
         sec('Advertising and cookies',
             '<p>We use <strong>Google AdSense</strong> to show ads. Google and its partners, as third-party vendors, use cookies and similar technologies to serve ads based on your previous visits to this site and other websites, to measure ads and to prevent fraud.</p>',
@@ -184,10 +185,11 @@ if ADS:
             '    <li>You can opt out of personalised advertising in <a href="https://adssettings.google.com/" rel="noopener">Google&rsquo;s Ads Settings</a>, or opt out of some third-party vendors&rsquo; use of cookies at <a href="https://www.aboutads.info/choices/" rel="noopener">aboutads.info</a>.</li>',
             '    <li><strong>Consent in the EEA, the UK and Switzerland.</strong> Visitors there see a consent message from a Google-certified consent management platform before any advertising cookies are used. You can change your choice at any time with the privacy settings link shown on the page.</li>',
             '</ul>',
-            '<p>Advertisers never receive information that identifies you from us, and they have no influence over our content.</p>'),
+            '<p>Advertisers never receive information that identifies you from us, and they have no influence over our content.</p>',
+            '<p>Our host, Cloudflare, sets one security cookie, <code>cf_clearance</code>, which helps tell real visitors from automated bots. Cloudflare classes it as strictly necessary: it holds no advertising or tracking profile, isn&rsquo;t used to follow you across websites, and lasts up to a year. You can delete it in your browser at any time and the site will still work.</p>'),
         sec('Services we use',
             '<ul>',
-            '    <li><strong>Cloudflare:</strong> hosting, content delivery, security and privacy-friendly page-view statistics.</li>',
+            '    <li><strong>Cloudflare:</strong> hosting, content delivery, security, email forwarding and privacy-friendly page-view statistics. Cloudflare is based in the United States; see its <a href="https://www.cloudflare.com/privacypolicy/" rel="noopener">privacy policy</a> for how data is protected when it is transferred there.</li>',
             '    <li><strong>Google AdSense:</strong> advertising (see above).</li>',
             '    <li><strong>GitHub:</strong> storage of the website&rsquo;s source code. No visitor data is stored there.</li>',
             '</ul>'),
@@ -199,27 +201,29 @@ if ADS:
             '<p>If our practices change, we update this page and the date at the top.</p>'),
     ]
 else:
-    privacy_dek = 'We collect as little as possible: no accounts, no cookies, no ads and no tracking scripts.'
+    privacy_dek = 'We collect as little as possible: no accounts, no ads, no tracking scripts and no cookies of our own.'
     privacy = [
         sec('The short version',
-            '<div class="callout"><strong>In short:</strong> no accounts, no cookies, no advertising, no tracking scripts. The counters and the footprint calculator run in your browser, and nothing you type is sent to us.</div>'),
+            '<div class="callout"><strong>In short:</strong> no accounts, no advertising, no tracking scripts and no cookies of our own. The counters and the footprint calculator run in your browser, and nothing you type is sent to us. Our host sets one strictly necessary security cookie (see Cookies).</div>'),
         sec('What we collect',
-            '<p>We do not ask for, collect or store personal information. There are no sign-ups, forms or newsletters.</p>',
+            '<p>We don&rsquo;t ask for personal information: there are no sign-ups, forms or newsletters.</p>',
             '<ul>',
             '    <li><strong>Server logs.</strong> Like any website, our hosting provider (Cloudflare) processes technical data such as your IP address, browser type and the pages requested, so it can deliver the site and protect it from abuse. We don&rsquo;t use these logs to identify you.</li>',
             '    <li><strong>Page-view statistics.</strong> We use Cloudflare Web Analytics, which counts visits in aggregate without cookies and without following you across websites.</li>',
             '    <li><strong>Things you type.</strong> Your birth year in the lifetime tool and your answers in the footprint calculator stay in your browser. If you share a result, only the link you choose to share contains them.</li>',
+            f'<li><strong>Emails you send us.</strong> Messages to {mailto()} are forwarded by Cloudflare to our inbox. We see your email address and message, use them only to reply, keep them no longer than needed, and delete them if you ask.</li>',
             '</ul>'),
         sec('Cookies',
-            '<p>This website does not set cookies, so there is no cookie banner. The embeddable counter widget does not set cookies either. If this ever changes, for example if we start showing ads, we will update this page first and ask for your consent where the law requires it.</p>'),
+            '<p>We don&rsquo;t set any cookies ourselves, and the site stores nothing else in your browser. Our host, Cloudflare, sets one security cookie, <code>cf_clearance</code>, which helps tell real visitors from automated bots. Cloudflare classes it as strictly necessary: it holds no advertising or tracking profile, isn&rsquo;t used to follow you across websites, and lasts up to a year. You can delete it in your browser at any time and the site will still work. Because it is strictly necessary, no cookie banner is needed. The embeddable counter widget sets no cookies of its own; Cloudflare&rsquo;s security cookie can also be set when the widget is shown on another site.</p>',
+            '<p>If this changes, for example if we start showing ads, we will update this page first and ask for your consent where the law requires it.</p>'),
         sec('Services we use',
             '<ul>',
-            '    <li><strong>Cloudflare:</strong> hosting, content delivery, security and privacy-friendly page-view statistics.</li>',
+            '    <li><strong>Cloudflare:</strong> hosting, content delivery, security, email forwarding and privacy-friendly page-view statistics. Cloudflare is based in the United States; see its <a href="https://www.cloudflare.com/privacypolicy/" rel="noopener">privacy policy</a> for how data is protected when it is transferred there.</li>',
             '    <li><strong>GitHub:</strong> storage of the website&rsquo;s source code. No visitor data is stored there.</li>',
             '</ul>',
             '<p>We do not use advertising networks, and we never sell or share data.</p>'),
         sec('Your rights',
-            f'<p>Because we don&rsquo;t hold personal data about you, there is normally nothing to access, correct or delete. If you have a question, email {mailto()}. If you are in the EU or UK you also have the right to complain to your data protection authority. Children can use the site safely: it collects nothing from them.</p>'),
+            f'<p>We hold no personal data about visitors, apart from emails you choose to send us. To see, correct or delete those, or if you have a question, email {mailto()}. If you are in the EU or UK you also have the right to complain to your data protection authority. Children can use the site safely: it collects nothing from them.</p>'),
         sec('Changes to this policy',
             '<p>If our practices change, we will update this page and the date at the top.</p>'),
     ]
@@ -314,7 +318,7 @@ data_secs = [
         '<p>For the live global counter, cite the <a href="/">home page</a>; for one country, cite its page, for example <a href="/co2-emissions/china">China</a>.</p>',
         sid='cite'),
     sec('Put the live counter on your site',
-        '<p>Show global CO&#8322; emissions rising, or the 1.5&nbsp;&deg;C carbon budget running out, with one line of code. It&rsquo;s free, sets no cookies and works on phones. <a href="/widget">Get the widget</a>.</p>',
+        '<p>Show global CO&#8322; emissions rising, or the 1.5&nbsp;&deg;C carbon budget running out, with one line of code. It&rsquo;s free, has no ads or tracking, and works on phones. <a href="/widget">Get the widget</a>.</p>',
         sid='widget'),
     sec('Licence and sources',
         '<ul>',
