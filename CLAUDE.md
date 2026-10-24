@@ -4,6 +4,7 @@
 - GitHub repo `Moxi89/carbon-counter`, default branch `master`.
 - Hosted on Cloudflare Pages (Free plan), which publishes only the `static/` folder. Merging to `master` deploys automatically in 1–2 minutes.
 - Security headers and redirects live in `static/_headers` and `static/_redirects`.
+- Email: Cloudflare Email Routing forwards hello@carbonemissionscounter.com to the owner's inbox (set up 24 Oct 2026).
 - Cloudflare Web Analytics is on, and the CSP allows it. Cloudflare injects a bot-detection script (`/cdn-cgi/challenge-platform/.../jsd/`) that the Free plan can't switch off; it costs the home page some Lighthouse points, nothing else.
 
 ## How the owner works
@@ -57,9 +58,8 @@ npm run build:motion               # slim Motion build → static/js/vendor/moti
 - AdSense is prepared but off. Full checklist: `docs/ADSENSE.md`. Launch-day security add-on: `docs/adsense/_middleware.js`.
 
 ## Open tasks (owner)
-- Turn on Cloudflare Email Routing for hello@carbonemissionscounter.com (used on the Contact page).
 - Find the cause of the 522 errors in Cloudflare analytics (probably an old proxied DNS record).
-- Apply for AdSense, then put the `ca-pub-…` ID in `tools/site_config.json` and run `apply.py`. That adds the verification tag and `ads.txt` while ads stay off.
+- Apply for AdSense once Google has indexed most pages (late November), then put the `ca-pub-…` ID in `tools/site_config.json` and run `apply.py`. That adds the verification tag and `ads.txt` while ads stay off.
 - 5 Nov 2026: check Search Console results (new home title, tracking guide, country pages) and share them.
 
 ## Search Console and speed notes
