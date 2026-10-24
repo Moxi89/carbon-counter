@@ -242,7 +242,7 @@ def foot(js):
         <div id="footer-placeholder"></div>
     </div>
     <script src="/shared/nav.js?v={ASSET_V}f" defer></script>
-    <script src="/shared/footer.js?v={ASSET_V}m" defer></script>
+    <script src="/shared/footer.js?v={ASSET_V}n" defer></script>
 
     <script src="/js/{js}?v={ASSET_V}" defer></script>
     <script src="/js/vendor/motion.js?v=14.6.0-lite" defer></script>
@@ -818,7 +818,7 @@ def list_page(data, featured_slugs, kind):
 
 STATIC_URLS = [
     ('/', 'daily', '1.0'), ('/co2-emissions-by-country', 'weekly', '0.9'), ('/co2-emissions-per-capita', 'monthly', '0.8'), ('/historical-co2-emissions-by-country', 'monthly', '0.8'),
-    ('/carbon-tracking-guide', 'monthly', '0.8'), ('/methodology', 'monthly', '0.6'), ('/blog/', 'weekly', '0.7'), ('/widget', 'monthly', '0.5'), ('/about', 'yearly', '0.4'), ('/contact', 'yearly', '0.3'),
+    ('/carbon-tracking-guide', 'monthly', '0.8'), ('/methodology', 'monthly', '0.6'), ('/blog/', 'weekly', '0.7'), ('/widget', 'monthly', '0.5'), ('/data', 'monthly', '0.6'), ('/about', 'yearly', '0.4'), ('/contact', 'yearly', '0.3'),
     ('/privacy', 'yearly', '0.2'), ('/terms', 'yearly', '0.2'),
 ]
 
@@ -947,6 +947,61 @@ def update_home(data, featured):
     print('index.html: country picker and top emitters updated')
 
 
+# ---------------------------------------------------------------------------
+# Downloads: CSV copies of the country data for the /data page (CC BY 4.0)
+# ---------------------------------------------------------------------------
+
+def write_downloads(data, featured_slugs):
+    out = os.path.join(STATIC, 'downloads')
+    os.makedirs(out, exist_ok=True)
+    year = data['year']
+
+    def r(v, d=2):
+        return '' if v is None else round(v, d)
+
+    with open(os.path.join(out, 'co2-emissions-by-country.csv'), 'w', encoding='utf-8', newline='') as f:
+        w = csv.writer(f)
+        w.writerow(['country', 'iso_code', 'year', 'co2_mt', 'co2_change_on_previous_year_pct', 'share_of_world_pct',
+                    'co2_per_person_t', 'population', 'cumulative_co2_since_1750_mt', 'cumulative_share_pct',
+                    'co2_1990_mt', 'co2_2005_mt', 'page'])
+        for c in data['countries']:
+            change = round((c['co2'] - c['prev']) / c['prev'] * 100, 2) if c.get('prev') else ''
+            page = f"{SITE}/co2-emissions/{c['slug']}" if c['slug'] in featured_slugs else ''
+            w.writerow([c['name'], c['iso'], year, r(c['co2'], 3), change, r(c['share']), r(c.get('pc')), c.get('pop') or '',
+                        r(c.get('cum'), 3), r(c.get('cum_share')), r(c.get('co2_1990'), 3), r(c.get('co2_2005'), 3), page])
+        wd = data['world']
+        cum = wd['cum_series'][-1][2] if wd.get('cum_series') and wd['cum_series'][-1][0] == year else None
+        w.writerow(['World', 'OWID_WRL', year, r(wd['co2'], 3), '', 100, r(wd.get('pc')), wd.get('pop') or '', r(cum, 3), 100 if cum else '', '', '', ''])
+
+    with open(os.path.join(out, 'co2-emissions-time-series.csv'), 'w', encoding='utf-8', newline='') as f:
+        w = csv.writer(f)
+        w.writerow(['country', 'iso_code', 'year', 'co2_mt'])
+        for y, v in data['world']['series']:
+            w.writerow(['World', 'OWID_WRL', y, r(v, 3)])
+        for c in data['countries']:
+            for y, v in c.get('series', []):
+                w.writerow([c['name'], c['iso'], y, r(v, 3)])
+
+    with open(os.path.join(out, 'README.txt'), 'w', encoding='utf-8') as f:
+        f.write(f"""CO2 emissions by country - Carbon Emissions Counter
+https://www.carbonemissionscounter.com/data
+
+co2-emissions-by-country.csv   {len(data['countries'])} countries plus the world total, {year} data
+co2-emissions-time-series.csv  yearly CO2 for the world from {data['world']['series'][0][0]} and for the {len(featured_slugs)} countries with
+                               over 1 million people from {SERIES_FROM}, to {year}
+
+co2_mt: annual CO2 from fossil fuels and industry (excluding land-use change), million tonnes.
+co2_per_person_t: tonnes per person. cumulative_co2_since_1750_mt: all emissions since 1750, million tonnes.
+Shares are of the world total. Values are rounded to 0.1 Mt, so very small emitters show 0.0. Empty cells mean no data.
+
+Source: {data['source']}.
+https://github.com/owid/co2-data
+Licence: CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). Credit "Our World in Data and the Global
+Carbon Project, via Carbon Emissions Counter" with a link to https://www.carbonemissionscounter.com/data
+""")
+    print(f'downloads: 2 CSV files ({len(data["countries"])} countries, {year})')
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--csv', help='path to owid-co2-data.csv; refreshes data.json')
@@ -970,6 +1025,7 @@ def main():
     print(f'pages: ranking, per capita, historical + {len(featured)} countries')
     write_sitemap(featured)
     update_home(data, featured)
+    write_downloads(data, featured_slugs)
 
 
 if __name__ == '__main__':

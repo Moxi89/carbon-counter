@@ -27,6 +27,9 @@ def main():
     data = json.load(open(os.path.join(ROOT, 'tools', 'countries', 'data.json'), encoding='utf-8'))
     year = data['year']
     top = data['countries'][:8]
+    jobs.append({'name': 'data', 'kicker': 'Free data · CC BY 4.0', 'title': 'CO₂ emissions data and charts',
+                 'big': '', 'sub': f'{len(data["countries"])} countries as CSV, {year} data, plus reusable charts',
+                 'ranking': [[c['name'], c['share']] for c in top[:6]]})
     jobs.append({'name': 'co2-emissions-by-country', 'kicker': f'{len(data["countries"])} countries · {year} data',
                  'title': 'CO₂ Emissions by Country', 'big': '', 'sub': 'Live ranking, per-person emissions and trends',
                  'ranking': [[c['name'], c['share']] for c in top]})
