@@ -32,12 +32,14 @@ python3 tools/ads/apply.py        # adds or removes ad code everywhere; safe to 
 
 ## 1. Before applying
 
-1. **Make the contact address work.** In Cloudflare, open the domain → **Email** → **Email Routing**, enable it,
-   and add a rule `hello@carbonemissionscounter.com` → your own inbox. Send a test email.
+1. [x] **Make the contact address work.** Done 24 Oct 2026: Cloudflare Email Routing forwards
+   `hello@carbonemissionscounter.com` to the owner's inbox, and a test email arrived.
    (To use another address, change `contact_email` and run `python3 tools/pages/build.py`.)
-2. Consider adding your name or a short bio to `/about` (edit `tools/pages/build.py`). A named, accountable
+2. [ ] Consider adding your name or a short bio to `/about` (edit `tools/pages/build.py`). A named, accountable
    owner helps with Google's trust assessment (E-E-A-T).
-3. You must be 18+ and own the domain (you do).
+3. [x] You must be 18+ and own the domain (you do).
+4. [ ] Wait until Search Console shows most guides and main country pages indexed (only 4 pages were indexed on
+   16 Oct 2026, before the rebuild). Reviewers judge what Google has crawled; apply around late November.
 
 ## 2. Apply
 
