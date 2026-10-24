@@ -398,7 +398,7 @@ PAGES = {
                 contact, 'ContactPage'),
     'privacy': ('Privacy Policy | Carbon Emissions Counter',
                 ('How Carbon Emissions Counter handles your data, including the advertising cookies used by Google AdSense and how to opt out.' if ADS else
-                 'Carbon Emissions Counter sets no cookies, runs no tracking or ads and collects no personal data. Here is exactly what happens when you visit.'),
+                 'Carbon Emissions Counter runs no ads or tracking, sets no cookies of its own and collects no personal data. Here is exactly what happens when you visit.'),
                 'Privacy policy', 'Legal', privacy_dek, privacy, 'WebPage'),
     'terms': ('Terms of Use | Carbon Emissions Counter',
               'Terms of use for Carbon Emissions Counter: how the estimates should be used, how to cite and share our content, and how to embed the free counter.',

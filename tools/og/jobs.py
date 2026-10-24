@@ -22,7 +22,7 @@ def main():
         {'name': 'home', 'kicker': 'Live estimate', 'title': 'Carbon Emissions Counter Live',
          'big': '1,338 t', 'sub': 'of CO₂ emitted every second worldwide', 'ring': True},
         {'name': 'widget', 'kicker': 'Free widget', 'title': 'A live CO₂ counter for your website',
-         'big': '', 'sub': 'One line of code · no cookies · dark and light themes', 'ring': True},
+         'big': '', 'sub': 'One line of code · no ads or tracking · dark and light themes', 'ring': True},
     ]
     data = json.load(open(os.path.join(ROOT, 'tools', 'countries', 'data.json'), encoding='utf-8'))
     year = data['year']
